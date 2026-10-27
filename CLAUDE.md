@@ -693,3 +693,12 @@ footer's "recent selections", both already in); go on to stage 7.
 
 Pictures `design/previews/stage7-dark-*.png`. **Couldn't be checked:** a real phone; Safari's
 toolbar colour.
+
+### 2026-10-28 — stage 7: favicon options for John (branch `claude/nice-goodall-j1r6wu`)
+
+Three options in `design/favicon-options/`, drawn to the house recipe (HOUSE-STYLE §7):
+A, a terracotta half sun on an ink horizon, cream with a terracotta ring; B, the page's
+logo (an arc of sun on the horizon); C, A on solid terracotta. `design/favicon-options.html`
+(from Hindcaster's) shows them at 16, 32, 48 and 96px beside the other five icons in a row
+of tabs; renders `design/previews/favicon-options.png` and `-1x.png`. At a real 16px, A and
+C read as a sun on the horizon; B's arc thins to a curl. Nothing wired in yet.

@@ -717,3 +717,16 @@ fits: "Free sunrise, sunset and twilight times for any postcode in England: toda
 the year, and compared with dates or places you choose."). **What:** `public/favicon.svg`
 (option A), linked from `index.html`; the build copies it. The description goes in with the
 title and the rest of the search tags once the title is confirmed (PLAN).
+
+### 2026-10-28 — search title and description in; link-preview picture drafted (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** the title is fine; go ahead with the link-preview picture.
+**What:** `index.html` now has the title "Lightreader – sunrise, sunset and twilight times in
+England", the agreed description and the canonical link to `https://lightreader.baish.net/`;
+`public/robots.txt` and `public/sitemap.xml` as Hindcaster's. The picture:
+`design/og-lightreader.html` (from Hindcaster's, same layout and fonts loaded by path), with
+icon A's half sun drawn large, "Lightreader" and the tagline "Sunrise, sunset and twilight /
+for your postcode." (the opening heading; for John). Rendered at 1200×630 to
+`design/previews/og-lightreader.png`; Caprasimo and Figtree 600 confirmed loaded. Waiting for
+John's approval before it goes in `public/` with the `og:` and `twitter:` tags.
+**Verified:** build (robots.txt and sitemap.xml copied; the tags in the built page).

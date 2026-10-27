@@ -1003,3 +1003,9 @@ are). Nothing is half-done.
 2. Search Console: submit the sitemap and request indexing.
 3. The baish.net hub card for Lightreader, the overview PDF, and Lightreader in the house
    style's 24-hour exceptions (all in clockwheel; needs access).
+
+### 2026-10-28 — a note for the morning: the top card after dark
+
+John, just before stopping: once it's dark, the top card could switch to tomorrow's sunrise
+and tomorrow's sunset. Noted in PLAN ("For John to come back to") with the two points to
+settle (which moment is "dark"; the headings); nothing built. Docs only.

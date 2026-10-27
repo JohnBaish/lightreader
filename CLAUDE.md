@@ -163,3 +163,48 @@ Nothing was lost.
 **Couldn't be checked:** Lerwick and Aberdeen's figures (their fixed points
 wait for PLAN question 7); twilight times against an outside source (MET
 Norway gives none).
+
+### 2026-10-27 — stage 2 built: the sentences (branch `claude/nice-goodall-j1r6wu`)
+
+**John** asked to go ahead with stage 2. Questions 4, 5, 7 and 8 are still open,
+so question 4's wording is drafted for him and "Across the UK" uses provisional
+points.
+
+**What:** `src/lib/sentences/`, one file per group, plain functions of a
+`SkyContext` (place, name, today, now, and the sun's figures from 400 days back
+to 400 ahead; `context.ts` has the shared rules: clock seconds for rule A, the
+minute shown for rule C, runs for rule B, near-ties for rule G, clock changes).
+`index.ts` gives every group in the spec's order. `src/lib/ukPlaces.ts`: Lerwick
+and Penzance at their OS Open Names town points (October 2026 download,
+checksum matched OS's; in the scratchpad only), provisional until question 7.
+Fonts `@fontsource/caprasimo` and `figtree` added at Hindcaster's versions (for
+the PDF now, the page later). `scripts/check-sentences.ts` (second part of
+`npm run check`, 10 checks, including every group for Reading today) and
+`scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`):
+`design/sentence-sheet-2026-10-27.md`, ten days and places, with 12 numbered
+points for John; the PDF is made from the HTML with the fresh-look
+`make-pdf.mjs`.
+
+**Rules worked out on the way (all in the sheet for John):**
+- "Close to the fastest they ever change" when the change is at least 90% of
+  the year's fastest (today 3m 41s; fastest 3m 58s, March 18th 2027).
+- A record against the way the times are going is the clocks' doing and isn't
+  said (October 25th: "the earliest sunrise since September"). "Since the
+  clocks went back" when the day it goes back to is the day before a change.
+- "Coming up" names every whole hour crossed, both ways, leaving out the
+  clock-change day itself and thresholds lasting more than 240 days.
+- Both dates in a "from … to …" get the year when either needs it.
+- "Across the UK" leaves out a fixed place within 25 km of the visitor.
+- Rule G names both near-tied days often with exact times: the earliest sunset
+  (December 12th and 13th, 0.44 seconds apart), the darkest mornings for 07:30
+  (December 31st and January 1st).
+
+**Mistakes on the way:** two expectations in the new checks were my guesses,
+not computed (the "since the clocks went back" date; the darkest evening for
+12:00). The checks failed, I looked at the real figures, and the code was
+right both times; the checks now use the real results. Breaking rule A on
+purpose (30 days to 2) makes the checks fail, as it should.
+
+**Verified:** `npm run build`, `npm run lint` (clean), `npm run check` (14 + 10).
+**Not yet:** working out all the sentences takes about 0.7 seconds in Node
+(800 days of figures); to be cut down in stage 3 before it runs on phones.

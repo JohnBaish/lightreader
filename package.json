@@ -8,10 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "check": "node scripts/check-figures.ts",
+    "check": "node scripts/check-figures.ts && node scripts/check-sentences.ts",
     "outcodes": "node scripts/build-outcodes.ts",
     "compare-metno": "node scripts/compare-metno.ts",
-    "figures-sheet": "node scripts/figures-sheet.ts"
+    "figures-sheet": "node scripts/figures-sheet.ts",
+    "sentence-sheet": "node scripts/sentence-sheet.ts"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
@@ -23,6 +24,8 @@
     "vite": "^8.2.2"
   },
   "dependencies": {
+    "@fontsource/caprasimo": "^5.3.0",
+    "@fontsource/figtree": "^5.3.0",
     "astronomy-engine": "2.1.19",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

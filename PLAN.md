@@ -83,7 +83,11 @@ sheet (`design/figures-sheet-2026-10-27.md`) and the MET Norway comparison
 
 ## Stage 2 — the sentences (no screen yet)
 
-Branch: `stage-2-sentences`
+Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
+
+**Status (27 October):** built; the sentence sheet
+(`design/sentence-sheet-2026-10-27.md`, and as a PDF) is with John, with 12
+numbered points for him to decide. Not merged.
 
 Every sentence group in SPEC §6 and every rule in SPEC §7, written as plain
 functions of (place, date, time of day) in `src/lib/sentences/`. Each group

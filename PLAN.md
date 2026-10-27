@@ -216,7 +216,9 @@ Branch: `stage-7-launch`
   the colours). Mock-ups in both themes first.
   **Built (28 October), for John to look at on the preview.**
 - Favicon options, then a link-preview image (house style §7). **John chose A (28
-  October), now `public/favicon.svg`.**
+  October), now `public/favicon.svg`.** Link-preview picture approved with "Sunrise, sunset
+  and light-based facts for English places you choose.": `public/og-lightreader.png`, with
+  the `og:` and `twitter:` tags.
 - Search description agreed (John, 28 October, 139 characters): "Free sunrise, sunset and
   twilight times for any postcode in England: today, through the year, and compared with
   dates or places you choose." Title draft: "Lightreader – sunrise, sunset and twilight

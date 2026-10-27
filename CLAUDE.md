@@ -737,3 +737,14 @@ John: the picture is right; try "Sunrise, sunset and light-based facts for place
 choose.", or "English places". Both rendered (`design/previews/og-lightreader-a.png` and
 `-b.png`, together in `og-lightreader-options.png`), broken after "facts"; both fit on two
 lines, fonts loaded. Waiting for his choice.
+
+### 2026-10-28 — link-preview picture in (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** "English places". `design/og-lightreader.html` now has "Sunrise, sunset and
+light-based facts / for English places you choose."; rendered again from it (byte for byte
+the same as the option shown) to `public/og-lightreader.png`. `index.html` has the `og:` and
+`twitter:` tags (title "Lightreader", that line as the description, the picture and the
+address on `https://lightreader.baish.net/`, so previews work once the domain is set up).
+Sizes as Hindcaster's: title Caprasimo 72px, tagline Figtree 600 at 27px (Hindcaster's file
+says these came unchanged from clockwheel's Clockmaker template; clockwheel's own file
+wasn't checked from here). **Verified:** build (the picture and six `og:` tags in `dist`).

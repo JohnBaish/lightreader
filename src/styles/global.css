@@ -198,7 +198,6 @@ body { margin: 0; background: var(--color-bg); }
 .day-cards li.clock-mark { padding: 4px 2px; }
 .day-cards li.is-today { background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg)); }
 .year-detail-big .pair { white-space: nowrap; }
-.year-by { font-family: var(--font-body, inherit); font-size: 14px; color: var(--color-neutral-700); white-space: nowrap; }
 .year-detail .pairs { width: 100%; }
 .year-detail .clock-note { background: var(--color-surface); }
 .year-compare { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
@@ -223,7 +222,12 @@ body { margin: 0; background: var(--color-bg); }
   .compare { padding: var(--space-4); }
   .pair-row { grid-template-columns: 1fr; gap: 2px; }
   .pair-axis .pair-label { display: none; }
-  .chip button { width: 36px; height: 36px; }
+  /* 44px to tap on a phone (house rule; the fresh look, 6.3). The chips' ✕ keeps its look
+     and gains a larger tap area around it. */
+  .chip button { width: 36px; height: 36px; position: relative; }
+  .chip button::after { content: ''; position: absolute; inset: -4px; }
+  .choose-row .input, .choose-row .btn { min-height: 44px; }
+  .link-button, .ribbon-fold-note { min-height: 44px; display: inline-flex; align-items: center; }
   .chip-button { min-height: 44px; }
   .about-row { grid-template-columns: 1fr; gap: 0; }
   .btn-small { min-height: 44px; }

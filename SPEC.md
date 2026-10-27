@@ -115,6 +115,7 @@ Compares with the same weekday a week back and a week ahead.
 - "The latest sunrise since the clocks went back."
   - Rule A hides this today, because the gap is less than 30 days.
 - "Today's daylight matches Sunday February 14th's."
+- **Changed (John, October 28th 2026; fresh look, 2.3):** the shortest and longest day records give the date even when it is just before a clock change ("The longest day since Saturday October 24th."), as the clocks don't change how long a day is.
 
 ### Coming up
 This shows events in the next three months. The clock-change line appears only in the ten weeks before the change.
@@ -144,6 +145,7 @@ This is option B of the "your times" mockup.
   - "It's light at [time] until [date]."
   - "The sun is up by [time] again from [date]."
   - "The sun is still up at [time] until [date]."
+- **Changed (John, October 28th 2026, J5):** when the time is dark today, the first sentence says when half-light first reaches it, in the site's own words: "Half-light starts by 05:15 from Saturday April 24th." and, in the evening, "Half-light lasts past 17:30 from Tuesday February 2nd." ("past", as a half-light ending on the minute counts as dark, rule C). **And (fresh look, 3.2):** a time that is daylight all year says only "12:00 is always daylight here."
 
 ### Darkness
 - "Tonight's true night lasts 10h 19m."
@@ -207,6 +209,7 @@ These are calculated for fixed coordinates, so they need no postcode data outsid
   - Each day is a thin upright strip of band colours, from midnight at the bottom to midnight at the top, with hour lines at 00, 06, 12, 18 and 24 and month labels.
   - A today marker sits on top. Clock changes show as steps.
   - Tapping a day shows a detail card: "Tuesday October 27th 2026: Sunrise 06:48 · Sunset 16:46 · 9h 58m of daylight. Half-light 06:14 to 17:21; very dark from 18:00", plus a link "See all of [month]".
+  - **Changed (John, October 28th 2026, J10, option B):** for a day other than today the card compares it with today, as Compare does: the chosen day's strip above today's, the BST note when the clocks differ, and Compare's sentences.
   - **To check:** how the strips draw in May and August, when true night starts or ends around midnight.
 - **Day by day.**
   - **Folded at rest:** only a row of 13 month buttons shows, with the current month marked.

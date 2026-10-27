@@ -166,7 +166,7 @@ check('is it light at…?: the strip agrees with the sentences, day by day', () 
   const year = yearChanges(RG1, ctx.today)
   const at = lightAtYear(ctx, year, '17:30')
   assert.equal(at.today, 'dark')
-  assert.deepEqual(at.sentences, ["It's dark at 17:30 until Monday February 1st.", 'The sun is up at 17:30 again from Monday February 22nd.'])
+  assert.deepEqual(at.sentences, ['Half-light lasts past 17:30 from Tuesday February 2nd.', 'The sun is up at 17:30 again from Monday February 22nd.'])
   const day = (date: string) => at.strip[Math.round((Date.parse(date) - Date.parse(at.from)) / 86_400_000)]
   const light = (b: string) => b === 'daylight' || b === 'half-light'
   assert.ok(!light(day('2027-02-01')))
@@ -227,6 +227,8 @@ check('fresh look: names for every district; "last Friday"; towns by postcode (2
   assert.deepEqual(t('last friday'), { kind: 'date', date: '2026-10-23' })
   assert.deepEqual(t('Last friday'), { kind: 'date', date: '2026-10-23' })
   assert.deepEqual(t('last july 14th'), { kind: 'date', date: '2026-07-14' })
+  assert.deepEqual(t('25.12'), { kind: 'date', date: '2026-12-25' })
+  assert.deepEqual(t('14-7-2027'), { kind: 'date', date: '2027-07-14' })
   const reading = t('Reading')
   assert.ok(reading.kind === 'error' && reading.message.includes('type its postcode'))
 })

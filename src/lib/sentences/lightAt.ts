@@ -51,22 +51,33 @@ export function lightAtSentences(ctx: SkyContext, time: TimeOfDay): string[] {
   const t = minutesOf(time)
   const days = year(ctx)
   const morning = t < shown(days[0].noon)
-  return [lightSentence(ctx, days, time, t, morning), sunSentence(ctx, days, time, t, morning)]
+  return [lightSentence(ctx, days, time, t, morning), sunSentence(ctx, days, time, t, morning)].filter((s) => s)
 }
 
-/** "It's dark at 17:30 until Monday February 1st." / "It's light at 07:30 until …" /
- *  "07:30 is always at least half-light here. Even on the darkest morning, Friday January
- *  1st, half-light starts at 07:29." */
+/** "Half-light lasts past 17:30 from Tuesday February 2nd." / "It's light at 07:30 until …"
+ *  / "07:30 is always at least half-light here. Even on the darkest morning, Friday January
+ *  1st, half-light starts at 07:29." / "12:00 is always daylight here." */
 function lightSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: number, morning: boolean): string {
   const light = lightAt(days[0], t)
   const c = change(days, (d) => lightAt(d, t))
   if (c && c.last.date === ctx.today) return `From tomorrow it's ${light ? 'dark' : 'light'} at ${time}.`
-  if (c) {
-    const state = light ? 'light' : 'dark'
+  if (c && light) {
     const end = c.byClocks ? `until ${clockWords(ctx, addDays(c.last.date, 1))}` : `until ${dateIn(ctx, c.last.date)}`
-    return `It's ${state} at ${time} ${end}.`
+    return `It's light at ${time} ${end}.`
+  }
+  if (c) {
+    // Dark now: when half-light first reaches the time, in the site's own words (John, 28
+    // October, J5): "Half-light starts by 05:15 from Friday April 23rd." In the evening a
+    // half-light ending on the minute counts as dark (rule C), hence "past".
+    const next = addDays(c.last.date, 1)
+    const clocks = c.byClocks ? `, when the clocks go ${offsetOn(next) > offsetOn(c.last.date) ? 'forward' : 'back'}` : ''
+    return morning
+      ? `Half-light starts by ${time} from ${dateIn(ctx, next)}${clocks}.`
+      : `Half-light lasts past ${time} from ${dateIn(ctx, next)}${clocks}.`
   }
   if (!light) return `It's always dark at ${time} here.`
+  // Daylight all year: said plainly (the fresh look, 3.2).
+  if (days.every((d) => sunUpAt(d, t))) return `${time} is always daylight here.`
   // Always light: name the darkest morning (latest half-light start) or evening (earliest end).
   const event = morning ? 'civilDawn' : 'civilDusk'
   const withEvent = days.filter((d) => d[event])
@@ -90,7 +101,8 @@ function sunSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: nu
   const up = sunUpAt(days[0], t)
   const c = change(days, (d) => sunUpAt(d, t))
   const by = morning ? 'up by' : 'up at'
-  if (!c) return up ? `The sun is always ${by} ${time} here.` : `The sun is never up at ${time} here.`
+  // (When the sun is always up, the first sentence has said so: "12:00 is always daylight here.")
+  if (!c) return up ? '' : `The sun is never up at ${time} here.`
   const next = addDays(c.last.date, 1)
   if (c.last.date === ctx.today) {
     if (up) return morning ? `Today is the last day the sun is up by ${time}.` : `Today is the last day the sun is still up at ${time}.`

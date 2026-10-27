@@ -75,6 +75,9 @@ export function readTarget(typed: string, place: Place, today: string): Target {
   }
   if (text === 'longest day' || text === 'shortest day') return { kind: 'date', date: solsticeDay(place, today, text === 'longest day', last) }
 
+  // "25.12" and "25-12" as "25/12" (the fresh look, 4.4).
+  if (/^\d{1,2}[.-]\d{1,2}([.-]\d{2,4})?$/.test(text)) text = text.replace(/[.-]/g, '/')
+
   // "march 28" would be read as March of the year 28; "28 march" is meant.
   text = text.replace(/^([a-z]+) (\d{1,2})$/, '$2 $1')
 
@@ -112,8 +115,11 @@ function by(a: Date, b: Date): string {
  *  BST, an hour ahead of today's GMT." */
 export function clockNote(today: string, other: string): string | null {
   if (isBst(today) === isBst(other)) return null
+  // "July times …"; within today's own month, the day itself: "Wednesday October 7th's
+  // times …" (the year card compares any day, so the month can be the same).
   const month = longDate(other).split(' ')[1]
-  return isBst(other) ? `${month} times are in BST, an hour ahead of today's GMT.` : `${month} times are in GMT, an hour behind today's BST.`
+  const whose = month === longDate(today).split(' ')[1] ? `${longDate(other)}'s` : month
+  return isBst(other) ? `${whose} times are in BST, an hour ahead of today's GMT.` : `${whose} times are in GMT, an hour behind today's BST.`
 }
 
 /** Comparing today with another date, here (SPEC §8). */

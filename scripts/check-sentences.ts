@@ -55,7 +55,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The sun is up by 07:30 until Friday November 20th.',
     ] },
     { heading: 'Is it light at 17:30?', sentences: [
-      "It's dark at 17:30 until Monday February 1st.",
+      'Half-light lasts past 17:30 from Tuesday February 2nd.',
       'The sun is up at 17:30 again from Monday February 22nd.',
     ] },
     { heading: 'Darkness', sentences: [
@@ -125,10 +125,15 @@ check('is it light at…?: clock changes end a run and say so; always and never'
     "It's always dark at 01:00 here.",
     'The sun is never up at 01:00 here.',
   ])
-  assert.deepEqual(lightAtSentences(ctxFor('RG1', '2026-10-27T09:02:00Z'), '12:00'), [
-    '12:00 is always at least half-light here. Even on the darkest evenings, Friday December 11th and Saturday December 12th, half-light ends at 16:35.',
-    'The sun is always up at 12:00 here.',
+  // Daylight all year: one plain sentence (the fresh look, 3.2).
+  assert.deepEqual(lightAtSentences(ctxFor('RG1', '2026-10-27T09:02:00Z'), '12:00'), ['12:00 is always daylight here.'])
+  assert.deepEqual(lightAtSentences(ctxFor('RG1', '2026-10-27T09:02:00Z'), '16:00'), [
+    '16:00 is always at least half-light here. Even on the darkest evenings, Friday December 11th and Saturday December 12th, half-light ends at 16:35.',
+    'The sun is still up at 16:00 until Saturday November 28th.',
   ])
+  // J5: dark now, so when half-light first reaches the time (John, 28 October).
+  assert.equal(lightAtSentences(ctxFor('RG1', '2026-10-27T09:02:00Z'), '05:15')[0], 'Half-light starts by 05:15 from Saturday April 24th.')
+  assert.equal(lightAtSentences(ctxFor('RG1', '2026-10-27T09:02:00Z'), '19:00')[0], 'Half-light lasts past 19:00 from Saturday March 27th.')
 })
 
 check('is it light at…?: "from tomorrow" when today is the last day', () => {
@@ -187,11 +192,14 @@ check('darkness: "No true night from …" only when it starts within ten weeks (
 })
 
 check('the fresh look and John\'s amendments (28 October)', () => {
+  // 2.3: daylight records give the date, never "since the clocks went back".
+  assert.ok(recordSentences(ctxFor('RG1', '2027-02-17T10:00:00Z')).includes('The longest day since Saturday October 24th.'))
+  // 4.4 is in check-page.ts.
   // 3.1: only the first run of near-tied darkest days, never the same days a year on.
-  assert.equal(lightAtSentences(ctxFor('RG1', '2026-12-11T10:00:00Z'), '12:00')[0],
-    '12:00 is always at least half-light here. Even on the darkest evenings, Friday December 11th and Saturday December 12th, half-light ends at 16:35.')
-  assert.equal(lightAtSentences(ctxFor('RG1', '2026-12-12T10:00:00Z'), '12:00')[0],
-    '12:00 is always at least half-light here. Even on the darkest evening, Saturday December 12th, half-light ends at 16:35.')
+  assert.equal(lightAtSentences(ctxFor('RG1', '2026-12-11T10:00:00Z'), '16:00')[0],
+    '16:00 is always at least half-light here. Even on the darkest evenings, Friday December 11th and Saturday December 12th, half-light ends at 16:35.')
+  assert.equal(lightAtSentences(ctxFor('RG1', '2026-12-12T10:00:00Z'), '16:00')[0],
+    '16:00 is always at least half-light here. Even on the darkest evening, Saturday December 12th, half-light ends at 16:35.')
   // J1: the daylight line only across a clock change.
   assert.deepEqual(fortnightSentences(ctxFor('RG1', '2026-11-10T10:00:00Z')), [
     'A week ago the sun rose at 07:01 (12m earlier) and set at 16:33 (12m later).',

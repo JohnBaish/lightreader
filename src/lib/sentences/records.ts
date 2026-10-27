@@ -45,7 +45,9 @@ export function recordSentences(ctx: SkyContext): string[] {
         return v !== null && beats(v)
       })
       if (!d || daysBetween(d.date, ctx.today) < RECORD_MIN_DAYS) continue
-      const acrossChange = offsetOn(d.date) !== offsetOn(addDays(d.date, 1))
+      // Daylight isn't moved by the clocks, so its records always give the date (the fresh
+      // look, 2.3; John, 28 October): "The longest day since Saturday October 24th."
+      const acrossChange = m.low !== 'shortest day' && offsetOn(d.date) !== offsetOn(addDays(d.date, 1))
       if (acrossChange) {
         out.push(`The ${label} since the clocks went ${offsetOn(d.date) > offsetOn(addDays(d.date, 1)) ? 'back' : 'forward'}.`)
       } else if (daysBetween(d.date, ctx.today) >= 365) {

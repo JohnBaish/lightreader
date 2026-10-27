@@ -226,9 +226,9 @@ Branch: `stage-7-launch`
 - Search: title, description, canonical address, `robots.txt`, `sitemap.xml`
   (`SEO-HANDOVER.md` checklist).
 - A `/fresh-look` review before launch. **Done (27 October, a separate thread;
-  `design/fresh-look-handover-2026-10-27.md`).** Fixes and John's J1–J10 under way (28
-  October); open: J3, J5, J10's choice, and the optional extras 2.1, 2.3, 3.2, 4.4, 5.2,
-  6.3 (John to look at later).
+  `design/fresh-look-handover-2026-10-27.md`).** Fixes and John's J1–J10 built (28
+  October; J3 dropped as duplication); the optional extras 2.3, 3.2, 4.4, 5.2 and 6.3 built;
+  2.1 explained again to John.
 - Astronomy Engine's MIT notice: the worker's script carries it, but the main script
   (which also includes the library) loses it in the build. Keep it there too (28 October).
   **Done (28 October):** the build keeps legal comments (`vite.config.ts`).

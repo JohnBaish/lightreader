@@ -866,3 +866,50 @@ one numbered list; nothing built yet.
 - Before-and-after pictures: `design/previews/fl-before-*.png` and `fl-after-*.png`.
 
 **Couldn't be checked:** a real phone's swipe.
+
+### 2026-10-28 — John's second round on the fresh look (branch `claude/nice-goodall-j1r6wu`)
+
+**John:**
+- **J10:** option B, with the chosen day's strip above today's.
+- **J3:** dropped, as duplication.
+- **J5:** yes to both wordings.
+- **2.1:** he didn't follow the point, so it's to be explained again.
+- **2.3, 3.2, 4.4, 5.2 and 6.3:** yes.
+
+**What:**
+- `Year.tsx`: option B for any day other than today. The chosen day's strip comes first,
+  then today's, then the BST note and `compareDate()`'s sentences. The `?j10` mock-up switch
+  and option A are gone.
+- `compare.ts`: `clockNote()` names the day itself when it's in today's month ("Wednesday
+  October 7th's times are in BST…"), since the year card can pick one.
+- `lightAt.ts` (J5): "Half-light starts by 05:15 from Saturday April 24th." /
+  "Half-light lasts past 17:30 from Tuesday February 2nd." The latter replaces "It's dark at
+  17:30 until Monday February 1st." "Past" rather than John's "until 17:30 or later",
+  because a half-light ending on the minute counts as dark (rule C).
+  - John's example date was April 23rd; that is the last dark day, so half-light first
+    reaches 05:15 on the 24th.
+  - A clock change ending the run adds ", when the clocks go forward/back".
+- `lightAt.ts` (3.2): daylight all year gives one sentence, "12:00 is always daylight here."
+  The second sentence ("The sun is always up at 12:00 here.") is dropped as the same thing.
+- `records.ts` (2.3): the shortest and longest day records always give the date.
+- `compare.ts` (4.4): "25.12" and "25-12" are read as "25/12".
+- `Year.tsx` (5.2): "See all of …" scrolls to the day even when that month is already open.
+- `global.css` (6.3), on a phone:
+  - the postcode and Compare boxes and their buttons are 44px;
+  - "See all of …" and the fold note are 44px;
+  - the chips' ✕ keeps its look, with a 44px tap area around it.
+- SPEC §6 and §9 annotated.
+
+**Verified:**
+- `npx tsc -b`, lint, `npm run check` (14 + 14 + 12). Checks updated with real figures: Reading's
+  17:30 sentence, 05:15 and 19:00, 12:00 and 16:00 (the 3.1 check moved to 16:00, now 12:00
+  is "always daylight"), the longest-day record on February 17th 2027, and "25.12" and
+  "14-7-2027".
+- In Chromium:
+  - at 390px with touch: the boxes, buttons, link and fold note are 44px; October open,
+    October 7th chosen on the ribbon, "See all of October" scrolls to its row;
+  - J10 at 1200px and 390px, May 20th against today;
+  - the stage 5, Compare and swipe runs again;
+  - no errors, no sideways scroll.
+- Pictures: `design/previews/j10-final-*.png`, `j10-b-chosen-narrow.png`, and `fl-after-*.png`
+  refreshed.

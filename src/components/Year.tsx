@@ -4,11 +4,10 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { clockNote, compareDate } from '../lib/compare.ts'
 import type { District } from '../lib/postcode.ts'
-import { clockSeconds } from '../lib/sentences/context.ts'
-import { dayFigures, daylight } from '../lib/sun.ts'
+import { dayFigures } from '../lib/sun.ts'
 import { DayStrip, SHORT } from './Compare.tsx'
 import { BANDS } from '../lib/bands.ts'
-import { clock, duration, longDate, ordinal, weekday } from '../lib/format.ts'
+import { longDate, ordinal, weekday } from '../lib/format.ts'
 import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
 import { addDays } from '../lib/ukTime.ts'
 import { Legend } from './SkyRibbon.tsx'
@@ -169,53 +168,34 @@ function MonthTable({ m, today, highlight, narrow }: { m: YearView['months'][num
   )
 }
 
-/** J10 mock-up (John, 28 October): what the card under the ribbon says for a day other than
- *  today. Chosen with ?j10=a or ?j10=b in the address while John decides; to be removed then.
- *  (a) each time with its difference from today in brackets, as This fortnight does;
- *  (b) the Compare block: two strips and its sentences. */
-function DayAgainstToday({ d, day, today, variant, row }: { d: District; day: string; today: string; variant: string; row: DayRow }) {
+/** A day other than today, compared with today, as a Compare entry (John, 28 October, J10,
+ *  option B): the chosen day's strip above today's, the BST note when the clocks differ,
+ *  and Compare's sentences. */
+function DayAgainstToday({ d, day, today }: { d: District; day: string; today: string }) {
   const [here, there] = useMemo(() => [dayFigures(d, today), dayFigures(d, day)], [d, today, day])
   const note = clockNote(today, day)
-  if (variant === 'b') {
-    return (
-      <>
-        <div className="pairs">
-          <DayStrip place={d} date={today} label="Today" />
-          <DayStrip place={d} date={day} label={SHORT(day)} />
-          <div className="pair-row pair-axis"><span className="pair-label" /><div className="pair-hours"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
-        </div>
-        {note && <p className="clock-note">{note}</p>}
-        <ul className="year-compare">{compareDate(here, there, today).map((s, i) => <li key={i}>{s}</li>)}</ul>
-      </>
-    )
-  }
-  if (!here.sunrise || !here.sunset || !there.sunrise || !there.sunset) return null
-  const by = (a: Date, b: Date) => {
-    const s = clockSeconds(a) - clockSeconds(b)
-    return Math.abs(s) < 60 ? 'the same as today' : `${duration(s * 1000)} ${s > 0 ? 'later' : 'earlier'}`
-  }
-  const diff = daylight(there) - daylight(here)
-  const more = Math.abs(diff) < 60_000 ? 'much the same as today' : `${duration(diff)} ${diff > 0 ? 'more' : 'less'} than today`
   return (
     <>
-      <p className="year-detail-big">
-        <span className="pair">Sunrise {clock(there.sunrise)}</span> <span className="year-by">({by(there.sunrise, here.sunrise)})</span>
-        <span className="dot"> · </span>
-        <span className="pair">Sunset {clock(there.sunset)}</span> <span className="year-by">({by(there.sunset, here.sunset)})</span>
-      </p>
-      <p>{duration(daylight(there))} of daylight ({more}). {dayDetail(row).split('. ').slice(1).join('. ')}</p>
+      <div className="pairs">
+        <DayStrip place={d} date={day} label={SHORT(day)} />
+        <DayStrip place={d} date={today} label="Today" />
+        <div className="pair-row pair-axis"><span className="pair-label" /><div className="pair-hours"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+      </div>
       {note && <p className="clock-note">{note}</p>}
+      <ul className="year-compare">{compareDate(here, there, today).map((s, i) => <li key={i}>{s}</li>)}</ul>
     </>
   )
 }
 
 export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow: boolean; place: string; d: District }) {
-  const variant = new URLSearchParams(location.search).get('j10')
   const [chosen, setChosen] = useState<string | null>(null)
   const [open, setOpen] = useState<string | null>(null)
   const [highlight, setHighlight] = useState<string | null>(null)
   const daysCard = useRef<HTMLElement>(null)
   const scrollTo = useRef<string | null>(null)
+  // Bumped by "See all of …", so it scrolls to the day even when that month is already open
+  // (the fresh look, 5.2).
+  const [seeAllCount, setSeeAllCount] = useState(0)
 
   // After "See all of …", bring the month, at the chosen day, into view.
   useEffect(() => {
@@ -224,7 +204,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
     scrollTo.current = null
     const row = daysCard.current.querySelector(`[data-date="${date}"]`)
     ;(row ?? daysCard.current).scrollIntoView({ block: 'center', behavior: 'smooth' })
-  }, [open])
+  }, [open, seeAllCount])
 
   if (!v) {
     return (
@@ -242,6 +222,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
     scrollTo.current = date
     setHighlight(date)
     setOpen(date.slice(0, 7))
+    setSeeAllCount((n) => n + 1)
   }
   const choose = (m: string | null) => {
     setHighlight(null)
@@ -268,8 +249,8 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         {row && (
           <div className="year-detail" aria-live="polite">
             <div className="kicker">{longDate(day, true)}{day === v.today ? ' · Today' : ''}</div>
-            {variant && day !== v.today ? (
-              <DayAgainstToday d={d} day={day} today={v.today} variant={variant} row={row} />
+            {day !== v.today ? (
+              <DayAgainstToday d={d} day={day} today={v.today} />
             ) : (
               <>
                 <p className="year-detail-big">{riseSetLines(row)}</p>

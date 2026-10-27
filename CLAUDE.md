@@ -540,3 +540,24 @@ Aberdeen and TR18 added; CF10 refused with its message and Cancel; a repeat igno
 removed; kept after a reload. No errors, no sideways scroll. Screenshots
 `design/previews/stage4-compare-chips-*.png`.
 **Couldn't be checked:** a real iPhone's picker.
+
+### 2026-10-28 — Compare's wording; the year drawn more quickly (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** "Your selections will only be saved on this device." before anything's saved in
+Compare (was "What you add is saved on this device only."); "never" and the other year
+wording are fine; "Is it light at…?" works on his iPhone now; stage 5 looks great. He found
+the page slow to load.
+
+**Speed:** measured here, today and the ribbon show at about 0.25 seconds; the sentences,
+the times and the year together at about 1.1 seconds. In Node the worker's part is about
+0.6 seconds: the sun's figures for 800 days (about 0.2), the sentences (0.15), the year's
+twilight times (0.13), "Is it light at…?" (0.05) and the year view. Two changes:
+- The year view no longer searches every change of light for each day, and reads the
+  clock without `Intl` except on the two clock-change days (about 120 to 40 milliseconds).
+- The year ribbon is drawn as five shapes, one per band, instead of about 2,900 boxes
+  (looks the same; quicker for a phone to draw).
+The rest is the figures themselves. How long it takes on John's iPhone isn't known.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 10; the ribbon still agrees
+with the tables every day); the stage 4 and 5 browser runs at 1200px and 390px with touch:
+no errors, no sideways scroll.

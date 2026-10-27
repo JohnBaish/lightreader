@@ -71,12 +71,10 @@ function YearRibbon({ v, chosen, onChoose, narrow }: { v: YearView; chosen: stri
         <svg viewBox={`0 0 ${n} 1440`} preserveAspectRatio="none" aria-hidden="true">
           <rect x="0" y="0" width={n} height="1440" fill="var(--band-true-night)" />
           {BANDS.filter((b) => b !== 'true-night').map((b) => (
-            <g key={b} fill={`var(--band-${b})`}>
-              {v.ribbon.flatMap((day, i) => day.filter((s) => s.band === b).map((s) => (
-                // Each day a touch wider, and each stretch a touch taller, so no seams show.
-                <rect key={`${i}-${s.from}`} x={i} y={1440 - s.to} width={1.6} height={s.to - s.from + 3} />
-              )))}
-            </g>
+            // One shape per band, each day a touch wider and each stretch a touch taller, so
+            // no seams show; five shapes draw far quicker on a phone than thousands of boxes.
+            <path key={b} fill={`var(--band-${b})`} d={v.ribbon.flatMap((day, i) => day.filter((s) => s.band === b)
+              .map((s) => `M${i} ${1440 - s.to}h1.6v${s.to - s.from + 3}h-1.6z`)).join('')} />
           ))}
           {[6, 12, 18].map((h) => <line key={h} x1="0" x2={n} y1={1440 - h * 60} y2={1440 - h * 60} className="yr-line" vectorEffect="non-scaling-stroke" />)}
         </svg>

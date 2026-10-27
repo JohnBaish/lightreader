@@ -120,7 +120,7 @@ export function CompareCard({ d, today, now }: { d: District; today: string; now
             {list.length > 0 && <button className="btn btn-secondary" type="button" onClick={close}>Cancel</button>}
           </div>
           {error && <div className="choose-error" role="alert">{error}</div>}
-          {list.length === 0 && <div className="note">What you add is saved on this device only.</div>}
+          {list.length === 0 && <div className="note">Your selections will only be saved on this device.</div>}
         </form>
       )}
       {results.map(({ text, r }) => r && <CompareResult key={text} r={r} />)}

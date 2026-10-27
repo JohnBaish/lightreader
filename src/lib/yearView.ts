@@ -49,17 +49,24 @@ const clockMinutes = (at: Date) => {
   return p.hour * 60 + p.minute
 }
 
-/** One day's strip, from UK midnight to the next, from the year's changes. */
-function dayStrip(changes: Change[], date: string): Stretch[] {
+/** One day's strip, from UK midnight to the next, from the year's changes. `first` is where
+ *  to start looking in `changes` (the days are worked out in order); the strip and where
+ *  the next day should start looking are returned. */
+function dayStrip(changes: Change[], date: string, first: number): [Stretch[], number] {
   const start = ukInstant(date, 0)
   const end = ukInstant(addDays(date, 1), 0)
+  // On an ordinary day the clock reads the minutes since midnight; only on the two days the
+  // clocks change does it need looking up.
+  const ordinary = end.getTime() - start.getTime() === 1440 * 60_000
+  const minutesAt = (at: Date) => (ordinary ? Math.round((at.getTime() - start.getTime()) / 60_000) : clockMinutes(at))
+  let i = first
+  while (i < changes.length && changes[i].at <= start) i++
   const out: Stretch[] = []
-  let band = bandAt(changes, start)
+  let band = bandAt(changes.slice(Math.max(0, i - 1), i), start)
   let from = 0
-  for (const c of changes) {
-    if (c.at <= start) continue
-    if (c.at >= end) break
-    const at = clockMinutes(c.at)
+  for (; i < changes.length && changes[i].at < end; i++) {
+    const c = changes[i]
+    const at = minutesAt(c.at)
     // The hour the clocks go back runs twice; the strip can't show both, so the second
     // pass simply continues from where the first ended.
     if (at > from) out.push({ from, to: at, band })
@@ -68,7 +75,7 @@ function dayStrip(changes: Change[], date: string): Stretch[] {
     from = Math.max(from, at)
   }
   out.push({ from, to: 1440, band })
-  return out
+  return [out, i]
 }
 
 /** "Clocks went back on Sunday October 25th. Times from here are GMT." */
@@ -79,7 +86,12 @@ export function clockMarkText(date: string, forward: boolean, today: string): st
 
 export function yearView(ctx: SkyContext, from: string, to: string, changes: Change[]): YearView {
   const ribbon: Stretch[][] = []
-  for (let d = from; d <= to; d = addDays(d, 1)) ribbon.push(dayStrip(changes, d))
+  let next = 0
+  for (let d = from; d <= to; d = addDays(d, 1)) {
+    const [strip, i] = dayStrip(changes, d, Math.max(0, next - 1))
+    ribbon.push(strip)
+    next = i
+  }
 
   const months: YearView['months'] = []
   for (let m = from.slice(0, 7); m <= to.slice(0, 7); m = addDays(m + '-28', 7).slice(0, 7)) {

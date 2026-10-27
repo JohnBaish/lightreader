@@ -74,40 +74,53 @@ function riseSet(obs: Observer, direction: 1 | -1, from: Date, to: Date): Date |
   return found && found.date < to ? found.date : null
 }
 
-/** Every sun event for `place` on the UK day `date` ("YYYY-MM-DD"). */
-export function dayFigures(place: Place, date: string): DayFigures {
+/** A value worked out the first time it's read, then kept. */
+function lazy<T extends object, K extends keyof T>(o: T, key: K, get: () => T[K]) {
+  Object.defineProperty(o, key, {
+    enumerable: true,
+    configurable: true,
+    get() {
+      const value = get()
+      Object.defineProperty(o, key, { value, enumerable: true })
+      return value
+    },
+  })
+}
+
+/** Every sun event for `place` on the UK day `date` ("YYYY-MM-DD"). The six twilight times
+ *  and the directions are worked out only when first read, as most sentences need only
+ *  sunrise and sunset (PLAN stage 3: the sentences took about a second). `midnightBefore`
+ *  is the previous day's `midnight`, when known, which saves a search. */
+export function dayFigures(place: Place, date: string, midnightBefore?: Date): DayFigures {
   const obs = observer(place)
   const dayStart = ukInstant(date, 0)
   const noon = SearchHourAngle(Body.Sun, obs, 0, dayStart).time.date
   // Solar midnight before noon: search forward from 24 hours before it, so the first hit
   // is the one in between.
-  const midnightBefore = SearchHourAngle(Body.Sun, obs, 12, new Date(noon.getTime() - DAY_MS)).time.date
+  const before = midnightBefore ?? SearchHourAngle(Body.Sun, obs, 12, new Date(noon.getTime() - DAY_MS)).time.date
   const midnight = SearchHourAngle(Body.Sun, obs, 12, noon).time.date
-  const sunrise = riseSet(obs, 1, midnightBefore, noon)
+  const sunrise = riseSet(obs, 1, before, noon)
   const sunset = riseSet(obs, -1, noon, midnight)
-  return {
-    date,
-    astronomicalDawn: crossing(obs, 1, ASTRONOMICAL, midnightBefore, noon),
-    nauticalDawn: crossing(obs, 1, NAUTICAL, midnightBefore, noon),
-    civilDawn: crossing(obs, 1, CIVIL, midnightBefore, noon),
-    sunrise,
-    noon,
+  const day = {
+    date, sunrise, noon, sunset, midnight,
     noonAltitude: sunPosition(place, noon).altitude,
-    sunset,
-    civilDusk: crossing(obs, -1, CIVIL, noon, midnight),
-    nauticalDusk: crossing(obs, -1, NAUTICAL, noon, midnight),
-    astronomicalDusk: crossing(obs, -1, ASTRONOMICAL, noon, midnight),
-    midnight,
     midnightAltitude: sunPosition(place, midnight).altitude,
-    sunriseAzimuth: sunrise ? sunPosition(place, sunrise).azimuth : null,
-    sunsetAzimuth: sunset ? sunPosition(place, sunset).azimuth : null,
-  }
+  } as DayFigures
+  lazy(day, 'astronomicalDawn', () => crossing(obs, 1, ASTRONOMICAL, before, noon))
+  lazy(day, 'nauticalDawn', () => crossing(obs, 1, NAUTICAL, before, noon))
+  lazy(day, 'civilDawn', () => crossing(obs, 1, CIVIL, before, noon))
+  lazy(day, 'civilDusk', () => crossing(obs, -1, CIVIL, noon, midnight))
+  lazy(day, 'nauticalDusk', () => crossing(obs, -1, NAUTICAL, noon, midnight))
+  lazy(day, 'astronomicalDusk', () => crossing(obs, -1, ASTRONOMICAL, noon, midnight))
+  lazy(day, 'sunriseAzimuth', () => (sunrise ? sunPosition(place, sunrise).azimuth : null))
+  lazy(day, 'sunsetAzimuth', () => (sunset ? sunPosition(place, sunset).azimuth : null))
+  return day
 }
 
 /** Day figures for every UK day from `from` to `to`, both included. */
 export function daysFigures(place: Place, from: string, to: string): DayFigures[] {
   const days: DayFigures[] = []
-  for (let d = from; d <= to; d = addDays(d, 1)) days.push(dayFigures(place, d))
+  for (let d = from; d <= to; d = addDays(d, 1)) days.push(dayFigures(place, d, days[days.length - 1]?.midnight))
   return days
 }
 

@@ -120,7 +120,10 @@ data.
 
 ## Stage 3 — the page, top half (light mode)
 
-Branch: `stage-3-page`
+Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
+
+**Status (27 October):** built; with John for a look on the Vercel preview. The wording of
+the first-visit screen, "About these figures" and the footer is draft. Not merged.
 
 - Header: logo, "Lightreader", and the postcode pill with Change. Opening the
   pill shows the postcode box (16px text on touch screens; capitals; no

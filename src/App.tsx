@@ -1,4 +1,137 @@
-// A placeholder until stage 3 (PLAN.md): stage 1 builds the figures, with no page.
+// Lightreader's page (PLAN stage 3, light mode): the header with the postcode pill, today's
+// sunrise and sunset, the sky ribbon for the next 24 hours, the sentence groups, "About
+// these figures" and the footer (SPEC §5). A first-time visitor sees the postcode box; the
+// last postcode chosen is kept on this device only.
+
+import { Component, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { About } from './components/About.tsx'
+import { PostcodeBox } from './components/PostcodeBox.tsx'
+import { SentenceGroups } from './components/Sentences.tsx'
+import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
+import { clock, longDate } from './lib/format.ts'
+import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
+import { useIsNarrow } from './lib/responsive.ts'
+import { ribbon } from './lib/ribbon.ts'
+import type { Group } from './lib/sentences/index.ts'
+import type { Answer, Ask } from './lib/sentences.worker.ts'
+import { dayFigures } from './lib/sun.ts'
+import { ukParts } from './lib/ukTime.ts'
+
+function Logo() {
+  return (
+    <svg className="logo" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="15" fill="var(--color-bg)" stroke="var(--color-accent)" strokeWidth="2.5" />
+      <path d="M9 19.5a7 7 0 0 1 14 0" fill="none" stroke="var(--color-accent)" strokeWidth="2.6" strokeLinecap="round" />
+      <path d="M7 23h18" fill="none" stroke="var(--color-accent-700)" strokeWidth="2.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/** The moment now, moving on each minute, so the ribbon keeps up while the page is open. */
+function useNow(): Date {
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 60_000)
+    return () => clearInterval(id)
+  }, [])
+  return now
+}
+
+/** The sentence groups for a place and day, from the worker. */
+function useGroups(d: District | null, date: string): Group[] | null {
+  const [answer, setAnswer] = useState<{ key: string; groups: Group[] } | null>(null)
+  const key = d ? `${d.code} ${date}` : ''
+  useEffect(() => {
+    if (!d) return
+    const key = `${d.code} ${date}`
+    const worker = new Worker(new URL('./lib/sentences.worker.ts', import.meta.url), { type: 'module' })
+    worker.onmessage = (e: MessageEvent<Answer>) => {
+      setAnswer({ key, groups: e.data.groups })
+      worker.terminate()
+    }
+    worker.postMessage({ place: d, name: d.name, now: new Date().toISOString() } satisfies Ask)
+    return () => worker.terminate()
+  }, [d, date])
+  return answer?.key === key ? answer.groups : null
+}
+
+/** If the page can't be shown, a message and a way to choose again, not an empty page
+ *  (as Hindcaster's safety net). */
+class SafetyNet extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  render() {
+    if (!this.state.failed) return this.props.children
+    return <div className="card welcome" role="alert"><p>Sorry, this page couldn't be shown. Try another postcode, or try again later.</p></div>
+  }
+}
+
+function Place({ d, now }: { d: District; now: Date }) {
+  const narrow = useIsNarrow(720)
+  const today = ukParts(now).date
+  const fig = useMemo(() => dayFigures(d, today), [d, today])
+  // The ribbon moves on with the clock; worked out again each minute.
+  const r = useMemo(() => ribbon(d, now), [d, now])
+  const groups = useGroups(d, today)
+  return (
+    <>
+      <section className="card today">
+        <div className="kicker">Today · {longDate(today)}</div>
+        <p className="today-big">
+          {fig.sunrise && <span className="pair">Sunrise <span>{clock(fig.sunrise)}</span></span>}
+          {fig.sunrise && fig.sunset && <span className="dot"> · </span>}
+          {fig.sunset && <span className="pair">Sunset <span>{clock(fig.sunset)}</span></span>}
+        </p>
+      </section>
+      <section className="card next24">
+        <h3>Next 24 hours</h3>
+        {narrow ? <SkyRibbonNarrow r={r} /> : <SkyRibbonWide r={r} />}
+      </section>
+      <SentenceGroups groups={groups} />
+    </>
+  )
+}
+
 export default function App() {
-  return <p>Lightreader is being built.</p>
+  const now = useNow()
+  const [d, setD] = useState<District | null>(savedDistrict)
+  const [changing, setChanging] = useState(false)
+  const choose = (next: District) => {
+    saveDistrict(next.code)
+    setD(next)
+    setChanging(false)
+  }
+
+  return (
+    <>
+      <nav className="nav" data-noprint>
+        <span className="nav-brand"><Logo /> Lightreader</span>
+        {d && !changing && (
+          <span className="pill">
+            {d.name} ({d.code})
+            <button className="btn btn-primary btn-small" type="button" onClick={() => setChanging(true)}>Change</button>
+          </span>
+        )}
+      </nav>
+      <main className="col screen">
+        {(!d || changing) && (
+          <section className="card welcome">
+            {!d && <h2>Sunrise, sunset and twilight for your postcode</h2>}
+            {!d && <p className="muted">When the light comes and goes where you are, today and through the year, in UK clock time.</p>}
+            <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
+          </section>
+        )}
+        {d && <SafetyNet key={d.code}><Place d={d} now={now} /></SafetyNet>}
+        <About />
+        <footer className="footer-notice" data-noprint>
+          Lightreader is a free-to-use personal project by John Baish. More free tools at{' '}
+          <a href="https://www.baish.net/" target="_blank" rel="noopener noreferrer" className="footer-link">www.baish.net</a>.
+          {' '}Contact: workshop@baish.net. We don't record anything you do here, apart from anonymous visit statistics (no cookies, no personal data) showing us how the site is used.
+          {' '}Your device, rather than the website, stores your last postcode, so the page opens the same way next time.
+          <br />{POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
+          {' '}Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer" className="footer-link">Astronomy Engine</a> (MIT licence).
+        </footer>
+      </main>
+    </>
+  )
 }

@@ -38,6 +38,23 @@ Key points:
   with a private repo). It holds no one else's raw data, unlike Hindcaster.
 - Add a dated entry below for every change.
 
+## Layout
+
+- **The page** (Vite + React + TypeScript): `src/App.tsx` (header with the postcode pill,
+  Today, the sky ribbon, the sentence groups, "About these figures", the footer; the last
+  postcode in `localStorage`, key `lightreader.postcode`), `src/components/` (`SkyRibbon`,
+  `Sentences`, `PostcodeBox`, `About`). The sentences are worked out in a worker
+  (`src/lib/sentences.worker.ts`) so today and the ribbon show at once.
+- **The figures:** `src/lib/sun.ts` (Astronomy Engine; twilight times worked out only when
+  read), `bands.ts`, `format.ts`, `year.ts`, `ribbon.ts` (the next 24 hours and where its
+  labels go), `postcode.ts` (the bundled list, `src/data/outcodes.json`), `ukPlaces.ts`
+  (`src/data/ukPlaces.json`), `src/lib/sentences/` (every group in SPEC §6).
+- **Checks:** `npm run check` (figures, sentences, page), `npm run build`, `npm run lint`.
+- **Sheets for John:** `npm run figures-sheet`, `npm run sentence-sheet [<html>]`,
+  `npm run compare-metno [<cache>]` (needs `NODE_USE_ENV_PROXY=1` here).
+- **Data builds:** `npm run outcodes <Hindcaster's data/outcodes.json>`,
+  `npm run uk-places <OS Open Names Data folder>`.
+
 ## Log
 
 ### 2026-10-27 — spec read; mock-ups moved; plan drafted (branch `claude/nice-goodall-j1r6wu`)
@@ -302,3 +319,47 @@ tonight: it's [Dark] from 22:58 to 03:22." (`today.ts`). "Very dark or true nigh
 … to …" and "It's dark at 17:30 until …" stay as words (SPEC §4 defines "dark" in a
 sentence). The sentence sheet's PDF shows the tags in the spec's light-mode band colours;
 its Markdown uses quotation marks. All 13 points are now decided. Checks 14 + 12.
+
+### 2026-10-27 — stage 3 built: the page, light mode (branch `claude/nice-goodall-j1r6wu`)
+
+**John** said yes to stage 3.
+
+**What:** the page from the approved mock-up (option B), on the shared base copied from
+Hindcaster (`organic.css`; the shared part of `global.css`; `responsive.ts`; the postcode
+reader and error wording of its chooser; the safety net; the footer), with
+`@vercel/analytics` at Hindcaster's version.
+- Header: logo (the mock-up's sun on the horizon), "Lightreader", the pill "Reading (RG1)"
+  with Change (44px on a phone). First visit: a heading, one line and the postcode box.
+- Today: the kicker and "Sunrise 06:48 · Sunset 16:46", nothing else (SPEC §5).
+- The sky ribbon (`src/lib/ribbon.ts`, `SkyRibbon.tsx`): to scale, now to the same time
+  tomorrow, moving on each minute. Computer: "Now" just left of the strip; labels alternate
+  above and below, moving to the other side or a far row when they'd touch, and a far-row
+  line never crosses a near-row label (`placeLabels`). Phone: upright, true night longer
+  than three hours folded to 40px with a zigzag and its length, labels spaced so none
+  overlap (`spreadLabels`), "Wed" before times after midnight.
+- The sentence groups as cards, two to a row on a computer, the tags in band colours.
+  "Is it light at…?" waits for stage 4; directions are compass-only until stage 6.
+- "About these figures" and the footer: **draft wording for John**, including the three
+  postcode credit lines and "Calculated with Astronomy Engine (MIT licence)".
+
+**Speed:** the sentences took about 1.5 seconds in the browser here; with twilight times
+worked out only when a sentence reads them, and each solar midnight reused for the next
+day, about 1 second (408 ms in Node, was about 900). The figures sheet and sentence sheet
+come out byte for byte the same. Slowing the browser's processor didn't slow the worker
+(CDP throttling seems not to reach it), so the time on a real phone isn't known.
+
+**Mistakes on the way, caught in the browser:** "Sunrise 06:48 · Sunset 16:46" broke into
+four lines on a phone; "Now" collided with the midnight divider and with changes only
+minutes later (now beside the strip on a computer, and always first on a phone); a far-row
+label's line ran through "Now 15:40". A quoting slip broke the new check file once.
+
+**Verified:** `npx tsc -b`, `oxlint` (clean), `npm run check` (14 + 12 + 4; new: the
+ribbon covers 24 hours band by band as `bandAt` says, Reading's ticks at 09:02, labels
+never overlap, the postcode reader). In Chromium at 1200px and at 390px with touch:
+Reading at 09:02 today, Reading on a winter evening, Berwick at 22:30 on midsummer night,
+four more ribbons (summer evening, spring dawn), the first visit, a Welsh postcode refused
+with Hindcaster's wording, "rg4 7hn" typed, Change, Cancel, a new postcode, a reload: no
+script errors, no sideways scroll, all four fonts loaded where used. The one failed load is
+Vercel's statistics script, which exists only on Vercel. Screenshots in
+`design/previews/stage3-*.png`.
+**Couldn't be checked:** a real phone; the Vercel preview itself (blocked here).

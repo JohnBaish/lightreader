@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "check": "node scripts/check-figures.ts && node scripts/check-sentences.ts",
+    "check": "node scripts/check-figures.ts && node scripts/check-sentences.ts && node scripts/check-page.ts",
     "outcodes": "node scripts/build-outcodes.ts",
     "uk-places": "node scripts/build-uk-places.ts",
     "compare-metno": "node scripts/compare-metno.ts",
@@ -27,6 +27,7 @@
   "dependencies": {
     "@fontsource/caprasimo": "^5.3.0",
     "@fontsource/figtree": "^5.3.0",
+    "@vercel/analytics": "^2.0.1",
     "astronomy-engine": "2.1.19",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

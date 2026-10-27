@@ -761,3 +761,14 @@ main script now holds "Copyright (c) 2019-2023 Don Cross" and React's five `@lic
 390px with touch, no errors, no sideways scroll.
 
 John will run `/fresh-look` in a new thread (with a prompt drafted here), on this branch.
+
+### 2026-10-28 — the fresh look's handover received (branch `claude/nice-goodall-j1r6wu`)
+
+John ran `/fresh-look` in a separate thread (review of commit `4a01d20`; nothing changed
+there) and passed on its handover, now `design/fresh-look-handover-2026-10-27.md`: Part A
+the report (findings 2.1–6.3, left alone 7.1–7.12), Part B John's own amendments J1–J10
+with the review's checks, Part C the open decisions and a combined order. Looked up for
+6.1: TR22's middle is 0.5 km from St Agnes (Isles of Scilly); MK20's (6 postcodes) is beside
+Caldecote, 1.5 km from Newport Pagnell; SO97 (15 postcodes, none with a place in Open Names)
+lies between North Stoneham and Swaythling, Southampton. The open decisions went to John as
+one numbered list; nothing built yet.

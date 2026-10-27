@@ -1,0 +1,416 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Lightreader Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: baish.net house column; each option shown in a true 1100px computer frame and a 390px phone frame, scaled to fit.
+   Single light theme by choice, matching the house style (no dark mode). */
+:root {
+  --cream: #f5ead8;
+  --surface: #ebddc5;
+  --ink: #201e1d;
+  --terra: #c67139;
+  --terra-dk: #8c491a;
+  --muted: #645c50;
+  --olive: #7a8a5e;
+  --line: #d9c7a8;
+  --paper: #fbf4e8;
+  /* new: light-band scale, proposed for approval */
+  --b-day: #f2cf86;
+  --b-half: #d98e57;
+  --b-dark: #7b6577;
+  --b-vdark: #463c55;
+  --b-night: #24212f;
+  --on-dark: #f5ead8;
+  --swb: rgba(32,30,29,.15);
+  --display: "Caprasimo", Georgia, serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+body { background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.page { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px; }
+h1, h2, h3, .disp { font-family: var(--display); font-weight: 400; font-style: normal; text-wrap: balance; }
+.kicker { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--terra-dk); font-weight: 600; }
+.intro h1 { font-size: clamp(30px, 5vw, 44px); margin: 6px 0 10px; line-height: 1.1; }
+.intro p { max-width: 64ch; margin: 0 0 8px; color: var(--muted); }
+.option { margin-top: 48px; display: grid; gap: 14px; }
+.option-head { display: grid; gap: 4px; }
+.option-head h2 { font-size: 28px; margin: 0; }
+.option-head p { margin: 0; max-width: 64ch; color: var(--muted); }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+@media (max-width: 860px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.frame-wrap { display: grid; gap: 6px; min-width: 0; }
+.frame-label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.frame { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--cream); }
+.frame.phone { border-radius: 26px; border-width: 6px; border-color: var(--ink); max-width: 300px; }
+@media (max-width: 860px) { .frame.phone { max-width: 390px; } }
+.vp { transform-origin: 0 0; position: absolute; top: 0; left: 0; background: var(--cream); color: var(--ink); }
+.vp.wide { width: 1100px; }
+.vp.narrow { width: 390px; }
+/* proposed dark mode, scoped to the mock frames */
+.vp.dk {
+  --cream: #1b1816; --surface: #2a2420; --paper: #221e1b; --ink: #efe2cc; --muted: #b0a28c; --line: #3b332c;
+  --terra: #d4783f; --terra-dk: #eb9d63;
+  --b-day: #d8b46e; --b-half: #c27a48; --b-dark: #6c5868; --b-vdark: #3d344f; --b-night: #0f0e16;
+  --swb: rgba(239,226,204,.25);
+  color: var(--ink);
+}
+.frame.dkf { border-color: #3b332c; }
+.frame.phone.dkf { border-color: #000; }
+.notes { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 8px; max-width: 70ch; color: var(--muted); font-size: 15px; }
+.notes h3 { font-size: 22px; color: var(--ink); margin: 0 0 4px; }
+.notes p { margin: 0; }
+
+/* ---------- mock site styles (inside frames) ---------- */
+.site { padding: 22px 28px 30px; display: grid; gap: 20px; font-family: var(--body); color: var(--ink); }
+.vp.narrow .site { padding: 16px 16px 24px; gap: 16px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .disp { font-size: 26px; line-height: 1; }
+.vp.narrow .brand .disp { font-size: 22px; }
+.place { display: flex; align-items: center; gap: 10px; background: var(--surface); border-radius: 999px; padding: 8px 8px 8px 16px; font-weight: 600; font-size: 15px; }
+.place .chg { background: var(--terra); color: var(--cream); border-radius: 999px; padding: 6px 12px; font-family: var(--display); font-weight: 400; font-size: 14px; }
+.card { background: var(--surface); border-radius: 18px; padding: 20px 22px; }
+.vp.narrow .card { padding: 16px; border-radius: 16px; }
+.today .big { font-family: var(--display); font-size: 44px; line-height: 1.05; margin: 6px 0 6px; font-variant-numeric: tabular-nums; }
+.vp.narrow .today .big { font-size: 30px; }
+.today .big span { color: var(--terra-dk); }
+.today .sub { color: var(--muted); margin: 0; }
+.sect-title { font-family: var(--display); font-size: 22px; margin: 0 0 10px; }
+.vp.narrow .sect-title { font-size: 19px; }
+.groups { display: grid; gap: 16px; }
+.group h4 { margin: 0 0 6px; }
+.group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.group li { padding-left: 16px; position: relative; }
+.group li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--terra); }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Option A: list */
+.a-cols { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 20px; align-items: start; }
+.vp.narrow .a-cols { grid-template-columns: minmax(0, 1fr); }
+.evlist { list-style: none; margin: 0; padding: 0; }
+.evlist li { display: grid; grid-template-columns: 58px 14px minmax(0, 1fr); gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); }
+.evlist li:first-child { border-top: 0; }
+.evlist .t { font-weight: 600; font-variant-numeric: tabular-nums; font-size: 17px; }
+.evlist .t small { display: block; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; line-height: 1; }
+.sw { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--swb); }
+.evlist .l { line-height: 1.25; }
+.evlist .l em { display: block; font-style: normal; font-size: 13px; color: var(--muted); }
+.daybreak { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 10px 0 2px; border-top: 1px solid var(--line); }
+
+/* Option B: ribbon */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid var(--swb); }
+.b-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.vp.narrow .b-split { grid-template-columns: minmax(0, 1fr); }
+
+/* Option C: dial */
+.c-cols { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 24px; align-items: start; }
+.vp.narrow .c-cols { grid-template-columns: minmax(0, 1fr); }
+.dial-card { display: grid; justify-items: center; gap: 8px; }
+.chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.vp.narrow .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.chip { background: var(--paper); border-radius: 12px; padding: 8px 10px; display: grid; gap: 2px; }
+.chip .t { font-weight: 600; font-variant-numeric: tabular-nums; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+.chip .l { font-size: 13px; color: var(--muted); line-height: 1.2; }
+</style>
+
+<div class="page">
+  <header class="intro">
+    <div class="kicker">baish.net · new tool</div>
+    <h1>Lightreader: three ways to open the page</h1>
+    <p>Each option shows the top of the page: today, the next 24 hours, and the first two groups of sentences. All the figures are real, for Reading (RG1) on Tuesday October 27th 2026 at 09:02.</p>
+    <p>Each one is drawn at true computer width (1100px) and phone width (390px), then scaled to fit your screen. Dark-mode versions of A and B follow B.</p>
+  </header>
+
+  <section class="option" id="opt-a">
+    <div class="option-head">
+      <div class="kicker">Option A</div>
+      <h2>The running order</h2>
+      <p>A plain list of what happens next, one row per change of light, like a programme running order. Easy to scan, and the most like Hindcaster.</p>
+    </div>
+    <div class="pair">
+      <div class="frame-wrap"><div class="frame-label">Computer</div><div class="frame"><div class="vp wide" data-opt="a"></div></div></div>
+      <div class="frame-wrap"><div class="frame-label">Phone</div><div class="frame phone"><div class="vp narrow" data-opt="a"></div></div></div>
+    </div>
+  </section>
+
+  <section class="option" id="opt-b">
+    <div class="option-head">
+      <div class="kicker">Option B</div>
+      <h2>The sky ribbon</h2>
+      <p>The next 24 hours as a strip of colour, drawn to scale, so you can see how long each stretch of light lasts. On a phone the strip turns upright and the long night is folded up.</p>
+    </div>
+    <div class="pair">
+      <div class="frame-wrap"><div class="frame-label">Computer</div><div class="frame"><div class="vp wide" data-opt="b"></div></div></div>
+      <div class="frame-wrap"><div class="frame-label">Phone</div><div class="frame phone"><div class="vp narrow" data-opt="b"></div></div></div>
+    </div>
+  </section>
+
+  <section class="option" id="opt-a-dark">
+    <div class="option-head">
+      <div class="kicker">Option A · dark mode</div>
+      <h2>The running order, after dark</h2>
+      <p>The same page for phones set to dark mode. The cream turns to a warm near-black, and the terracotta is lifted a little so it still reads.</p>
+    </div>
+    <div class="pair">
+      <div class="frame-wrap"><div class="frame-label">Computer</div><div class="frame dkf"><div class="vp wide dk" data-opt="a"></div></div></div>
+      <div class="frame-wrap"><div class="frame-label">Phone</div><div class="frame phone dkf"><div class="vp narrow dk" data-opt="a"></div></div></div>
+    </div>
+  </section>
+
+  <section class="option" id="opt-b-dark">
+    <div class="option-head">
+      <div class="kicker">Option B · dark mode</div>
+      <h2>The sky ribbon, after dark</h2>
+      <p>The night colours sit closer to the page here, so the ribbon's faint outline does more work to hold its shape.</p>
+    </div>
+    <div class="pair">
+      <div class="frame-wrap"><div class="frame-label">Computer</div><div class="frame dkf"><div class="vp wide dk" data-opt="b"></div></div></div>
+      <div class="frame-wrap"><div class="frame-label">Phone</div><div class="frame phone dkf"><div class="vp narrow dk" data-opt="b"></div></div></div>
+    </div>
+  </section>
+
+  <section class="option" id="opt-c">
+    <div class="option-head">
+      <div class="kicker">Option C</div>
+      <h2>The 24-hour dial</h2>
+      <p>Today as a clock face, with noon at the top and midnight at the bottom, a cousin of the Clockmaker ring. The hand shows now; the events sit beside it as small cards.</p>
+    </div>
+    <div class="pair">
+      <div class="frame-wrap"><div class="frame-label">Computer</div><div class="frame"><div class="vp wide" data-opt="c"></div></div></div>
+      <div class="frame-wrap"><div class="frame-label">Phone</div><div class="frame phone"><div class="vp narrow" data-opt="c"></div></div></div>
+    </div>
+  </section>
+
+  <footer class="notes">
+    <h3>Notes</h3>
+    <p>The five band colours, from sunshine yellow through to a deep night blue, are new. They would join the house palette, so they need your approval.</p>
+    <p>Fonts come from Google here because that's all the mockup page allows. The real site would self-host them, as the others do.</p>
+    <p>The sentences use the "1h 20m" style and the 06:49 time format, both still open to change.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // Real figures, Reading 51.46N 0.97W, Tue Oct 27th 2026 (GMT). Minutes from Tue 00:00.
+  var NOW = 542; // 09:02
+  var END = NOW + 1440;
+  var BAND = { day: "var(--b-day)", half: "var(--b-half)", dark: "var(--b-dark)", vdark: "var(--b-vdark)", night: "var(--b-night)" };
+  var BANDNAME = { day: "Daylight", half: "Half-light", dark: "Dark", vdark: "Very dark", night: "True night" };
+  var events = [
+    { m: 708, t: "11:48", label: "Sun highest", tech: "solar noon", band: "day" },
+    { m: 1006, t: "16:46", label: "Sunset", tech: "half-light begins", band: "half" },
+    { m: 1041, t: "17:21", label: "Dark", tech: "nautical twilight", band: "dark" },
+    { m: 1080, t: "18:00", label: "Very dark", tech: "astronomical twilight", band: "vdark" },
+    { m: 1119, t: "18:39", label: "True night", tech: "until 04:57", band: "night" },
+    { m: 1737, t: "04:57", label: "Very dark", tech: "astronomical twilight", band: "vdark", wed: true },
+    { m: 1776, t: "05:36", label: "Dark", tech: "nautical twilight", band: "dark", wed: true },
+    { m: 1815, t: "06:15", label: "Half-light", tech: "civil twilight", band: "half", wed: true },
+    { m: 1850, t: "06:50", label: "Sunrise", tech: "", band: "day", wed: true }
+  ];
+  // band segments across the 24-hour window
+  var segs = [["day", NOW, 1006], ["half", 1006, 1041], ["dark", 1041, 1080], ["vdark", 1080, 1119], ["night", 1119, 1737], ["vdark", 1737, 1776], ["dark", 1776, 1815], ["half", 1815, 1850], ["day", 1850, END]];
+  // calendar-day bands for the dial (Tue)
+  var daySegs = [["night", 0, 295.9], ["vdark", 295.9, 334.4], ["dark", 334.4, 373.3], ["half", 373.3, 408.6], ["day", 408.6, 1006], ["half", 1006, 1041.3], ["dark", 1041.3, 1080.1], ["vdark", 1080.1, 1118.6], ["night", 1118.6, 1440]];
+
+  function logo(size) {
+    return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 32 32" aria-hidden="true">' +
+      '<circle cx="16" cy="16" r="15" fill="var(--cream)" stroke="var(--terra)" stroke-width="2.5"/>' +
+      '<path d="M9 19.5a7 7 0 0 1 14 0" fill="none" stroke="var(--terra)" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<path d="M7 23h18" fill="none" stroke="var(--terra-dk)" stroke-width="2.6" stroke-linecap="round"/></svg>';
+  }
+  function topbar() {
+    return '<div class="topbar"><div class="brand">' + logo(34) + '<span class="disp">Lightreader</span></div>' +
+      '<div class="place"><span>Reading (RG1)</span><span class="chg">Change</span></div></div>';
+  }
+  function today(compact) {
+    return '<div class="card today"><div class="kicker">Today · Tuesday October 27th</div>' +
+      '<div class="big">Sunrise <span>06:49</span>' + (compact ? '<br>' : ' · ') + 'Sunset <span>16:46</span></div>' +
+      '<p class="sub">9h 57m of daylight, about 4m less each day.</p></div>';
+  }
+  function gRecords() {
+    return '<div class="group"><h4 class="sect-title">Records and runs</h4><ul>' +
+      '<li>The earliest sunset since Wednesday January 28th.</li>' +
+      '<li>Sunsets keep getting earlier until Saturday December 12th, when the sun sets at 15:55.</li>' +
+      '<li>The shortest day since Saturday February 14th.</li></ul></div>';
+  }
+  function gFortnight() {
+    return '<div class="group"><h4 class="sect-title">This fortnight</h4><ul>' +
+      '<li>A week ago, before the clocks went back, the sun rose at 07:36 and set at 18:00. Days were 26m longer.</li>' +
+      '<li>Next Tuesday the sun rises 12m later, at 07:01, and sets 13m earlier, at 16:33. That\'s 25m less daylight.</li></ul></div>';
+  }
+  function groups() { return '<div class="groups">' + gRecords() + gFortnight() + '</div>'; }
+  function legend() {
+    return '<div class="legend">' + ["day", "half", "dark", "vdark", "night"].map(function (b) {
+      return '<span><i style="background:' + BAND[b] + '"></i>' + BANDNAME[b] + '</span>';
+    }).join("") + '</div>';
+  }
+
+  // ---- Option A
+  function evList() {
+    var html = '<ul class="evlist">';
+    var wedShown = false;
+    events.forEach(function (e) {
+      if (e.wed && !wedShown) { html += '</ul><div class="daybreak">Wednesday</div><ul class="evlist">'; wedShown = true; }
+      html += '<li><span class="t">' + e.t + '</span><span class="sw" style="background:' + BAND[e.band] + '"></span>' +
+        '<span class="l">' + e.label + (e.tech ? '<em>' + e.tech + '</em>' : '') + '</span></li>';
+    });
+    return html + '</ul>';
+  }
+  function optA(narrow) {
+    return '<div class="site">' + topbar() + today(narrow) +
+      '<div class="a-cols"><div class="card"><h3 class="sect-title">Next 24 hours</h3>' + evList() + '</div>' +
+      '<div class="card">' + groups() + '</div></div></div>';
+  }
+
+  // ---- Option B
+  function ribbonWide() {
+    var W = 1000, H = 150, top = 52, bh = 46, x0 = 20;
+    var px = function (m) { return x0 + (m - NOW) / 1440 * W; };
+    var s = '<svg viewBox="0 0 1040 ' + H + '" width="100%" role="img" aria-label="Light over the next 24 hours">';
+    segs.forEach(function (g, i) {
+      s += '<rect x="' + px(g[1]).toFixed(1) + '" y="' + top + '" width="' + (px(g[2]) - px(g[1]) + 0.6).toFixed(1) + '" height="' + bh + '" fill="' + BAND[g[0]] + '"/>';
+    });
+    s += '<rect x="' + x0 + '" y="' + top + '" width="' + W + '" height="' + bh + '" rx="10" fill="none" stroke="var(--ink)" stroke-opacity=".15"/>';
+    // midnight divider
+    var mx = px(1440);
+    s += '<line x1="' + mx + '" x2="' + mx + '" y1="' + (top - 6) + '" y2="' + (top + bh + 6) + '" stroke="var(--on-dark)" stroke-dasharray="3 3" stroke-width="1.5"/>';
+    s += '<text x="' + (mx + 6) + '" y="' + (top + bh - 8) + '" font-size="12" font-weight="600" fill="var(--on-dark)" font-family="Figtree, sans-serif">WED</text>';
+    // labels alternate above/below
+    var flip = { "11:48": 1, "16:46": 1, "17:21": 0, "18:00": 1, "18:39": 0, "04:57": 1, "05:36": 0, "06:15": 1, "06:50": 0 };
+    events.forEach(function (e) {
+      var x = px(e.m), up = flip[e.t];
+      var y1 = up ? top - 10 : top + bh + 2, y2 = up ? top : top + bh + 12;
+      s += '<line x1="' + x + '" x2="' + x + '" y1="' + y1 + '" y2="' + y2 + '" stroke="var(--ink)" stroke-width="1.5"/>';
+      var ty = up ? top - 30 : top + bh + 30;
+      s += '<text x="' + x + '" y="' + ty + '" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="Figtree, sans-serif" style="font-variant-numeric:tabular-nums">' + e.t + '</text>';
+      s += '<text x="' + x + '" y="' + (ty + (up ? 15 : 15)) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)" font-family="Figtree, sans-serif">' + e.label + '</text>';
+    });
+    // now / end
+    s += '<text x="' + x0 + '" y="' + (top + bh / 2 + 5) + '" dx="10" font-size="13" font-weight="600" fill="var(--terra-dk)" font-family="Figtree, sans-serif">Now 09:02</text>';
+    s += '<circle cx="' + x0 + '" cy="' + (top + bh / 2) + '" r="5" fill="var(--terra)" stroke="var(--cream)" stroke-width="2"/>';
+    return s + '</svg>';
+  }
+  function ribbonNarrow() {
+    // vertical, with true night folded to a fixed height
+    var W = 358, x = 18, bw = 26;
+    var rows = [];
+    var y = 10, k = 0.62;
+    var pos = {};
+    function hFor(g) { return g[0] === "night" ? 70 : (g[2] - g[1]) * k; }
+    var s = '';
+    var ys = [];
+    segs.forEach(function (g) { var h = hFor(g); ys.push([g, y, h]); y += h; });
+    var H = y + 10;
+    s += '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Light over the next 24 hours">';
+    ys.forEach(function (r) {
+      var g = r[0];
+      s += '<rect x="' + x + '" y="' + r[1].toFixed(1) + '" width="' + bw + '" height="' + (r[2] + 0.6).toFixed(1) + '" fill="' + BAND[g[0]] + '"/>';
+      if (g[0] === "night") {
+        var cy = r[1] + r[2] / 2;
+        s += '<path d="M' + (x - 3) + ' ' + (cy - 4) + ' l8 6 l8 -6 l8 6 l8 -6" fill="none" stroke="var(--on-dark)" stroke-width="2"/>';
+        s += '<text x="' + (x + bw + 14) + '" y="' + (cy + 4) + '" font-size="13" fill="var(--muted)" font-family="Figtree, sans-serif">True night, 10h 19m (folded)</text>';
+      }
+    });
+    s += '<rect x="' + x + '" y="10" width="' + bw + '" height="' + (H - 20) + '" rx="8" fill="none" stroke="var(--ink)" stroke-opacity=".15"/>';
+    function yOf(m) {
+      for (var i = 0; i < ys.length; i++) { var g = ys[i][0]; if (m >= g[1] && m <= g[2]) { return g[0] === "night" ? ys[i][1] : ys[i][1] + (m - g[1]) * k; } }
+      return H - 10;
+    }
+    // now marker
+    s += '<circle cx="' + (x + bw / 2) + '" cy="11" r="6" fill="var(--terra)" stroke="var(--cream)" stroke-width="2"/>';
+    s += '<text x="' + (x + bw + 14) + '" y="16" font-size="14" font-weight="600" fill="var(--terra-dk)" font-family="Figtree, sans-serif">Now 09:02</text>';
+    var lastY = -99;
+    events.forEach(function (e) {
+      var yy = yOf(e.m);
+      var ly = Math.max(yy, lastY + 22);
+      lastY = ly;
+      s += '<line x1="' + (x + bw) + '" x2="' + (x + bw + 8) + '" y1="' + yy + '" y2="' + yy + '" stroke="var(--ink)" stroke-width="1.5"/>';
+      s += '<text x="' + (x + bw + 14) + '" y="' + (ly + 5) + '" font-size="15" font-family="Figtree, sans-serif" fill="var(--ink)"><tspan font-weight="600" style="font-variant-numeric:tabular-nums">' + (e.wed ? 'Wed ' : '') + e.t + '</tspan><tspan fill="var(--muted)" dx="8">' + e.label + '</tspan></text>';
+    });
+    return s + '</svg>';
+  }
+  function optB(narrow) {
+    return '<div class="site">' + topbar() + today(narrow) +
+      '<div class="card"><h3 class="sect-title">Next 24 hours</h3>' + (narrow ? ribbonNarrow() : ribbonWide()) + '<div style="margin-top:10px">' + legend() + '</div></div>' +
+      '<div class="b-split">' +
+      '<div class="card">' + gRecords() + '</div>' +
+      '<div class="card">' + gFortnight() + '</div>' +
+      '</div></div>';
+  }
+
+  // ---- Option C
+  function arc(cx, cy, r, a0, a1) {
+    var p = function (a) { var rad = (a - 90) * Math.PI / 180; return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)]; };
+    var s = p(a0), e = p(a1), large = (a1 - a0) > 180 ? 1 : 0;
+    return "M" + s[0].toFixed(2) + " " + s[1].toFixed(2) + " A" + r + " " + r + " 0 " + large + " 1 " + e[0].toFixed(2) + " " + e[1].toFixed(2);
+  }
+  function ang(m) { return (m / 1440) * 360 + 180; }
+  function dial(size) {
+    var c = 150, r = 112, sw = 34;
+    var s = '<svg viewBox="0 0 300 300" width="' + size + '" height="' + size + '" role="img" aria-label="Today as a 24-hour dial">';
+    s += '<circle cx="' + c + '" cy="' + c + '" r="' + (r + sw / 2 + 10) + '" fill="var(--paper)"/>';
+    daySegs.forEach(function (g) {
+      s += '<path d="' + arc(c, c, r, ang(g[1]), ang(g[2]) + 0.4) + '" fill="none" stroke="' + BAND[g[0]] + '" stroke-width="' + sw + '"/>';
+    });
+    // hour ticks
+    for (var h = 0; h < 24; h++) {
+      var a = (ang(h * 60) - 90) * Math.PI / 180, r1 = r + sw / 2 + 2, r2 = r + sw / 2 + (h % 6 ? 5 : 9);
+      s += '<line x1="' + (c + r1 * Math.cos(a)).toFixed(1) + '" y1="' + (c + r1 * Math.sin(a)).toFixed(1) + '" x2="' + (c + r2 * Math.cos(a)).toFixed(1) + '" y2="' + (c + r2 * Math.sin(a)).toFixed(1) + '" stroke="var(--muted)" stroke-width="' + (h % 6 ? 1 : 1.6) + '"/>';
+    }
+    [[0, "00"], [360, "06"], [720, "12"], [1080, "18"]].forEach(function (t) {
+      var a = (ang(t[0]) - 90) * Math.PI / 180, rr = r - sw / 2 - 14;
+      s += '<text x="' + (c + rr * Math.cos(a)).toFixed(1) + '" y="' + (c + rr * Math.sin(a) + 4).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="600" fill="var(--muted)" font-family="Figtree, sans-serif">' + t[1] + '</text>';
+    });
+    // sunrise / sunset dots
+    [[408.6, "06:49"], [1006, "16:46"]].forEach(function (t) {
+      var a = (ang(t[0]) - 90) * Math.PI / 180;
+      s += '<circle cx="' + (c + r * Math.cos(a)).toFixed(1) + '" cy="' + (c + r * Math.sin(a)).toFixed(1) + '" r="6" fill="var(--cream)" stroke="var(--terra-dk)" stroke-width="2"/>';
+    });
+    // now hand
+    var an = (ang(NOW) - 90) * Math.PI / 180;
+    s += '<line x1="' + c + '" y1="' + c + '" x2="' + (c + (r + sw / 2) * Math.cos(an)).toFixed(1) + '" y2="' + (c + (r + sw / 2) * Math.sin(an)).toFixed(1) + '" stroke="var(--terra)" stroke-width="3" stroke-linecap="round"/>';
+    s += '<circle cx="' + c + '" cy="' + c + '" r="5" fill="var(--terra)"/>';
+    s += '<text x="' + c + '" y="' + (c + 30) + '" text-anchor="middle" font-size="26" fill="var(--ink)" font-family="Caprasimo, Georgia, serif">9h 57m</text>';
+    s += '<text x="' + c + '" y="' + (c + 48) + '" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Figtree, sans-serif">of daylight</text>';
+    s += '<text x="' + c + '" y="' + (c - 22) + '" text-anchor="middle" font-size="12" font-weight="600" fill="var(--terra-dk)" font-family="Figtree, sans-serif">NOW 09:02</text>';
+    return s + '</svg>';
+  }
+  function chips() {
+    return '<div class="chips">' + events.map(function (e) {
+      return '<div class="chip"><span class="t"><span class="sw" style="background:' + BAND[e.band] + '"></span>' + (e.wed ? '<small style="font-size:11px;color:var(--muted)">WED</small>' : '') + e.t + '</span><span class="l">' + e.label + '</span></div>';
+    }).join("") + '</div>';
+  }
+  function optC(narrow) {
+    return '<div class="site">' + topbar() +
+      '<div class="c-cols"><div class="card dial-card"><div class="kicker">Today · Tuesday October 27th</div>' + dial(narrow ? 300 : 330) +
+      '<div class="tnum" style="font-family:var(--display);font-size:22px">Sunrise <span style="color:var(--terra-dk)">06:49</span> · Sunset <span style="color:var(--terra-dk)">16:46</span></div>' + legend() + '</div>' +
+      '<div style="display:grid;gap:16px;min-width:0"><div class="card"><h3 class="sect-title">Next 24 hours</h3>' + chips() + '</div>' +
+      '<div class="card">' + groups() + '</div></div></div></div>';
+  }
+
+  var build = { a: optA, b: optB, c: optC };
+  var vps = Array.prototype.slice.call(document.querySelectorAll(".vp"));
+  vps.forEach(function (vp) { vp.innerHTML = build[vp.dataset.opt](vp.classList.contains("narrow")); });
+
+  function fit() {
+    vps.forEach(function (vp) {
+      var frame = vp.parentElement;
+      var scale = Math.min(1, frame.clientWidth / vp.offsetWidth);
+      vp.style.transform = "scale(" + scale + ")";
+      frame.style.height = Math.ceil(vp.offsetHeight * scale) + "px";
+    });
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
+  if ("ResizeObserver" in window) { var ro = new ResizeObserver(fit); vps.forEach(function (vp) { ro.observe(vp.parentElement); }); }
+  window.addEventListener("resize", fit);
+})();
+</script>
+
+</body></html>

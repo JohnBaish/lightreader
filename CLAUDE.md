@@ -913,3 +913,12 @@ one numbered list; nothing built yet.
   - no errors, no sideways scroll.
 - Pictures: `design/previews/j10-final-*.png`, `j10-b-chosen-narrow.png`, and `fl-after-*.png`
   refreshed.
+
+### 2026-10-28 — a lone sentence card stretches across (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** yes to 2.1, once explained. **What (`Sentences.tsx`):** on a computer, a card left
+alone at the end of a run of cards (before "Is it light at…?" or at the end) gets
+`group-wide`, so today "Direction of sunrise and sunset" spans both columns. Phones are
+unchanged (one column). **Verified:** `npx tsc -b`, lint, `npm run check` (14 + 14 + 12); in
+Chromium at 1200px and 390px with touch, no errors, no sideways scroll;
+`design/previews/fl-after-sentences-wide.png` refreshed.

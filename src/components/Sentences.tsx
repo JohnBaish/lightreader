@@ -19,11 +19,24 @@ export function Sentence({ text }: { text: string }) {
  *  it light at…?") straight after the group named, across the full width. */
 export function SentenceGroups({ groups, after = {} }: { groups: Group[] | null; after?: Record<string, ReactNode> }) {
   if (!groups) return <p className="muted working" role="status">Working out the rest of the year…</p>
+  const shown = groups.filter((g) => g.sentences.length)
+  // Cards sit two to a row on a computer. A card left on its own before a full-width card
+  // (or at the end) stretches across both columns, rather than leaving a gap beside it (the
+  // fresh look, 2.1; John, 28 October).
+  const alone = new Set<string>()
+  let run: string[] = []
+  for (const g of shown) {
+    run.push(g.heading)
+    if (after[g.heading] || g === shown[shown.length - 1]) {
+      if (run.length % 2 === 1) alone.add(run[run.length - 1])
+      run = []
+    }
+  }
   return (
     <div className="groups">
-      {groups.filter((g) => g.sentences.length).map((g) => (
+      {shown.map((g) => (
         <Fragment key={g.heading}>
-          <section className="card group">
+          <section className={`card group${alone.has(g.heading) ? ' group-wide' : ''}`}>
             <h3>{g.heading}</h3>
             <ul>{g.sentences.map((s, i) => <li key={i}><Sentence text={s} /></li>)}</ul>
           </section>

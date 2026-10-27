@@ -988,3 +988,18 @@ pattern in HOUSE-STYLE §10 (not opened from here): `https://lightreader-git-mai
 (the branch address of `main`, always the latest live build), and probably
 `https://lightreader.vercel.app` or `https://lightreader-john-baish.vercel.app` as the
 production address.
+
+### 2026-10-28 — PARKED for the night
+
+Everything is committed and pushed; `main` and `claude/nice-goodall-j1r6wu` are the same
+(`e4561c9` plus this note). John confirmed `https://lightreader.vercel.app` works. Link
+previews show no picture yet, as expected: the `og:image` points at
+`https://lightreader.baish.net/`, which isn't set up (John agreed to leave the tags as they
+are). Nothing is half-done.
+
+**For the morning (John's steps first):**
+1. Add `lightreader.baish.net` to the **lightreader** project in Vercel, and switch on Web
+   Analytics.
+2. Search Console: submit the sitemap and request indexing.
+3. The baish.net hub card for Lightreader, the overview PDF, and Lightreader in the house
+   style's 24-hour exceptions (all in clockwheel; needs access).

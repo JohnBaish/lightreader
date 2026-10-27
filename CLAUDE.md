@@ -208,3 +208,15 @@ purpose (30 days to 2) makes the checks fail, as it should.
 **Verified:** `npm run build`, `npm run lint` (clean), `npm run check` (14 + 10).
 **Not yet:** working out all the sentences takes about 0.7 seconds in Node
 (800 days of figures); to be cut down in stage 3 before it runs on phones.
+
+### 2026-10-27 — John's answers to the open questions (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** no surprises in the figures sheet or the MET Norway comparison; Lerwick and
+Aberdeen at their town centres; question 4's wording drafted (as in the sentence
+sheet); question 5, Compare accepts places outside England "if easily done" (stage 4);
+question 7, Penzance at its postcode district centre (TR18), and the places shown
+should be "the closest big places to the extremes"; question 8, the address is
+`lightreader.baish.net`. SPEC §1 and §8 and PLAN updated. Penzance in
+`src/lib/ukPlaces.ts` moved from its OS town point to the TR18 centre (about 230 m
+apart; today's sentences don't change). Checks 14 + 10. He is now reading the
+sentence sheet.

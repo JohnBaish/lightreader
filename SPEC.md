@@ -12,7 +12,7 @@ Drafted with John on Tuesday October 27th 2026, for Claude Code to turn into a s
 - **Coverage:** England first, like Hindcaster. Scotland, Wales and Northern Ireland can come later.
 - **Location:** by postcode only, at postcode-district precision.
 - **Name:** Lightreader. The name plays on reading the light, light reading, and a photographer's light reading.
-- **Address:** **To check** — presumably lightreader.baish.net, following the other tools.
+- **Address:** lightreader.baish.net (John, October 27th 2026).
 - **House rules:** follows HOUSE-STYLE.md, the wording rules and the ways of working, the same as the other tools. It is described as "a free-to-use personal project by John Baish". Update the hub's title and description when it launches.
 - **Stack:** Vite + React + TypeScript on Vercel. No backend, no accounts, anonymous Vercel analytics.
 
@@ -187,7 +187,7 @@ These are calculated for fixed coordinates, so they need no postcode data outsid
   - Date behind: "On Tuesday July 14th the sun rose at 05:04, 1h 45m earlier than today, and set at 21:15, 4h 29m later." / "Half-light ended at 22:01, 4h 39m later than today." / "There was 6h 14m more daylight: 16h 12m in all." / "There was no true night."
   - Place: "In Aberdeen today the sun rose at 07:08, 20m later than in Reading." / "It sets at 16:35, 11m earlier." / "Half-light ends at 17:16, 5m earlier." / "That's 31m less daylight: 9h 27m in all."
   - The "usable light" sentence uses the end of half-light.
-- **Place comparisons beyond England:** only English postcodes can be looked up at launch, so Aberdeen above is only an illustration. **To decide:** whether Compare should accept places outside England, using the same fixed-coordinate approach as "Across the UK".
+- **Place comparisons beyond England:** only English postcodes can be looked up at launch, so Aberdeen above is only an illustration. **Decided** (John, October 27th 2026): yes, if easily done, using the same fixed-coordinate approach as "Across the UK", with each place at its town centre (Aberdeen as the example).
 
 ## 9. The year (mockup option C, then option B)
 

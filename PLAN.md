@@ -39,6 +39,14 @@ are a deliberate exception; question 2, Hindcaster's dark colours; question 6,
 `api.met.no` allowed; question 9, start stage 1. Questions 4, 5, 7 and 8 are
 still open; question 3 needed no answer.
 
+**More answers (27 October, after stage 1):** the figures sheet and the MET Norway
+comparison hold no surprises. Question 4: yes, draft the wording (done in the stage 2
+sentence sheet). Question 5: yes, Compare accepts places outside England if it's easily
+done, each at its town centre (stage 4). Question 7: Lerwick at its town centre,
+Penzance at its postcode district centre (TR18); and the places shown should be "the
+closest big places to the extremes", which is being settled. Question 8: yes,
+`lightreader.baish.net`.
+
 ## Stage 1 — the calculation, and the postcode list (no screen)
 
 Branch: `claude/nice-goodall-j1r6wu` (this session's branch, together with stage 0)

@@ -466,3 +466,50 @@ open.
 adds; Cancel doesn't; Enter adds; an empty box stays open) and at 390px with touch (the
 picker's confirm adds at once): saved after each, no errors, no sideways scroll.
 **Couldn't be checked:** the real iPhone and Android pickers.
+
+### 2026-10-28 — stage 5 built: the year (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** keep 07:30 and 17:30 for a first visit; go on with stage 5.
+
+**What:**
+- `src/lib/yearView.ts`: worked out in the worker (a `year` message; `useSky` returns
+  `year`), from the same figures as the sentences. `yearChanges()` now takes the context,
+  so the year's changes are worked out once for "Is it light at…?" and the ribbon (the same
+  result either way, checked). Each change is taken at the minute shown (rule C).
+  - The ribbon: each day from UK midnight to midnight by the clock, so the clock changes
+    show as steps; in the hour the clocks go back, the second pass simply carries on.
+  - The tables: whole months for the 13 months the span touches, with the clock-change
+    rows ("Clocks went back on Sunday October 25th. Times from here are GMT."; "go forward
+    … BST" for the coming one).
+- `src/components/Year.tsx`, after Compare.
+  - "The year in light": an SVG drawn in days and minutes and stretched to fit. It has hour
+    lines, month labels (one letter on a phone), a today line and the chosen day's line.
+    Tap or click a day (arrow keys on a computer) to fill the detail card ("See all of May"
+    opens that month at that day).
+  - "Day by day": the 13 month buttons, grouped under 2026 and 2027, with today's month
+    ringed. When a month is open: arrows, Close and "Print this month". Each month is a
+    table on a computer and compact cards on a phone, with today highlighted.
+- Printing a month gives one A4 page: the place, the month and its table.
+- Rule E: a time that doesn't happen shows "never" in the table, and "the sky never gets
+  very dark" (or "Half-light all night") in the detail card. Both are drafts.
+
+**SPEC §9's "to check":** the strips in May and August draw correctly. Each strip is cut at
+midnight from one timeline, so true night that starts after midnight (Reading, May 20th:
+very dark to 00:17, then true night) is in the right place; this is now a check.
+
+**Figures:** the October table matches the mock-up apart from one cell: October 7th's
+half-light ends at 19:01 (19:01:29), where the mock-up had 19:02. Berwick never gets very
+dark from June 2nd to July 9th; on June 1st very dark comes at 00:48, after midnight, and
+is shown under that date.
+
+**Verified:**
+- `npx tsc -b`, lint, `npm run check` (14 + 12 + 9; new: every strip from midnight to
+  midnight; daylight on the strip matches the table's sunrise and sunset every day; today's
+  row and detail; both clock-change rows; May 20th; Berwick at midsummer).
+- In Chromium at 1200px and 390px with touch: today's detail; tapping May 20th, then the
+  arrow key to the 21st; "See all of May" opening May with the day marked; October's clock
+  row and today; next month; Close; Berwick's June; printing a month (one page). The year
+  shows about one second after the page opens. No errors, no sideways scroll.
+- Screenshots `design/previews/stage5-*.png`.
+
+**Couldn't be checked:** a real phone; the Vercel preview (blocked here).

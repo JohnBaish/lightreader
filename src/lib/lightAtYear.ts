@@ -9,7 +9,7 @@
 import { bandAt, timeline, type Band } from './bands.ts'
 import { roundToMinute } from './format.ts'
 import { lightAtSentences } from './sentences/lightAt.ts'
-import type { SkyContext } from './sentences/context.ts'
+import { daysBetween, type SkyContext } from './sentences/context.ts'
 import { daysFigures, type Place } from './sun.ts'
 import { addDays, ukInstant } from './ukTime.ts'
 import { addMonths } from './year.ts'
@@ -33,11 +33,15 @@ export const instantAt = (date: string, time: string) =>
   new Date(ukInstant(date, Number(time.slice(0, 2))).getTime() + Number(time.slice(3, 5)) * 60_000)
 
 /** The year's changes of light for a place, each at the minute shown. Worked out once per
- *  place and day, for all the visitor's times. */
-export function yearChanges(place: Place, today: string) {
+ *  place and day, for all the visitor's times and the year ribbon; with `ctx`, from the
+ *  figures the sentences already hold. */
+export function yearChanges(place: Place, today: string, ctx?: SkyContext) {
   const from = addMonths(today, -6)
   const to = addMonths(today, 6)
-  const changes = timeline(daysFigures(place, addDays(from, -1), addDays(to, 1))).map((c) => ({ ...c, at: roundToMinute(c.at) }))
+  const days = ctx
+    ? ctx.days.slice(daysBetween(ctx.days[0].date, addDays(from, -1)), daysBetween(ctx.days[0].date, addDays(to, 1)) + 1)
+    : daysFigures(place, addDays(from, -1), addDays(to, 1))
+  const changes = timeline(days).map((c) => ({ ...c, at: roundToMinute(c.at) }))
   return { from, to, changes }
 }
 

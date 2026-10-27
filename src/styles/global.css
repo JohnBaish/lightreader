@@ -155,6 +155,54 @@ body { margin: 0; background: var(--color-bg); }
 .about dd { margin: 0; }
 .about p { margin: 0; font-size: 14px; }
 
+/* The year (SPEC §9): the year ribbon (option C) and the day-by-day tables (option B). */
+.year, .days { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-3); }
+.year h3, .days h3 { margin: 0; font-size: 20px; }
+.year-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.yr { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: 240px 18px; column-gap: 6px; }
+.yr-hours { position: relative; font-size: 11px; color: var(--color-neutral-700); font-variant-numeric: tabular-nums; }
+.yr-hours span { position: absolute; right: 0; transform: translateY(50%); }
+.yr-plot { position: relative; border-radius: 5px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--band-edge); cursor: pointer; touch-action: pan-y; }
+.yr-plot:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 2px; }
+.yr-plot svg { display: block; width: 100%; height: 100%; }
+.yr-line { stroke: color-mix(in srgb, var(--color-text) 22%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
+.yr-today, .yr-chosen { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--color-accent-800); pointer-events: none; }
+.yr-chosen { background: #fff; box-shadow: 0 0 0 1px var(--color-text); }
+.yr-months { grid-column: 2; position: relative; font-size: 11px; color: var(--color-neutral-700); }
+.yr-months span { position: absolute; top: 3px; transform: translateX(-50%); }
+.year-detail { background: var(--color-bg); border-radius: 12px; padding: var(--space-3) var(--space-4); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.year-detail p { margin: 0; font-size: 14px; }
+.year-detail .year-detail-big { font-family: var(--font-heading); font-size: 22px; font-variant-numeric: tabular-nums; }
+.link-button { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: var(--color-accent-700); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.month-buttons { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+.month-year { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.month-year > span { font-size: 13px; font-weight: 600; margin-right: 2px; }
+.chip-button.is-now { box-shadow: inset 0 0 0 2px var(--color-accent); }
+.chip-button.is-open { background: var(--color-accent-700); border-color: var(--color-accent-700); color: #fff; }
+.days-nav { display: flex; align-items: center; gap: var(--space-2); }
+.days-month { font-family: var(--font-heading); font-size: 18px; min-width: 9.5em; text-align: center; }
+.days-actions { display: flex; gap: var(--space-2); justify-content: flex-end; }
+.day-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.day-table th { text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-700); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--color-divider); }
+.day-table td { padding: 7px 8px; border-bottom: 1px solid var(--color-divider); }
+.day-table td:first-child { white-space: nowrap; }
+.is-today { background: color-mix(in srgb, var(--color-accent) 18%, transparent); box-shadow: inset 3px 0 0 var(--color-accent-700); }
+.is-chosen:not(.is-today) { box-shadow: inset 3px 0 0 var(--color-text); }
+.today-tag { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; background: var(--color-surface); border-radius: 999px; padding: 1px 6px; margin-left: 6px; vertical-align: 1px; }
+.clock-mark td, li.clock-mark { font-size: 12.5px; color: var(--color-accent-800); font-weight: 600; }
+.day-table .clock-mark td { background: var(--color-bg); }
+.day-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.day-cards li:not(.clock-mark) { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: var(--space-3); background: var(--color-bg); border-radius: 10px; padding: 8px 12px; }
+.day-cards li.clock-mark { padding: 4px 2px; }
+.day-cards li.is-today { background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg)); }
+.year-detail-big .pair { white-space: nowrap; }
+.day-card-date { display: flex; flex-direction: column; font-weight: 600; font-size: 16px; line-height: 1.1; }
+.day-card-date small { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-700); }
+.day-card-times { display: flex; flex-direction: column; }
+.day-card-times b { font-size: 15px; }
+.day-card-times small { font-size: 12px; color: var(--color-neutral-700); }
+.day-card-length { font-size: 13px; color: var(--color-neutral-700); }
+
 @media (max-width: 720px) {
   .nav { padding: var(--space-3) var(--space-4); }
   .screen { padding: var(--space-4); }
@@ -172,6 +220,11 @@ body { margin: 0; background: var(--color-bg); }
   .chip-button { min-height: 44px; }
   .about-row { grid-template-columns: 1fr; gap: 0; }
   .btn-small { min-height: 44px; }
+  .year, .days { padding: var(--space-4); }
+  .yr { grid-template-columns: 34px 1fr; grid-template-rows: 170px 18px; }
+  .days-month { min-width: 0; font-size: 16px; }
+  .year-detail-big { display: flex; flex-direction: column; }
+  .year-detail-big .dot { display: none; }
 }
 
 @media print {
@@ -181,4 +234,12 @@ body { margin: 0; background: var(--color-bg); }
   [data-noprint] { display: none !important; }
   .print-only { display: block; }
   .card { break-inside: avoid; }
+  span.print-only { display: inline; }
+  .days { break-inside: auto; }
+  .day-table tr, .day-cards li { break-inside: avoid; }
+  /* "Print this month": the month's table only. */
+  body[data-print-month] main > *:not(.days), body[data-print-month] .nav { display: none !important; }
+  body[data-print-month] .days { background: none; box-shadow: none; padding: 0; }
+  body[data-print-month] .day-table { font-size: 13px; }
+  body[data-print-month] .day-table td { padding: 3px 8px; }
 }

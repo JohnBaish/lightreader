@@ -6,11 +6,13 @@ import type { LightAt } from './lightAtYear.ts'
 import type { Group } from './sentences/index.ts'
 import type { Answer, Ask } from './sentences.worker.ts'
 import type { District } from './postcode.ts'
+import type { YearView } from './yearView.ts'
 
-export function useSky(d: District, today: string, times: string[]): { groups: Group[] | null; lightAt: LightAt[] | null } {
+export function useSky(d: District, today: string, times: string[]): { groups: Group[] | null; lightAt: LightAt[] | null; year: YearView | null } {
   const worker = useRef<Worker | null>(null)
   const [groups, setGroups] = useState<{ key: string; value: Group[] } | null>(null)
   const [lightAt, setLightAt] = useState<{ key: string; value: LightAt[] } | null>(null)
+  const [year, setYear] = useState<{ key: string; value: YearView } | null>(null)
   const nextId = useRef(0)
   const place = `${d.code} ${today}`
   const timesKey = `${place} ${times.join(',')}`
@@ -43,7 +45,20 @@ export function useSky(d: District, today: string, times: string[]): { groups: G
     return () => w.removeEventListener('message', onAnswer)
   }, [d, timesKey, times])
 
+  // The year, asked for after the sentences and times, which come first on the page.
+  useEffect(() => {
+    const w = worker.current!
+    const id = ++nextId.current
+    const onAnswer = (e: MessageEvent<Answer>) => {
+      if (e.data.kind === 'year' && e.data.id === id) setYear({ key: place, value: e.data.year })
+    }
+    w.addEventListener('message', onAnswer)
+    w.postMessage({ kind: 'year', id, place: d, name: d.name, now: new Date().toISOString() } satisfies Ask)
+    return () => w.removeEventListener('message', onAnswer)
+  }, [d, place])
+
   return {
+    year: year?.key === place ? year.value : null,
     groups: groups?.key === place ? groups.value : null,
     // While new times are being worked out, the last ones stay, so the card doesn't flicker.
     lightAt: lightAt?.key.startsWith(place) ? lightAt.value : null,

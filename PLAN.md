@@ -167,7 +167,13 @@ with no "Add" needed. Not merged.
 
 ## Stage 5 — the year
 
-Branch: `stage-5-year`
+Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
+
+**Status (28 October):** built; with John for a look on the Vercel preview. Not merged.
+Below the year ribbon, the day-by-day tables cover whole months (April 1st 2026 to April
+30th 2027 today), and the month buttons are grouped under their years. A time that
+doesn't happen shows as "never" in the table, and the detail card says "the sky never gets
+very dark" (both drafts). There's a "Print this month" button.
 
 - The year ribbon (option C): a strip for each day, hour lines, month
   labels, a today marker and clock-change steps. Tapping a day shows its

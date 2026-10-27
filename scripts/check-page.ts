@@ -1,5 +1,6 @@
-// `npm run check`, third part: the page's own logic (PLAN stage 3): the sky ribbon's
-// stretches and labels, and the postcode box. Places are real postcode-district centres.
+// `npm run check`, third part: the page's own logic (PLAN stages 3 to 5): the sky ribbon's
+// stretches and labels, the postcode box, Compare, "Is it light at…?" and the year.
+// Places are real postcode-district centres.
 
 import assert from 'node:assert/strict'
 import { bandAt, timeline } from '../src/lib/bands.ts'
@@ -10,6 +11,7 @@ import { lightAtYear, yearChanges } from '../src/lib/lightAtYear.ts'
 import { makeContext } from '../src/lib/sentences/index.ts'
 import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
 import { dayFigures, daysFigures } from '../src/lib/sun.ts'
+import { dayDetail, yearView } from '../src/lib/yearView.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -151,6 +153,43 @@ check('is it light at…?: the strip agrees with the sentences, day by day', () 
   const morning = lightAtYear(ctx, year, '07:30')
   assert.equal(morning.today, 'daylight')
   assert.ok(morning.strip.every(light)) // "07:30 is always at least half-light here"
+})
+
+check('the year: every day from midnight to midnight, agreeing with the tables', () => {
+  const ctx = makeContext(RG1, 'Reading', new Date('2026-10-27T09:02:00Z'))
+  const year = yearChanges(RG1, ctx.today, ctx)
+  // The same changes, whether from the sentences' figures or worked out afresh.
+  assert.deepEqual(year.changes, yearChanges(RG1, ctx.today).changes)
+  const v = yearView(ctx, year.from, year.to, year.changes)
+  assert.equal(v.ribbon.length, 366)
+  assert.deepEqual(v.months.map((m) => m.month), ['2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11', '2026-12', '2027-01', '2027-02', '2027-03', '2027-04'])
+  assert.equal(v.months[0].rows.length, 30)
+  const minutes = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3))
+  v.ribbon.forEach((day, i) => {
+    assert.equal(day[0].from, 0)
+    assert.equal(day.at(-1)!.to, 1440)
+    for (let j = 1; j < day.length; j++) assert.equal(day[j].from, day[j - 1].to)
+    // The daylight on the strip runs from the sunrise to the sunset in the table.
+    const date = new Date(Date.parse(year.from) + i * 86_400_000).toISOString().slice(0, 10)
+    const row = v.months.find((m) => date.startsWith(m.month))!.rows.find((r) => r.date === date)!
+    const light = day.find((s) => s.band === 'daylight')!
+    assert.equal(light.from, minutes(row.sunrise!), date)
+    assert.equal(light.to, minutes(row.sunset!), date)
+  })
+  const oct = v.months.find((m) => m.month === '2026-10')!
+  assert.deepEqual(oct.rows[26], { date: '2026-10-27', civilDawn: '06:14', sunrise: '06:48', sunset: '16:46', civilDusk: '17:21', nauticalDusk: '18:00', daylight: '9h 58m' })
+  assert.equal(dayDetail(oct.rows[26]), '9h 58m of daylight. Half-light 06:14 to 17:21; very dark from 18:00.')
+  assert.deepEqual(oct.clockMarks, [{ date: '2026-10-25', text: 'Clocks went back on Sunday October 25th. Times from here are GMT.' }])
+  assert.deepEqual(v.months.find((m) => m.month === '2027-03')!.clockMarks, [{ date: '2027-03-28', text: 'Clocks go forward on Sunday March 28th. Times from here are BST.' }])
+  // May 20th: true night begins after midnight (SPEC §9's "to check").
+  assert.deepEqual(v.ribbon[23].slice(0, 2), [{ from: 0, to: 17, band: 'very-dark' }, { from: 17, to: 103, band: 'true-night' }])
+  // Berwick at midsummer: it never gets very dark, and the page says so (rule E).
+  const td15 = district('TD15')!
+  const far = makeContext(td15, 'Berwick-upon-Tweed', new Date('2026-10-27T09:02:00Z'))
+  const fy = yearChanges(td15, far.today, far)
+  const june21 = yearView(far, fy.from, fy.to, fy.changes).months[2].rows[20]
+  assert.equal(june21.nauticalDusk, null)
+  assert.equal(dayDetail(june21), '17h 33m of daylight. Half-light 03:22 to 22:58; the sky never gets very dark.')
 })
 
 console.log(`\n${passed} checks passed`)

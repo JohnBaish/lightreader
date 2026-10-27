@@ -1,5 +1,6 @@
-// Lightreader's page (PLAN stage 3, light mode): the header with the postcode pill, today's
-// sunrise and sunset, the sky ribbon for the next 24 hours, the sentence groups, "About
+// Lightreader's page (PLAN stages 3 to 5, light mode): the header with the postcode pill,
+// today's sunrise and sunset, the sky ribbon for the next 24 hours, the sentence groups,
+// "Is it light at…?", Compare, the year ribbon and the day-by-day tables, "About
 // these figures" and the footer (SPEC §5). A first-time visitor sees the postcode box; the
 // last postcode chosen is kept on this device only.
 
@@ -10,6 +11,7 @@ import { CompareCard } from './components/Compare.tsx'
 import { LightAtCard } from './components/LightAt.tsx'
 import { SentenceGroups } from './components/Sentences.tsx'
 import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
+import { YearCards } from './components/Year.tsx'
 import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { useIsNarrow } from './lib/responsive.ts'
 import { ribbon } from './lib/ribbon.ts'
@@ -67,7 +69,7 @@ function Place({ d, now }: { d: District; now: Date }) {
     saveTimes(tidy)
     setTimes(tidy)
   }
-  const { groups, lightAt } = useSky(d, today, times)
+  const { groups, lightAt, year } = useSky(d, today, times)
   return (
     <>
       <section className="card today">
@@ -93,6 +95,7 @@ function Place({ d, now }: { d: District; now: Date }) {
       </section>
       <SentenceGroups groups={groups} after={{ 'Coming up': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
       <CompareCard d={d} today={today} now={now} />
+      <YearCards v={year} narrow={narrow} place={`${d.name} (${d.code})`} />
     </>
   )
 }

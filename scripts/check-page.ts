@@ -5,6 +5,7 @@
 import assert from 'node:assert/strict'
 import { bandAt, timeline } from '../src/lib/bands.ts'
 import { district, outwardCode } from '../src/lib/postcode.ts'
+import { addComparison } from '../src/lib/comparisons.ts'
 import { clockNote, compareDate, comparePlace, readTarget } from '../src/lib/compare.ts'
 import { headline } from '../src/lib/headline.ts'
 import { lightAtYear, yearChanges } from '../src/lib/lightAtYear.ts'
@@ -134,6 +135,17 @@ check("compare: the spec's three examples, with today's figures", () => {
     'Half-light ends at 17:16, 5m earlier.',
     "That's 31m less daylight: 9h 27m in all.",
   ])
+})
+
+check('compare: saved comparisons read back as they were added', () => {
+  const tr18 = readTarget('tr18', RG1, '2026-10-27')
+  assert.equal(tr18.kind === 'place' && tr18.name, 'Penzance (TR18)')
+  const again = readTarget('Penzance (TR18)', RG1, '2026-10-27')
+  assert.equal(again.kind === 'place' && again.name, 'Penzance (TR18)')
+  assert.deepEqual(addComparison(['Christmas'], '  christmas '), ['Christmas'])
+  assert.deepEqual(addComparison(['Christmas'], 'last  july 14th'), ['Christmas', 'Last july 14th'])
+  const last = readTarget('Last july 14th', RG1, '2026-10-27')
+  assert.equal(last.kind === 'date' && last.date, '2026-07-14')
 })
 
 check('is it light at…?: the strip agrees with the sentences, day by day', () => {

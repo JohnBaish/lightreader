@@ -43,8 +43,9 @@ export function readTarget(typed: string, place: Place, today: string): Target {
   if (!raw) return { kind: 'error', message: 'Type a date or a place first.' }
   let text = raw.toLowerCase().replace(/\s+/g, ' ')
 
-  // A place: an English postcode, or a big place by name.
-  const code = outwardCode(raw)
+  // A place: an English postcode, or a big place by name. A saved comparison keeps a
+  // postcode district under its name, "Penzance (TR18)".
+  const code = outwardCode(raw.match(/\(([A-Za-z0-9 ]+)\)$/)?.[1] ?? raw)
   if (code) {
     const d = district(code)
     if (d) return { kind: 'place', place: d, name: `${d.name} (${d.code})` }
@@ -86,8 +87,6 @@ export function readTarget(typed: string, place: Place, today: string): Target {
   return { kind: 'date', date }
 }
 
-/** The quick choices (SPEC §8). */
-export const QUICK = ['Christmas Day', 'Shortest day', 'Longest day']
 
 // ---------------------------------------------------------------------------------------
 // The sentences (SPEC §8): from exact times, by the clock (rule H); tense follows the date

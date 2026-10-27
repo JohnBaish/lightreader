@@ -513,3 +513,30 @@ is shown under that date.
 - Screenshots `design/previews/stage5-*.png`.
 
 **Couldn't be checked:** a real phone; the Vercel preview (blocked here).
+
+### 2026-10-28 — the iPhone time picker fixed; Compare works like "Is it light at…?" (branch `claude/nice-goodall-j1r6wu`)
+
+**John (on his iPhone):** "+ Add a time" opened the picker, then closed it a second later,
+adding the current time. **Cause:** an iPhone fills in the current time the moment its
+picker opens, and the page added a time on the first change (the touch-screen rule from
+earlier today). **Fix (`LightAt.tsx`):** a time goes in only when the box loses focus (the
+picker closed with its tick, or clicking away), never on a change; a loss of focus within
+half a second of gaining it is ignored. Enter and Add still work.
+
+**John (a change of plan for Compare):** model it on "Is it light at…?": the quick
+choices go, and what's added is saved as chips with "Saved on this device only".
+**What:** `src/lib/comparisons.ts` (`lightreader.compare`, up to six, in the order added,
+kept as typed so "Christmas" always means the next one; repeats ignored). In `Compare.tsx`,
+the chips have ✕ and "+ Add a date or place"; the box shows when adding, and always while
+nothing's saved. Each comparison has its echo, ribbons, clock note and sentences, and the
+key comes once at the end. A postcode is saved under its name ("Penzance (TR18)"), which
+`readTarget()` now reads back. `QUICK` is removed; the earlier note about more chips is
+superseded.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 10; new: saved comparisons
+read back, repeats ignored). In Chromium at 1200px and 390px with touch: the box filled
+with a time while focused adds nothing; closing it adds that time. In Compare: Christmas,
+Aberdeen and TR18 added; CF10 refused with its message and Cancel; a repeat ignored; one
+removed; kept after a reload. No errors, no sideways scroll. Screenshots
+`design/previews/stage4-compare-chips-*.png`.
+**Couldn't be checked:** a real iPhone's picker.

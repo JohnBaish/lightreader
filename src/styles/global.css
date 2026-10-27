@@ -133,7 +133,6 @@ body { margin: 0; background: var(--color-bg); }
 .compare { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-3); }
 .compare h3 { margin: 0; font-size: 20px; }
 .compare .field { max-width: 640px; }
-.quick { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .compare-result { border-top: 1px solid var(--color-divider); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-3); }
 .echo b { font-family: var(--font-heading); font-weight: 400; font-size: 22px; }
 .pairs { display: flex; flex-direction: column; gap: 6px; }

@@ -2,7 +2,7 @@
 // chips, each with today's light as a pill, a thin strip of the light at that time on every
 // day of the year with a today marker, and two sentences.
 
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { BAND_LABEL } from '../lib/bands.ts'
 import type { LightAt } from '../lib/lightAtYear.ts'
 import { MAX_TIMES } from '../lib/times.ts'
@@ -37,11 +37,13 @@ export function YearStrip({ l, narrow }: { l: LightAt; narrow: boolean }) {
 export function LightAtCard({ times, lightAt, narrow, onChange }: { times: string[]; lightAt: LightAt[] | null; narrow: boolean; onChange: (t: string[]) => void }) {
   const [adding, setAdding] = useState(false)
   const [value, setValue] = useState('')
-  const box = useRef<HTMLInputElement>(null)
+  const focusedAt = useRef(0)
   // A time goes in as soon as it's chosen, with no "Add" needed (John, 28 October): when the
-  // box loses focus (the tick or Done on a phone's picker, or clicking away), and on a touch
-  // screen also when the picker confirms. On a computer the picker's typed changes don't
-  // count, as "07:3" would already read as 07:03; Enter or Add still work there.
+  // box loses focus, which is when a phone's picker is closed with its tick or Done, or the
+  // visitor clicks away on a computer. Not on each change: an iPhone fills in the current
+  // time the moment its picker opens, which would add that at once (John, 28 October). A
+  // loss of focus within half a second of gaining it is the picker opening, not closing.
+  // Enter or Add still work.
   const commit = (v: string) => {
     if (!/^\d{2}:\d{2}$/.test(v)) return
     onChange([...times, v])
@@ -52,15 +54,9 @@ export function LightAtCard({ times, lightAt, narrow, onChange }: { times: strin
     e.preventDefault()
     commit(value)
   }
-  const latest = useRef(commit)
-  useEffect(() => { latest.current = commit })
-  useEffect(() => {
-    const el = box.current
-    if (!el || !window.matchMedia('(pointer: coarse)').matches) return
-    const confirmed = () => latest.current(el.value)
-    el.addEventListener('change', confirmed)
-    return () => el.removeEventListener('change', confirmed)
-  }, [adding])
+  const left = (v: string) => {
+    if (Date.now() - focusedAt.current > 500) commit(v)
+  }
   // Pressing Cancel mustn't first add the time through the box losing focus.
   const keepFocus = (e: { preventDefault: () => void }) => e.preventDefault()
   const shown = lightAt?.filter((l) => times.includes(l.time)) ?? null
@@ -76,7 +72,7 @@ export function LightAtCard({ times, lightAt, narrow, onChange }: { times: strin
         ))}
         {adding ? (
           <form className="chip-add" onSubmit={add}>
-            <input ref={box} className="input" type="time" required autoFocus value={value} onChange={(e) => setValue(e.target.value)} onBlur={(e) => commit(e.target.value)} aria-label="A time to add" />
+            <input className="input" type="time" required autoFocus value={value} onFocus={() => { focusedAt.current = Date.now() }} onChange={(e) => setValue(e.target.value)} onBlur={(e) => left(e.target.value)} aria-label="A time to add" />
             <button className="btn btn-primary btn-small" type="submit">Add</button>
             <button className="btn btn-secondary btn-small" type="button" onPointerDown={keepFocus} onMouseDown={keepFocus} onClick={() => { setValue(''); setAdding(false) }}>Cancel</button>
           </form>

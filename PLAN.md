@@ -164,6 +164,10 @@ with no "Add" needed. Not merged.
   ("Comparing with Friday December 25th 2026"), paired ribbons on a
   midnight-to-midnight scale, the BST note, and sentences only. It stays at
   a fixed place on the page.
+  **Changed (John, 28 October):** like "Is it light at…?": each date or place added is a
+  chip with ✕, saved on this device only (`lightreader.compare`, up to six, as typed;
+  a postcode under its name, "Penzance (TR18)"), each with its comparison beneath. No quick
+  choices; a first visit starts with the box and nothing saved.
 
 ## Stage 5 — the year
 
@@ -218,10 +222,9 @@ Branch: `stage-7-launch`
   wants to review it at some point (27 October). Today it has a heading, one line, the
   postcode box, "About these figures" and the footer, all draft wording.
 - The wording of "About these figures" and the footer (drafts from stage 3).
-- **More quick choices in Compare** (John, 28 October): he'd like more chips beside
-  Christmas Day, Shortest day and Longest day. Which ones is still to decide (ideas to put
-  to him: the next clock change, the spring and autumn equinoxes, a year ago today,
-  Midsummer's Eve, New Year's Day).
+- **Compare:** John first asked for more quick choices (28 October), then changed plan the
+  same day: Compare now works like "Is it light at…?", with the visitor's own dates and places
+  as saved chips and no preset choices.
 
 ## Later (SPEC §10, not in the first version)
 

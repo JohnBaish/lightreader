@@ -3,20 +3,20 @@
 import { duration } from '../format.ts'
 import { addDays } from '../ukTime.ts'
 import { dayOf, daysAhead, type SkyContext } from './context.ts'
-import { dateIn, rangeIn } from './words.ts'
+import { bandTag, dateIn, rangeIn } from './words.ts'
 
 export function darknessSentences(ctx: SkyContext): string[] {
   const today = dayOf(ctx, ctx.today)
   const tomorrow = dayOf(ctx, addDays(ctx.today, 1))
   const out: string[] = []
 
-  // Tonight (rule E: never a blank).
+  // Tonight (rule E: never a blank). The labels are tags (John, 27 October, option B).
   if (today.astronomicalDusk && tomorrow.astronomicalDawn) {
     out.push(`Tonight's true night lasts ${duration(tomorrow.astronomicalDawn.getTime() - today.astronomicalDusk.getTime())}.`)
   } else if (today.nauticalDusk) {
-    out.push('No true night tonight: at its darkest the sky is very dark.')
+    out.push(`No true night tonight: at its darkest the sky only reaches ${bandTag('very-dark')}.`)
   } else if (today.civilDusk) {
-    out.push('No true night tonight: at its darkest the sky is dark.')
+    out.push(`No true night tonight: at its darkest the sky only reaches ${bandTag('dark')}.`)
   } else {
     out.push('Half-light lasts all night.')
   }

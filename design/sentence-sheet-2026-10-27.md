@@ -14,7 +14,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 5. **Records a year back** (decided 27 October): “The shortest day for a year.” (C), or “for more than a year”.
 6. **Records the clocks make.** Just after the clocks go back, sunrises are an hour earlier by the clock while they’re getting later each day, so “The earliest sunrise since September” would be the clocks’ doing. Records against the way the times are going are left out; “The latest sunrise since the clocks went back” stays, as the spec has it.
 7. **Inside the summer weeks with no true night** (decided 27 October): “True night returns on Sunday August 8th.” (G and J).
-8. **Where it doesn’t even get very dark** (you asked for more examples; K–N are new): this happens in 125 English postcode districts, north of about 54.6° N, from Middlesbrough and Appleby (three or four nights around the longest day) to Berwick (38 nights, June 2nd to July 9th 2027). Today says “It doesn’t get very dark tonight: dark from 22:58 to 03:22.” and Darkness “No true night tonight: at its darkest the sky is dark.” (your rule E wording with “dark” in place of “very dark”). Either side of those weeks, the very dark spell can start just after midnight: “Very dark from 00:01 to 02:09.” (M).
+8. **Where it doesn’t even get very dark** (decided 27 October: option B): this happens in 125 English postcode districts, north of about 54.6° N, from Middlesbrough and Appleby (three or four nights around the longest day) to Berwick (38 nights, June 2nd to July 9th 2027). The labels are now small tags in their band colours, as the page will show them, with “only” so they read as a limit: Today says “The sky never reaches [Very dark] tonight: it’s [Dark] from 22:58 to 03:22.” and Darkness “No true night tonight: at its darkest the sky only reaches [Dark].” (J–L); in Reading at midsummer, “… only reaches [Very dark].” (G). Either side of those weeks, the very dark spell can start just after midnight: “Very dark from 00:01 to 02:09.” (M).
 9. **Is it light at…? for times that never change:** “It’s always dark at 01:00 here.”, “The sun is never up at 01:00 here.”, “The sun is always up at 12:00 here.” When the clocks end a run: “It’s light at 06:00 until the clocks go forward on Sunday March 28th.” and “… again from Sunday March 28th, when the clocks go forward.” And when today is the last day: “From tomorrow it’s light at 21:30.”, “Today is the last day the sun is up by 07:30.”
 10. **Across the UK** (decided 27 October): the two ends are whichever places on your short list (the 69 cities, plus Lerwick, Stornoway, Penzance, Dover and Lowestoft) have the earliest and latest sunset that day, and separately the least and most daylight, so they change with the season (see G: Dover to Stornoway). Penzance is at its postcode district centre, so its sunset today is 17:07:38 and shows as 17:08 (the spec had 17:07). For someone within about 15 miles of a place on the list, that place is left out, and if they are beyond both ends it says so: “…to 17:05 in Truro, and Penzance’s is later still, at 17:08.” (see I).
 11. **A week either side with much the same daylight** (less than a minute’s difference) would say “Daylight was much the same.” or “That’s much the same daylight.” It doesn’t happen in England, as the smallest weekly change is about 2m, so it’s there only as a safety net.
@@ -378,7 +378,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is very dark.
+- No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Tuesday July 20th.
 
 **Across the UK**
@@ -501,7 +501,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Today**
 
 - Sunrise 04:23, sunset 21:57: 17h 33m of daylight.
-- It doesn't get very dark tonight: dark from 22:58 to 03:22.
+- The sky never reaches "very dark" tonight: it's "dark" from 22:58 to 03:22.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -532,7 +532,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is dark.
+- No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Sunday August 8th.
 
 **Across the UK**
@@ -551,7 +551,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Today**
 
 - Sunrise 04:27, sunset 21:49: 17h 22m of daylight.
-- It doesn't get very dark tonight: dark from 22:47 to 03:29.
+- The sky never reaches "very dark" tonight: it's "dark" from 22:47 to 03:29.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -582,7 +582,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is dark.
+- No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Thursday August 5th.
 
 **Across the UK**
@@ -601,7 +601,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Today**
 
 - Sunrise 04:29, sunset 21:45: 17h 16m of daylight.
-- It doesn't get very dark tonight: dark from 22:42 to 03:32.
+- The sky never reaches "very dark" tonight: it's "dark" from 22:42 to 03:32.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -632,7 +632,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is dark.
+- No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Tuesday August 3rd.
 
 **Across the UK**
@@ -683,7 +683,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is very dark.
+- No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Sunday August 8th.
 
 **Across the UK**
@@ -733,7 +733,7 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
-- No true night tonight: at its darkest the sky is very dark.
+- No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Thursday August 5th.
 
 **Across the UK**

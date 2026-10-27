@@ -285,3 +285,20 @@ not found", as expected: `main` holds only the spec and the mock-ups, with no
 that starts the branch's own preview build. Preview link pattern (HOUSE-STYLE §10):
 `https://lightreader-git-claude-nice-goodall-j1r6wu-john-baish.vercel.app` (to confirm
 from Vercel's status on the commit).
+
+### 2026-10-27 — the far-north wording: option B (branch `claude/nice-goodall-j1r6wu`)
+
+The branch's first Vercel preview built successfully (status "Deployment has completed",
+14:09 UTC); its address can't be opened from this container (`*.vercel.app` is refused).
+
+**John chose option B** for "at its darkest the sky is dark": where a light label could
+be read as an ordinary word, it's a tag in its band colour, with "only" so it reads as
+a limit. The sentences carry the tag as `{{dark}}` (`bandTag()` in
+`src/lib/sentences/words.ts`); `plainText()` turns it into "dark" in quotation marks,
+and `sentenceParts()` splits a sentence for the page (stage 3). Used in three
+sentences: "No true night tonight: at its darkest the sky only reaches [Very dark]."
+and "… only reaches [Dark]." (`darkness.ts`), and "The sky never reaches [Very dark]
+tonight: it's [Dark] from 22:58 to 03:22." (`today.ts`). "Very dark or true night from
+… to …" and "It's dark at 17:30 until …" stay as words (SPEC §4 defines "dark" in a
+sentence). The sentence sheet's PDF shows the tags in the spec's light-mode band colours;
+its Markdown uses quotation marks. All 13 points are now decided. Checks 14 + 12.

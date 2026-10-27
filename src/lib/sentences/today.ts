@@ -5,7 +5,7 @@ import { clock, duration } from '../format.ts'
 import { daylight } from '../sun.ts'
 import { addDays } from '../ukTime.ts'
 import { dayOf, daysAhead, type SkyContext } from './context.ts'
-import { looseMinutes } from './words.ts'
+import { bandTag, looseMinutes } from './words.ts'
 
 export function todaySentences(ctx: SkyContext): string[] {
   const today = dayOf(ctx, ctx.today)
@@ -23,7 +23,7 @@ export function todaySentences(ctx: SkyContext): string[] {
     out.push(`${what} from ${clock(today.nauticalDusk)} to ${clock(tomorrow.nauticalDawn)}.`)
   } else if (today.civilDusk && tomorrow.civilDawn) {
     // Too far north in midsummer for the sky to get very dark (rule E: never a blank).
-    out.push(`It doesn't get very dark tonight: dark from ${clock(today.civilDusk)} to ${clock(tomorrow.civilDawn)}.`)
+    out.push(`The sky never reaches ${bandTag('very-dark')} tonight: it's ${bandTag('dark')} from ${clock(today.civilDusk)} to ${clock(tomorrow.civilDawn)}.`)
   }
 
   const rate = rateSentence(ctx)

@@ -12,7 +12,7 @@ import { fortnightSentences } from '../src/lib/sentences/fortnight.ts'
 import { lightAtSentences } from '../src/lib/sentences/lightAt.ts'
 import { recordSentences } from '../src/lib/sentences/records.ts'
 import { rateSentence, todaySentences } from '../src/lib/sentences/today.ts'
-import { looseMinutes } from '../src/lib/sentences/words.ts'
+import { looseMinutes, plainText, sentenceParts } from '../src/lib/sentences/words.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -137,9 +137,12 @@ check('is it light at…?: "from tomorrow" when today is the last day', () => {
 
 check('rule E: no true night, and not even very dark in the far north at midsummer', () => {
   const berwick = ctxFor('TD15', '2027-06-21T10:00:00Z')
-  assert.deepEqual(darknessSentences(berwick), ['No true night tonight: at its darkest the sky is dark.', 'True night returns on Sunday August 8th.'])
-  assert.equal(todaySentences(berwick)[1], "It doesn't get very dark tonight: dark from 22:58 to 03:22.")
-  assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[0], 'No true night tonight: at its darkest the sky is very dark.')
+  assert.deepEqual(darknessSentences(berwick), ['No true night tonight: at its darkest the sky only reaches {{dark}}.', 'True night returns on Sunday August 8th.'])
+  assert.equal(todaySentences(berwick)[1], "The sky never reaches {{very-dark}} tonight: it's {{dark}} from 22:58 to 03:22.")
+  assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[0], 'No true night tonight: at its darkest the sky only reaches {{very-dark}}.')
+  // In plain text (the sentence sheet), the tags are in quotation marks; the page gets parts.
+  assert.equal(plainText(todaySentences(berwick)[1]), 'The sky never reaches "very dark" tonight: it\'s "dark" from 22:58 to 03:22.')
+  assert.deepEqual(sentenceParts('reaches {{dark}}.'), [{ text: 'reaches ' }, { band: 'dark' }, { text: '.' }])
 })
 
 check('across the UK: the ends change with the season; a place near the visitor is left out', () => {

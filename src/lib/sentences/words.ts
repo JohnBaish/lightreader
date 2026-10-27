@@ -1,5 +1,6 @@
 // Small wording helpers shared by the sentence groups.
 
+import { BAND_LABEL, type Band } from '../bands.ts'
 import { longDate } from '../format.ts'
 import { numberWord } from '../words.ts'
 import { daysBetween, type SkyContext } from './context.ts'
@@ -12,6 +13,31 @@ export const dateIn = (ctx: SkyContext, date: string) => longDate(date, Math.abs
 export function rangeIn(ctx: SkyContext, a: string, b: string): [string, string] {
   const year = Math.abs(daysBetween(ctx.today, a)) > 300 || Math.abs(daysBetween(ctx.today, b)) > 300
   return [longDate(a, year), longDate(b, year)]
+}
+
+/** A light label inside a sentence, where it could be read as an ordinary word ("at its
+ *  darkest the sky only reaches dark"). John, 27 October (option B): the page shows it as
+ *  a small coloured tag matching the ribbon's key; anywhere else (`plainText`) it's in
+ *  quotation marks. Written into the sentence as "{{dark}}". */
+export const bandTag = (band: Band) => `{{${band}}}`
+
+const TAG = /\{\{(daylight|half-light|dark|very-dark|true-night)\}\}/g
+
+/** A sentence with its tags as plain text: "{{very-dark}}" becomes "very dark" in
+ *  quotation marks. */
+export const plainText = (s: string) => s.replace(TAG, (_, b: Band) => `"${BAND_LABEL[b].toLowerCase()}"`)
+
+/** A sentence split into text and tags, for the page. */
+export function sentenceParts(s: string): ({ text: string } | { band: Band })[] {
+  const parts: ({ text: string } | { band: Band })[] = []
+  let last = 0
+  for (const m of s.matchAll(TAG)) {
+    if (m.index > last) parts.push({ text: s.slice(last, m.index) })
+    parts.push({ band: m[1] as Band })
+    last = m.index + m[0].length
+  }
+  if (last < s.length) parts.push({ text: s.slice(last) })
+  return parts
 }
 
 /** "in nine days", "in 12 days", "tomorrow". */

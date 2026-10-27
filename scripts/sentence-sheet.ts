@@ -5,6 +5,8 @@
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { allGroups, makeContext } from '../src/lib/sentences/index.ts'
+import { plainText, sentenceParts } from '../src/lib/sentences/words.ts'
+import { BAND_LABEL, type Band } from '../src/lib/bands.ts'
 import { clock, longDate } from '../src/lib/format.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
 
@@ -36,7 +38,7 @@ const DECISIONS: string[] = [
   '<strong>Records a year back</strong> (decided 27 October): “The shortest day for a year.” (C), or “for more than a year”.',
   '<strong>Records the clocks make.</strong> Just after the clocks go back, sunrises are an hour earlier by the clock while they’re getting later each day, so “The earliest sunrise since September” would be the clocks’ doing. Records against the way the times are going are left out; “The latest sunrise since the clocks went back” stays, as the spec has it.',
   '<strong>Inside the summer weeks with no true night</strong> (decided 27 October): “True night returns on Sunday August 8th.” (G and J).',
-  '<strong>Where it doesn’t even get very dark</strong> (you asked for more examples; K–N are new): this happens in 125 English postcode districts, north of about 54.6° N, from Middlesbrough and Appleby (three or four nights around the longest day) to Berwick (38 nights, June 2nd to July 9th 2027). Today says “It doesn’t get very dark tonight: dark from 22:58 to 03:22.” and Darkness “No true night tonight: at its darkest the sky is dark.” (your rule E wording with “dark” in place of “very dark”). Either side of those weeks, the very dark spell can start just after midnight: “Very dark from 00:01 to 02:09.” (M).',
+  '<strong>Where it doesn’t even get very dark</strong> (decided 27 October: option B): this happens in 125 English postcode districts, north of about 54.6° N, from Middlesbrough and Appleby (three or four nights around the longest day) to Berwick (38 nights, June 2nd to July 9th 2027). The labels are now small tags in their band colours, as the page will show them, with “only” so they read as a limit: Today says “The sky never reaches [Very dark] tonight: it’s [Dark] from 22:58 to 03:22.” and Darkness “No true night tonight: at its darkest the sky only reaches [Dark].” (J–L); in Reading at midsummer, “… only reaches [Very dark].” (G). Either side of those weeks, the very dark spell can start just after midnight: “Very dark from 00:01 to 02:09.” (M).',
   '<strong>Is it light at…? for times that never change:</strong> “It’s always dark at 01:00 here.”, “The sun is never up at 01:00 here.”, “The sun is always up at 12:00 here.” When the clocks end a run: “It’s light at 06:00 until the clocks go forward on Sunday March 28th.” and “… again from Sunday March 28th, when the clocks go forward.” And when today is the last day: “From tomorrow it’s light at 21:30.”, “Today is the last day the sun is up by 07:30.”',
   '<strong>Across the UK</strong> (decided 27 October): the two ends are whichever places on your short list (the 69 cities, plus Lerwick, Stornoway, Penzance, Dover and Lowestoft) have the earliest and latest sunset that day, and separately the least and most daylight, so they change with the season (see G: Dover to Stornoway). Penzance is at its postcode district centre, so its sunset today is 17:07:38 and shows as 17:08 (the spec had 17:07). For someone within about 15 miles of a place on the list, that place is left out, and if they are beyond both ends it says so: “…to 17:05 in Truro, and Penzance’s is later still, at 17:08.” (see I).',
   '<strong>A week either side with much the same daylight</strong> (less than a minute’s difference) would say “Daylight was much the same.” or “That’s much the same daylight.” It doesn’t happen in England, as the smallest weekly change is about 2m, so it’s there only as a safety net.',
@@ -73,7 +75,7 @@ for (const [n, s] of SCENARIOS.entries()) {
   md.push(`## ${String.fromCharCode(65 + n)}. ${name} (${s.code}), ${when(s)}`, '', `*${s.why}*`, '')
   for (const g of groups) {
     if (!g.sentences.length) continue
-    md.push(`**${g.heading}**`, '', ...g.sentences.map((x) => `- ${x}`), '')
+    md.push(`**${g.heading}**`, '', ...g.sentences.map((x) => `- ${plainText(x)}`), '')
   }
 }
 writeFileSync('design/sentence-sheet-2026-10-27.md', md.join('\n'))
@@ -82,17 +84,26 @@ writeFileSync('design/sentence-sheet-2026-10-27.md', md.join('\n'))
 const out = process.argv[2]
 if (out) {
   const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  // Option B (John, 27 October): a label in a sentence as a small tag in its band colour
+  // (SPEC §4, light mode), as the page will show it.
+  const BAND_COLOUR: Record<Band, [string, string]> = {
+    'daylight': ['#f2cf86', '#201e1d'], 'half-light': ['#d98e57', '#201e1d'], 'dark': ['#7b6577', '#ffffff'],
+    'very-dark': ['#463c55', '#ffffff'], 'true-night': ['#24212f', '#ffffff'],
+  }
+  const tagged = (x: string) => sentenceParts(x).map((p) => 'text' in p ? esc(p.text)
+    : `<span class="band" style="background:${BAND_COLOUR[p.band][0]};color:${BAND_COLOUR[p.band][1]}">${BAND_LABEL[p.band]}</span>`).join('')
   const template = readFileSync('.claude/skills/fresh-look/report-template.html', 'utf8')
   const head = template.slice(0, template.indexOf('</style>')) + `
 .day{color:#5b5550;font-size:9.5pt;margin:0 0 6pt}
 .group{break-inside:avoid;margin:0 0 6pt}
 .group h3{margin:6pt 0 2pt}
+.band{font-weight:600;font-size:8.5pt;padding:0.5pt 5pt;border-radius:6pt;white-space:nowrap}
 </style></head><body>`
   const html: string[] = [
     head.replace('<title>PROJECT: fresh look</title>', '<title>Lightreader: sentence sheet</title>'),
     '<h1>Lightreader: the sentences</h1>',
     '<p class="sub">Stage 2, Tuesday October 27th 2026. Every sentence group in the spec, worked out by the code for 14 days and places.</p>',
-    '<div class="note"><strong>Nothing here is made up.</strong> Each sentence is the real figure for that place and day, from Lightreader’s own calculation. Places are postcode-district centres. Each point is numbered so you can reply by number: 1–13 are the points (all decided on 27 October except 8, which has more examples, K–N); A–N are the examples.</div>',
+    '<div class="note"><strong>Nothing here is made up.</strong> Each sentence is the real figure for that place and day, from Lightreader’s own calculation. Places are postcode-district centres. Each point is numbered so you can reply by number: 1–13 are the points, all decided on 27 October; A–N are the examples, with K–N added for point 8.</div>',
     '<h2>For you to decide</h2>',
     ...DECISIONS.map((d, i) => `<div class="item"><p>${i + 1}. ${d}</p></div>`),
   ]
@@ -101,7 +112,7 @@ if (out) {
     html.push(`<h2>${String.fromCharCode(65 + n)}. ${esc(name)} (${s.code})</h2>`, `<p class="day">${esc(when(s))}: ${esc(s.why)}.</p>`)
     for (const g of groups) {
       if (!g.sentences.length) continue
-      html.push(`<div class="group"><h3>${esc(g.heading)}</h3><ul>${g.sentences.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`)
+      html.push(`<div class="group"><h3>${esc(g.heading)}</h3><ul>${g.sentences.map((x) => `<li>${tagged(x)}</li>`).join('')}</ul></div>`)
     }
   }
   html.push('</body></html>')

@@ -104,3 +104,21 @@ export function placeLabels(spans: [number, number][], marks: number[], pad = 6)
   })
   return out
 }
+
+/** One whole UK day, midnight to midnight, as stretches of light: for Compare's paired
+ *  ribbons (SPEC §8), drawn on the same midnight-to-midnight scale. */
+export function dayRibbon(place: Place, date: string): Segment[] {
+  const from = ukInstant(date, 0)
+  const to = ukInstant(addDays(date, 1), 0)
+  const changes = timeline(daysFigures(place, addDays(date, -1), addDays(date, 1)))
+  const segments: Segment[] = []
+  let band = bandAt(changes, from)
+  let start = from
+  for (const c of changes.filter((c) => c.at > from && c.at < to)) {
+    segments.push({ band, from: start, to: c.at })
+    band = BAND_AFTER[c.kind]
+    start = c.at
+  }
+  segments.push({ band, from: start, to })
+  return segments
+}

@@ -33,8 +33,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago, before the clocks went back, the sun rose at 07:36 and set at 18:00. Days were 26m longer.
-- Next Tuesday the sun rises at 07:01 and sets at 16:33. That's 25m less daylight.
+- A week ago, before the clocks went back, the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later). Days were 26m longer.
+- Next Tuesday the sun rises at 07:01 (12m later) and sets at 16:33 (13m earlier). That's 25m less daylight.
 
 **Records and runs**
 
@@ -87,8 +87,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago, before the clocks went back, the sun rose at 07:33 and set at 18:04. Days were 26m longer.
-- Next Sunday the sun rises at 06:57 and sets at 16:37. That's 25m less daylight.
+- A week ago, before the clocks went back, the sun rose at 07:33 (48m later) and set at 18:04 (1h 14m later). Days were 26m longer.
+- Next Sunday the sun rises at 06:57 (12m later) and sets at 16:37 (13m earlier). That's 25m less daylight.
 
 **Records and runs**
 
@@ -142,8 +142,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 08:02 and set at 15:55. Days were 3m longer.
-- Next Monday the sun rises at 08:09 and sets at 16:02. That's 2m more daylight.
+- A week ago the sun rose at 08:02 (5m earlier) and set at 15:55 (2m earlier). Days were 3m longer.
+- Next Monday the sun rises at 08:09 (2m later) and sets at 16:02 (5m later). That's 2m more daylight.
 
 **Records and runs**
 
@@ -194,8 +194,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 06:23 and set at 18:05. Days were 28m shorter.
-- Next Saturday the sun rises at 05:51 and sets at 18:28. That's 28m more daylight.
+- A week ago the sun rose at 06:23 (16m later) and set at 18:05 (12m earlier). Days were 28m shorter.
+- Next Saturday the sun rises at 05:51 (16m earlier) and sets at 18:28 (12m later). That's 28m more daylight.
 
 **Records and runs**
 
@@ -248,8 +248,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago, before the clocks went forward, the sun rose at 06:05 and set at 18:18. Days were 28m shorter.
-- Next Sunday the sun rises at 06:33 and sets at 19:42. That's 28m more daylight.
+- A week ago, before the clocks went forward, the sun rose at 06:05 (44m earlier) and set at 18:18 (1h 12m earlier). Days were 28m shorter.
+- Next Sunday the sun rises at 06:33 (16m earlier) and sets at 19:42 (12m later). That's 28m more daylight.
 
 **Records and runs**
 
@@ -303,8 +303,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 05:24 and set at 20:38. Days were 22m shorter.
-- Next Saturday the sun rises at 05:03 and sets at 20:59. That's 20m more daylight.
+- A week ago the sun rose at 05:24 (11m later) and set at 20:38 (11m earlier). Days were 22m shorter.
+- Next Saturday the sun rises at 05:03 (10m earlier) and sets at 20:59 (10m later). That's 20m more daylight.
 
 **Records and runs**
 
@@ -358,8 +358,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:47 and set at 21:22. Days were 3m shorter.
-- Next Monday the sun rises at 04:49 and sets at 21:25. That's 2m less daylight.
+- A week ago the sun rose at 04:47 (about the same as today) and set at 21:22 (3m earlier). Days were 3m shorter.
+- Next Monday the sun rises at 04:49 (3m later) and sets at 21:25 (about the same as today). That's 2m less daylight.
 
 **Records and runs**
 
@@ -409,8 +409,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 05:38 and set at 20:40. Days were 24m longer.
-- Next Sunday the sun rises at 06:00 and sets at 20:12. That's 25m less daylight.
+- A week ago the sun rose at 05:38 (11m earlier) and set at 20:40 (13m later). Days were 24m longer.
+- Next Sunday the sun rises at 06:00 (11m later) and sets at 20:12 (14m earlier). That's 25m less daylight.
 
 **Records and runs**
 
@@ -461,8 +461,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago, before the clocks went back, the sun rose at 07:52 and set at 18:21. Days were 25m longer.
-- Next Tuesday the sun rises at 07:15 and sets at 16:55. That's 24m less daylight.
+- A week ago, before the clocks went back, the sun rose at 07:52 (49m later) and set at 18:21 (1h 13m later). Days were 25m longer.
+- Next Tuesday the sun rises at 07:15 (12m later) and sets at 16:55 (12m earlier). That's 24m less daylight.
 
 **Records and runs**
 
@@ -515,8 +515,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:23 and set at 21:54. Days were 3m shorter.
-- Next Monday the sun rises at 04:26 and sets at 21:56. That's 3m less daylight.
+- A week ago the sun rose at 04:23 (about the same as today) and set at 21:54 (3m earlier). Days were 3m shorter.
+- Next Monday the sun rises at 04:26 (3m later) and sets at 21:56 (about the same as today). That's 3m less daylight.
 
 **Records and runs**
 
@@ -566,8 +566,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:27 and set at 21:46. Days were 3m shorter.
-- Next Monday the sun rises at 04:30 and sets at 21:49. That's 3m less daylight.
+- A week ago the sun rose at 04:27 (about the same as today) and set at 21:46 (3m earlier). Days were 3m shorter.
+- Next Monday the sun rises at 04:30 (3m later) and sets at 21:49 (about the same as today). That's 3m less daylight.
 
 **Records and runs**
 
@@ -617,8 +617,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:29 and set at 21:42. Days were 3m shorter.
-- Next Monday the sun rises at 04:31 and sets at 21:45. That's 3m less daylight.
+- A week ago the sun rose at 04:29 (about the same as today) and set at 21:42 (3m earlier). Days were 3m shorter.
+- Next Monday the sun rises at 04:31 (3m later) and sets at 21:45 (about the same as today). That's 3m less daylight.
 
 **Records and runs**
 
@@ -668,8 +668,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:52 and set at 21:18. Days were 23m shorter.
-- Next Tuesday the sun rises at 04:32 and sets at 21:40. That's 19m more daylight.
+- A week ago the sun rose at 04:52 (11m later) and set at 21:18 (12m earlier). Days were 23m shorter.
+- Next Tuesday the sun rises at 04:32 (9m earlier) and sets at 21:40 (10m later). That's 19m more daylight.
 
 **Records and runs**
 
@@ -720,8 +720,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **This fortnight**
 
-- A week ago the sun rose at 04:34 and set at 21:47. Days were 13m longer.
-- Next Saturday the sun rises at 04:50 and sets at 21:34. That's 17m less daylight.
+- A week ago the sun rose at 04:34 (7m earlier) and set at 21:47 (5m later). Days were 13m longer.
+- Next Saturday the sun rises at 04:50 (9m later) and sets at 21:34 (8m earlier). That's 17m less daylight.
 
 **Records and runs**
 

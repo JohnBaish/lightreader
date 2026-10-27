@@ -148,7 +148,10 @@ the first-visit screen, "About these figures" and the footer is draft. Not merge
 
 ## Stage 4 — "Is it light at…?" and Compare
 
-Branch: `stage-4-times-compare`
+Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
+
+**Status (28 October):** built; with John for a look on the Vercel preview. A first visit's
+two example times (07:30 and 17:30) are a draft. Not merged.
 
 - **Is it light at…?** (option B): chips with ✕ and "+ Add a time", saved
   in `localStorage` (`lightreader.times`). Each time gets a band pill, a

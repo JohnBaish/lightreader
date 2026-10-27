@@ -43,11 +43,15 @@ Key points:
 - **The page** (Vite + React + TypeScript): `src/App.tsx` (header with the postcode pill,
   Today, the sky ribbon, the sentence groups, "About these figures", the footer; the last
   postcode in `localStorage`, key `lightreader.postcode`), `src/components/` (`SkyRibbon`,
-  `Sentences`, `PostcodeBox`, `About`). The sentences are worked out in a worker
-  (`src/lib/sentences.worker.ts`) so today and the ribbon show at once.
+  `Sentences`, `PostcodeBox`, `About`, `LightAt`, `Compare`). The sentences and "Is it
+  light at…?" are worked out in a worker that stays running (`src/lib/sentences.worker.ts`,
+  `src/lib/useSky.ts`) so today and the ribbon show at once; the times are kept in
+  `localStorage`, key `lightreader.times` (`src/lib/times.ts`).
 - **The figures:** `src/lib/sun.ts` (Astronomy Engine; twilight times worked out only when
   read), `bands.ts`, `format.ts`, `year.ts`, `ribbon.ts` (the next 24 hours and where its
-  labels go), `postcode.ts` (the bundled list, `src/data/outcodes.json`), `ukPlaces.ts`
+  labels go, and Compare's midnight-to-midnight days), `headline.ts` (the top card),
+  `lightAtYear.ts` (each time's year strip), `compare.ts` (reading the Compare box with
+  chrono-node, and its sentences), `postcode.ts` (the bundled list, `src/data/outcodes.json`), `ukPlaces.ts`
   (`src/data/ukPlaces.json`), `src/lib/sentences/` (every group in SPEC §6).
 - **Checks:** `npm run check` (figures, sentences, page), `npm run build`, `npm run lint`.
 - **Sheets for John:** `npm run figures-sheet`, `npm run sentence-sheet [<html>]`,
@@ -403,3 +407,45 @@ lint and the build pass, and the Vercel preview built.
    evening", "Tomorrow morning"), or B by event ("Today's sunset", "Tomorrow's sunrise").
 2. Anything else from his look at the page; then stage 4 ("Is it light at…?" and Compare).
 3. Later: the landing page review and the draft wording ("About these figures", footer).
+
+### 2026-10-28 — John's answers; stage 4 built: "Is it light at…?" and Compare (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** option B for the top card's headings ("Today's sunset · …", "Tomorrow's sunrise ·
+…"); the folded true night to open when tapped; "This fortnight" to give each time's
+difference from today in brackets; go ahead with stage 4.
+
+**What:**
+- `headline.ts`: option B. `SkyRibbon.tsx`: tapping the fold or its note ("(folded: tap to
+  open)") opens true night out to scale, the strip growing longer (470px to 684px today)
+  with the rest unchanged; tapping again folds it. `fortnight.ts`: "the sun rose at 07:36
+  (48m later) and set at 18:00 (1h 14m later)", "rises at 07:01 (12m later)": by the clock
+  from exact times (rule H; 07:01 against 06:48 is 12m 3x s, so "12m").
+- **"Is it light at…?"** (`LightAt.tsx`, `lightAtYear.ts`, `times.ts`): chips with ✕, "+ Add
+  a time" (the phone's own time picker), up to six, "Saved on this device only"; a first
+  visit starts with 07:30 and 17:30 (draft); for each time a pill ("Dark today"), the year
+  strip (six months either side, today marked, months beneath, one letter on a phone) and
+  its two sentences. The strip uses each change at the minute shown, so it agrees with the
+  sentences (checked day by day). Sits straight after "Coming up", across the full width.
+- **Compare** (`Compare.tsx`, `compare.ts`): one box ("Try Christmas, 14/7 or TR18"), the
+  three quick choices, the echo ("Comparing with Friday December 25th 2026"), paired
+  midnight-to-midnight ribbons with the hours and key, the BST note, and the spec's
+  sentences for a date ahead, a date behind, and a place (tense by whether each moment has
+  passed there yet). Reads dates with `chrono-node` 2.10.3 (MIT, published 12 October 2026,
+  pinned), plus "Christmas", "Christmas Day", "longest day", "shortest day" (worked out for
+  the place), "last …" (the one before), and "march 28" (chrono read it as March of the year
+  28). Places: an English postcode, or any of the 74 big places by name (John: places outside
+  England "if easily done").
+- The worker now stays running and keeps the place's figures, so changing the times is quick.
+
+**Results:** all three of the spec's Compare examples come out as written, apart from the
+known minute-or-so differences (Christmas sunrise 08:08 and 7h 51m; July 14th 05:03 and
+22:00; Aberdeen's sunset 16:35:31, shown 16:36).
+
+**Verified:** `npx tsc -b`, `oxlint`, `npm run check` (14 + 12 + 8; new: reading the box,
+the three Compare examples, the strip against the sentences). In Chromium at 1200px and
+390px with touch: Compare with Christmas, last July 14th, Aberdeen, CF10 (refused), the
+"Shortest day" button; adding 21:00 and removing 07:30, kept after a reload; tapping the fold
+open and shut; the full page at 09:02 and 15:00: no script errors, no sideways scroll.
+Screenshots `design/previews/stage4-*.png`. The page's script grew from 130 to 150 KB
+compressed (chrono-node); it could be loaded only when Compare is first used, if wanted.
+**Couldn't be checked:** a real phone; the Vercel preview (blocked here).

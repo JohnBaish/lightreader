@@ -106,6 +106,7 @@ These are shown under sub-headings, in this order. The examples are for Reading 
 Compares with the same weekday a week back and a week ahead.
 - "A week ago, before the clocks went back, the sun rose at 07:36 and set at 18:00. Days were 26m longer."
 - "Next Tuesday the sun rises at 07:01 and sets at 16:33. That's 25m less daylight."
+- **Changed (John, October 28th 2026):** each time is followed by its difference from today's in brackets: "the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later)".
 
 ### Records and runs
 - "The earliest sunset since Wednesday January 28th."

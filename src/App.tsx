@@ -6,13 +6,15 @@
 import { Component, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { About } from './components/About.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
+import { CompareCard } from './components/Compare.tsx'
+import { LightAtCard } from './components/LightAt.tsx'
 import { SentenceGroups } from './components/Sentences.tsx'
 import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
 import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { useIsNarrow } from './lib/responsive.ts'
 import { ribbon } from './lib/ribbon.ts'
-import type { Group } from './lib/sentences/index.ts'
-import type { Answer, Ask } from './lib/sentences.worker.ts'
+import { savedTimes, saveTimes, tidyTimes } from './lib/times.ts'
+import { useSky } from './lib/useSky.ts'
 import { headline } from './lib/headline.ts'
 import { daysFigures } from './lib/sun.ts'
 import { addDays, ukParts } from './lib/ukTime.ts'
@@ -37,24 +39,6 @@ function useNow(): Date {
   return now
 }
 
-/** The sentence groups for a place and day, from the worker. */
-function useGroups(d: District | null, date: string): Group[] | null {
-  const [answer, setAnswer] = useState<{ key: string; groups: Group[] } | null>(null)
-  const key = d ? `${d.code} ${date}` : ''
-  useEffect(() => {
-    if (!d) return
-    const key = `${d.code} ${date}`
-    const worker = new Worker(new URL('./lib/sentences.worker.ts', import.meta.url), { type: 'module' })
-    worker.onmessage = (e: MessageEvent<Answer>) => {
-      setAnswer({ key, groups: e.data.groups })
-      worker.terminate()
-    }
-    worker.postMessage({ place: d, name: d.name, now: new Date().toISOString() } satisfies Ask)
-    return () => worker.terminate()
-  }, [d, date])
-  return answer?.key === key ? answer.groups : null
-}
-
 /** If the page can't be shown, a message and a way to choose again, not an empty page
  *  (as Hindcaster's safety net). */
 class SafetyNet extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -77,7 +61,13 @@ function Place({ d, now }: { d: District; now: Date }) {
   }, [d, today, now])
   // The ribbon moves on with the clock; worked out again each minute.
   const r = useMemo(() => ribbon(d, now), [d, now])
-  const groups = useGroups(d, today)
+  const [times, setTimes] = useState<string[]>(savedTimes)
+  const changeTimes = (next: string[]) => {
+    const tidy = tidyTimes(next)
+    saveTimes(tidy)
+    setTimes(tidy)
+  }
+  const { groups, lightAt } = useSky(d, today, times)
   return (
     <>
       <section className="card today">
@@ -101,7 +91,8 @@ function Place({ d, now }: { d: District; now: Date }) {
         <h3>Next 24 hours</h3>
         {narrow ? <SkyRibbonNarrow r={r} /> : <SkyRibbonWide r={r} />}
       </section>
-      <SentenceGroups groups={groups} />
+      <SentenceGroups groups={groups} after={{ 'Coming up': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
+      <CompareCard d={d} today={today} now={now} />
     </>
   )
 }

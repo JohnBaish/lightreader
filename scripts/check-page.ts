@@ -4,9 +4,12 @@
 import assert from 'node:assert/strict'
 import { bandAt, timeline } from '../src/lib/bands.ts'
 import { district, outwardCode } from '../src/lib/postcode.ts'
+import { clockNote, compareDate, comparePlace, readTarget } from '../src/lib/compare.ts'
 import { headline } from '../src/lib/headline.ts'
+import { lightAtYear, yearChanges } from '../src/lib/lightAtYear.ts'
+import { makeContext } from '../src/lib/sentences/index.ts'
 import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
-import { daysFigures } from '../src/lib/sun.ts'
+import { dayFigures, daysFigures } from '../src/lib/sun.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -86,6 +89,68 @@ check('the top of the page: today\'s sunrise and sunset until the sun is highest
   assert.deepEqual(headline(new Date('2026-10-27T11:48:00Z'), today, tomorrow), after)
   assert.deepEqual(headline(new Date('2026-10-27T22:00:00Z'), today, tomorrow), after)
   assert.equal(headline(new Date('2026-10-27T11:47:00Z'), today, tomorrow).length, 1)
+})
+
+check('compare: what someone types, read as a date or a place', () => {
+  const read = (s: string) => readTarget(s, RG1, '2026-10-27')
+  assert.deepEqual(read('Christmas'), { kind: 'date', date: '2026-12-25' })
+  assert.deepEqual(read('christmas day'), { kind: 'date', date: '2026-12-25' })
+  assert.deepEqual(read('last Christmas'), { kind: 'date', date: '2025-12-25' })
+  assert.deepEqual(read('last July 14th'), { kind: 'date', date: '2026-07-14' })
+  assert.deepEqual(read('July 14th'), { kind: 'date', date: '2027-07-14' }) // a bare date means the next one
+  assert.deepEqual(read('14/7'), { kind: 'date', date: '2027-07-14' }) // day before month
+  assert.deepEqual(read('march 28'), { kind: 'date', date: '2027-03-28' }) // not March of the year 28
+  assert.deepEqual(read('shortest day'), { kind: 'date', date: '2026-12-21' })
+  assert.deepEqual(read('longest day'), { kind: 'date', date: '2027-06-21' })
+  assert.equal((read('Aberdeen') as { name: string }).name, 'Aberdeen')
+  assert.equal((read('tr18 1aa') as { name: string }).name, 'Penzance (TR18)')
+  assert.equal(read('CF10').kind, 'error')
+  assert.equal(read('Paris').kind, 'error')
+  assert.equal(clockNote('2026-10-27', '2026-07-14'), "July times are in BST, an hour ahead of today's GMT.")
+  assert.equal(clockNote('2027-06-21', '2026-12-25'), "December times are in GMT, an hour behind today's BST.")
+  assert.equal(clockNote('2026-10-27', '2026-12-25'), null)
+})
+
+check("compare: the spec's three examples, with today's figures", () => {
+  const here = dayFigures(RG1, '2026-10-27')
+  assert.deepEqual(compareDate(here, dayFigures(RG1, '2026-12-25'), '2026-10-27'), [
+    'On Friday December 25th the sun rises at 08:08, 1h 20m later than today.',
+    'It sets at 15:59, 47m earlier.',
+    'Half-light ends at 16:40, 41m earlier.',
+    "That's 2h 7m less daylight: 7h 51m in all.",
+  ])
+  assert.deepEqual(compareDate(here, dayFigures(RG1, '2026-07-14'), '2026-10-27'), [
+    'On Tuesday July 14th the sun rose at 05:03, 1h 45m earlier than today, and set at 21:15, 4h 29m later.',
+    'Half-light ended at 22:00, 4h 39m later than today.',
+    'There was 6h 14m more daylight: 16h 12m in all.',
+    'There was no true night.',
+  ])
+  const ab = readTarget('Aberdeen', RG1, '2026-10-27') as { place: { latitude: number; longitude: number } }
+  assert.deepEqual(comparePlace(here, dayFigures(ab.place, '2026-10-27'), 'Reading', 'Aberdeen', new Date('2026-10-27T09:02:00Z')), [
+    'In Aberdeen today the sun rose at 07:08, 20m later than in Reading.',
+    'It sets at 16:36, 11m earlier.',
+    'Half-light ends at 17:16, 5m earlier.',
+    "That's 31m less daylight: 9h 27m in all.",
+  ])
+})
+
+check('is it light at…?: the strip agrees with the sentences, day by day', () => {
+  const ctx = makeContext(RG1, 'Reading', new Date('2026-10-27T09:02:00Z'))
+  const year = yearChanges(RG1, ctx.today)
+  const at = lightAtYear(ctx, year, '17:30')
+  assert.equal(at.today, 'dark')
+  assert.deepEqual(at.sentences, ["It's dark at 17:30 until Monday February 1st.", 'The sun is up at 17:30 again from Monday February 22nd.'])
+  const day = (date: string) => at.strip[Math.round((Date.parse(date) - Date.parse(at.from)) / 86_400_000)]
+  const light = (b: string) => b === 'daylight' || b === 'half-light'
+  assert.ok(!light(day('2027-02-01')))
+  assert.ok(light(day('2027-02-02')))
+  assert.notEqual(day('2027-02-21'), 'daylight')
+  assert.equal(day('2027-02-22'), 'daylight')
+  assert.equal(at.strip.length, 366)
+  assert.equal(at.todayIndex, 183)
+  const morning = lightAtYear(ctx, year, '07:30')
+  assert.equal(morning.today, 'daylight')
+  assert.ok(morning.strip.every(light)) // "07:30 is always at least half-light here"
 })
 
 console.log(`\n${passed} checks passed`)

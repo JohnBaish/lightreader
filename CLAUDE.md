@@ -922,3 +922,17 @@ alone at the end of a run of cards (before "Is it light at…?" or at the end) g
 unchanged (one column). **Verified:** `npx tsc -b`, lint, `npm run check` (14 + 14 + 12); in
 Chromium at 1200px and 390px with touch, no errors, no sideways scroll;
 `design/previews/fl-after-sentences-wide.png` refreshed.
+
+### 2026-10-28 — merged to `main`: live on the Vercel address
+
+John: "make it live … on the Vercel address unless you can think of a reason not to". No
+reason found: `main` held only the first two commits (the spec and mock-ups), so it was
+fast-forwarded to the branch at `403e6a6`; `npm run check` (14 + 14 + 12), lint and the build
+passed first. Vercel's statuses on that commit show two builds, the branch preview and the
+production build of `main`, both "Deployment has completed" (22:04 UTC). The production
+address can't be opened from here. The search and link-preview tags already name
+`https://lightreader.baish.net/`, so they'll be right once John adds that domain. **Still for
+John:** add `lightreader.baish.net` to the lightreader project in Vercel (not another
+project), switch on Web Analytics, then Search Console, the baish.net hub card and the
+overview PDF (PLAN stage 7). In clockwheel, when there's access: Lightreader on the house
+style's list of 24-hour exceptions.

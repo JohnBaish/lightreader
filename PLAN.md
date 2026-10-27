@@ -150,8 +150,9 @@ the first-visit screen, "About these figures" and the footer is draft. Not merge
 
 Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
 
-**Status (28 October):** built; with John for a look on the Vercel preview. A first visit's
-two example times (07:30 and 17:30) are a draft. Not merged.
+**Status (28 October):** built and looked at by John ("I love them both"). A first visit
+starts with 07:30 and 17:30 (John: as is). A time chosen in the picker goes in at once,
+with no "Add" needed. Not merged.
 
 - **Is it light at…?** (option B): chips with ✕ and "+ Add a time", saved
   in `localStorage` (`lightreader.times`). Each time gets a band pill, a
@@ -210,8 +211,11 @@ Branch: `stage-7-launch`
 - **The landing page** (what a first-time visitor sees before entering a postcode): John
   wants to review it at some point (27 October). Today it has a heading, one line, the
   postcode box, "About these figures" and the footer, all draft wording.
-- The wording of the top card's headings ("Today · …", "Tomorrow · …"), "About these
-  figures" and the footer (drafts from stage 3).
+- The wording of "About these figures" and the footer (drafts from stage 3).
+- **More quick choices in Compare** (John, 28 October): he'd like more chips beside
+  Christmas Day, Shortest day and Longest day. Which ones is still to decide (ideas to put
+  to him: the next clock change, the spring and autumn equinoxes, a year ago today,
+  Midsummer's Eve, New Year's Day).
 
 ## Later (SPEC §10, not in the first version)
 

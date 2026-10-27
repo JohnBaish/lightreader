@@ -449,3 +449,20 @@ open and shut; the full page at 09:02 and 15:00: no script errors, no sideways s
 Screenshots `design/previews/stage4-*.png`. The page's script grew from 130 to 150 KB
 compressed (chrono-node); it could be loaded only when Compare is first used, if wanted.
 **Couldn't be checked:** a real phone; the Vercel preview (blocked here).
+
+### 2026-10-28 — a chosen time goes in at once; more Compare chips noted (branch `claude/nice-goodall-j1r6wu`)
+
+**John** asked for a time chosen in "Is it light at…?" to go in when the picker's tick is
+pressed, without "Add"; and noted he'd like more quick choices in Compare (in PLAN, "For
+John to come back to"). He also said a first visit keeps 07:30 and 17:30, and to go on.
+
+**What (`LightAt.tsx`):** the time goes in when the box loses focus (a phone picker's tick
+or Done, or clicking away) and, on a touch screen, when the picker confirms. On a computer
+the box's typed changes don't count, because "07:3" already reads as 07:03; Enter and Add
+still work. Cancel doesn't add what was in the box; an empty box clicked away from stays
+open.
+
+**Verified:** `npx tsc -b`, lint, build. In Chromium at 1200px (choosing then clicking away
+adds; Cancel doesn't; Enter adds; an empty box stays open) and at 390px with touch (the
+picker's confirm adds at once): saved after each, no errors, no sideways scroll.
+**Couldn't be checked:** the real iPhone and Android pickers.

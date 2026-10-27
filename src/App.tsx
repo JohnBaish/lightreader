@@ -94,7 +94,7 @@ function Place({ d, now }: { d: District; now: Date }) {
         <h3>Next 24 hours</h3>
         {narrow ? <SkyRibbonNarrow r={r} /> : <SkyRibbonWide r={r} />}
       </section>
-      <SentenceGroups groups={groups} after={{ 'Coming up': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
+      <SentenceGroups groups={groups} after={{ 'Looking ahead': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
       <CompareCard d={d} today={today} now={now} />
       <YearCards v={year} narrow={narrow} place={`${d.name} (${d.code})`} d={d} />
     </>

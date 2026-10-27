@@ -1,4 +1,4 @@
-// "Coming up" (SPEC §6): what happens in the next three months, in date order.
+// "Coming up", headed "Looking ahead" on the page (SPEC §6; John, 28 October): what happens in the next three months, in date order.
 //
 // - Whole hours crossed, the soonest for sunrise and the soonest for sunset only (John,
 //   27 October): "The sun rises after 07:00 from Tuesday November 3rd to Tuesday February

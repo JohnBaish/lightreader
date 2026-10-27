@@ -100,7 +100,7 @@ body { margin: 0; background: var(--color-bg); }
 .ribbon-vstrip button { position: absolute; left: 0; right: 0; border: 0; padding: 0; cursor: pointer; }
 
 /* The sentence groups, two to a row on a computer (as the mock-up). */
-.groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }
+.groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: center; /* side-by-side cards centred on each other (John, 28 October) */ }
 .group { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-2); }
 .group ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .group li::marker { color: var(--color-accent); }

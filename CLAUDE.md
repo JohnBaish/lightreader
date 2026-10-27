@@ -936,3 +936,13 @@ John:** add `lightreader.baish.net` to the lightreader project in Vercel (not an
 project), switch on Web Analytics, then Search Console, the baish.net hub card and the
 overview PDF (PLAN stage 7). In clockwheel, when there's access: Lightreader on the house
 style's list of 24-hour exceptions.
+
+### 2026-10-28 — "Looking ahead"; side-by-side cards centred (branch `claude/nice-goodall-j1r6wu`, not yet on `main`)
+
+**John:** "Coming up" renamed "Looking ahead" (the heading in `sentences/index.ts`, the
+`after` key in `App.tsx`, the check); and Darkness to sit vertically centred against Across
+the UK. **What:** `.groups` now centres side-by-side cards (`align-items: center`), which
+does that, but also floats "Records and runs" halfway down beside the much taller "Looking
+ahead"; picture `design/previews/fl-after-sentences-wide.png` sent to John to decide
+whether to keep it for every pair. **Verified:** `npx tsc -b`, lint, `npm run check`
+(14 + 14 + 12); 1200px and 390px with touch, no errors, no sideways scroll. Not merged.

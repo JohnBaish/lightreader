@@ -43,7 +43,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The earliest sunset since Wednesday January 28th.',
       "Today's daylight matches Saturday February 14th's.",
     ] },
-    { heading: 'Coming up', sentences: [
+    { heading: 'Looking ahead', sentences: [
       'The sun rises after 07:00 from Tuesday November 3rd to Tuesday February 23rd.',
       'The sun sets before 16:00 from Monday November 30th to Friday December 25th.',
       'Earliest sunset: 15:55, every day from Wednesday December 9th to Wednesday December 16th. Within that period, the very earliest are on Saturday December 12th and Sunday December 13th, a fraction of a second apart.',

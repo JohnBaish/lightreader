@@ -174,8 +174,10 @@ body { margin: 0; background: var(--color-bg); }
 .year-detail .year-detail-big { font-family: var(--font-heading); font-size: 22px; font-variant-numeric: tabular-nums; }
 .link-button { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: var(--color-accent-700); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .month-buttons { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
-.month-year { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-.month-year > span { font-size: 13px; font-weight: 600; margin-right: 2px; }
+.month-year { display: flex; align-items: flex-start; gap: 8px; }
+/* The months wrap under each other, beside the year (John, 28 October). */
+.month-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.month-year > span { font-size: 13px; font-weight: 600; line-height: 34px; flex: none; }
 .chip-button.is-now { box-shadow: inset 0 0 0 2px var(--color-accent); }
 .chip-button.is-open { background: var(--color-accent-700); border-color: var(--color-accent-700); color: #fff; }
 .days-nav { display: flex; align-items: center; gap: var(--space-2); }
@@ -223,6 +225,11 @@ body { margin: 0; background: var(--color-bg); }
   .yr { grid-template-columns: 34px 1fr; grid-template-rows: 170px 18px; }
   .days-month { min-width: 0; font-size: 16px; }
   .year-detail-big { display: flex; flex-direction: column; }
+  /* Equal columns, so the second row of months lines up under the first. */
+  .month-buttons { display: grid; grid-template-columns: 1fr; }
+  .month-list { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); }
+  .month-list .chip-button { padding: 7px 0; justify-content: center; }
+  .month-year > span { line-height: 44px; }
   .year-detail-big .dot { display: none; }
 }
 

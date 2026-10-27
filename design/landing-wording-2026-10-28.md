@@ -1,4 +1,4 @@
-# Lightreader: the opening page, as it is now (28 October 2026)
+# Lightreader: the opening page, as it is now (28 October 2026; John's first changes made)
 
 Everything a first-time visitor sees before choosing a postcode, top to bottom, word for
 word. All of it is draft wording, for John to redraft.
@@ -11,7 +11,7 @@ Lightreader
 
 **Heading:** Sunrise, sunset and twilight for your postcode
 
-**Line under it:** When the light comes and goes where you are, today and through the year, in UK clock time.
+**Line under it:** Check when the light comes and goes anywhere in England, today and through the year, in UK local time.
 
 **Box label:** Your postcode, or just its first half
 
@@ -47,7 +47,7 @@ They're accurate to within a minute or so of the published times. They assume a 
 
 ## Footer
 
-Lightreader is a free-to-use personal project by John Baish. More free tools at www.baish.net. Contact: workshop@baish.net. We don't record anything you do here, apart from anonymous visit statistics (no cookies, no personal data) showing us how the site is used. Your device, rather than the website, stores your last postcode, so the page opens the same way next time.
+Lightreader is a free-to-use personal project by John Baish. More free tools at www.baish.net. Contact: workshop@baish.net. We don't record anything you do here, apart from anonymous visit statistics (no cookies, no personal data) showing us how the site is used. Your device, rather than the website, stores your recent selections, so the page opens the same way next time.
 
 Contains OS data © Crown Copyright and database rights 2026. Contains Royal Mail data © Royal Mail copyright and database right 2026. Contains National Statistics data © Crown copyright and database right 2026. Calculated with Astronomy Engine (MIT licence).
 
@@ -56,4 +56,3 @@ Contains OS data © Crown Copyright and database rights 2026. Contains Royal Mai
 - The three credit lines are copied exactly from the OS download's licence file, so they shouldn't be reworded. The page adds the missing full stop at the end of the third.
 - "Calculated with Astronomy Engine (MIT licence)" credits the free library that works out the times. Its licence asks for its copyright notice to go with copies of the code, not for a line on the page, so this line is a courtesy and could be shortened.
 - The footer follows Hindcaster's, so any changes there might be worth matching.
-- Once you've chosen a postcode, the footer stays the same, but the footer will need to mention the times and comparisons you save too ("Saved on this device only").

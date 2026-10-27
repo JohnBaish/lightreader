@@ -214,17 +214,19 @@ export function YearCards({ v, narrow, place }: { v: YearView | null; narrow: bo
           {years.map((y) => (
             <div key={y} className="month-year">
               <span className="muted">{y}</span>
-              {v.months.filter((m) => m.month.startsWith(y)).map((m) => (
-                <button
-                  key={m.month}
-                  type="button"
-                  className={`chip chip-button${m.month === open ? ' is-open' : ''}${m.month === v.today.slice(0, 7) ? ' is-now' : ''}`}
-                  aria-pressed={m.month === open}
-                  onClick={() => choose(m.month === open ? null : m.month)}
-                >
-                  {monthName(m.month).slice(0, 3)}
-                </button>
-              ))}
+              <div className="month-list">
+                {v.months.filter((m) => m.month.startsWith(y)).map((m) => (
+                  <button
+                    key={m.month}
+                    type="button"
+                    className={`chip chip-button${m.month === open ? ' is-open' : ''}${m.month === v.today.slice(0, 7) ? ' is-now' : ''}`}
+                    aria-pressed={m.month === open}
+                    onClick={() => choose(m.month === open ? null : m.month)}
+                  >
+                    {monthName(m.month).slice(0, 3)}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
         </div>

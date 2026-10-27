@@ -598,3 +598,24 @@ the sea), the compass point alone; Welsh names in English.
 
 **Verified:** `npx tsc -b`, lint, `npm run check` (unchanged; the page doesn't show the
 places yet).
+
+### 2026-10-28 — John's wording for the opening page; the month buttons lined up (branch `claude/nice-goodall-j1r6wu`)
+
+**John:**
+- The opening line is now "Check when the light comes and goes anywhere in England, today
+  and through the year, in UK local time." (was "When the light comes and goes where you
+  are, … in UK clock time.").
+- The footer says "stores your recent selections" (was "your last postcode").
+- In "Day by day" on his iPhone, a month that wraps should sit under April, not under the
+  year.
+
+**What:**
+- `App.tsx`: the two wording changes, also in `design/landing-wording-2026-10-28.md`.
+- `Year.tsx` and `global.css`: each year's months sit in their own box beside the year.
+  On a phone they're equal columns, five to a row at 390px and 375px (2026: April to
+  August, then September to December under them; 2027: January to April). A computer
+  still has one row.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 10); in Chromium at 1200px, and
+at 390px and 375px with touch: the months' positions line up; the year card and tables as
+before; no errors, no sideways scroll.

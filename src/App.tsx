@@ -125,7 +125,7 @@ export default function App() {
         {(!d || changing) && (
           <section className="card welcome">
             {!d && <h2>Sunrise, sunset and twilight for your postcode</h2>}
-            {!d && <p className="muted">When the light comes and goes where you are, today and through the year, in UK clock time.</p>}
+            {!d && <p className="muted">Check when the light comes and goes anywhere in England, today and through the year, in UK local time.</p>}
             <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
           </section>
         )}
@@ -135,7 +135,7 @@ export default function App() {
           Lightreader is a free-to-use personal project by John Baish. More free tools at{' '}
           <a href="https://www.baish.net/" target="_blank" rel="noopener noreferrer" className="footer-link">www.baish.net</a>.
           {' '}Contact: workshop@baish.net. We don't record anything you do here, apart from anonymous visit statistics (no cookies, no personal data) showing us how the site is used.
-          {' '}Your device, rather than the website, stores your last postcode, so the page opens the same way next time.
+          {' '}Your device, rather than the website, stores your recent selections, so the page opens the same way next time.
           <br />{POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
           {' '}Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer" className="footer-link">Astronomy Engine</a> (MIT licence).
         </footer>

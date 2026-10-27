@@ -71,7 +71,11 @@ function lightSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: 
   const event = morning ? 'civilDawn' : 'civilDusk'
   const withEvent = days.filter((d) => d[event])
   if (withEvent.length === 0) return `${time} is always at least half-light here.`
-  const worst = bestWithTies(withEvent, (d) => (morning ? -1 : 1) * clockSeconds(d[event]!))
+  // Only the first run of near-tied days: a year on, the same days tie again (the fresh
+  // look, 3.1: "December 11th and 12th and December 11th 2027").
+  const tied = bestWithTies(withEvent, (d) => (morning ? -1 : 1) * clockSeconds(d[event]!))
+  const worst = [tied[0]]
+  for (const d of tied.slice(1)) if (d.date === addDays(worst[worst.length - 1].date, 1)) worst.push(d)
   const names = worst.map((d) => dateIn(ctx, d.date)).join(' and ')
   const verb = morning ? 'starts' : 'ends'
   const which = morning ? 'morning' : 'evening'

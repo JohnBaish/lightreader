@@ -96,7 +96,7 @@ function Place({ d, now }: { d: District; now: Date }) {
       </section>
       <SentenceGroups groups={groups} after={{ 'Coming up': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
       <CompareCard d={d} today={today} now={now} />
-      <YearCards v={year} narrow={narrow} place={`${d.name} (${d.code})`} />
+      <YearCards v={year} narrow={narrow} place={`${d.name} (${d.code})`} d={d} />
     </>
   )
 }

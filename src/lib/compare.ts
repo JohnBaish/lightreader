@@ -37,6 +37,9 @@ function solsticeDay(place: Place, today: string, longest: boolean, last: boolea
   return last ? candidates.filter((d) => d < today).at(-1)! : candidates.find((d) => d >= today)!
 }
 
+/** The fresh look, 4.3 (a): only cities are known by name, so say how to find a town. */
+const NOT_KNOWN = "That isn't a date or place Lightreader knows. Try one like Christmas or 14/7. For a town in England, type its postcode (like TR18). Cities can be typed by name."
+
 /** What someone typed, as a date or a place to compare with. */
 export function readTarget(typed: string, place: Place, today: string): Target {
   const raw = typed.trim()
@@ -53,6 +56,12 @@ export function readTarget(typed: string, place: Place, today: string): Target {
   }
   const named = UK_PLACES.find((p) => p.name.toLowerCase() === text)
   if (named) return { kind: 'place', place: named, name: named.name }
+
+  // "last Friday", "last week": chrono reads these whole (the fresh look, 4.1).
+  if (/^last (monday|tuesday|wednesday|thursday|friday|saturday|sunday|week)$/.test(text)) {
+    const found = en.GB.parse(text, new Date(today + 'T12:00:00Z'))[0]
+    if (found) return { kind: 'date', date: iso(found.start.get('year')!, found.start.get('month')!, found.start.get('day')!) }
+  }
 
   // "last …": the one before, not the next.
   const last = text.startsWith('last ')
@@ -72,7 +81,7 @@ export function readTarget(typed: string, place: Place, today: string): Target {
   const ref = new Date(today + 'T12:00:00Z')
   const found = en.GB.parse(text, ref, { forwardDate: !last })[0]
   if (!found || found.text.length < text.length - 1) {
-    return { kind: 'error', message: "That isn't a date or place Lightreader knows. Try one like Christmas, 14/7 or TR18." }
+    return { kind: 'error', message: NOT_KNOWN }
   }
   const s = found.start
   let date = iso(s.get('year')!, s.get('month')!, s.get('day')!)

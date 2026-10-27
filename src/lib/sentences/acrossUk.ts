@@ -31,28 +31,36 @@ export function acrossUkSentences(ctx: SkyContext, places: NamedPlace[] = UK_PLA
   if (cities.length < 2) return []
 
   // The ends among the cities; an edge town in brackets when it goes further (John, 27
-  // October): "from 16:35 in Aberdeen (16:21 in Lerwick) to 17:05 in Truro (17:08 in
-  // Penzance)".
+  // October), in John's wording of 28 October (J7): "There's an early sunset today in Norwich
+  // at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance).
+  // Reading's is at 16:46."
   const sunset = (d: DayFigures) => d.sunset!.getTime()
   const [early, late] = ends(cities, sunset)
   const [earliest, latest] = ends(near, sunset)
   const also = (city: Day, edge: Day, words: (d: Day) => string) => (edge !== city && edge.edge ? ` (${words(edge)})` : '')
   const at = (d: Day) => `${clock(d.day.sunset!)} in ${d.name}`
   const mine = here.sunset.getTime()
-  const yours = mine < sunset(earliest.day) ? `, and ${ctx.name}'s is earlier still, at ${clock(here.sunset)}.`
-    : mine > sunset(latest.day) ? `, and ${ctx.name}'s is later still, at ${clock(here.sunset)}.`
+  const yours = mine < sunset(earliest.day) ? `; ${ctx.name}'s is earlier still, at ${clock(here.sunset)}.`
+    : mine > sunset(latest.day) ? `; ${ctx.name}'s is later still, at ${clock(here.sunset)}.`
     : `. ${ctx.name}'s is at ${clock(here.sunset)}.`
-  const out = [`Sunset today runs from ${at(early)}${also(early, earliest, at)} to ${at(late)}${also(late, latest, at)}${yours}`]
+  const out = [`There's an early sunset today in ${early.name} at ${clock(early.day.sunset!)}${also(early, earliest, at)}, and a late one in ${late.name} at ${clock(late.day.sunset!)}${also(late, latest, at)}${yours}`]
 
-  // "Reading gets 34m more daylight than Inverness (51m more than Lerwick) today, and 5m
-  // less than Truro (6m less than Penzance)."
+  // "Reading gets 33m more daylight than Inverness today, and 5m less than Truro." The cities
+  // only, without the edge towns in brackets (John, 28 October, J8). When every place is within
+  // a minute of the visitor's, as around the equinoxes, one plain sentence (the fresh look,
+  // 2.2; John's wording).
   const [least, most] = ends(cities, daylight)
   const [leastAll, mostAll] = ends(near, daylight)
+  const within = (p: Day) => Math.abs(daylight(here) - daylight(p.day)) < 60_000
+  if (within(leastAll) && within(mostAll)) {
+    out.push('Today every place in the UK gets about the same amount of daylight.')
+    return out
+  }
   const than = (p: Day, first: boolean) => {
     const diff = daylight(here) - daylight(p.day)
-    return Math.abs(diff) < 60_000 ? `about the same daylight as ${p.name}` : `${duration(diff)} ${diff > 0 ? 'more' : 'less'}${first ? ' daylight' : ''} than ${p.name}`
+    return Math.abs(diff) < 60_000 ? `about the same amount of daylight as ${p.name}` : `${duration(diff)} ${diff > 0 ? 'more' : 'less'}${first ? ' daylight' : ''} than ${p.name}`
   }
-  out.push(`${ctx.name} gets ${than(least, true)}${also(least, leastAll, (d) => than(d, false))} today, and ${than(most, false)}${also(most, mostAll, (d) => than(d, false))}.`)
+  out.push(`${ctx.name} gets ${than(least, true)} today, and ${than(most, false)}.`)
   return out
 }
 

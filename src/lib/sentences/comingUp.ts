@@ -15,6 +15,7 @@ import { daylight, type DayFigures } from '../sun.ts'
 import { addMonths } from '../year.ts'
 import { addDays } from '../ukTime.ts'
 import { bestWithTies, clockChanges, clockSeconds, dayOf, daysAhead, daysBetween, offsetOn, runAround, shown, type SkyContext } from './context.ts'
+import { numberWord } from '../words.ts'
 import { dateIn, inDays, rangeIn } from './words.ts'
 
 export const CLOCK_CHANGE_NOTICE_DAYS = 70
@@ -162,7 +163,17 @@ function turningPoints(ctx: SkyContext, ahead: DayFigures[], windowLength: numbe
 function turnText(ctx: SkyContext, t: Turn, low: boolean, list: DayFigures[], i: number): string {
   const label = low ? t.low : t.high
   const day = list[i]
-  if (t.event === null) return `${label}: ${dateIn(ctx, day.date)}, with ${duration(daylight(day))} of daylight.`
+  if (t.event === null) {
+    // "Shortest day: Monday December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m
+    // less than today." (John, 28 October, J4; the difference from exact times, rule H)
+    const n = daysBetween(ctx.today, day.date)
+    const when = n === 0 ? 'today' : n === 1 ? 'tomorrow' : `${numberWord(n)} days from now`
+    const diff = daylight(day) - daylight(dayOf(ctx, ctx.today))
+    const than = Math.abs(diff) < 60_000 ? 'much the same as today' : `${duration(diff)} ${diff > 0 ? 'more' : 'less'} than today`
+    return n === 0
+      ? `${label}: today, with ${duration(daylight(day))} of daylight.`
+      : `${label}: ${dateIn(ctx, day.date)}, ${when}, with ${duration(daylight(day))} of daylight, ${than}.`
+  }
   const at = (d: DayFigures) => d[t.event!]!
   const minute = shown(at(day))
   const [first, last] = runAround(list, i, (d) => !!d[t.event!] && !changesClock(d) && shown(at(d)) === minute)

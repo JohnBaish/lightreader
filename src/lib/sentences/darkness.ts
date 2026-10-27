@@ -3,6 +3,7 @@
 
 import { clock, duration } from '../format.ts'
 import { addDays } from '../ukTime.ts'
+import { CLOCK_CHANGE_NOTICE_DAYS } from './comingUp.ts'
 import { dayOf, daysAhead, type SkyContext } from './context.ts'
 import { bandTag, dateIn, rangeIn } from './words.ts'
 
@@ -11,10 +12,11 @@ export function darknessSentences(ctx: SkyContext): string[] {
   const tomorrow = dayOf(ctx, addDays(ctx.today, 1))
   const out: string[] = []
 
-  // "Very dark or true night from 18:00 to 05:36." (the sun 12° or more below)
+  // "Very dark or true night from 18:00 to 05:36 (11h 36m)." (the sun 12° or more below;
+  // the length from the exact times, rule H; John, 28 October, J6)
   if (today.nauticalDusk && tomorrow.nauticalDawn) {
     const what = today.astronomicalDusk ? 'Very dark or true night' : 'Very dark'
-    out.push(`${what} from ${clock(today.nauticalDusk)} to ${clock(tomorrow.nauticalDawn)}.`)
+    out.push(`${what} from ${clock(today.nauticalDusk)} to ${clock(tomorrow.nauticalDawn)} (${duration(tomorrow.nauticalDawn.getTime() - today.nauticalDusk.getTime())}).`)
   } else if (today.civilDusk && tomorrow.civilDawn) {
     // Too far north in midsummer for the sky to get very dark (rule E: never a blank).
     out.push(`The sky never reaches ${bandTag('very-dark')} tonight: it's ${bandTag('dark')} from ${clock(today.civilDusk)} to ${clock(tomorrow.civilDawn)}.`)
@@ -32,7 +34,8 @@ export function darknessSentences(ctx: SkyContext): string[] {
   }
 
   // "No true night from Sunday May 23rd to Monday July 19th." The next run of nights
-  // without one within the year; inside one, "True night returns on Tuesday July 20th."
+  // without one, when it starts within ten weeks, as the clock-change notice (John, 28
+  // October, J6); inside one, "True night returns on Tuesday July 20th."
   const nights = [today, ...daysAhead(ctx, 366)]
   const none = (i: number) => !nights[i].astronomicalDusk
   if (none(0)) {
@@ -40,7 +43,7 @@ export function darknessSentences(ctx: SkyContext): string[] {
     if (end > 0) out.push(`True night returns on ${dateIn(ctx, nights[end].date)}.`) // John, 27 October
   } else {
     const start = nights.findIndex((_, i) => none(i))
-    if (start > 0) {
+    if (start > 0 && start <= CLOCK_CHANGE_NOTICE_DAYS) {
       let end = start
       while (end + 1 < nights.length && none(end + 1)) end++
       const [a, b] = rangeIn(ctx, nights[start].date, nights[end].date)

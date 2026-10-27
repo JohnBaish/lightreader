@@ -11,9 +11,10 @@ import { longDate } from '../lib/format.ts'
 import type { District } from '../lib/postcode.ts'
 import { dayRibbon } from '../lib/ribbon.ts'
 import { dayFigures, type Place } from '../lib/sun.ts'
+import { bearingAndMiles } from '../lib/towns.ts'
 import { Legend } from './SkyRibbon.tsx'
 
-function DayStrip({ place, date, label }: { place: Place; date: string; label: string }) {
+export function DayStrip({ place, date, label }: { place: Place; date: string; label: string }) {
   const segs = useMemo(() => dayRibbon(place, date), [place, date])
   const from = segs[0].from.getTime()
   const span = segs[segs.length - 1].to.getTime() - from
@@ -28,7 +29,7 @@ function DayStrip({ place, date, label }: { place: Place; date: string; label: s
   )
 }
 
-const SHORT = (date: string) => {
+export const SHORT = (date: string) => {
   const [weekday, month, day] = longDate(date).split(' ')
   return `${weekday.slice(0, 3)} ${month} ${day}`
 }
@@ -46,6 +47,11 @@ function compareWith(target: Target, d: District, today: string, now: Date): Res
       sentences: compareDate(here, dayFigures(d, target.date), today),
       strips: [{ place: d, date: today, label: 'Today' }, { place: d, date: target.date, label: SHORT(target.date) }],
     }
+  }
+  // The visitor's own place, or a named place within a couple of miles of it (the fresh
+  // look, 4.2).
+  if (('code' in target.place && target.place.code === d.code) || bearingAndMiles(d, target.place).miles < 2) {
+    return { echo: `Comparing with ${target.name}`, note: null, sentences: ["That's where you are: see above."], strips: null }
   }
   const name = target.name.replace(/ \(.*\)$/, '')
   return {
@@ -114,7 +120,7 @@ export function CompareCard({ d, today, now }: { d: District; today: string; now
         <form className="field" onSubmit={submit} noValidate>
           <label htmlFor="cmp">Type a date, like "Christmas" or "14/7", or a place or postcode.</label>
           <div className="choose-row">
-            <input className="input" id="cmp" value={typed} placeholder="Try Christmas, 14/7 or TR18" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
+            <input className="input" id="cmp" value={typed} placeholder="Christmas, 14/7 or TR18" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
               autoFocus={adding} onChange={(e) => { setTyped(e.target.value); setError(null) }} />
             <button className="btn btn-primary" type="submit">Compare</button>
             {list.length > 0 && <button className="btn btn-secondary" type="button" onClick={close}>Cancel</button>}

@@ -1,9 +1,14 @@
 // The year (SPEC §9): the year ribbon (mock-up option C), and below it the day-by-day
 // tables (option B), folded to a row of month buttons until one is chosen.
 
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { clockNote, compareDate } from '../lib/compare.ts'
+import type { District } from '../lib/postcode.ts'
+import { clockSeconds } from '../lib/sentences/context.ts'
+import { dayFigures, daylight } from '../lib/sun.ts'
+import { DayStrip, SHORT } from './Compare.tsx'
 import { BANDS } from '../lib/bands.ts'
-import { longDate, weekday, ordinal } from '../lib/format.ts'
+import { clock, duration, longDate, ordinal, weekday } from '../lib/format.ts'
 import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
 import { addDays } from '../lib/ukTime.ts'
 import { Legend } from './SkyRibbon.tsx'
@@ -36,6 +41,32 @@ function YearRibbon({ v, chosen, onChoose, narrow }: { v: YearView; chosen: stri
     const i = Math.min(n - 1, Math.max(0, Math.floor(((e.clientX - box.left) / box.width) * n)))
     onChoose(addDays(v.from, i))
   }
+  // A mouse picks at once and drags. A finger picks on a tap, or once it moves sideways, so
+  // scrolling the page past the ribbon leaves the day alone (the fresh look, 5.1).
+  const touch = useRef<{ x: number; y: number; id: number } | null>(null)
+  const down = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'mouse') {
+      e.currentTarget.setPointerCapture(e.pointerId)
+      pick(e)
+    } else touch.current = { x: e.clientX, y: e.clientY, id: e.pointerId }
+  }
+  const move = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) return pick(e)
+    const t = touch.current
+    if (!t || t.id !== e.pointerId) return
+    const dx = Math.abs(e.clientX - t.x)
+    const dy = Math.abs(e.clientY - t.y)
+    if (dy > 10 && dy > dx) touch.current = null // a scroll
+    else if (dx > 10) {
+      touch.current = null
+      e.currentTarget.setPointerCapture(e.pointerId)
+      pick(e)
+    }
+  }
+  const up = (e: PointerEvent<HTMLDivElement>) => {
+    if (touch.current?.id === e.pointerId) pick(e) // a tap
+    touch.current = null
+  }
   const keys = (e: KeyboardEvent) => {
     const step = { ArrowLeft: -1, ArrowRight: 1, PageUp: -7, PageDown: 7 }[e.key]
     if (!step) return
@@ -65,8 +96,10 @@ function YearRibbon({ v, chosen, onChoose, narrow }: { v: YearView; chosen: stri
         aria-valuemax={n - 1}
         aria-valuenow={dayIndex(v, chosen)}
         aria-valuetext={longDate(chosen, true)}
-        onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); pick(e) }}
-        onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) pick(e) }}
+        onPointerDown={down}
+        onPointerMove={move}
+        onPointerUp={up}
+        onPointerCancel={() => { touch.current = null }}
         onKeyDown={keys}
       >
         <svg viewBox={`0 0 ${n} 1440`} preserveAspectRatio="none" aria-hidden="true">
@@ -136,7 +169,48 @@ function MonthTable({ m, today, highlight, narrow }: { m: YearView['months'][num
   )
 }
 
-export function YearCards({ v, narrow, place }: { v: YearView | null; narrow: boolean; place: string }) {
+/** J10 mock-up (John, 28 October): what the card under the ribbon says for a day other than
+ *  today. Chosen with ?j10=a or ?j10=b in the address while John decides; to be removed then.
+ *  (a) each time with its difference from today in brackets, as This fortnight does;
+ *  (b) the Compare block: two strips and its sentences. */
+function DayAgainstToday({ d, day, today, variant, row }: { d: District; day: string; today: string; variant: string; row: DayRow }) {
+  const [here, there] = useMemo(() => [dayFigures(d, today), dayFigures(d, day)], [d, today, day])
+  const note = clockNote(today, day)
+  if (variant === 'b') {
+    return (
+      <>
+        <div className="pairs">
+          <DayStrip place={d} date={today} label="Today" />
+          <DayStrip place={d} date={day} label={SHORT(day)} />
+          <div className="pair-row pair-axis"><span className="pair-label" /><div className="pair-hours"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+        </div>
+        {note && <p className="clock-note">{note}</p>}
+        <ul className="year-compare">{compareDate(here, there, today).map((s, i) => <li key={i}>{s}</li>)}</ul>
+      </>
+    )
+  }
+  if (!here.sunrise || !here.sunset || !there.sunrise || !there.sunset) return null
+  const by = (a: Date, b: Date) => {
+    const s = clockSeconds(a) - clockSeconds(b)
+    return Math.abs(s) < 60 ? 'the same as today' : `${duration(s * 1000)} ${s > 0 ? 'later' : 'earlier'}`
+  }
+  const diff = daylight(there) - daylight(here)
+  const more = Math.abs(diff) < 60_000 ? 'much the same as today' : `${duration(diff)} ${diff > 0 ? 'more' : 'less'} than today`
+  return (
+    <>
+      <p className="year-detail-big">
+        <span className="pair">Sunrise {clock(there.sunrise)}</span> <span className="year-by">({by(there.sunrise, here.sunrise)})</span>
+        <span className="dot"> · </span>
+        <span className="pair">Sunset {clock(there.sunset)}</span> <span className="year-by">({by(there.sunset, here.sunset)})</span>
+      </p>
+      <p>{duration(daylight(there))} of daylight ({more}). {dayDetail(row).split('. ').slice(1).join('. ')}</p>
+      {note && <p className="clock-note">{note}</p>}
+    </>
+  )
+}
+
+export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow: boolean; place: string; d: District }) {
+  const variant = new URLSearchParams(location.search).get('j10')
   const [chosen, setChosen] = useState<string | null>(null)
   const [open, setOpen] = useState<string | null>(null)
   const [highlight, setHighlight] = useState<string | null>(null)
@@ -194,8 +268,14 @@ export function YearCards({ v, narrow, place }: { v: YearView | null; narrow: bo
         {row && (
           <div className="year-detail" aria-live="polite">
             <div className="kicker">{longDate(day, true)}{day === v.today ? ' · Today' : ''}</div>
-            <p className="year-detail-big">{riseSetLines(row)}</p>
-            <p>{dayDetail(row)}</p>
+            {variant && day !== v.today ? (
+              <DayAgainstToday d={d} day={day} today={v.today} variant={variant} row={row} />
+            ) : (
+              <>
+                <p className="year-detail-big">{riseSetLines(row)}</p>
+                <p>{dayDetail(row)}</p>
+              </>
+            )}
             <button type="button" className="link-button" onClick={() => seeAll(day)}>See all of {monthName(day)}</button>
           </div>
         )}

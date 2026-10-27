@@ -1,5 +1,7 @@
 // "This fortnight" (SPEC §6): the same weekday a week back and a week ahead. A clock change
-// in between is named, as the times are then on different clocks (SPEC §4, BST/GMT).
+// in between is named, as the times are then on different clocks (SPEC §4, BST/GMT). The
+// daylight line ("Days were 26m longer.") only comes when a clock change lies between, where
+// the bracketed differences need explaining (John, 28 October, J1).
 
 import { clock, duration } from '../format.ts'
 import { daylight } from '../sun.ts'
@@ -28,7 +30,7 @@ export function fortnightSentences(ctx: SkyContext): string[] {
     const change = offsetOn(back.date) === nowOffset ? '' : `, before the clocks went ${offsetOn(back.date) > nowOffset ? 'back' : 'forward'},`
     const diff = daylight(back) - daylight(today)
     const then = Math.abs(diff) < 60_000 ? 'Daylight was much the same.' : `Days were ${duration(diff)} ${diff > 0 ? 'longer' : 'shorter'}.`
-    out.push(`A week ago${change} the sun rose at ${clock(back.sunrise)} ${than(back.sunrise, today.sunrise)} and set at ${clock(back.sunset)} ${than(back.sunset, today.sunset)}. ${then}`)
+    out.push(`A week ago${change} the sun rose at ${clock(back.sunrise)} ${than(back.sunrise, today.sunrise)} and set at ${clock(back.sunset)} ${than(back.sunset, today.sunset)}.${change ? ` ${then}` : ''}`)
   }
 
   // "Next Tuesday the sun rises at 07:01 (13m later) and sets at 16:33 (13m earlier).
@@ -38,7 +40,7 @@ export function fortnightSentences(ctx: SkyContext): string[] {
     const diff = daylight(ahead) - daylight(today)
     const then = Math.abs(diff) < 60_000 ? "That's much the same daylight." : `That's ${duration(diff)} ${diff > 0 ? 'more' : 'less'} daylight.`
     const weekday = dateIn(ctx, ahead.date).split(' ')[0]
-    out.push(`Next ${weekday}${change} the sun rises at ${clock(ahead.sunrise)} ${than(ahead.sunrise, today.sunrise!)} and sets at ${clock(ahead.sunset)} ${than(ahead.sunset, today.sunset!)}. ${then}`)
+    out.push(`Next ${weekday}${change} the sun rises at ${clock(ahead.sunrise)} ${than(ahead.sunrise, today.sunrise!)} and sets at ${clock(ahead.sunset)} ${than(ahead.sunset, today.sunset!)}.${change ? ` ${then}` : ''}`)
   }
   return out
 }

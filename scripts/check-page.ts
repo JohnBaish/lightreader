@@ -217,4 +217,18 @@ check('the year: every day from midnight to midnight, agreeing with the tables',
   assert.equal(dayDetail(june21), '17h 33m of daylight. Half-light 03:22 to 22:58; the sky never gets very dark.')
 })
 
+check('fresh look: names for every district; "last Friday"; towns by postcode (28 October)', () => {
+  assert.equal(district('TR22')!.name, 'St Agnes')
+  assert.equal(district('MK20')!.name, 'Newport Pagnell')
+  assert.equal(district('SO97')!.name, 'Southampton')
+  assert.equal(district('HR3')!.name, 'Hay-on-Wye')
+  assert.equal(district('TR19')!.name, 'St Just')
+  const t = (typed: string) => readTarget(typed, RG1, '2026-10-27')
+  assert.deepEqual(t('last friday'), { kind: 'date', date: '2026-10-23' })
+  assert.deepEqual(t('Last friday'), { kind: 'date', date: '2026-10-23' })
+  assert.deepEqual(t('last july 14th'), { kind: 'date', date: '2026-07-14' })
+  const reading = t('Reading')
+  assert.ok(reading.kind === 'error' && reading.message.includes('type its postcode'))
+})
+
 console.log(`\n${passed} checks passed`)

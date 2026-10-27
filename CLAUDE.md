@@ -772,3 +772,97 @@ with the review's checks, Part C the open decisions and a combined order. Looked
 Caldecote, 1.5 km from Newport Pagnell; SO97 (15 postcodes, none with a place in Open Names)
 lies between North Stoneham and Swaythling, Southampton. The open decisions went to John as
 one numbered list; nothing built yet.
+
+### 2026-10-28 — the fresh look's fixes and John's amendments (branch `claude/nice-goodall-j1r6wu`)
+
+**The review:** `/fresh-look` of commit `4a01d20`, in a separate thread
+(`design/fresh-look-handover-2026-10-27.md`). Its findings, one line each:
+- 2.1 the last sentence card alone on a computer;
+- 2.2 "about the same daylight" four times at the equinoxes;
+- 2.3 "the longest day since the clocks went back";
+- 3.1 three "darkest" days named, two a year apart;
+- 3.2 midday times name the darkest evening;
+- 4.1 "last Friday" read as a year ago;
+- 4.2 your own place compared with itself;
+- 4.3 a town typed by name refused without saying why;
+- 4.4 "25.12" refused;
+- 4.5 Compare's hint cut short on a phone;
+- 5.1 a phone swipe over the year ribbon changes the day;
+- 5.2 "See all of …" doesn't scroll when that month is open;
+- 6.1 three districts named "null";
+- 6.2 two double names with a slash;
+- 6.3 controls under 44px on a phone;
+- 7.1–7.12 left alone.
+
+**John's amendments:**
+- J1 This fortnight's daylight line only across a clock change;
+- J2 "latest sunrise since" (already there);
+- J3 "won't set before … until";
+- J4 shortest and longest day with days from now and the difference;
+- J5 a new wording for "It's dark at 05:15 until …";
+- J6 Darkness: the length, and "No true night" within ten weeks;
+- J7 Across the UK's sunset sentence;
+- J8 no brackets in the daylight sentence;
+- J9 directions in two bullets, without the longest day;
+- J10 the year card compared with today.
+
+**John decided (28 October):**
+- **Agreed as recommended:** 6.1 (St Agnes, Newport Pagnell, Southampton, and the
+  postcode whenever a name is missing), 4.3 (a), 4.5 (a), J1, J4 ("of daylight"), J6, J7,
+  J8 with 2.2 ("about the same amount of daylight"), J9, and mock-ups for J10.
+- **J3:** an addition, not a replacement; "16:00", and keep the eight-month limit. Which
+  sentence is still to settle.
+- **J5:** it was to replace "It's dark at 05:15 until Friday April 23rd."; keep the site's
+  own words. The wording is still to settle.
+- **To look at later:** 2.1, 2.3, 3.2, 4.4, 5.2 and 6.3.
+- **Built without asking:** 3.1, 4.1, 4.2, 5.1 and 6.2, as plain faults.
+
+**What:**
+- `scripts/build-outcodes.ts`: `NAMED` for TR22, MK20 and SO97, and one name for a double
+  name (Hay-on-Wye, St Just). `src/data/outcodes.json` was rebuilt, and exactly those five
+  districts changed. `towns.json` was rebuilt and gains St Agnes.
+- `district()` falls back to the postcode for a missing name.
+- `lightAt.ts`: only the first run of near-tied darkest days.
+- `compare.ts`:
+  - "last Friday" and "last week" are read by chrono whole;
+  - the refusal now reads "That isn't a date or place Lightreader knows. Try one like
+    Christmas or 14/7. For a town in England, type its postcode (like TR18). Cities can be
+    typed by name."
+- `Compare.tsx`:
+  - the hint is "Christmas, 14/7 or TR18";
+  - your own district, or a named place within 2 miles, gives "That's where you are: see
+    above."
+- `Year.tsx`: a mouse picks at once; a finger picks on a tap or once it moves sideways, so a
+  vertical swipe scrolls without changing the day.
+- `fortnight.ts`, `comingUp.ts`, `darkness.ts` (`CLOCK_CHANGE_NOTICE_DAYS`), `acrossUk.ts`
+  and `directions.ts`: J1, J4, J6, J7, J8 with 2.2, and J9.
+- SPEC §6 annotated.
+- **J10 mock-up:** both versions are built into the page behind `?j10=a` and `?j10=b`, to
+  remove once John chooses (`DayAgainstToday` in `Year.tsx`).
+  - (a): "Sunrise 05:05 (1h 43m earlier) · Sunset 20:56 (4h 10m later)", "15h 51m of
+    daylight (5h 53m more than today). Half-light 04:23 to 21:39; very dark from 22:39.",
+    and the BST note.
+  - (b): Compare's two strips and sentences.
+  - Pictures: `design/previews/j10-options-*.png`.
+
+**Results (real figures):**
+- Reading's Coming up: "Shortest day: Monday December 21st, 55 days from now, with 7h 50m of
+  daylight, 2h 8m less than today."
+- Darkness: "Very dark or true night from 18:00 to 05:36 (11h 36m)."
+- The equinox sentence shows in Reading on March 18th and 19th 2027.
+- "No true night from …" first shows on March 13th 2028, 70 days ahead.
+
+**Verified:**
+- `npx tsc -b`, lint, `npm run check` (14 + 14 + 12). Reading's full set of sentences is
+  updated to the real new wording. New checks cover 3.1, J1, 2.2/J8, J6's ten weeks, the
+  district names, "last Friday" and the town message.
+- In Chromium at 1200px and 390px with touch:
+  - Compare with RG1 ("That's where you are"), "Last friday" (Friday October 23rd) and the
+    new hint;
+  - on a phone, a vertical swipe over the ribbon leaves today chosen, while a tap and a
+    sideways drag pick;
+  - a mouse click picks;
+  - no errors, no sideways scroll.
+- Before-and-after pictures: `design/previews/fl-before-*.png` and `fl-after-*.png`.
+
+**Couldn't be checked:** a real phone's swipe.

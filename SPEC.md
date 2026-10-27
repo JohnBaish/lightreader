@@ -107,6 +107,7 @@ Compares with the same weekday a week back and a week ahead.
 - "A week ago, before the clocks went back, the sun rose at 07:36 and set at 18:00. Days were 26m longer."
 - "Next Tuesday the sun rises at 07:01 and sets at 16:33. That's 25m less daylight."
 - **Changed (John, October 28th 2026):** each time is followed by its difference from today's in brackets: "the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later)".
+- **Changed (John, October 28th 2026, J1):** the daylight line ("Days were 26m longer.", "That's 25m less daylight.") only when a clock change lies between, where the brackets need explaining.
 
 ### Records and runs
 - "The earliest sunset since Wednesday January 28th."
@@ -120,6 +121,7 @@ This shows events in the next three months. The clock-change line appears only i
 - "The sun rises after 07:00 from Tuesday November 3rd to Tuesday February 23rd."
 - "Earliest sunset: 15:55, every day from Monday December 7th to Friday December 18th. Within that period, the very earliest is on Saturday December 12th."
 - "Shortest day: Monday December 21st, with 7h 49m of daylight."
+  - **Changed (John, October 28th 2026, J4):** "Shortest day: Monday December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m less than today." The longest day the same, with "more".
 - "Latest sunrise: 08:10, every day from Monday December 28th to Saturday January 2nd. Within that period, the very latest are on Wednesday December 30th and Thursday December 31st, a fraction of a second apart."
 - "First sunset at 17:00 or later: Friday February 5th."
   - This illustrates the wording; on October 27th it would fall outside the three-month window.
@@ -147,12 +149,14 @@ This is option B of the "your times" mockup.
 - "Tonight's true night lasts 10h 19m."
 - "No true night from Monday May 17th to Thursday July 22nd."
   - These dates are next summer's, from Astral; recompute them.
+- **Changed (John, October 28th 2026, J6):** the dark hours carry their length: "Very dark or true night from 18:00 to 05:36 (11h 36m)."; and "No true night from …" only shows when it starts within ten weeks.
 
 ### Across the UK
 These are calculated for fixed coordinates, so they need no postcode data outside England.
 - **Decided (John, October 27th 2026):** the places are whichever big places are at the two ends of each comparison that day, from a short list (the cities in OS Open Names, plus Lerwick, Stornoway, Penzance, Dover and Lowestoft; not Northern Ireland). The cities are named, with one of the five edge towns in brackets when it goes further: "Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro (17:08 in Penzance). Reading's is at 16:46."
 - "Sunset today runs from 16:21 in Lerwick to 17:07 in Penzance. Reading's is at 16:46."
 - "Reading gets 51m more daylight than Lerwick today, and 6m less than Penzance."
+- **Changed (John, October 28th 2026, J7 and J8):** "There's an early sunset today in Norwich at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance). Reading's is at 16:46." (beyond both ends: "…and a late one in Truro at 17:05; Penzance's is later still, at 17:08."). The daylight sentence names the cities only, without brackets: "Reading gets 33m more daylight than Inverness today, and 5m less than Truro." When every place is within a minute, as around the equinoxes: "Today every place in the UK gets about the same amount of daylight."
 
 ### Where the sun rises and sets
 (Heading on the page: "Direction of sunrise and sunset", John, October 27th 2026.)
@@ -161,6 +165,7 @@ These are calculated for fixed coordinates, so they need no postcode data outsid
   - The town is a recognisable place lying in that direction, within about 5°, at a sensible distance. In the example, Bracknell and Theale were picked by hand.
   - **To check:** a data source, such as OS Open Names.
 - "On the longest day it rises in the north-east and sets in the north-west."
+- **Changed (John, October 28th 2026):** the places are "between" two towns or cities, with a smaller place in brackets ("between Bracknell and Wokingham (near Bagshot)"), or "roughly over" one (src/lib/towns.ts); and (J9) two bullets, "The sun rises in the east-south-east, between Bracknell and Wokingham (near Bagshot)." and "It sets in the west-south-west, roughly over Thatcham.", with the longest-day bullet dropped.
 
 ## 7. Rules
 

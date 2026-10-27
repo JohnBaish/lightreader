@@ -6,7 +6,7 @@ import type { Place } from './sun.ts'
 
 export type District = Place & { code: string; name: string }
 
-const OUTCODES = data.outcodes as unknown as Record<string, [number, number, string]>
+const OUTCODES = data.outcodes as unknown as Record<string, [number, number, string | null]>
 
 /** The three credit lines that come with the list (OS Open Names). */
 export const POSTCODE_CREDITS: string[] = data.credits
@@ -24,7 +24,9 @@ export function outwardCode(typed: string): string | null {
 /** The district for an outward code, or null if it isn't one in England. */
 export function district(code: string): District | null {
   const d = OUTCODES[code]
-  return d ? { code, latitude: d[0], longitude: d[1], name: d[2] } : null
+  // A district with no place name is called by its postcode, so a sentence can never say
+  // "null" (the fresh look, 6.1); the bundled list now has a name for every district.
+  return d ? { code, latitude: d[0], longitude: d[1], name: d[2] || code } : null
 }
 
 const KEY = 'lightreader.postcode'

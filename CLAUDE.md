@@ -276,3 +276,12 @@ may need more examples; 9–13 fine.
   dark, from three around the longest day (Middlesbrough, Barnard Castle) to 38 at
   Berwick (June 2nd to July 9th 2027).
 - Checks 14 + 12; breaking the 60-day limit on purpose makes them fail.
+
+### 2026-10-27 — Vercel project created
+
+John created the Vercel project. Its first build, of `main`, failed with "vite: command
+not found", as expected: `main` holds only the spec and the mock-ups, with no
+`package.json` (Hindcaster's first build failed the same way). This entry is the push
+that starts the branch's own preview build. Preview link pattern (HOUSE-STYLE §10):
+`https://lightreader-git-claude-nice-goodall-j1r6wu-john-baish.vercel.app` (to confirm
+from Vercel's status on the commit).

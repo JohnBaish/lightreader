@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "check": "node scripts/check-figures.ts && node scripts/check-sentences.ts",
     "outcodes": "node scripts/build-outcodes.ts",
+    "uk-places": "node scripts/build-uk-places.ts",
     "compare-metno": "node scripts/compare-metno.ts",
     "figures-sheet": "node scripts/figures-sheet.ts",
     "sentence-sheet": "node scripts/sentence-sheet.ts"

@@ -5,6 +5,8 @@
 // is only there because the clocks changed), it says "since the clocks went back" instead
 // of the date; with today's examples that's always less than 30 days, so it's hidden. A
 // record against the way the times are going (the clocks' doing) isn't shown at all.
+// "Today's daylight matches …'s" replaces "The shortest (longest) day since …" when both
+// would show.
 
 import { duration } from '../format.ts'
 import { daylight, type DayFigures } from '../sun.ts'
@@ -62,7 +64,9 @@ export function recordSentences(ctx: SkyContext): string[] {
     const [a, b] = runAround(recent, i, (p) => duration(daylight(p)) === shownToday)
     const run = recent.slice(recent.indexOf(a), recent.indexOf(b) + 1)
     const closest = run.sort((x, y) => Math.abs(daylight(x) - daylight(today)) - Math.abs(daylight(y) - daylight(today)))[0]
-    out.push(`Today's daylight matches ${dateIn(ctx, closest.date)}'s.`)
+    // It says what "the shortest day since …" says, better (John, 27 October), so that
+    // one goes.
+    return [...out.filter((s) => !/^The (shortest|longest) day since /.test(s)), `Today's daylight matches ${dateIn(ctx, closest.date)}'s.`]
   }
   return out
 }

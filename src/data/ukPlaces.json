@@ -1,0 +1,375 @@
+{
+ "note": "The big places \"Across the UK\" picks its ends from: every city in OS Open Names (Great Britain) and five towns at the edges. Built by scripts/build-uk-places.ts.",
+ "places": [
+  {
+   "name": "Aberdeen",
+   "latitude": 57.1499,
+   "longitude": -2.0938
+  },
+  {
+   "name": "Bangor",
+   "latitude": 53.228,
+   "longitude": -4.1282
+  },
+  {
+   "name": "Bath",
+   "latitude": 51.3828,
+   "longitude": -2.3593
+  },
+  {
+   "name": "Birmingham",
+   "latitude": 52.4793,
+   "longitude": -1.9029
+  },
+  {
+   "name": "Bradford",
+   "latitude": 53.7908,
+   "longitude": -1.7546
+  },
+  {
+   "name": "Brighton and Hove",
+   "latitude": 50.8236,
+   "longitude": -0.1436
+  },
+  {
+   "name": "Bristol",
+   "latitude": 51.4531,
+   "longitude": -2.601
+  },
+  {
+   "name": "Cambridge",
+   "latitude": 52.2049,
+   "longitude": 0.1197
+  },
+  {
+   "name": "Canterbury",
+   "latitude": 51.2797,
+   "longitude": 1.0789
+  },
+  {
+   "name": "Cardiff",
+   "latitude": 51.48,
+   "longitude": -3.1769
+  },
+  {
+   "name": "Carlisle",
+   "latitude": 54.8926,
+   "longitude": -2.933
+  },
+  {
+   "name": "Chelmsford",
+   "latitude": 51.737,
+   "longitude": 0.4736
+  },
+  {
+   "name": "Chester",
+   "latitude": 53.1902,
+   "longitude": -2.8916
+  },
+  {
+   "name": "Chichester",
+   "latitude": 50.8365,
+   "longitude": -0.779
+  },
+  {
+   "name": "Colchester",
+   "latitude": 51.8897,
+   "longitude": 0.8993
+  },
+  {
+   "name": "Coventry",
+   "latitude": 52.4077,
+   "longitude": -1.5069
+  },
+  {
+   "name": "Derby",
+   "latitude": 52.9247,
+   "longitude": -1.4781
+  },
+  {
+   "name": "Doncaster",
+   "latitude": 53.5227,
+   "longitude": -1.1324
+  },
+  {
+   "name": "Dover",
+   "latitude": 51.1281,
+   "longitude": 1.3084
+  },
+  {
+   "name": "Dundee",
+   "latitude": 56.4584,
+   "longitude": -2.9737
+  },
+  {
+   "name": "Dunfermline",
+   "latitude": 56.0712,
+   "longitude": -3.4639
+  },
+  {
+   "name": "Durham",
+   "latitude": 54.7779,
+   "longitude": -1.5826
+  },
+  {
+   "name": "Edinburgh",
+   "latitude": 55.9533,
+   "longitude": -3.1891
+  },
+  {
+   "name": "Ely",
+   "latitude": 52.3996,
+   "longitude": 0.2625
+  },
+  {
+   "name": "Exeter",
+   "latitude": 50.7226,
+   "longitude": -3.5326
+  },
+  {
+   "name": "Glasgow",
+   "latitude": 55.8636,
+   "longitude": -4.2369
+  },
+  {
+   "name": "Gloucester",
+   "latitude": 51.8646,
+   "longitude": -2.2469
+  },
+  {
+   "name": "Hereford",
+   "latitude": 52.056,
+   "longitude": -2.7175
+  },
+  {
+   "name": "Inverness",
+   "latitude": 57.48,
+   "longitude": -4.2262
+  },
+  {
+   "name": "Kingston upon Hull",
+   "latitude": 53.7446,
+   "longitude": -0.3326
+  },
+  {
+   "name": "Lancaster",
+   "latitude": 54.0501,
+   "longitude": -2.8032
+  },
+  {
+   "name": "Leeds",
+   "latitude": 53.8007,
+   "longitude": -1.5503
+  },
+  {
+   "name": "Leicester",
+   "latitude": 52.6336,
+   "longitude": -1.1335
+  },
+  {
+   "name": "Lerwick",
+   "latitude": 60.1546,
+   "longitude": -1.1468
+  },
+  {
+   "name": "Lichfield",
+   "latitude": 52.6831,
+   "longitude": -1.8273
+  },
+  {
+   "name": "Lincoln",
+   "latitude": 53.2348,
+   "longitude": -0.5384
+  },
+  {
+   "name": "Liverpool",
+   "latitude": 53.4093,
+   "longitude": -2.9785
+  },
+  {
+   "name": "London",
+   "latitude": 51.5074,
+   "longitude": -0.1277
+  },
+  {
+   "name": "Lowestoft",
+   "latitude": 52.4773,
+   "longitude": 1.7504
+  },
+  {
+   "name": "Manchester",
+   "latitude": 53.4789,
+   "longitude": -2.2453
+  },
+  {
+   "name": "Milton Keynes",
+   "latitude": 52.043,
+   "longitude": -0.7541
+  },
+  {
+   "name": "Newcastle upon Tyne",
+   "latitude": 54.978,
+   "longitude": -1.6102
+  },
+  {
+   "name": "Newport",
+   "latitude": 51.5879,
+   "longitude": -2.9967
+  },
+  {
+   "name": "Norwich",
+   "latitude": 52.6289,
+   "longitude": 1.2933
+  },
+  {
+   "name": "Nottingham",
+   "latitude": 52.9562,
+   "longitude": -1.1512
+  },
+  {
+   "name": "Oxford",
+   "latitude": 51.752,
+   "longitude": -1.2576
+  },
+  {
+   "name": "Penzance",
+   "latitude": 50.1174,
+   "longitude": -5.5424
+  },
+  {
+   "name": "Perth",
+   "latitude": 56.3955,
+   "longitude": -3.4389
+  },
+  {
+   "name": "Peterborough",
+   "latitude": 52.5725,
+   "longitude": -0.2425
+  },
+  {
+   "name": "Plymouth",
+   "latitude": 50.37,
+   "longitude": -4.1421
+  },
+  {
+   "name": "Portsmouth",
+   "latitude": 50.7968,
+   "longitude": -1.0912
+  },
+  {
+   "name": "Preston",
+   "latitude": 53.7606,
+   "longitude": -2.6985
+  },
+  {
+   "name": "Ripon",
+   "latitude": 54.136,
+   "longitude": -1.5234
+  },
+  {
+   "name": "Salford",
+   "latitude": 53.4806,
+   "longitude": -2.295
+  },
+  {
+   "name": "Salisbury",
+   "latitude": 51.0704,
+   "longitude": -1.7964
+  },
+  {
+   "name": "Sheffield",
+   "latitude": 53.3825,
+   "longitude": -1.4685
+  },
+  {
+   "name": "Southampton",
+   "latitude": 50.9049,
+   "longitude": -1.4043
+  },
+  {
+   "name": "Southend-on-Sea",
+   "latitude": 51.5401,
+   "longitude": 0.7114
+  },
+  {
+   "name": "St Albans",
+   "latitude": 51.7523,
+   "longitude": -0.3391
+  },
+  {
+   "name": "St Asaph",
+   "latitude": 53.2579,
+   "longitude": -3.4457
+  },
+  {
+   "name": "St Davids",
+   "latitude": 51.8809,
+   "longitude": -5.2646
+  },
+  {
+   "name": "Stirling",
+   "latitude": 56.1155,
+   "longitude": -3.9342
+  },
+  {
+   "name": "Stoke-on-Trent",
+   "latitude": 53.0222,
+   "longitude": -2.1734
+  },
+  {
+   "name": "Stornoway",
+   "latitude": 58.2077,
+   "longitude": -6.3861
+  },
+  {
+   "name": "Sunderland",
+   "latitude": 54.9022,
+   "longitude": -1.3838
+  },
+  {
+   "name": "Swansea",
+   "latitude": 51.6201,
+   "longitude": -3.9414
+  },
+  {
+   "name": "Truro",
+   "latitude": 50.2633,
+   "longitude": -5.051
+  },
+  {
+   "name": "Wakefield",
+   "latitude": 53.6837,
+   "longitude": -1.4982
+  },
+  {
+   "name": "Wells",
+   "latitude": 51.2086,
+   "longitude": -2.6472
+  },
+  {
+   "name": "Winchester",
+   "latitude": 51.0618,
+   "longitude": -1.311
+  },
+  {
+   "name": "Wolverhampton",
+   "latitude": 52.5862,
+   "longitude": -2.1299
+  },
+  {
+   "name": "Worcester",
+   "latitude": 52.1929,
+   "longitude": -2.2211
+  },
+  {
+   "name": "Wrexham",
+   "latitude": 53.0479,
+   "longitude": -2.9948
+  },
+  {
+   "name": "York",
+   "latitude": 53.962,
+   "longitude": -1.0837
+  }
+ ]
+}

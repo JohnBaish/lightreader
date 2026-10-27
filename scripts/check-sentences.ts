@@ -41,7 +41,6 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
     ] },
     { heading: 'Records and runs', sentences: [
       'The earliest sunset since Wednesday January 28th.',
-      'The shortest day since Saturday February 14th.',
       "Today's daylight matches Saturday February 14th's.",
     ] },
     { heading: 'Coming up', sentences: [
@@ -146,10 +145,15 @@ check('rule E: no true night, and not even very dark in the far north at midsumm
   assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[0], 'No true night tonight: at its darkest the sky is very dark.')
 })
 
-check('across the UK: a fixed place near the visitor is left out', () => {
-  assert.deepEqual(acrossUkSentences(ctxFor('TR18', '2027-05-20T10:00:00Z')), [
-    "Sunset today is at 21:49 in Lerwick. Penzance's is at 21:09.",
-    'Penzance gets 1h 55m less daylight than Lerwick today.',
+check('across the UK: the ends change with the season; a place near the visitor is left out', () => {
+  assert.deepEqual(acrossUkSentences(ctxFor('RG1', '2027-06-21T10:00:00Z')), [
+    "Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Reading's is at 21:25.",
+    'Reading gets 14m more daylight than Penzance today, and 2h 18m less than Lerwick.',
+  ])
+  // Penzance itself is left out, so Penzance is beyond both ends.
+  assert.deepEqual(acrossUkSentences(ctxFor('TR18', '2026-10-27T09:02:00Z')), [
+    "Sunset today runs from 16:21 in Lerwick to 17:05 in Truro, and Penzance's is later still, at 17:08.",
+    'Penzance gets 57m more daylight than Lerwick today, and about the same daylight as Truro.',
   ])
 })
 

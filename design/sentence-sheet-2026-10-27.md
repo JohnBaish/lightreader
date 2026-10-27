@@ -16,9 +16,10 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 7. **Inside the summer weeks with no true night,** Darkness says “No true night until Sunday August 8th.”, meaning true night returns that night. Would “True night returns on Sunday August 8th.” be clearer?
 8. **In the far north at midsummer** it doesn’t even get very dark. Today says “It doesn’t get very dark tonight: dark from 22:58 to 03:22.” and Darkness “No true night tonight: at its darkest the sky is dark.” (your rule E wording with “dark” in place of “very dark”).
 9. **Is it light at…? for times that never change:** “It’s always dark at 01:00 here.”, “The sun is never up at 01:00 here.”, “The sun is always up at 12:00 here.” When the clocks end a run: “It’s light at 06:00 until the clocks go forward on Sunday March 28th.” and “… again from Sunday March 28th, when the clocks go forward.” And when today is the last day: “From tomorrow it’s light at 21:30.”, “Today is the last day the sun is up by 07:30.”
-10. **Across the UK** (your question 7): Lerwick and Penzance are their town points in OS Open Names for now. Penzance’s sunset today is 17:07:37, so it shows as 17:08 (the spec had 17:07). For someone within about 15 miles of Lerwick or Penzance, that place is left out: “Sunset today is at 21:49 in Lerwick. Penzance’s is at 21:09.”
+10. **Across the UK** (decided 27 October): the two ends are whichever places on your short list (the 69 cities, plus Lerwick, Stornoway, Penzance, Dover and Lowestoft) have the earliest and latest sunset that day, and separately the least and most daylight, so they change with the season (see G: Dover to Stornoway). Penzance is at its postcode district centre, so its sunset today is 17:07:38 and shows as 17:08 (the spec had 17:07). For someone within about 15 miles of a place on the list, that place is left out, and if they are beyond both ends it says so: “…to 17:05 in Truro, and Penzance’s is later still, at 17:08.” (see I).
 11. **A week either side with much the same daylight** (less than a minute’s difference) would say “Daylight was much the same.” or “That’s much the same daylight.” It doesn’t happen in England, as the smallest weekly change is about 2m, so it’s there only as a safety net.
 12. **Where the sun rises and sets** has the compass directions only; the towns (“roughly over Bracknell”) come in stage 6. “On the longest day …” is left out when it would say the same as today.
+13. **Records (decided 27 October):** when “Today’s daylight matches …’s” shows, “The shortest day since …” (or “longest”) no longer shows with it, as they said the same thing.
 
 ## A. Reading (RG1), Tuesday October 27th 2026 at 09:02
 
@@ -38,7 +39,6 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Records and runs**
 
 - The earliest sunset since Wednesday January 28th.
-- The shortest day since Saturday February 14th.
 - Today's daylight matches Saturday February 14th's.
 
 **Coming up**
@@ -95,7 +95,6 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Records and runs**
 
 - The earliest sunset since Friday January 30th.
-- The shortest day since Monday February 16th.
 - Today's daylight matches Monday February 16th's.
 
 **Coming up**
@@ -207,7 +206,6 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Records and runs**
 
 - The latest sunset since Monday October 12th.
-- The longest day since Tuesday September 22nd.
 - The earliest sunrise since Wednesday August 26th.
 - Today's daylight matches Wednesday September 23rd's.
 
@@ -238,8 +236,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 18:18 in Lerwick to 18:35 in Penzance. Reading's is at 18:16.
-- Reading gets 2m less daylight than Lerwick today, and about the same daylight as Penzance.
+- Sunset today runs from 18:06 in Lowestoft to 18:39 in Stornoway. Reading's is at 18:16.
+- Reading gets about the same daylight as Penzance today, and 2m less than Lerwick.
 
 **Where the sun rises and sets**
 
@@ -294,8 +292,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 19:38 in Lerwick to 19:47 in Penzance. Reading's is at 19:30.
-- Reading gets 15m less daylight than Lerwick today, and 2m more than Penzance.
+- Sunset today runs from 19:20 in Lowestoft to 19:57 in Stornoway. Reading's is at 19:30.
+- Reading gets 2m more daylight than Penzance today, and 15m less than Lerwick.
 
 **Where the sun rises and sets**
 
@@ -320,7 +318,6 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Records and runs**
 
 - The latest sunset since Sunday August 2nd.
-- The longest day since Tuesday July 28th.
 - The earliest sunrise since Tuesday July 21st.
 - Today's daylight matches Tuesday July 28th's.
 
@@ -349,8 +346,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 21:02 in Penzance to 21:37 in Lerwick. Reading's is at 20:49.
-- Reading gets 1h 35m less daylight than Lerwick today, and 11m more than Penzance.
+- Sunset today runs from 20:38 in Dover to 21:45 in Stornoway. Reading's is at 20:49.
+- Reading gets 11m more daylight than Penzance today, and 1h 35m less than Lerwick.
 
 **Where the sun rises and sets**
 
@@ -400,8 +397,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 21:36 in Penzance to 22:34 in Lerwick. Reading's is at 21:25.
-- Reading gets 2h 18m less daylight than Lerwick today, and 14m more than Penzance.
+- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Reading's is at 21:25.
+- Reading gets 14m more daylight than Penzance today, and 2h 18m less than Lerwick.
 
 **Where the sun rises and sets**
 
@@ -454,8 +451,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 20:41 in Penzance to 20:59 in Lerwick. Reading's is at 20:27.
-- Reading gets 1h 4m less daylight than Lerwick today, and 7m more than Penzance.
+- Sunset today runs from 20:17 in Dover to 21:11 in Stornoway. Reading's is at 20:27.
+- Reading gets 7m more daylight than Penzance today, and 1h 4m less than Lerwick.
 
 **Where the sun rises and sets**
 
@@ -480,7 +477,6 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 **Records and runs**
 
 - The earliest sunset since Tuesday January 27th.
-- The shortest day since Saturday February 14th.
 - Today's daylight matches Saturday February 14th's.
 
 **Coming up**
@@ -509,8 +505,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today is at 16:21 in Lerwick. Penzance's is at 17:08.
-- Penzance gets 57m more daylight than Lerwick today.
+- Sunset today runs from 16:21 in Lerwick to 17:05 in Truro, and Penzance's is later still, at 17:08.
+- Penzance gets 57m more daylight than Lerwick today, and about the same daylight as Truro.
 
 **Where the sun rises and sets**
 
@@ -560,8 +556,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Across the UK**
 
-- Sunset today runs from 21:36 in Penzance to 22:34 in Lerwick. Berwick-upon-Tweed's is at 21:57.
-- Berwick-upon-Tweed gets 1h 22m less daylight than Lerwick today, and 1h 10m more than Penzance.
+- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Berwick-upon-Tweed's is at 21:57.
+- Berwick-upon-Tweed gets 1h 10m more daylight than Penzance today, and 1h 22m less than Lerwick.
 
 **Where the sun rises and sets**
 

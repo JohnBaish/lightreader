@@ -220,3 +220,34 @@ should be "the closest big places to the extremes"; question 8, the address is
 `src/lib/ukPlaces.ts` moved from its OS town point to the TR18 centre (about 250 m
 apart; today's sentences don't change). Checks 14 + 10. He is now reading the
 sentence sheet.
+
+### 2026-10-27 — "Across the UK" from John's short list; one record line dropped (branch `claude/nice-goodall-j1r6wu`)
+
+**John** meant "the closest big places to the extremes" as the places at the two ends
+of whatever is compared that day, not the UK's geographical extremes. Shown options A
+(cities), B (cities and towns) and a short list; **he chose the short list, without
+Northern Ireland.** He also spotted that "The shortest day since Monday February
+16th." and "Today's daylight matches Monday February 16th's." say the same thing, and
+preferred the second.
+
+**What:** `scripts/build-uk-places.ts` (`npm run uk-places <Open Names Data folder>`)
+writes `src/data/ukPlaces.json`: the 69 cities in OS Open Names (not the City of
+London or the City of Westminster; Newport, Swansea and St Davids in English), plus
+Lerwick, Stornoway, Dover and Lowestoft at their Open Names points and Penzance at
+TR18: 74 places. `src/lib/ukPlaces.ts` loads it; `acrossUk.ts` picks the earliest and
+latest sunset, and separately the least and most daylight, each day, leaving out any
+place within 25 km of the visitor, and says "earlier still" or "later still" when the
+visitor is beyond both ends. `records.ts`: "Today's daylight matches …" replaces "The
+shortest (longest) day since …" when both would show. Sentence sheet regenerated; its
+points 1–12 keep their numbers, and the records change is point 13.
+
+**Results:** today, sunset from 16:21 in Lerwick to 17:08 in Penzance (the spec's
+example, exactly); on June 21st 2027, from 21:14 in Dover to 22:35 in Stornoway, and
+daylight from Penzance (least) to Lerwick (most). **Correction:** in chat I'd said the
+spec's "Lerwick to Penzance" was right by luck and that today's latest sunset was in
+the Isles of Scilly or Truro; that was for the lists without Penzance. With the short
+list, Penzance is the latest.
+
+**Verified:** `npm run build`, lint, `npm run check` (14 + 10). Working out all the
+sentences now takes about 0.9 seconds in Node (74 more places for one day); still to be
+cut down in stage 3.

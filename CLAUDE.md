@@ -702,3 +702,9 @@ logo (an arc of sun on the horizon); C, A on solid terracotta. `design/favicon-o
 (from Hindcaster's) shows them at 16, 32, 48 and 96px beside the other five icons in a row
 of tabs; renders `design/previews/favicon-options.png` and `-1x.png`. At a real 16px, A and
 C read as a sun on the horizon; B's arc thins to a curl. Nothing wired in yet.
+
+### 2026-10-28 — the opening page's wording agreed
+
+John: apart from his two changes (the line under the heading and "your recent selections"),
+the rest of the opening page's wording is fine as it stands. `design/landing-wording-2026-10-28.md`
+marked agreed. Docs only.

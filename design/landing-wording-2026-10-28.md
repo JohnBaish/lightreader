@@ -1,7 +1,8 @@
-# Lightreader: the opening page, as it is now (28 October 2026; John's first changes made)
+# Lightreader: the opening page (28 October 2026; agreed by John)
 
 Everything a first-time visitor sees before choosing a postcode, top to bottom, word for
-word. All of it is draft wording, for John to redraft.
+word. John changed the line under the heading and the footer's last sentence, and agreed
+the rest as it stands (28 October).
 
 ## Top bar
 

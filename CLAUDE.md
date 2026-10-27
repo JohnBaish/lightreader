@@ -664,3 +664,32 @@ sunset over the sea, the visitor's own place never named; Reading's full set of 
 updated); in Chromium at 1200px and 390px with touch, Reading, Brighton and Darlington (no
 places either way): the card as above, the sentences in about a second as before, no errors,
 no sideways scroll. Pictures `design/previews/stage6-directions-*.png`.
+
+### 2026-10-28 — stage 7 begun: dark mode (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** he had redrafted the opening wording in chat (the line under the heading and the
+footer's "recent selections", both already in); go on to stage 7.
+
+**What:** dark mode copied from Hindcaster (HOUSE-STYLE §2):
+- `src/lib/theme.ts` (key `lightreader.theme`) and `src/components/ThemeSwitch.tsx`, at the
+  top right.
+- A few lines in `index.html` set dark mode before the page draws.
+- `global.css` has Hindcaster's dark tokens plus SPEC §4's dark band colours. Ink is kept on
+  the daylight and half-light tags, and the page background colour is used for the text of
+  the open month's button.
+- Screen only, so printing is always light.
+- On a phone the switch sits beside "Lightreader", with the postcode pill on the row below.
+- The footer's "stores your recent selections" already covers the choice.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 11). In Chromium at 1200px and
+390px with touch:
+- the switch on the first visit; still dark after choosing RG1 and a reload;
+- the whole page looked over in dark (ribbon, sentences, "Is it light at…?", Compare, the
+  year, October's day cards);
+- printing gives white;
+- switching back clears the stored choice;
+- the stage 4 and 5 runs in light as before;
+- no errors, no sideways scroll.
+
+Pictures `design/previews/stage7-dark-*.png`. **Couldn't be checked:** a real phone; Safari's
+toolbar colour.

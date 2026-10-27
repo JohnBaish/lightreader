@@ -214,6 +214,7 @@ Branch: `stage-7-launch`
 
 - Dark mode with Hindcaster's switch, light by default (question 2 decides
   the colours). Mock-ups in both themes first.
+  **Built (28 October), for John to look at on the preview.**
 - Favicon options, then a link-preview image (house style §7).
 - Search: title, description, canonical address, `robots.txt`, `sitemap.xml`
   (`SEO-HANDOVER.md` checklist).

@@ -234,6 +234,64 @@ body { margin: 0; background: var(--color-bg); }
   .year-detail-big .dot { display: none; }
 }
 
+/* Dark mode, as Hindcaster's (HOUSE-STYLE §2): light unless the visitor switches
+   (src/lib/theme.ts); the same tokens as organic.css given dark values, and the band colours'
+   dark set from SPEC §4. Screen only, so a printed page is always light. */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-bg: #2a2723;
+    --color-surface: #37332e;
+    --color-text: #e8dfcf;
+    --color-accent: #dd8a56;
+    --color-divider: color-mix(in srgb, #e8dfcf 16%, transparent);
+    --color-neutral-100: #423d36;
+    --color-neutral-700: #b0a593;
+    --color-neutral-800: #e3d9c7;
+    --color-accent-100: #4a2a14;
+    --color-accent-300: #b2622d;
+    --color-accent-600: #e8935d;
+    --color-accent-700: #f2a573;
+    --color-accent-800: #ffc6a5;
+    --color-accent-2-100: #2f3a20;
+    --color-accent-2-800: #d4e4b8;
+    --shadow-sm: 0 0 0 1px color-mix(in srgb, #e8dfcf 6%, transparent), 0 1px 2px #0006;
+    --shadow-md: 0 0 0 1px color-mix(in srgb, #e8dfcf 7%, transparent), 0 3px 10px #0008;
+    --shadow-lg: 0 0 0 1px color-mix(in srgb, #e8dfcf 8%, transparent), 0 12px 32px #000a;
+    /* The band colours' dark set (SPEC §4). */
+    --band-daylight: #d8b46e;
+    --band-half-light: #c27a48;
+    --band-dark: #6c5868;
+    --band-very-dark: #3d344f;
+    --band-true-night: #0f0e16;
+  }
+  /* Ink on the two light bands, whatever the theme; and on the open month's button. */
+  :root[data-theme="dark"] .band-tag.band-daylight, :root[data-theme="dark"] .band-tag.band-half-light { color: #201e1d; }
+  :root[data-theme="dark"] .chip-button.is-open { color: var(--color-bg); }
+}
+
+.nav-right { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+.theme-switch { display: inline-flex; align-items: center; gap: 8px; flex: none; background: none; border: 0; padding: 4px 0; cursor: pointer; color: var(--color-neutral-700); font: inherit; }
+.theme-switch:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 999px; }
+.theme-switch-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+.theme-switch-track { position: relative; width: 46px; height: 26px; border-radius: 999px; background: color-mix(in srgb, var(--color-text) 18%, transparent); transition: background 0.2s; }
+.theme-switch-knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-bg); box-shadow: 0 1px 3px #0004; display: grid; place-items: center; color: var(--color-accent); transition: transform 0.2s; }
+.theme-switch[aria-checked="true"] .theme-switch-track { background: var(--color-accent); }
+.theme-switch[aria-checked="true"] .theme-switch-knob { transform: translateX(20px); }
+.theme-switch svg { width: 12px; height: 12px; display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch-track, .theme-switch-knob { transition: none; }
+}
+@media (max-width: 720px) {
+  .theme-switch { min-height: 44px; }
+  .theme-switch-label { display: none; }
+  .nav-right { gap: var(--space-2); }
+  /* On a phone the switch stays beside the name, and the postcode pill goes underneath. */
+  .nav-right { display: contents; }
+  .nav .theme-switch { order: 1; margin-left: auto; }
+  .nav .pill { order: 2; }
+}
+
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
   html, body { background: #fff; }

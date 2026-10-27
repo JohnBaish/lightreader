@@ -10,6 +10,7 @@ import { PostcodeBox } from './components/PostcodeBox.tsx'
 import { CompareCard } from './components/Compare.tsx'
 import { LightAtCard } from './components/LightAt.tsx'
 import { SentenceGroups } from './components/Sentences.tsx'
+import { ThemeSwitch } from './components/ThemeSwitch.tsx'
 import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
 import { YearCards } from './components/Year.tsx'
 import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
@@ -114,12 +115,15 @@ export default function App() {
     <>
       <nav className="nav" data-noprint>
         <span className="nav-brand"><Logo /> Lightreader</span>
-        {d && !changing && (
-          <span className="pill">
-            {d.name} ({d.code})
-            <button className="btn btn-primary btn-small" type="button" onClick={() => setChanging(true)}>Change</button>
-          </span>
-        )}
+        <div className="nav-right">
+          {d && !changing && (
+            <span className="pill">
+              {d.name} ({d.code})
+              <button className="btn btn-primary btn-small" type="button" onClick={() => setChanging(true)}>Change</button>
+            </span>
+          )}
+          <ThemeSwitch />
+        </div>
       </nav>
       <main className="col screen">
         {(!d || changing) && (

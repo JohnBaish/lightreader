@@ -65,7 +65,8 @@ function YearRibbon({ v, chosen, onChoose, narrow }: { v: YearView; chosen: stri
         aria-valuemax={n - 1}
         aria-valuenow={dayIndex(v, chosen)}
         aria-valuetext={longDate(chosen, true)}
-        onPointerDown={pick}
+        onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); pick(e) }}
+        onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) pick(e) }}
         onKeyDown={keys}
       >
         <svg viewBox={`0 0 ${n} 1440`} preserveAspectRatio="none" aria-hidden="true">
@@ -80,6 +81,8 @@ function YearRibbon({ v, chosen, onChoose, narrow }: { v: YearView; chosen: stri
         </svg>
         <div className="yr-today" style={{ left: pct((dayIndex(v, v.today) + 0.5) / n) }} aria-hidden="true" />
         {chosen !== v.today && <div className="yr-chosen" style={{ left: pct((dayIndex(v, chosen) + 0.5) / n) }} aria-hidden="true" />}
+        {/* A small handle on the chosen day's line, hinting that it can be moved (John, 28 October). */}
+        <div className="yr-handle" style={{ left: `clamp(11px, ${pct((dayIndex(v, chosen) + 0.5) / n)}, calc(100% - 11px))` }} aria-hidden="true">‹›</div>
       </div>
       <div className="yr-months" aria-hidden="true">
         {months.map((m) => <span key={m.i} style={{ left: pct((m.i + 15) / n) }}>{m.label}</span>)}
@@ -196,7 +199,7 @@ export function YearCards({ v, narrow, place }: { v: YearView | null; narrow: bo
             <button type="button" className="link-button" onClick={() => seeAll(day)}>See all of {monthName(day)}</button>
           </div>
         )}
-        <p className="note">Tap a day to see its times{narrow ? '' : ', or use the arrow keys'}.</p>
+        <p className="note">{narrow ? "Tap or slide along the year to see a day's times." : "Click or drag along the year to see a day's times, or use the arrow keys."}</p>
       </section>
 
       <section className="card days" ref={daysCard}>

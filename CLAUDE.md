@@ -640,3 +640,15 @@ and Town/City (near smaller place name)".
   72 to 77%, "roughly over" 11 to 13%, the compass alone 12 to 16%.
 
 **Verified:** `npx tsc -b`, lint, `npm run check` (unchanged; not on the page yet).
+
+### 2026-10-28 — the year ribbon: a handle hints that the line moves (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** "The Year In Light is beautiful", but it isn't obvious the line can be moved;
+asked for a very subtle pointer. **What (`Year.tsx`, `global.css`):** a small rounded handle
+with "‹›" at the top of the chosen day's line (today's at first), kept inside the chart at
+the ends; the line can now be dragged as well as tapped; the note under the card reads "Tap
+or slide along the year to see a day's times." on a phone and "Click or drag along the year
+to see a day's times, or use the arrow keys." on a computer (drafts).
+**Verified:** `npx tsc -b`, lint, build; in Chromium at 1200px and 390px with touch: dragging
+from today to mid-June shows Saturday June 20th, tapping and the arrow keys as before, no
+errors, no sideways scroll. Picture `design/previews/stage5-year-handle-narrow.png`.

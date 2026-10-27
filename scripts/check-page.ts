@@ -13,6 +13,7 @@ import { makeContext } from '../src/lib/sentences/index.ts'
 import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
 import { dayFigures, daysFigures } from '../src/lib/sun.ts'
 import { dayDetail, yearView } from '../src/lib/yearView.ts'
+import { describeToward, townsBetween } from '../src/lib/towns.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -146,6 +147,18 @@ check('compare: saved comparisons read back as they were added', () => {
   assert.deepEqual(addComparison(['Christmas'], 'last  july 14th'), ['Christmas', 'Last july 14th'])
   const last = readTarget('Last july 14th', RG1, '2026-10-27')
   assert.equal(last.kind === 'date' && last.date, '2026-07-14')
+})
+
+check('directions: between two towns, roughly over one, or the compass point alone', () => {
+  const rg1 = dayFigures(RG1, '2026-10-27')
+  assert.equal(describeToward(RG1, rg1.sunriseAzimuth!, 'Reading'), ', between Bracknell and Wokingham (near Bagshot)')
+  assert.equal(describeToward(RG1, rg1.sunsetAzimuth!, 'Reading'), ', roughly over Thatcham')
+  // Brighton's sunset is over the sea.
+  const bn1 = district('BN1')!
+  assert.equal(describeToward(bn1, dayFigures(bn1, '2026-10-27').sunsetAzimuth!, 'Brighton'), '')
+  // The visitor's own place is never named.
+  const b = townsBetween(RG1, rg1.sunriseAzimuth!, 'Bracknell')!
+  assert.ok(b.left.name !== 'Bracknell' && b.right.name !== 'Bracknell')
 })
 
 check('is it light at…?: the strip agrees with the sentences, day by day', () => {

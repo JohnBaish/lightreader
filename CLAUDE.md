@@ -652,3 +652,15 @@ to see a day's times, or use the arrow keys." on a computer (drafts).
 **Verified:** `npx tsc -b`, lint, build; in Chromium at 1200px and 390px with touch: dragging
 from today to mid-June shows Saturday June 20th, tapping and the arrow keys as before, no
 errors, no sideways scroll. Picture `design/previews/stage5-year-handle-narrow.png`.
+
+### 2026-10-28 — the places on the page (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** the year ribbon's handle "is great", and so is the second sheet of places. The
+places are now in the "Direction of sunrise and sunset" card (`directionSentences(ctx,
+true)`). Reading today: "The sun rises in the east-south-east, between Bracknell and
+Wokingham (near Bagshot), and sets in the west-south-west, roughly over Thatcham."
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 11; new: Reading's places, Brighton's
+sunset over the sea, the visitor's own place never named; Reading's full set of sentences
+updated); in Chromium at 1200px and 390px with touch, Reading, Brighton and Darlington (no
+places either way): the card as above, the sentences in about a second as before, no errors,
+no sideways scroll. Pictures `design/previews/stage6-directions-*.png`.

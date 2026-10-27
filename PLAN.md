@@ -192,12 +192,11 @@ very dark" (both drafts). There's a "Print this month" button.
 
 Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
 
-**Status (28 October):** John chose a first rule (one place within 8°, 3 to 25 miles,
-towns and cities plus the places postcode districts are named after), then found its places
-too obscure and asked for "between Town and Town (near smaller place)". Built as the
-second version (`describeToward()` in `src/lib/towns.ts`), with the sheet
-`design/directions-sheet-2026-10-27.md` for John. Not on the page until he has checked it
-(`directionSentences(ctx, withTowns)`).
+**Status (28 October):** built and on the page. John chose a first rule (one place within
+8°), found its places too obscure, and asked for "between Town and Town (near smaller
+place)"; he approved that version's sheet (`design/directions-sheet-2026-10-27.md`) and
+it's now in the "Direction of sunrise and sunset" card (`describeToward()` in
+`src/lib/towns.ts`). Not merged.
 
 - Directions on the 16-point compass from the sun's direction at sunrise and
   sunset.

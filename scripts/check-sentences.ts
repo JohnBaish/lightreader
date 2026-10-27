@@ -68,7 +68,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'Reading gets 33m more daylight than Inverness (51m more than Lerwick) today, and 5m less than Truro (6m less than Penzance).',
     ] },
     { heading: 'Direction of sunrise and sunset', sentences: [
-      'The sun rises in the east-south-east and sets in the west-south-west.',
+      'The sun rises in the east-south-east, between Bracknell and Wokingham (near Bagshot), and sets in the west-south-west, roughly over Thatcham.',
       'On the longest day it rises in the north-east and sets in the north-west.',
     ] },
   ])

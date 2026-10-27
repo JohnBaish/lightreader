@@ -34,11 +34,14 @@ Done on this branch:
 - `CLAUDE.md` (working notes, reading list, log) and this plan.
 - Some of the SPEC §11 checks (results in `CLAUDE.md`).
 
-**Still needed: John's answers to the questions at the end of this plan.**
+**John's answers (27 October):** question 1, yes, Lightreader's 24-hour times
+are a deliberate exception; question 2, Hindcaster's dark colours; question 6,
+`api.met.no` allowed; question 9, start stage 1. Questions 4, 5, 7 and 8 are
+still open; question 3 needed no answer.
 
 ## Stage 1 — the calculation, and the postcode list (no screen)
 
-Branch: `stage-1-figures`
+Branch: `claude/nice-goodall-j1r6wu` (this session's branch, together with stage 0)
 
 1. Scaffold Vite + React + TypeScript, set up like Hindcaster's (`oxlint`,
    `npm run check` run directly by Node with no test framework), with

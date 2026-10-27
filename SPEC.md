@@ -52,7 +52,7 @@ Drafted with John on Tuesday October 27th 2026, for Claude Code to turn into a s
 
 ### Formats
 
-- **Times:** 24-hour, with a leading zero and a colon: "06:49". Round to the nearest minute.
+- **Times:** 24-hour, with a leading zero and a colon: "06:49". Round to the nearest minute. This is a deliberate exception to HOUSE-STYLE §15's "9.30am", like Clockmaker's (John, October 27th 2026: "we tried various looks and this was the best").
 - **Dates:** month first, with an ordinal: "Tuesday October 27th". Add the year only where it's needed.
 - **Durations:** "1h 20m", "47m", "2h" (never "2h 0m"), and "less than a minute" for anything shorter.
 - **Numbers:** one to nine in words and 10+ as digits, as house style ("in nine days", "in 12 days"). Durations and times always use digits.
@@ -64,7 +64,7 @@ Drafted with John on Tuesday October 27th 2026, for Claude Code to turn into a s
 
 - **Theme:** light mode by default, with a switch for dark mode, as Hindcaster has.
 - **Light mode:** house palette, plus the band colours below.
-- **Dark mode page colours:** page #1b1816, surface #2a2420, inner panels #221e1b, text #efe2cc, muted text #b0a28c, lines #3b332c, terracotta #d4783f, dark terracotta (for text accents) #eb9d63.
+- **Dark mode page colours:** Hindcaster's, as in HOUSE-STYLE §2 (page #2a2723, surface #37332e, text #e8dfcf, muted text #b0a593, terracotta #dd8a56; John, October 27th 2026). This replaces the darker set first drafted here (page #1b1816). The dark band colours below are to be re-checked against the new page colours.
 
 | Band | Light mode | Dark mode |
 |---|---|---|

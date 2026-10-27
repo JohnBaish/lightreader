@@ -77,6 +77,10 @@ Branch: `claude/nice-goodall-j1r6wu` (this session's branch, together with stage
 9. **For John:** a "figures sheet" with Reading's spec examples next to the
    recomputed ones, so the wording stage starts from the right numbers.
 
+**Stage 1 status (27 October):** built; waiting for John's look at the figures
+sheet (`design/figures-sheet-2026-10-27.md`) and the MET Norway comparison
+(`design/metno-comparison.md`). Not merged.
+
 ## Stage 2 — the sentences (no screen yet)
 
 Branch: `stage-2-sentences`

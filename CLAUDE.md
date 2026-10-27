@@ -84,3 +84,82 @@ allowed host here); the subdomain (John, in Vercel).
 
 **For John:** the questions at the end of `PLAN.md`. Two come from the house
 style: 24-hour times, and the dark-mode page colours.
+
+### 2026-10-27 — John's answers; stage 1 built (branch `claude/nice-goodall-j1r6wu`)
+
+**John decided:** Lightreader's 24-hour times ("06:49") are a deliberate
+exception to the house style's "9.30am", like Clockmaker's ("we tried various
+looks and this was the best"); dark mode uses Hindcaster's colours (house style
+§2), not the spec's darker set; he allowed `api.met.no`; start stage 1. SPEC §4
+updated to match. **To do in clockwheel when there's access:** add Lightreader
+to the house style's list of 24-hour exceptions (§15).
+
+**Branch:** stages 0 and 1 are both on this session's branch,
+`claude/nice-goodall-j1r6wu` (the session can only push there), not on
+`stage-1-figures` as PLAN first said.
+
+**What:** Vite + React + TypeScript set up as Hindcaster's, with the same tool
+versions (from its lock file) and `astronomy-engine` pinned at 2.1.19; the page
+is a placeholder line until stage 3.
+- `src/lib/sun.ts`: every event for a place and a UK day. A day's morning
+  events are those between the solar midnight before its noon and the noon;
+  its evening events run from the noon to the next solar midnight. So
+  "tonight" stays with the evening it starts, even when true night begins
+  after midnight in May. Missing events are `null` (rule E).
+- `src/lib/bands.ts`: the five labels and `bandAt()`, from one timeline of
+  changes, for everything that colours or answers "is it light".
+- `src/lib/format.ts`: times (rounded on the instant, then read in UK time),
+  dates, durations, the 16-point compass. `src/lib/year.ts`: six months either
+  side, both ends included (366 days for today). Copied from Hindcaster:
+  `ukTime.ts`, `words.ts`, `scripts/lib/grid.ts` (with a new `fromBritishGrid`).
+- `scripts/build-outcodes.ts` (`npm run outcodes <Hindcaster's
+  data/outcodes.json>`): `src/data/outcodes.json`, the 2,210 English districts
+  as latitude, longitude and place (81 KB, 30 KB compressed), with the three
+  credit lines.
+- `scripts/check-figures.ts` (`npm run check`, 14 checks).
+- `scripts/compare-metno.ts` (`npm run compare-metno [<cache folder>]`):
+  `design/metno-comparison.md`. Node's `fetch` needs `NODE_USE_ENV_PROXY=1` in
+  this container to use the proxy.
+- `scripts/figures-sheet.ts` (`npm run figures-sheet`):
+  `design/figures-sheet-2026-10-27.md`, every example in the spec recomputed.
+
+**Found:**
+- **MET Norway, all of 2027, six places from Penzance to Berwick (4,380
+  times):** MET Norway drops the seconds rather than rounding (its times run
+  from 62 seconds before ours to 3 after). Measured against that, our time
+  falls outside its minute 114 times, by at most 3.3 seconds (Reading's
+  sunrise on January 21st 2027). Directions agree to 0.02°; the compass word
+  differs twice, both within 0.02° of the line between two points. Because we
+  round and MET Norway doesn't, the page will often show a minute later than
+  MET Norway's own figures. That's the agreed rounding, not an error.
+- **The spec's examples:** 19 of 31 lines come out the same. The 12 that
+  differ are mostly a minute either side, because the spec's examples came
+  partly from Astral, for example: sunrise 06:48, not 06:49; 9h 58m of
+  daylight; the shortest day 7h 50m; the latest sunrise 08:09 from December
+  26th to January 4th; earliest sunset 15:55 from December 9th to 16th;
+  "dark at 17:30 until Monday February 1st"; Christmas sunrise 08:08 and
+  7h 51m.
+- **No true night in Reading next summer: May 23rd to July 19th 2027**, not
+  the spec's May 17th to July 22nd (Astral). Checked independently: the sun's
+  lowest point on each night, found by stepping through the night every 30
+  seconds, first fails to reach 18° below on May 23rd, and reaches it again on
+  July 20th. That matches the textbook rule: no true night at 51.45° N while
+  the sun's declination is above 20.55°.
+- **Rule G in practice:** the darkest morning is a near-tie, December 31st
+  (07:29:22) and January 1st (07:29:23), so both would be named; the latest
+  sunrises, December 30th and 31st, are 0.012 seconds apart.
+- The spec's "Sunday February 14th" was a Saturday in 2026.
+- A whole year for one place takes about 0.3 seconds in Node here. To measure
+  on a phone in stage 3; it may want working out a little at a time.
+
+**Mistakes on the way:** a first draft of the clock-change check had guessed
+times (07:44, 06:46) instead of computed ones (07:43, 06:45); caught by the
+check itself and replaced with the real figures. `pkill -f` with the pattern in
+its own command line stopped the calling shell, as Hindcaster's notes warn.
+Nothing was lost.
+
+**Verified:** `npm run build`, `npm run lint` (clean), `npm run check`
+(14 passed). No screen to check in a browser yet.
+**Couldn't be checked:** Lerwick and Aberdeen's figures (their fixed points
+wait for PLAN question 7); twilight times against an outside source (MET
+Norway gives none).

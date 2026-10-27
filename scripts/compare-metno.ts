@@ -12,7 +12,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { dayFigures, type Place } from '../src/lib/sun.ts'
-import { clock, compassPoint } from '../src/lib/format.ts'
+import { compassPoint } from '../src/lib/format.ts'
 import { addDays } from '../src/lib/ukTime.ts'
 
 const YEAR = 2027
@@ -26,19 +26,26 @@ const cache = process.argv[2]
 if (cache) mkdirSync(cache, { recursive: true })
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
+const cacheFile = (code: string, date: string) => (cache ? join(cache, `${code}-${date}.json`) : null)
+const cached = (code: string, date: string) => { const f = cacheFile(code, date); return f !== null && existsSync(f) }
+
 async function ask(code: string, place: Place, date: string): Promise<Answer> {
-  const file = cache ? join(cache, `${code}-${date}.json`) : null
+  const file = cacheFile(code, date)
   if (file && existsSync(file)) return JSON.parse(readFileSync(file, 'utf8')) as Answer
   const url = `https://api.met.no/weatherapi/sunrise/3.0/sun?lat=${place.latitude}&lon=${place.longitude}&date=${date}&offset=+00:00`
   for (let attempt = 1; ; attempt++) {
-    const res = await fetch(url, { headers: { 'User-Agent': AGENT } })
-    if (res.ok) {
+    // A dropped connection is retried like a refused request.
+    const res = await fetch(url, { headers: { 'User-Agent': AGENT } }).catch((e: Error) => {
+      if (attempt === 3) throw e
+      return null
+    })
+    if (res?.ok) {
       const body = (await res.json()) as { properties: Answer }
       const answer = { sunrise: body.properties.sunrise ?? null, sunset: body.properties.sunset ?? null }
       if (file) writeFileSync(file, JSON.stringify(answer))
       return answer
     }
-    if (attempt === 3) throw new Error(`MET Norway ${res.status} for ${code} ${date}`)
+    if (attempt === 3) throw new Error(`MET Norway ${res?.status} for ${code} ${date}`)
     await sleep(5000 * attempt)
   }
 }
@@ -55,9 +62,11 @@ let lastStart = 0
 await Promise.all([1, 2, 3, 4].map(async () => {
   while (next < queue.length) {
     const { code, date } = queue[next++]
-    const start = Math.max(Date.now(), lastStart + 250)
-    lastStart = start
-    if (start > Date.now()) await sleep(start - Date.now())
+    if (!cached(code, date)) {
+      const start = Math.max(Date.now(), lastStart + 250)
+      lastStart = start
+      if (start > Date.now()) await sleep(start - Date.now())
+    }
     answers.set(`${code} ${date}`, await ask(code, placeOf(code), date))
     if (answers.size % 200 === 0) console.log(`${answers.size} of ${queue.length}`)
   }
@@ -83,8 +92,17 @@ for (const code of CODES) {
   console.log(`${code} (${name}): ${YEAR} compared`)
 }
 
-// Theirs (to the minute) minus ours (exact), in seconds.
-const diff = (r: Row) => (r.theirs.getTime() - r.ours.getTime()) / 1000
+// MET Norway's minute turns out to be the time with its seconds dropped (its times run from
+// about 60 seconds before ours to a few seconds after), so its "06:48" means some time from
+// 06:48:00 to 06:48:59. "Outside" is how far our exact time lies outside that minute, in
+// seconds: 0 when it is inside, negative when ours is earlier, positive when later.
+const MINUTE = 60_000
+const outside = (r: Row) => {
+  const from = r.theirs.getTime()
+  const t = r.ours.getTime()
+  return t < from ? (t - from) / 1000 : t >= from + MINUTE ? (t - from - MINUTE) / 1000 : 0
+}
+const raw = (r: Row) => (r.theirs.getTime() - r.ours.getTime()) / 1000
 const lines: string[] = [
   `# Lightreader against MET Norway, ${YEAR}`,
   '',
@@ -92,39 +110,38 @@ const lines: string[] = [
   'for six postcode districts, from Lightreader\'s calculation (Astronomy Engine) and from MET Norway\'s',
   'Sunrise 3.0 API. MET Norway gives times to the minute; ours are to the second.',
   '',
-  '"Difference" is MET Norway\'s time minus ours. "Shown differently" counts the days on which',
-  'Lightreader, rounding to the nearest minute, would show a different minute from MET Norway.',
+  'MET Norway\'s times run from about a minute before ours to a few seconds after, so it drops the',
+  'seconds rather than rounding: its "06:48" means some time from 06:48:00 to 06:48:59. So the fair',
+  'test is whether our exact time falls inside MET Norway\'s minute, and if not, by how many seconds',
+  'it misses. Lightreader itself rounds to the nearest minute (SPEC §4), so the page will often show',
+  'a minute later than MET Norway\'s own pages; that is the rounding, not a disagreement.',
   '',
-  '| District | Place | Days | Difference, smallest to largest | Shown differently | Direction, largest difference |',
-  '|---|---|---|---|---|---|',
+  '| District | Place | Times | MET Norway minus ours | Outside MET Norway\'s minute | By at most | Direction, largest difference |',
+  '|---|---|---|---|---|---|---|',
 ]
 let worst: Row | null = null
 for (const code of CODES) {
   const mine = rows.filter((r) => r.code === code)
-  const d = mine.map(diff)
-  const shownDiff = mine.filter((r) => clock(r.ours) !== clock(r.theirs))
+  const out = mine.filter((r) => outside(r) !== 0)
+  const most = Math.max(0, ...mine.map((r) => Math.abs(outside(r))))
   const az = Math.max(...mine.map((r) => Math.abs(r.azOurs - r.azTheirs)))
-  for (const r of mine) if (!worst || Math.abs(diff(r)) > Math.abs(diff(worst))) worst = r
-  lines.push(`| ${code} | ${outcodes.outcodes[code][2]} | ${mine.length / 2} | ${Math.min(...d).toFixed(0)} to ${Math.max(...d).toFixed(0)} seconds | ${shownDiff.length} of ${mine.length} | ${az.toFixed(2)}° |`)
+  for (const r of mine) if (!worst || Math.abs(outside(r)) > Math.abs(outside(worst))) worst = r
+  lines.push(`| ${code} | ${outcodes.outcodes[code][2]} | ${mine.length} | ${Math.min(...mine.map(raw)).toFixed(0)} to ${Math.max(...mine.map(raw)).toFixed(0)} seconds | ${out.length} | ${most.toFixed(1)} seconds | ${az.toFixed(2)}° |`)
 }
-const all = rows.map(diff)
-const within30 = all.filter((s) => Math.abs(s) <= 30).length
-const shownAll = rows.filter((r) => clock(r.ours) !== clock(r.theirs))
+const misses = rows.filter((r) => outside(r) !== 0)
 lines.push(
   '',
-  `**Largest difference:** ${diff(worst!).toFixed(0)} seconds, ${worst!.event} in ${worst!.code} on ${worst!.date}`,
-  `(ours ${worst!.ours.toISOString().slice(11, 19)} UTC, MET Norway ${worst!.theirs.toISOString().slice(11, 16)} UTC).`,
+  `**Largest difference:** our ${worst!.event} in ${worst!.code} on ${worst!.date} is ${Math.abs(outside(worst!)).toFixed(1)} seconds`,
+  `${outside(worst!) < 0 ? 'before' : 'after'} MET Norway's minute (ours ${worst!.ours.toISOString().slice(11, 19)} UTC, MET Norway ${worst!.theirs.toISOString().slice(11, 16)} UTC).`,
   '',
-  `**Within half a minute:** ${within30} of ${all.length} times. If MET Norway rounds to the nearest minute, as`,
-  'this suggests, a difference of up to 30 seconds is only its rounding.',
+  `**Outside MET Norway's minute:** ${misses.length} of ${rows.length} times; ${misses.filter((r) => outside(r) < 0).length} earlier, ${misses.filter((r) => outside(r) > 0).length} later.`,
   '',
-  `**Shown differently:** ${shownAll.length} of ${rows.length} times would show a different minute.`,
-  shownAll.length ? 'Each one, with our exact time:' : '',
+  `**Directions:** the 16-point compass word differs on ${rows.filter((r) => compassPoint(r.azOurs) !== compassPoint(r.azTheirs)).length} of ${rows.length} times`,
+  '(an azimuth within a few hundredths of a degree of a boundary between two points):',
   '',
-  ...shownAll.map((r) => `- ${r.code} ${r.date} ${r.event}: ours ${r.ours.toISOString().slice(11, 19)} UTC (${clock(r.ours)}), MET Norway ${clock(r.theirs)}`),
-  '',
-  `**Directions:** the 16-point compass word differs on ${rows.filter((r) => compassPoint(r.azOurs) !== compassPoint(r.azTheirs)).length} of ${rows.length} times.`,
+  ...rows.filter((r) => compassPoint(r.azOurs) !== compassPoint(r.azTheirs))
+    .map((r) => `- ${r.code} ${r.date} ${r.event}: ours ${r.azOurs.toFixed(3)}° (${compassPoint(r.azOurs)}), MET Norway ${r.azTheirs.toFixed(2)}° (${compassPoint(r.azTheirs)})`),
   '',
 )
 writeFileSync('design/metno-comparison.md', lines.join('\n'))
-console.log(lines.slice(-12).join('\n'))
+console.log(lines.slice(11).join('\n'))

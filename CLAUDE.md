@@ -979,3 +979,12 @@ the whole town list into the main script (155 KB compressed went to 177 KB, the 
 the bottom run's real heights). In Chromium at 1200px (also 900px) for RG1, TD15 and BN1, and
 at 390px with touch: no errors, no sideways scroll, the phone order unchanged; the stage 5 run
 again. Pictures `design/previews/layout-*.png`.
+
+### 2026-10-28 — "Looking ahead" and the arranged cards live
+
+John said put them live. `main` fast-forwarded to `b7ddd2c`; Vercel's production build of
+`main` completed at 22:20 UTC (its status on the commit). Addresses given to John, by the
+pattern in HOUSE-STYLE §10 (not opened from here): `https://lightreader-git-main-john-baish.vercel.app`
+(the branch address of `main`, always the latest live build), and probably
+`https://lightreader.vercel.app` or `https://lightreader-john-baish.vercel.app` as the
+production address.

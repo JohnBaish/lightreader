@@ -730,3 +730,10 @@ for your postcode." (the opening heading; for John). Rendered at 1200×630 to
 `design/previews/og-lightreader.png`; Caprasimo and Figtree 600 confirmed loaded. Waiting for
 John's approval before it goes in `public/` with the `og:` and `twitter:` tags.
 **Verified:** build (robots.txt and sitemap.xml copied; the tags in the built page).
+
+### 2026-10-28 — link-preview picture: two taglines for John (branch `claude/nice-goodall-j1r6wu`)
+
+John: the picture is right; try "Sunrise, sunset and light-based facts for places you
+choose.", or "English places". Both rendered (`design/previews/og-lightreader-a.png` and
+`-b.png`, together in `og-lightreader-options.png`), broken after "facts"; both fit on two
+lines, fonts loaded. Waiting for his choice.

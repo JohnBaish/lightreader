@@ -251,3 +251,28 @@ list, Penzance is the latest.
 **Verified:** `npm run build`, lint, `npm run check` (14 + 10). Working out all the
 sentences now takes about 0.9 seconds in Node (74 more places for one day); still to be
 cut down in stage 3.
+
+### 2026-10-27 — John's answers on the sentence sheet (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** 1 agreed (the rate wording); 2 yes (name both near-tied days); 3 only some
+"Coming up" lines, with firm suggestions from me; 4 put the spring repeat in one line;
+5 "the shortest day for a year"; 6 fine; 7 "True night returns on …"; 8 fine, but he
+may need more examples; 9–13 fine.
+
+**What:**
+- `comingUp.ts`: of the whole hours crossed, only the soonest for sunrise and the
+  soonest for sunset that makes a line (my suggestion, put to John in the sheet);
+  turning points and the clock change as before. Between two and six lines on the
+  14 examples (five today). The spring repeat: "First sunrise at 06:00 or earlier:
+  Tuesday March 23rd, and again after the clocks go forward, on Tuesday April 20th."
+  (only a repeat within 60 days, with a clock change in between, counts; a first
+  try matched the same date a year on).
+- `records.ts`: a record a year or more back says "for a year" (or "for more than a
+  year" beyond 366 days) instead of the date.
+- `darkness.ts`: "True night returns on …" inside the summer weeks without one.
+- Sentence sheet: points 3, 4, 5 and 7 marked decided; point 8 explained with four
+  more examples (K–N: Newcastle and Middlesbrough on the longest day, Berwick on May
+  25th, Newcastle on July 10th). 125 English districts have nights that don't get very
+  dark, from three around the longest day (Middlesbrough, Barnard Castle) to 38 at
+  Berwick (June 2nd to July 9th 2027).
+- Checks 14 + 12; breaking the 60-day limit on purpose makes them fail.

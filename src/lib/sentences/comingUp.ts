@@ -1,10 +1,11 @@
 // "Coming up" (SPEC §6): what happens in the next three months, in date order.
 //
-// - Whole hours crossed: "The sun rises after 07:00 from Tuesday November 3rd to Tuesday
-//   February 23rd." when it's getting darker; "First sunset at 17:00 or later: Friday
-//   February 5th." when it's getting lighter. Thresholds use the minute shown, and a time
-//   on the hour counts as reached (rule C). A jump made by the clocks changing doesn't count:
-//   the clock-change line says it.
+// - Whole hours crossed, the soonest for sunrise and the soonest for sunset only (John,
+//   27 October): "The sun rises after 07:00 from Tuesday November 3rd to Tuesday February
+//   23rd." when it's getting darker; "First sunset at 17:00 or later: Friday February
+//   5th." when it's getting lighter. Thresholds use the minute shown, and a time on the
+//   hour counts as reached (rule C). A jump made by the clocks changing doesn't count: the
+//   clock-change line says it.
 // - Turning points: the earliest or latest sunrise or sunset, with the run of days showing
 //   that minute and the very day (rules B and G), and the shortest or longest day.
 // - The clock change, only in the ten weeks before it.
@@ -34,31 +35,79 @@ export function comingUpSentences(ctx: SkyContext): string[] {
 const hh = (minutes: number) => `${String(Math.floor(minutes / 60) % 24).padStart(2, '0')}:00`
 const changesClock = (d: DayFigures) => offsetOn(d.date) !== offsetOn(addDays(d.date, -1))
 
+type Crossing = { event: 'sunrise' | 'sunset'; h: number; later: boolean; i: number }
+
+/** Every whole hour that sunrise or sunset crosses between `list[from]` and `list[to]`,
+ *  by the minute shown. `later` is the way it crosses: past the hour into later times. */
+function crossings(list: DayFigures[], from: number, to: number): Crossing[] {
+  const out: Crossing[] = []
+  for (let i = Math.max(1, from); i <= to && i < list.length; i++) {
+    const prev = list[i - 1]
+    const cur = list[i]
+    if (changesClock(cur)) continue
+    for (const event of ['sunrise', 'sunset'] as const) {
+      const a = prev[event]
+      const b = cur[event]
+      if (!a || !b) continue
+      // Sunrise: past h means after h (h itself counts as by h). Sunset: h itself counts as reached.
+      const before = event === 'sunrise' ? (m: number, h: number) => m <= h : (m: number, h: number) => m < h
+      for (let h = 60; h < 24 * 60; h += 60) {
+        const wasBefore = before(shown(a), h)
+        const isBefore = before(shown(b), h)
+        if (wasBefore !== isBefore) out.push({ event, h, later: wasBefore, i })
+      }
+    }
+  }
+  return out
+}
+
+/** The whole hours crossed (John, 27 October: "only some"): the soonest for sunrise and
+ *  the soonest for sunset in the window, so at most two lines. Getting darker reads as a
+ *  run ("The sun rises after 07:00 from … to …"); getting lighter as a first ("First
+ *  sunset at 17:00 or later: …"). In spring the clocks can make a first happen twice;
+ *  then both go in one line. */
 function hourCrossings(ctx: SkyContext, ahead: DayFigures[], windowLength: number): Item[] {
   const items: Item[] = []
   const list = [dayOf(ctx, ctx.today), ...ahead]
-  for (let i = 1; i <= windowLength; i++) {
-    const prev = list[i - 1]
-    const cur = list[i]
-    if (changesClock(cur) || !prev.sunrise || !cur.sunrise || !prev.sunset || !cur.sunset) continue
-    const r1 = shown(prev.sunrise)
-    const r2 = shown(cur.sunrise)
-    const s1 = shown(prev.sunset)
-    const s2 = shown(cur.sunset)
-    for (let h = 60; h < 24 * 60; h += 60) {
-      if (r1 <= h && r2 > h) {
-        const last = runEnd(list, i, (d) => !!d.sunrise && shown(d.sunrise) > h)
-        if (last) items.push({ date: cur.date, text: `The sun rises after ${hh(h)} ${fromUntil(ctx, cur, last)}.` })
+  const found = crossings(list, 1, windowLength)
+  for (const event of ['sunrise', 'sunset'] as const) {
+    // The soonest crossing that makes a line (a run lasting most of the year doesn't).
+    for (const c of found.filter((x) => x.event === event)) {
+      const item = crossingLine(ctx, list, c)
+      if (item) {
+        items.push(item)
+        break
       }
-      if (r1 > h && r2 <= h) items.push({ date: cur.date, text: `First sunrise at ${hh(h)} or earlier: ${dateIn(ctx, cur.date)}.` })
-      if (s1 >= h && s2 < h) {
-        const last = runEnd(list, i, (d) => !!d.sunset && shown(d.sunset) < h)
-        if (last) items.push({ date: cur.date, text: `The sun sets before ${hh(h)} ${fromUntil(ctx, cur, last)}.` })
-      }
-      if (s1 < h && s2 >= h) items.push({ date: cur.date, text: `First sunset at ${hh(h)} or later: ${dateIn(ctx, cur.date)}.` })
     }
   }
   return items
+}
+
+function crossingLine(ctx: SkyContext, list: DayFigures[], c: Crossing): Item | null {
+  const event = c.event
+  const cur = list[c.i]
+  const darker = event === 'sunrise' ? c.later : !c.later
+  if (darker) {
+    const test = event === 'sunrise'
+      ? (d: DayFigures) => !!d.sunrise && shown(d.sunrise) > c.h
+      : (d: DayFigures) => !!d.sunset && shown(d.sunset) < c.h
+    const last = runEnd(list, c.i, test)
+    const verb = event === 'sunrise' ? `The sun rises after ${hh(c.h)}` : `The sun sets before ${hh(c.h)}`
+    return last ? { date: cur.date, text: `${verb} ${fromUntil(ctx, cur, last)}.` } : null
+  }
+  const what = event === 'sunrise' ? `First sunrise at ${hh(c.h)} or earlier` : `First sunset at ${hh(c.h)} or later`
+  // The same first again, after a clock change has undone it (John's point 4).
+  // Only a repeat within two months counts: a year on, it's simply next year's.
+  const again = crossings(list, c.i + 1, c.i + 60)
+    .find((x) => x.event === event && x.h === c.h && x.later === c.later)
+  const changeBetween = again && list.slice(c.i + 1, again.i + 1).some(changesClock)
+  if (again && changeBetween) {
+    const change = list.slice(c.i + 1, again.i + 1).find(changesClock)!
+    const way = offsetOn(change.date) > offsetOn(addDays(change.date, -1)) ? 'forward' : 'back'
+    const [a, b] = rangeIn(ctx, cur.date, list[again.i].date)
+    return { date: cur.date, text: `${what}: ${a}, and again after the clocks go ${way}, on ${b}.` }
+  }
+  return { date: cur.date, text: `${what}: ${dateIn(ctx, cur.date)}.` }
 }
 
 /** The last day of the run starting at `list[i]`, and whether a clock change ended it;

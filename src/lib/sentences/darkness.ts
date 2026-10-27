@@ -22,12 +22,12 @@ export function darknessSentences(ctx: SkyContext): string[] {
   }
 
   // "No true night from Sunday May 23rd to Monday July 19th." The next run of nights
-  // without one within the year, or the end of the one tonight is part of.
+  // without one within the year; inside one, "True night returns on Tuesday July 20th."
   const nights = [today, ...daysAhead(ctx, 366)]
   const none = (i: number) => !nights[i].astronomicalDusk
   if (none(0)) {
     const end = nights.findIndex((_, i) => !none(i))
-    if (end > 0) out.push(`No true night until ${dateIn(ctx, nights[end].date)}.`)
+    if (end > 0) out.push(`True night returns on ${dateIn(ctx, nights[end].date)}.`) // John, 27 October
   } else {
     const start = nights.findIndex((_, i) => none(i))
     if (start > 0) {

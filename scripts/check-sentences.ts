@@ -47,11 +47,8 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The sun rises after 07:00 from Tuesday November 3rd to Tuesday February 23rd.',
       'The sun sets before 16:00 from Monday November 30th to Friday December 25th.',
       'Earliest sunset: 15:55, every day from Wednesday December 9th to Wednesday December 16th. Within that period, the very earliest are on Saturday December 12th and Sunday December 13th, a fraction of a second apart.',
-      'The sun rises after 08:00 from Sunday December 13th to Sunday January 17th.',
       'Shortest day: Monday December 21st, with 7h 50m of daylight.',
-      'First sunset at 16:00 or later: Saturday December 26th.',
       'Latest sunrise: 08:09, every day from Saturday December 26th to Monday January 4th. Within that period, the very latest are on Wednesday December 30th and Thursday December 31st, a fraction of a second apart.',
-      'First sunrise at 08:00 or earlier: Monday January 18th.',
     ] },
     { heading: 'Is it light at 07:30?', sentences: [
       '07:30 is always at least half-light here. Even on the darkest mornings, Thursday December 31st and Friday January 1st, half-light starts at 07:29.',
@@ -140,7 +137,7 @@ check('is it light at…?: "from tomorrow" when today is the last day', () => {
 
 check('rule E: no true night, and not even very dark in the far north at midsummer', () => {
   const berwick = ctxFor('TD15', '2027-06-21T10:00:00Z')
-  assert.deepEqual(darknessSentences(berwick), ['No true night tonight: at its darkest the sky is dark.', 'No true night until Sunday August 8th.'])
+  assert.deepEqual(darknessSentences(berwick), ['No true night tonight: at its darkest the sky is dark.', 'True night returns on Sunday August 8th.'])
   assert.equal(todaySentences(berwick)[1], "It doesn't get very dark tonight: dark from 22:58 to 03:22.")
   assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[0], 'No true night tonight: at its darkest the sky is very dark.')
 })
@@ -155,6 +152,19 @@ check('across the UK: the ends change with the season; a place near the visitor 
     "Sunset today runs from 16:21 in Lerwick to 17:05 in Truro, and Penzance's is later still, at 17:08.",
     'Penzance gets 57m more daylight than Lerwick today, and about the same daylight as Truro.',
   ])
+})
+
+check('coming up: only the soonest hour for sunrise and for sunset; the spring repeat in one line', () => {
+  const march = comingUpSentences(ctxFor('RG1', '2027-03-20T10:00:00Z'))
+  assert.ok(march.includes('First sunrise at 06:00 or earlier: Tuesday March 23rd, and again after the clocks go forward, on Tuesday April 20th.'))
+  assert.equal(march.filter((s) => s.startsWith('First sunrise')).length, 1)
+  // December: the same "first" a year on is next year's, not a repeat.
+  assert.ok(comingUpSentences(ctxFor('RG1', '2026-12-21T10:00:00Z')).includes('First sunset at 16:00 or later: Saturday December 26th.'))
+})
+
+check('records: a year or more back says "for a year"', () => {
+  assert.ok(recordSentences(ctxFor('RG1', '2026-12-21T10:00:00Z')).includes('The shortest day for a year.'))
+  assert.ok(recordSentences(ctxFor('RG1', '2026-12-21T10:00:00Z')).includes('The latest sunrise since Thursday January 8th 2026.'))
 })
 
 check('coming up: no threshold lasting most of the year; both years when either is needed', () => {

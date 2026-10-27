@@ -48,6 +48,9 @@ export function recordSentences(ctx: SkyContext): string[] {
       const acrossChange = offsetOn(d.date) !== offsetOn(addDays(d.date, 1))
       if (acrossChange) {
         out.push(`The ${label} since the clocks went ${offsetOn(d.date) > offsetOn(addDays(d.date, 1)) ? 'back' : 'forward'}.`)
+      } else if (daysBetween(d.date, ctx.today) >= 365) {
+        // A year or more back: "The shortest day for a year." (John, 27 October)
+        out.push(`The ${label} for ${daysBetween(d.date, ctx.today) > 366 ? 'more than a year' : 'a year'}.`)
       } else {
         out.push(`The ${label} since ${dateIn(ctx, d.date)}.`)
       }

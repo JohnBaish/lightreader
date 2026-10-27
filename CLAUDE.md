@@ -217,6 +217,6 @@ sheet); question 5, Compare accepts places outside England "if easily done" (sta
 question 7, Penzance at its postcode district centre (TR18), and the places shown
 should be "the closest big places to the extremes"; question 8, the address is
 `lightreader.baish.net`. SPEC §1 and §8 and PLAN updated. Penzance in
-`src/lib/ukPlaces.ts` moved from its OS town point to the TR18 centre (about 230 m
+`src/lib/ukPlaces.ts` moved from its OS town point to the TR18 centre (about 250 m
 apart; today's sentences don't change). Checks 14 + 10. He is now reading the
 sentence sheet.

@@ -1,7 +1,6 @@
 // The top of the page (SPEC §5, "Today"), which changes with the time of day (John, 27
 // October): before the sun is highest, today's sunrise and sunset; from then on, today's
-// sunset and then tomorrow's sunrise, each under its own small heading. Draft wording for
-// the headings, for John.
+// sunset and then tomorrow's sunrise, each under its own small heading.
 
 import { clock, longDate } from './format.ts'
 import type { DayFigures } from './sun.ts'
@@ -14,8 +13,9 @@ export function headline(now: Date, today: DayFigures, tomorrow: DayFigures): He
   if (now < today.noon) {
     return [{ kicker: day(today, 'Today'), items: [...item('Sunrise', today.sunrise), ...item('Sunset', today.sunset)] }]
   }
+  // John, 28 October (option B): the headings say which event.
   return [
-    { kicker: day(today, 'Today'), items: item('Sunset', today.sunset) },
-    { kicker: day(tomorrow, 'Tomorrow'), items: item('Sunrise', tomorrow.sunrise) },
+    { kicker: day(today, "Today's sunset"), items: item('Sunset', today.sunset) },
+    { kicker: day(tomorrow, "Tomorrow's sunrise"), items: item('Sunrise', tomorrow.sunrise) },
   ]
 }

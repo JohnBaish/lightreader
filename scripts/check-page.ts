@@ -80,8 +80,8 @@ check('the top of the page: today\'s sunrise and sunset until the sun is highest
   ])
   // The sun is highest at 11:47:44 UTC (GMT).
   const after = [
-    { kicker: 'Today · Tuesday October 27th', items: [{ label: 'Sunset', time: '16:46' }] },
-    { kicker: 'Tomorrow · Wednesday October 28th', items: [{ label: 'Sunrise', time: '06:50' }] },
+    { kicker: "Today's sunset · Tuesday October 27th", items: [{ label: 'Sunset', time: '16:46' }] },
+    { kicker: "Tomorrow's sunrise · Wednesday October 28th", items: [{ label: 'Sunrise', time: '06:50' }] },
   ]
   assert.deepEqual(headline(new Date('2026-10-27T11:48:00Z'), today, tomorrow), after)
   assert.deepEqual(headline(new Date('2026-10-27T22:00:00Z'), today, tomorrow), after)

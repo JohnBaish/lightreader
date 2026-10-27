@@ -36,8 +36,8 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'Days are shortening by nearly 4m a day, close to the fastest they ever change.',
     ] },
     { heading: 'This fortnight', sentences: [
-      'A week ago, before the clocks went back, the sun rose at 07:36 and set at 18:00. Days were 26m longer.',
-      "Next Tuesday the sun rises at 07:01 and sets at 16:33. That's 25m less daylight.",
+      'A week ago, before the clocks went back, the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later). Days were 26m longer.',
+      "Next Tuesday the sun rises at 07:01 (12m later) and sets at 16:33 (13m earlier). That's 25m less daylight.",
     ] },
     { heading: 'Records and runs', sentences: [
       'The earliest sunset since Wednesday January 28th.',
@@ -99,9 +99,9 @@ check('the clock-change line: ten weeks ahead, the day before and the day itself
 
 check('this fortnight names a clock change in between, either way', () => {
   assert.deepEqual(fortnightSentences(ctxFor('RG1', '2027-03-28T10:00:00Z'))[0],
-    'A week ago, before the clocks went forward, the sun rose at 06:05 and set at 18:18. Days were 28m shorter.')
+    'A week ago, before the clocks went forward, the sun rose at 06:05 (44m earlier) and set at 18:18 (1h 12m earlier). Days were 28m shorter.')
   assert.match(fortnightSentences(ctxFor('RG1', '2027-03-23T10:00:00Z'))[1], /^Next Tuesday, after the clocks go forward, the sun rises at /)
-  assert.match(fortnightSentences(ctxFor('RG1', '2026-12-21T10:00:00Z'))[0], /^A week ago the sun rose at 08:02/)
+  assert.match(fortnightSentences(ctxFor('RG1', '2026-12-21T10:00:00Z'))[0], /^A week ago the sun rose at 08:02 \(5m earlier\)/)
 })
 
 check('records: rule A\'s 30 days, "since the clocks went back", and none against the trend', () => {

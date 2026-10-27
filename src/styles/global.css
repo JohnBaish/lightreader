@@ -96,7 +96,8 @@ body { margin: 0; background: var(--color-bg); }
 .ribbon-vnow { font-weight: 600; color: var(--color-accent-800); }
 .ribbon-vmark { position: absolute; left: 22px; width: 8px; height: 1px; background: var(--color-text); }
 .ribbon-vlabel { position: absolute; left: 36px; right: 0; font-size: 13.5px; line-height: 21px; white-space: nowrap; }
-.ribbon-fold-note { font-size: 12px; color: var(--color-neutral-700); }
+.ribbon-fold-note { font-size: 12px; color: var(--color-accent-700); background: none; border: 0; padding: 0; text-align: left; font-family: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.ribbon-vstrip button { position: absolute; left: 0; right: 0; border: 0; padding: 0; cursor: pointer; }
 
 /* The sentence groups, two to a row on a computer (as the mock-up). */
 .groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }

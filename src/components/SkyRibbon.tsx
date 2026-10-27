@@ -82,13 +82,18 @@ const FOLD_PX = 80
 const LINE_PX = 21
 
 /** Upright, for a phone. The strip's height is shared out by time, except a long true
- *  night, which is folded to FOLD_PX with a zigzag and its length. */
+ *  night, which is folded to FOLD_PX with a zigzag and its length. Tapping the fold, or its
+ *  note, opens it out to scale, making the strip longer; tapping again folds it (John, 28
+ *  October). */
 export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
+  const [open, setOpen] = useState(false)
   const total = 470
   const ms = (s: { from: Date; to: Date }) => s.to.getTime() - s.from.getTime()
-  const folded = (s: Ribbon['segments'][number]) => s.band === 'true-night' && ms(s) > FOLD_LONGER_THAN
-  const unfoldedMs = r.segments.filter((s) => !folded(s)).reduce((a, s) => a + ms(s), 0)
-  const foldCount = r.segments.filter(folded).length
+  const long = (s: Ribbon['segments'][number]) => s.band === 'true-night' && ms(s) > FOLD_LONGER_THAN
+  const folded = (s: Ribbon['segments'][number]) => !open && long(s)
+  // The scale is the folded one either way, so opening the fold leaves the rest as it was.
+  const unfoldedMs = r.segments.filter((s) => !long(s)).reduce((a, s) => a + ms(s), 0)
+  const foldCount = r.segments.filter(long).length
   const perMs = (total - foldCount * FOLD_PX) / unfoldedMs
 
   // Each segment's top and height in pixels, and where any moment falls.
@@ -112,7 +117,7 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
     { at: LINE_PX / 2, now: true },
     ...[
       ...r.ticks.map((tick) => ({ at: yOf(tick.at), tick })),
-      ...placed.filter((p) => p.folded).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}, ${duration(ms(p.s))} (folded)` })),
+      ...placed.filter((p) => long(p.s)).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}, ${duration(ms(p.s))} ${open ? '(tap to fold)' : '(folded: tap to open)'}` })),
     ].sort((a, b) => a.at - b.at),
   ]
   const tops = spreadLabels(entries.map((e) => e.at), LINE_PX)
@@ -120,10 +125,13 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
 
   return (
     <div className="ribbon-narrow">
-      <div className="ribbon-column" style={{ height: total }}>
+      <div className="ribbon-column" style={{ height: placed.reduce((a, p) => a + p.h, 0) }}>
         <div className="ribbon-vstrip">
-          {placed.map((p, i) => (
-            <div key={i} className={`band-${p.s.band}${p.folded ? ' folded' : ''}`} style={{ top: p.top, height: p.h }} />
+          {placed.map((p, i) => long(p.s) ? (
+            <button key={i} type="button" className={`band-${p.s.band}${p.folded ? ' folded' : ''}`} style={{ top: p.top, height: p.h }}
+              aria-expanded={open} aria-label={open ? 'Fold true night' : 'Open true night out to scale'} onClick={() => setOpen(!open)} />
+          ) : (
+            <div key={i} className={`band-${p.s.band}`} style={{ top: p.top, height: p.h }} />
           ))}
         </div>
         {labels.map((l, i) => l.now ? (
@@ -136,7 +144,7 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
             </div>
           </div>
         ) : (
-          <div key={i} className="ribbon-vlabel ribbon-fold-note" style={{ top: l.top }}>{l.fold}</div>
+          <button key={i} type="button" className="ribbon-vlabel ribbon-fold-note" style={{ top: l.top }} aria-expanded={open} onClick={() => setOpen(!open)}>{l.fold}</button>
         ))}
       </div>
       <Legend />

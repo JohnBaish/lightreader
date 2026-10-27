@@ -391,3 +391,15 @@ check` (14 + 12 + 5; new: the top card before and after the sun is highest). In 
 1200px, 390px and 375px with touch, at 09:02 and at 15:00 today, a winter evening and
 Berwick's midsummer night: no script errors, no sideways scroll. Screenshots in
 `design/previews/stage3-*.png` refreshed.
+
+### 2026-10-27 — PARKED (John stepped away)
+
+Everything is committed and pushed to `claude/nice-goodall-j1r6wu`, **not merged**
+(`main` still has only the spec and the mock-ups). Nothing is half-done; `npm run check`,
+lint and the build pass, and the Vercel preview built.
+
+**Waiting on John:**
+1. The top card's headings: "Today" / "Tomorrow" (as built), A by time of day ("This
+   evening", "Tomorrow morning"), or B by event ("Today's sunset", "Tomorrow's sunrise").
+2. Anything else from his look at the page; then stage 4 ("Is it light at…?" and Compare).
+3. Later: the landing page review and the draft wording ("About these figures", footer).

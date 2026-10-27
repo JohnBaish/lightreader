@@ -11,6 +11,8 @@
     "check": "node scripts/check-figures.ts && node scripts/check-sentences.ts && node scripts/check-page.ts",
     "outcodes": "node scripts/build-outcodes.ts",
     "uk-places": "node scripts/build-uk-places.ts",
+    "towns": "node scripts/build-towns.ts",
+    "directions-sheet": "node scripts/directions-sheet.ts",
     "compare-metno": "node scripts/compare-metno.ts",
     "figures-sheet": "node scripts/figures-sheet.ts",
     "sentence-sheet": "node scripts/sentence-sheet.ts"

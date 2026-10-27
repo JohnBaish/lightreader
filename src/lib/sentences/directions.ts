@@ -1,14 +1,24 @@
-// "Where the sun rises and sets" (SPEC §6), on the 16-point compass. The towns that lie in
-// those directions ("roughly over Bracknell") come in PLAN stage 6.
+// "Where the sun rises and sets" (SPEC §6), on the 16-point compass, with the place lying in
+// each direction where there is one ("roughly over Thatcham"; src/lib/towns.ts, PLAN stage 6).
+// The places are shown only once John has checked the sheet (`withTowns`).
 
 import { compassPoint } from '../format.ts'
 import { dayFigures } from '../sun.ts'
+import { townToward } from '../towns.ts'
 import { dayOf, type SkyContext } from './context.ts'
 
-export function directionSentences(ctx: SkyContext): string[] {
+export function directionSentences(ctx: SkyContext, withTowns = false): string[] {
   const today = dayOf(ctx, ctx.today)
   if (today.sunriseAzimuth === null || today.sunsetAzimuth === null) return []
-  const out = [`The sun rises in the ${compassPoint(today.sunriseAzimuth)} and sets in the ${compassPoint(today.sunsetAzimuth)}.`]
+  const over = (azimuth: number) => {
+    const t = withTowns ? townToward(ctx.place, azimuth, ctx.name) : null
+    return t ? `, roughly over ${t.name}` : ''
+  }
+  const rises = `rises in the ${compassPoint(today.sunriseAzimuth)}${over(today.sunriseAzimuth)}`
+  const sets = `sets in the ${compassPoint(today.sunsetAzimuth)}${over(today.sunsetAzimuth)}`
+  // "rises in the east-south-east, roughly over Windlesham, and sets …": a comma before "and"
+  // only when the first half has its place.
+  const out = [`The sun ${rises}${rises.includes(',') ? ',' : ''} and ${sets}.`]
 
   // "On the longest day it rises in the north-east and sets in the north-west." The longest
   // day of the year containing today (June 21st in recent years; checked by daylight).

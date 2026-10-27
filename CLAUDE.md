@@ -569,3 +569,32 @@ word in `design/landing-wording-2026-10-28.md` (top bar, the opening card, its m
 "About these figures", the footer and credits). Docs only. Noticed while checking: the
 build keeps Astronomy Engine's MIT notice in the worker's script but not in the main
 script, which also includes the library; noted for stage 7 in PLAN.
+
+### 2026-10-28 — stage 6: the "roughly over …" places, with a sheet for John (branch `claude/nice-goodall-j1r6wu`)
+
+**John's rule:** towns and cities, plus the places postcode districts are named after;
+within 8° of the sun's direction; 3 to 25 miles away; the nearest first; when none (often
+the sea), the compass point alone; Welsh names in English.
+
+**What:**
+- `scripts/build-towns.ts` (`npm run towns <Open Names Data folder>`) writes
+  `src/data/towns.json` from the same October 2026 Open Names download: 1,603 places within
+  45 km of an English district's middle (48 KB, 20 KB compressed).
+  - The towns and cities, plus each district's place at its own Open Names point. Either
+    half of a double name counts, and hyphens are ignored.
+  - "City of Westminster" reads as "Westminster", and "City of London" as "the City of
+    London".
+  - Only the districts named "London" have no place of that name.
+- `src/lib/towns.ts`: `townToward()`, with the bearing and distance along the earth's
+  surface.
+- `directions.ts`: "The sun rises in the east-south-east, roughly over Windlesham, and sets in
+  the west-south-west, roughly over Thatcham." Behind `withTowns`, off on the page until John
+  has checked the sheet.
+- `scripts/directions-sheet.ts` (`npm run directions-sheet`) writes
+  `design/directions-sheet-2026-10-27.md`:
+  - how often a place is found across all 2,210 districts (84 to 87%);
+  - today's sentence for one district in each of the 100 postcode areas;
+  - the shortest and longest days' places, with distances and how far off line.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (unchanged; the page doesn't show the
+places yet).

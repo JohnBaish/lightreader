@@ -8,7 +8,9 @@
 // centre (TR18, from src/data/outcodes.json), as John chose; the others are at their Open
 // Names point. Welsh cities listed under their Welsh name first are given in English
 // (Newport, Swansea, St Davids). London's two other "cities", the City of London and the
-// City of Westminster, are left out, as London stands for them.
+// City of Westminster, are left out, as London stands for them. The five towns are marked
+// `edge`: the sentences name the cities, with an edge town in brackets when it goes
+// further (John, 27 October).
 
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -60,14 +62,14 @@ const outcodes = JSON.parse(readFileSync('src/data/outcodes.json', 'utf8')) as {
 const round = (x: number) => Math.round(x * 1e4) / 1e4
 const places = chosen.map((r) => {
   const { latitude, longitude } = fromBritishGrid(r.e, r.n)
-  return { name: r.name, latitude: round(latitude), longitude: round(longitude) }
+  return { name: r.name, latitude: round(latitude), longitude: round(longitude), ...(r.type === 'Town' ? { edge: true } : {}) }
 })
 const [lat, lon] = outcodes.outcodes.TR18
-places.push({ name: 'Penzance', latitude: lat, longitude: lon })
+places.push({ name: 'Penzance', latitude: lat, longitude: lon, edge: true })
 places.sort((a, b) => a.name.localeCompare(b.name))
 
 writeFileSync('src/data/ukPlaces.json', JSON.stringify({
-  note: 'The big places "Across the UK" picks its ends from: every city in OS Open Names (Great Britain) and five towns at the edges. Built by scripts/build-uk-places.ts.',
+  note: 'The big places "Across the UK" picks its ends from: every city in OS Open Names (Great Britain) and five towns at the edges (edge: true). Built by scripts/build-uk-places.ts.',
   places,
 }, null, 1) + '\n')
 console.log(`${places.length} places written to src/data/ukPlaces.json`)

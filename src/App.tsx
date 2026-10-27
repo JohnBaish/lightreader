@@ -8,14 +8,14 @@ import { About } from './components/About.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
 import { SentenceGroups } from './components/Sentences.tsx'
 import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
-import { clock, longDate } from './lib/format.ts'
 import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { useIsNarrow } from './lib/responsive.ts'
 import { ribbon } from './lib/ribbon.ts'
 import type { Group } from './lib/sentences/index.ts'
 import type { Answer, Ask } from './lib/sentences.worker.ts'
-import { dayFigures } from './lib/sun.ts'
-import { ukParts } from './lib/ukTime.ts'
+import { headline } from './lib/headline.ts'
+import { daysFigures } from './lib/sun.ts'
+import { addDays, ukParts } from './lib/ukTime.ts'
 
 function Logo() {
   return (
@@ -69,19 +69,33 @@ class SafetyNet extends Component<{ children: ReactNode }, { failed: boolean }> 
 function Place({ d, now }: { d: District; now: Date }) {
   const narrow = useIsNarrow(720)
   const today = ukParts(now).date
-  const fig = useMemo(() => dayFigures(d, today), [d, today])
+  // Today's and tomorrow's figures for the top of the page, which changes once the sun
+  // is highest (src/lib/headline.ts).
+  const head = useMemo(() => {
+    const [fig, next] = daysFigures(d, today, addDays(today, 1))
+    return headline(now, fig, next)
+  }, [d, today, now])
   // The ribbon moves on with the clock; worked out again each minute.
   const r = useMemo(() => ribbon(d, now), [d, now])
   const groups = useGroups(d, today)
   return (
     <>
       <section className="card today">
-        <div className="kicker">Today · {longDate(today)}</div>
-        <p className="today-big">
-          {fig.sunrise && <span className="pair">Sunrise <span>{clock(fig.sunrise)}</span></span>}
-          {fig.sunrise && fig.sunset && <span className="dot"> · </span>}
-          {fig.sunset && <span className="pair">Sunset <span>{clock(fig.sunset)}</span></span>}
-        </p>
+        <div className="today-blocks">
+          {head.map((b) => (
+            <div key={b.kicker} className="today-block">
+              <div className="kicker">{b.kicker}</div>
+              <p className="today-big">
+                {b.items.map((it, i) => (
+                  <span key={it.label}>
+                    {i > 0 && <span className="dot"> · </span>}
+                    <span className="pair">{it.label} <span>{it.time}</span></span>
+                  </span>
+                ))}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
       <section className="card next24">
         <h3>Next 24 hours</h3>

@@ -202,6 +202,14 @@ Branch: `stage-7-launch`
   then Search Console, then the hub card with the hub's title and
   description updated, then the baish.net overview.
 
+## For John to come back to
+
+- **The landing page** (what a first-time visitor sees before entering a postcode): John
+  wants to review it at some point (27 October). Today it has a heading, one line, the
+  postcode box, "About these figures" and the footer, all draft wording.
+- The wording of the top card's headings ("Today · …", "Tomorrow · …"), "About these
+  figures" and the footer (drafts from stage 3).
+
 ## Later (SPEC §10, not in the first version)
 
 Saved dates and places in Compare; the 24-hour clock face; Scotland, Wales

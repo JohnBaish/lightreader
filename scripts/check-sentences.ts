@@ -31,8 +31,8 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
   const groups = allGroups(ctxFor('RG1', '2026-10-27T09:02:00Z'), ['07:30', '17:30'])
   assert.deepEqual(groups, [
     { heading: 'Today', sentences: [
-      'Sunrise 06:48, sunset 16:46: 9h 58m of daylight.',
-      'Very dark or true night from 18:00 to 05:36.',
+      'Sunrise 06:48, sunset 16:46.',
+      '9h 58m of daylight.',
       'Days are shortening by nearly 4m a day, close to the fastest they ever change.',
     ] },
     { heading: 'This fortnight', sentences: [
@@ -59,14 +59,15 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The sun is up at 17:30 again from Monday February 22nd.',
     ] },
     { heading: 'Darkness', sentences: [
+      'Very dark or true night from 18:00 to 05:36.',
       "Tonight's true night lasts 10h 19m.",
       'No true night from Sunday May 23rd to Monday July 19th.',
     ] },
     { heading: 'Across the UK', sentences: [
-      "Sunset today runs from 16:21 in Lerwick to 17:08 in Penzance. Reading's is at 16:46.",
-      'Reading gets 51m more daylight than Lerwick today, and 6m less than Penzance.',
+      "Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro (17:08 in Penzance). Reading's is at 16:46.",
+      'Reading gets 33m more daylight than Inverness (51m more than Lerwick) today, and 5m less than Truro (6m less than Penzance).',
     ] },
-    { heading: 'Where the sun rises and sets', sentences: [
+    { heading: 'Direction of sunrise and sunset', sentences: [
       'The sun rises in the east-south-east and sets in the west-south-west.',
       'On the longest day it rises in the north-east and sets in the north-west.',
     ] },
@@ -137,23 +138,27 @@ check('is it light at…?: "from tomorrow" when today is the last day', () => {
 
 check('rule E: no true night, and not even very dark in the far north at midsummer', () => {
   const berwick = ctxFor('TD15', '2027-06-21T10:00:00Z')
-  assert.deepEqual(darknessSentences(berwick), ['No true night tonight: at its darkest the sky only reaches {{dark}}.', 'True night returns on Sunday August 8th.'])
-  assert.equal(todaySentences(berwick)[1], "The sky never reaches {{very-dark}} tonight: it's {{dark}} from 22:58 to 03:22.")
-  assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[0], 'No true night tonight: at its darkest the sky only reaches {{very-dark}}.')
+  assert.deepEqual(darknessSentences(berwick), [
+    "The sky never reaches {{very-dark}} tonight: it's {{dark}} from 22:58 to 03:22.",
+    'No true night tonight: at its darkest the sky only reaches {{dark}}.',
+    'True night returns on Sunday August 8th.',
+  ])
+  assert.equal(darknessSentences(ctxFor('RG1', '2027-06-21T10:00:00Z'))[1], 'No true night tonight: at its darkest the sky only reaches {{very-dark}}.')
+  assert.ok(!todaySentences(berwick).some((s) => s.includes('{{')))
   // In plain text (the sentence sheet), the tags are in quotation marks; the page gets parts.
-  assert.equal(plainText(todaySentences(berwick)[1]), 'The sky never reaches "very dark" tonight: it\'s "dark" from 22:58 to 03:22.')
+  assert.equal(plainText(darknessSentences(berwick)[0]), 'The sky never reaches "very dark" tonight: it\'s "dark" from 22:58 to 03:22.')
   assert.deepEqual(sentenceParts('reaches {{dark}}.'), [{ text: 'reaches ' }, { band: 'dark' }, { text: '.' }])
 })
 
-check('across the UK: the ends change with the season; a place near the visitor is left out', () => {
+check('across the UK: cities at the ends, edge towns in brackets; a place near the visitor left out', () => {
   assert.deepEqual(acrossUkSentences(ctxFor('RG1', '2027-06-21T10:00:00Z')), [
-    "Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Reading's is at 21:25.",
-    'Reading gets 14m more daylight than Penzance today, and 2h 18m less than Lerwick.',
+    "Sunset today runs from 21:15 in Canterbury (21:14 in Dover) to 22:19 in Inverness (22:35 in Stornoway). Reading's is at 21:25.",
+    'Reading gets 13m more daylight than Truro (14m more than Penzance) today, and 1h 24m less than Inverness (2h 18m less than Lerwick).',
   ])
   // Penzance itself is left out, so Penzance is beyond both ends.
   assert.deepEqual(acrossUkSentences(ctxFor('TR18', '2026-10-27T09:02:00Z')), [
-    "Sunset today runs from 16:21 in Lerwick to 17:05 in Truro, and Penzance's is later still, at 17:08.",
-    'Penzance gets 57m more daylight than Lerwick today, and about the same daylight as Truro.',
+    "Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro, and Penzance's is later still, at 17:08.",
+    'Penzance gets 39m more daylight than Inverness (57m more than Lerwick) today, and about the same daylight as Truro.',
   ])
 })
 
@@ -173,7 +178,7 @@ check('records: a year or more back says "for a year"', () => {
 check('coming up: no threshold lasting most of the year; both years when either is needed', () => {
   const lines = comingUpSentences(ctxFor('TD15', '2027-06-21T10:00:00Z'))
   assert.ok(!lines.some((s) => s.includes('after 05:00')))
-  assert.deepEqual(darknessSentences(ctxFor('RG1', '2027-08-15T21:00:00Z'))[1], 'No true night from Monday May 22nd 2028 to Wednesday July 19th 2028.')
+  assert.deepEqual(darknessSentences(ctxFor('RG1', '2027-08-15T21:00:00Z'))[2], 'No true night from Monday May 22nd 2028 to Wednesday July 19th 2028.')
 })
 
 console.log(`\n${passed} checks passed`)

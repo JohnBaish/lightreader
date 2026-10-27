@@ -27,8 +27,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 06:48, sunset 16:46: 9h 58m of daylight.
-- Very dark or true night from 18:00 to 05:36.
+- Sunrise 06:48, sunset 16:46.
+- 9h 58m of daylight.
 - Days are shortening by nearly 4m a day, close to the fastest they ever change.
 
 **This fortnight**
@@ -61,15 +61,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 18:00 to 05:36.
 - Tonight's true night lasts 10h 19m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 16:21 in Lerwick to 17:08 in Penzance. Reading's is at 16:46.
-- Reading gets 51m more daylight than Lerwick today, and 6m less than Penzance.
+- Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro (17:08 in Penzance). Reading's is at 16:46.
+- Reading gets 33m more daylight than Inverness (51m more than Lerwick) today, and 5m less than Truro (6m less than Penzance).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east-south-east and sets in the west-south-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -80,8 +81,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 06:45, sunset 16:50: 10h 5m of daylight.
-- Very dark or true night from 18:04 to 05:33.
+- Sunrise 06:45, sunset 16:50.
+- 10h 5m of daylight.
 - Days are shortening by nearly 4m a day, close to the fastest they ever change.
 
 **This fortnight**
@@ -115,15 +116,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 18:04 to 05:33.
 - Tonight's true night lasts 10h 12m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 16:27 in Lerwick to 17:11 in Penzance. Reading's is at 16:50.
-- Reading gets 48m more daylight than Lerwick today, and 6m less than Penzance.
+- Sunset today runs from 16:39 in Norwich (16:27 in Lerwick) to 17:09 in Truro (17:11 in Penzance). Reading's is at 16:50.
+- Reading gets 31m more daylight than Inverness (48m more than Lerwick) today, and 5m less than Truro (6m less than Penzance).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east-south-east and sets in the west-south-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -134,8 +136,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 08:07, sunset 15:57: 7h 50m of daylight.
-- Very dark or true night from 17:20 to 06:44.
+- Sunrise 08:07, sunset 15:57.
+- 7h 50m of daylight.
 - Today is the shortest day of the year: days start lengthening tomorrow.
 
 **This fortnight**
@@ -166,15 +168,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 17:20 to 06:44.
 - Tonight's true night lasts 12h 2m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 14:57 in Lerwick to 16:22 in Penzance. Reading's is at 15:57.
-- Reading gets 2h 1m more daylight than Lerwick today, and 13m less than Penzance.
+- Sunset today runs from 15:27 in Aberdeen (14:57 in Lerwick) to 16:19 in Truro (16:22 in Penzance). Reading's is at 15:57.
+- Reading gets 1h 15m more daylight than Inverness (2h 1m more than Lerwick) today, and 12m less than Truro (13m less than Penzance).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the south-east and sets in the south-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -185,8 +188,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 06:07, sunset 18:16: 12h 9m of daylight.
-- Very dark or true night from 19:29 to 04:53.
+- Sunrise 06:07, sunset 18:16.
+- 12h 9m of daylight.
 - Days are lengthening by nearly 4m a day, close to the fastest they ever change.
 
 **This fortnight**
@@ -219,15 +222,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 19:29 to 04:53.
 - Tonight's true night lasts 8h 1m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 18:06 in Lowestoft to 18:39 in Stornoway. Reading's is at 18:16.
-- Reading gets about the same daylight as Penzance today, and 2m less than Lerwick.
+- Sunset today runs from 18:08 in Norwich (18:06 in Lowestoft) to 18:34 in St Davids (18:39 in Stornoway). Reading's is at 18:16.
+- Reading gets about the same daylight as Truro (about the same daylight as Penzance) today, and 1m less than Inverness (2m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east and sets in the west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -238,8 +242,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 06:49, sunset 19:30: 12h 41m of daylight.
-- Very dark or true night from 20:44 to 05:33.
+- Sunrise 06:49, sunset 19:30.
+- 12h 41m of daylight.
 - Days are lengthening by nearly 4m a day, close to the fastest they ever change.
 
 **This fortnight**
@@ -273,15 +277,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 20:44 to 05:33.
 - Tonight's true night lasts 7h 24m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 19:20 in Lowestoft to 19:57 in Stornoway. Reading's is at 19:30.
-- Reading gets 2m more daylight than Penzance today, and 15m less than Lerwick.
+- Sunset today runs from 19:22 in Canterbury (19:20 in Lowestoft) to 19:48 in Inverness (19:57 in Stornoway). Reading's is at 19:30.
+- Reading gets 1m more daylight than Truro (2m more than Penzance) today, and 9m less than Inverness (15m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east and sets in the west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -292,8 +297,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 05:13, sunset 20:49: 15h 36m of daylight.
-- Very dark or true night from 22:27 to 03:33.
+- Sunrise 05:13, sunset 20:49.
+- 15h 36m of daylight.
 - Days are lengthening by about 3m a day.
 
 **This fortnight**
@@ -327,15 +332,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 22:27 to 03:33.
 - Tonight's true night lasts 2h 16m.
 - No true night from Sunday May 23rd to Monday July 19th.
 
 **Across the UK**
 
-- Sunset today runs from 20:38 in Dover to 21:45 in Stornoway. Reading's is at 20:49.
-- Reading gets 11m more daylight than Penzance today, and 1h 35m less than Lerwick.
+- Sunset today runs from 20:40 in Canterbury (20:38 in Dover) to 21:32 in Inverness (21:45 in Stornoway). Reading's is at 20:49.
+- Reading gets 9m more daylight than Truro (11m more than Penzance) today, and 59m less than Inverness (1h 35m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east-north-east and sets in the west-north-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -346,8 +352,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:47, sunset 21:25: 16h 38m of daylight.
-- Very dark from 23:26 to 02:45.
+- Sunrise 04:47, sunset 21:25.
+- 16h 38m of daylight.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -378,15 +384,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark from 23:26 to 02:45.
 - No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Tuesday July 20th.
 
 **Across the UK**
 
-- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Reading's is at 21:25.
-- Reading gets 14m more daylight than Penzance today, and 2h 18m less than Lerwick.
+- Sunset today runs from 21:15 in Canterbury (21:14 in Dover) to 22:19 in Inverness (22:35 in Stornoway). Reading's is at 21:25.
+- Reading gets 13m more daylight than Truro (14m more than Penzance) today, and 1h 24m less than Inverness (2h 18m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.
 
@@ -396,8 +403,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 05:49, sunset 20:27: 14h 38m of daylight.
-- Very dark or true night from 21:52 to 04:25.
+- Sunrise 05:49, sunset 20:27.
+- 14h 38m of daylight.
 - Days are shortening by more than 3m a day.
 
 **This fortnight**
@@ -428,15 +435,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 21:52 to 04:25.
 - Tonight's true night lasts 4h 39m.
 - No true night from Monday May 22nd 2028 to Wednesday July 19th 2028.
 
 **Across the UK**
 
-- Sunset today runs from 20:17 in Dover to 21:11 in Stornoway. Reading's is at 20:27.
-- Reading gets 7m more daylight than Penzance today, and 1h 4m less than Lerwick.
+- Sunset today runs from 20:18 in Canterbury (20:17 in Dover) to 21:00 in Inverness (21:11 in Stornoway). Reading's is at 20:27.
+- Reading gets 7m more daylight than Truro (7m more than Penzance) today, and 41m less than Inverness (1h 4m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east-north-east and sets in the west-north-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -447,8 +455,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 07:04, sunset 17:08: 10h 4m of daylight.
-- Very dark or true night from 18:19 to 05:54.
+- Sunrise 07:04, sunset 17:08.
+- 10h 4m of daylight.
 - Days are shortening by more than 3m a day, close to the fastest they ever change.
 
 **This fortnight**
@@ -481,15 +489,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark or true night from 18:19 to 05:54.
 - Tonight's true night lasts 10h 20m.
 - No true night from Monday May 31st to Sunday July 11th.
 
 **Across the UK**
 
-- Sunset today runs from 16:21 in Lerwick to 17:05 in Truro, and Penzance's is later still, at 17:08.
-- Penzance gets 57m more daylight than Lerwick today, and about the same daylight as Truro.
+- Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro, and Penzance's is later still, at 17:08.
+- Penzance gets 39m more daylight than Inverness (57m more than Lerwick) today, and about the same daylight as Truro.
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the east-south-east and sets in the west-south-west.
 - On the longest day it rises in the north-east and sets in the north-west.
@@ -500,8 +509,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:23, sunset 21:57: 17h 33m of daylight.
-- The sky never reaches "very dark" tonight: it's "dark" from 22:58 to 03:22.
+- Sunrise 04:23, sunset 21:57.
+- 17h 33m of daylight.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -532,15 +541,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- The sky never reaches "very dark" tonight: it's "dark" from 22:58 to 03:22.
 - No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Sunday August 8th.
 
 **Across the UK**
 
-- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Berwick-upon-Tweed's is at 21:57.
-- Berwick-upon-Tweed gets 1h 10m more daylight than Penzance today, and 1h 22m less than Lerwick.
+- Sunset today runs from 21:15 in Canterbury (21:14 in Dover) to 22:19 in Inverness (22:35 in Stornoway). Berwick-upon-Tweed's is at 21:57.
+- Berwick-upon-Tweed gets 1h 8m more daylight than Truro (1h 10m more than Penzance) today, and 28m less than Inverness (1h 22m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.
 
@@ -550,8 +560,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:27, sunset 21:49: 17h 22m of daylight.
-- The sky never reaches "very dark" tonight: it's "dark" from 22:47 to 03:29.
+- Sunrise 04:27, sunset 21:49.
+- 17h 22m of daylight.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -582,15 +592,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- The sky never reaches "very dark" tonight: it's "dark" from 22:47 to 03:29.
 - No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Thursday August 5th.
 
 **Across the UK**
 
-- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Newcastle upon Tyne's is at 21:49.
-- Newcastle upon Tyne gets 59m more daylight than Penzance today, and 1h 34m less than Lerwick.
+- Sunset today runs from 21:15 in Canterbury (21:14 in Dover) to 22:19 in Inverness (22:35 in Stornoway). Newcastle upon Tyne's is at 21:49.
+- Newcastle upon Tyne gets 57m more daylight than Truro (59m more than Penzance) today, and 40m less than Inverness (1h 34m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.
 
@@ -600,8 +611,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:29, sunset 21:45: 17h 16m of daylight.
-- The sky never reaches "very dark" tonight: it's "dark" from 22:42 to 03:32.
+- Sunrise 04:29, sunset 21:45.
+- 17h 16m of daylight.
 - Today is the longest day of the year: days start shortening tomorrow.
 
 **This fortnight**
@@ -632,15 +643,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- The sky never reaches "very dark" tonight: it's "dark" from 22:42 to 03:32.
 - No true night tonight: at its darkest the sky only reaches "dark".
 - True night returns on Tuesday August 3rd.
 
 **Across the UK**
 
-- Sunset today runs from 21:14 in Dover to 22:35 in Stornoway. Middlesbrough's is at 21:45.
-- Middlesbrough gets 53m more daylight than Penzance today, and 1h 39m less than Lerwick.
+- Sunset today runs from 21:15 in Canterbury (21:14 in Dover) to 22:19 in Inverness (22:35 in Stornoway). Middlesbrough's is at 21:45.
+- Middlesbrough gets 51m more daylight than Truro (53m more than Penzance) today, and 45m less than Inverness (1h 39m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.
 
@@ -650,8 +662,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:41, sunset 21:30: 16h 49m of daylight.
-- Very dark from 00:01 to 02:09.
+- Sunrise 04:41, sunset 21:30.
+- 16h 49m of daylight.
 - Days are lengthening by about 3m a day.
 
 **This fortnight**
@@ -683,15 +695,16 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark from 00:01 to 02:09.
 - No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Sunday August 8th.
 
 **Across the UK**
 
-- Sunset today runs from 20:52 in Dover to 22:05 in Stornoway. Berwick-upon-Tweed's is at 21:30.
-- Berwick-upon-Tweed gets 58m more daylight than Penzance today, and 1h 5m less than Lerwick.
+- Sunset today runs from 20:54 in Canterbury (20:52 in Dover) to 21:51 in Inverness (22:05 in Stornoway). Berwick-upon-Tweed's is at 21:30.
+- Berwick-upon-Tweed gets 57m more daylight than Truro (58m more than Penzance) today, and 23m less than Inverness (1h 5m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.
 
@@ -701,8 +714,8 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Today**
 
-- Sunrise 04:41, sunset 21:42: 17h 1m of daylight.
-- Very dark from 00:18 to 02:06.
+- Sunrise 04:41, sunset 21:42.
+- 17h 1m of daylight.
 - Days are shortening by about 2m a day.
 
 **This fortnight**
@@ -733,14 +746,15 @@ chosen to show the interesting cases. Made by `npm run sentence-sheet`.
 
 **Darkness**
 
+- Very dark from 00:18 to 02:06.
 - No true night tonight: at its darkest the sky only reaches "very dark".
 - True night returns on Thursday August 5th.
 
 **Across the UK**
 
-- Sunset today runs from 21:08 in Dover to 22:25 in Stornoway. Newcastle upon Tyne's is at 21:42.
-- Newcastle upon Tyne gets 54m more daylight than Penzance today, and 1h 23m less than Lerwick.
+- Sunset today runs from 21:10 in Canterbury (21:08 in Dover) to 22:10 in Inverness (22:25 in Stornoway). Newcastle upon Tyne's is at 21:42.
+- Newcastle upon Tyne gets 52m more daylight than Truro (54m more than Penzance) today, and 36m less than Inverness (1h 23m less than Lerwick).
 
-**Where the sun rises and sets**
+**Direction of sunrise and sunset**
 
 - The sun rises in the north-east and sets in the north-west.

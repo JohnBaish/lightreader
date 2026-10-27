@@ -13,7 +13,7 @@ import { dayOf, type SkyContext } from './context.ts'
  *  itself. About 15 miles. */
 export const NEAR_KM = 25
 
-type Day = { name: string; day: DayFigures }
+type Day = { name: string; edge: boolean; day: DayFigures }
 
 /** The two ends of `key` among `days`, lowest first. */
 function ends(days: Day[], key: (d: DayFigures) => number): [Day, Day] {
@@ -24,28 +24,35 @@ function ends(days: Day[], key: (d: DayFigures) => number): [Day, Day] {
 export function acrossUkSentences(ctx: SkyContext, places: NamedPlace[] = UK_PLACES): string[] {
   const here = dayOf(ctx, ctx.today)
   if (!here.sunset || !here.sunrise) return []
-  const there = places.filter((p) => kmBetween(p, ctx.place) >= NEAR_KM)
-    .map((p) => ({ name: p.name, day: dayFigures(p, ctx.today) }))
+  const near = places.filter((p) => kmBetween(p, ctx.place) >= NEAR_KM)
+    .map((p) => ({ name: p.name, edge: !!p.edge, day: dayFigures(p, ctx.today) }))
     .filter((p) => p.day.sunset && p.day.sunrise)
-  if (there.length < 2) return []
+  const cities = near.filter((p) => !p.edge)
+  if (cities.length < 2) return []
 
-  // "Sunset today runs from 16:21 in Lerwick to 17:08 in Penzance. Reading's is at 16:46."
-  // When the visitor is beyond both ends: "…, and Penzance's is later still, at 17:08."
-  const [early, late] = ends(there, (d) => d.sunset!.getTime())
+  // The ends among the cities; an edge town in brackets when it goes further (John, 27
+  // October): "from 16:35 in Aberdeen (16:21 in Lerwick) to 17:05 in Truro (17:08 in
+  // Penzance)".
+  const sunset = (d: DayFigures) => d.sunset!.getTime()
+  const [early, late] = ends(cities, sunset)
+  const [earliest, latest] = ends(near, sunset)
+  const also = (city: Day, edge: Day, words: (d: Day) => string) => (edge !== city && edge.edge ? ` (${words(edge)})` : '')
+  const at = (d: Day) => `${clock(d.day.sunset!)} in ${d.name}`
   const mine = here.sunset.getTime()
-  const yours = mine < early.day.sunset!.getTime() ? `, and ${ctx.name}'s is earlier still, at ${clock(here.sunset)}.`
-    : mine > late.day.sunset!.getTime() ? `, and ${ctx.name}'s is later still, at ${clock(here.sunset)}.`
+  const yours = mine < sunset(earliest.day) ? `, and ${ctx.name}'s is earlier still, at ${clock(here.sunset)}.`
+    : mine > sunset(latest.day) ? `, and ${ctx.name}'s is later still, at ${clock(here.sunset)}.`
     : `. ${ctx.name}'s is at ${clock(here.sunset)}.`
-  const out = [`Sunset today runs from ${clock(early.day.sunset!)} in ${early.name} to ${clock(late.day.sunset!)} in ${late.name}${yours}`]
+  const out = [`Sunset today runs from ${at(early)}${also(early, earliest, at)} to ${at(late)}${also(late, latest, at)}${yours}`]
 
-  // "Reading gets 51m more daylight than Lerwick today, and 6m less than Penzance."
-  const [least, most] = ends(there, daylight)
-  const parts = [least, most].map((p, i) => {
+  // "Reading gets 34m more daylight than Inverness (51m more than Lerwick) today, and 5m
+  // less than Truro (6m less than Penzance)."
+  const [least, most] = ends(cities, daylight)
+  const [leastAll, mostAll] = ends(near, daylight)
+  const than = (p: Day, first: boolean) => {
     const diff = daylight(here) - daylight(p.day)
-    const amount = Math.abs(diff) < 60_000 ? 'about the same daylight as' : `${duration(diff)} ${diff > 0 ? 'more' : 'less'}${i === 0 ? ' daylight' : ''} than`
-    return `${amount} ${p.name}`
-  })
-  out.push(`${ctx.name} gets ${parts[0]} today, and ${parts[1]}.`)
+    return Math.abs(diff) < 60_000 ? `about the same daylight as ${p.name}` : `${duration(diff)} ${diff > 0 ? 'more' : 'less'}${first ? ' daylight' : ''} than ${p.name}`
+  }
+  out.push(`${ctx.name} gets ${than(least, true)}${also(least, leastAll, (d) => than(d, false))} today, and ${than(most, false)}${also(most, mostAll, (d) => than(d, false))}.`)
   return out
 }
 

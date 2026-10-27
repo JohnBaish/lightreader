@@ -23,6 +23,6 @@ export function allGroups(ctx: SkyContext, times: TimeOfDay[]): Group[] {
     ...times.map((t) => ({ heading: `Is it light at ${t}?`, sentences: lightAtSentences(ctx, t) })),
     { heading: 'Darkness', sentences: darknessSentences(ctx) },
     { heading: 'Across the UK', sentences: acrossUkSentences(ctx) },
-    { heading: 'Where the sun rises and sets', sentences: directionSentences(ctx) },
+    { heading: 'Direction of sunrise and sunset', sentences: directionSentences(ctx) }, // John, 27 October
   ]
 }

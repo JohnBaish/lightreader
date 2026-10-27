@@ -1,29 +1,21 @@
-// "Today" (SPEC §6): the day's sunrise, sunset and daylight; tonight's dark hours; and how
-// fast the days are changing.
+// "Today" (SPEC §6): the day's sunrise, sunset and daylight, and how fast the days are
+// changing.
 
 import { clock, duration } from '../format.ts'
 import { daylight } from '../sun.ts'
 import { addDays } from '../ukTime.ts'
 import { dayOf, daysAhead, type SkyContext } from './context.ts'
-import { bandTag, looseMinutes } from './words.ts'
+import { looseMinutes } from './words.ts'
 
 export function todaySentences(ctx: SkyContext): string[] {
   const today = dayOf(ctx, ctx.today)
-  const tomorrow = dayOf(ctx, addDays(ctx.today, 1))
   const out: string[] = []
 
-  // "Sunrise 06:48, sunset 16:46: 9h 58m of daylight."
+  // "Sunrise 06:48, sunset 16:46." and "9h 58m of daylight." on a line of its own (John,
+  // 27 October). Tonight's dark hours are under Darkness.
   if (today.sunrise && today.sunset) {
-    out.push(`Sunrise ${clock(today.sunrise)}, sunset ${clock(today.sunset)}: ${duration(daylight(today))} of daylight.`)
-  }
-
-  // "Very dark or true night from 18:00 to 05:36." (the sun 12° or more below)
-  if (today.nauticalDusk && tomorrow.nauticalDawn) {
-    const what = today.astronomicalDusk ? 'Very dark or true night' : 'Very dark'
-    out.push(`${what} from ${clock(today.nauticalDusk)} to ${clock(tomorrow.nauticalDawn)}.`)
-  } else if (today.civilDusk && tomorrow.civilDawn) {
-    // Too far north in midsummer for the sky to get very dark (rule E: never a blank).
-    out.push(`The sky never reaches ${bandTag('very-dark')} tonight: it's ${bandTag('dark')} from ${clock(today.civilDusk)} to ${clock(tomorrow.civilDawn)}.`)
+    out.push(`Sunrise ${clock(today.sunrise)}, sunset ${clock(today.sunset)}.`)
+    out.push(`${duration(daylight(today))} of daylight.`)
   }
 
   const rate = rateSentence(ctx)

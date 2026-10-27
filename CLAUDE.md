@@ -363,3 +363,31 @@ script errors, no sideways scroll, all four fonts loaded where used. The one fai
 Vercel's statistics script, which exists only on Vercel. Screenshots in
 `design/previews/stage3-*.png`.
 **Couldn't be checked:** a real phone; the Vercel preview itself (blocked here).
+
+### 2026-10-27 — John's first look at the page (branch `claude/nice-goodall-j1r6wu`)
+
+**John** ("I love this"), on an iPhone, asked to stay at stage 3 for some changes:
+- **The top card** changes once the sun is highest (`src/lib/headline.ts`): before, "Today ·
+  Tuesday October 27th" with "Sunrise 06:48 · Sunset 16:46"; from then on, "Today · …" with
+  "Sunset 16:46" and "Tomorrow · Wednesday October 28th" with "Sunrise 06:50" (side by side on
+  a computer, stacked on a phone). He asked for wording suggestions for the headings; these
+  are drafts, with alternatives put to him.
+- **Folded true night** on a phone 80px tall (was 40).
+- **The key** in two groups that stay together, so "Very dark" sits beside "True night" when
+  it wraps on a phone.
+- **Today:** the daylight on its own line ("9h 58m of daylight.").
+- **Darkness** now starts with "Very dark or true night from 18:00 to 05:36." (moved from
+  Today, with its far-north version).
+- **Across the UK:** the ends among the cities, with one of the five edge towns in brackets
+  when it goes further ("from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro (17:08 in
+  Penzance)"); the five are marked `edge` in `src/data/ukPlaces.json` (rebuilt from the same
+  Open Names download).
+- **"Direction of sunrise and sunset"** as the heading (the towns still come in stage 6).
+- **To come back to:** John will review the landing page (before a postcode is entered);
+  noted in PLAN.
+
+SPEC §5 and §6 annotated with the changes. **Verified:** `npx tsc -b`, `oxlint`, `npm run
+check` (14 + 12 + 5; new: the top card before and after the sun is highest). In Chromium at
+1200px, 390px and 375px with touch, at 09:02 and at 15:00 today, a winter evening and
+Berwick's midsummer night: no script errors, no sideways scroll. Screenshots in
+`design/previews/stage3-*.png` refreshed.

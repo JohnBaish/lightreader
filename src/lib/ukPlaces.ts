@@ -7,6 +7,7 @@
 import data from '../data/ukPlaces.json' with { type: 'json' }
 import type { Place } from './sun.ts'
 
-export type NamedPlace = Place & { name: string }
+/** `edge`: one of the five less familiar towns at the edges, named in brackets. */
+export type NamedPlace = Place & { name: string; edge?: boolean }
 
 export const UK_PLACES: NamedPlace[] = data.places

@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict'
 import { bandAt, timeline } from '../src/lib/bands.ts'
 import { district, outwardCode } from '../src/lib/postcode.ts'
+import { headline } from '../src/lib/headline.ts'
 import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
 import { daysFigures } from '../src/lib/sun.ts'
 
@@ -70,6 +71,21 @@ check('the postcode box: the first half of anything typed, England only', () => 
   assert.equal(outwardCode('reading'), null)
   assert.equal(district('RG1')?.name, 'Reading')
   assert.equal(district('CF10'), null) // Cardiff: not in England
+})
+
+check('the top of the page: today\'s sunrise and sunset until the sun is highest, then sunset and tomorrow\'s sunrise', () => {
+  const [today, tomorrow] = daysFigures(RG1, '2026-10-27', '2026-10-28')
+  assert.deepEqual(headline(new Date('2026-10-27T09:02:00Z'), today, tomorrow), [
+    { kicker: 'Today · Tuesday October 27th', items: [{ label: 'Sunrise', time: '06:48' }, { label: 'Sunset', time: '16:46' }] },
+  ])
+  // The sun is highest at 11:47:44 UTC (GMT).
+  const after = [
+    { kicker: 'Today · Tuesday October 27th', items: [{ label: 'Sunset', time: '16:46' }] },
+    { kicker: 'Tomorrow · Wednesday October 28th', items: [{ label: 'Sunrise', time: '06:50' }] },
+  ]
+  assert.deepEqual(headline(new Date('2026-10-27T11:48:00Z'), today, tomorrow), after)
+  assert.deepEqual(headline(new Date('2026-10-27T22:00:00Z'), today, tomorrow), after)
+  assert.equal(headline(new Date('2026-10-27T11:47:00Z'), today, tomorrow).length, 1)
 })
 
 console.log(`\n${passed} checks passed`)

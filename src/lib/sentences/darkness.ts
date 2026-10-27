@@ -1,6 +1,7 @@
-// "Darkness" (SPEC §6 and rule E): tonight's true night, and the coming nights without one.
+// "Darkness" (SPEC §6 and rule E): tonight's dark hours (moved here from Today, John, 27
+// October), tonight's true night, and the coming nights without one.
 
-import { duration } from '../format.ts'
+import { clock, duration } from '../format.ts'
 import { addDays } from '../ukTime.ts'
 import { dayOf, daysAhead, type SkyContext } from './context.ts'
 import { bandTag, dateIn, rangeIn } from './words.ts'
@@ -9,6 +10,15 @@ export function darknessSentences(ctx: SkyContext): string[] {
   const today = dayOf(ctx, ctx.today)
   const tomorrow = dayOf(ctx, addDays(ctx.today, 1))
   const out: string[] = []
+
+  // "Very dark or true night from 18:00 to 05:36." (the sun 12° or more below)
+  if (today.nauticalDusk && tomorrow.nauticalDawn) {
+    const what = today.astronomicalDusk ? 'Very dark or true night' : 'Very dark'
+    out.push(`${what} from ${clock(today.nauticalDusk)} to ${clock(tomorrow.nauticalDawn)}.`)
+  } else if (today.civilDusk && tomorrow.civilDawn) {
+    // Too far north in midsummer for the sky to get very dark (rule E: never a blank).
+    out.push(`The sky never reaches ${bandTag('very-dark')} tonight: it's ${bandTag('dark')} from ${clock(today.civilDusk)} to ${clock(tomorrow.civilDawn)}.`)
+  }
 
   // Tonight (rule E: never a blank). The labels are tags (John, 27 October, option B).
   if (today.astronomicalDusk && tomorrow.astronomicalDawn) {

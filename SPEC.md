@@ -80,9 +80,10 @@ All of these colours are approved by John.
 
 1. **Header:** logo, "Lightreader", and a postcode pill showing, for example, "Reading (RG1)" with a Change button.
 2. **Today:** "Sunrise 06:49 · Sunset 16:46" in large type. Show nothing else here; day length lives in the sentences.
+   - **Changed (John, October 27th 2026):** before the sun is highest, as above, under "Today · Tuesday October 27th"; from then on, today's sunset under "Today · …" and then tomorrow's sunrise under "Tomorrow · Wednesday October 28th". The headings' wording is a draft.
 3. **Next 24 hours: the sky ribbon** (mockup option B).
    - **Computer:** a horizontal strip, drawn to scale, from now to the same time tomorrow, coloured by band. Each change of light is a tick with its time and label, alternating above and below. The strip starts with a "Now" marker and has a midnight divider marked "Wed" (or whichever day). Show the legend below it.
-   - **Phone:** the strip stands upright. True night is folded to a fixed height with a zigzag and its length ("True night, 10h 19m (folded)"). Events are listed beside it.
+   - **Phone:** the strip stands upright. True night is folded to a fixed height with a zigzag and its length ("True night, 10h 19m (folded)"). Events are listed beside it. (John, October 27th 2026: the folded part at least twice as tall as first built; the key wraps with "Very dark" beside "True night".)
    - **To consider later:** showing the length of the night on the computer version too.
 4. **Sentence groups,** in the order of section 6.
 5. **Compare** (section 7). It sits at a fixed place on the page and does not follow you as you scroll.
@@ -94,7 +95,9 @@ These are shown under sub-headings, in this order. The examples are for Reading 
 
 ### Today
 - "Sunrise 06:49, sunset 16:46: 9h 57m of daylight."
+  - **Changed (John, October 27th 2026):** the daylight on a line of its own: "Sunrise 06:48, sunset 16:46." then "9h 58m of daylight."
 - "Very dark or true night from 18:00 to 05:36."
+  - **Moved (John, October 27th 2026)** to the start of Darkness.
 - "Days are shortening by nearly 4m a day, close to the fastest they ever change."
   - The rate is worded loosely, with no seconds.
   - **To decide with John:** variants for lengthening days, and for around the solstices when the change is tiny.
@@ -146,10 +149,12 @@ This is option B of the "your times" mockup.
 
 ### Across the UK
 These are calculated for fixed coordinates, so they need no postcode data outside England.
+- **Decided (John, October 27th 2026):** the places are whichever big places are at the two ends of each comparison that day, from a short list (the cities in OS Open Names, plus Lerwick, Stornoway, Penzance, Dover and Lowestoft; not Northern Ireland). The cities are named, with one of the five edge towns in brackets when it goes further: "Sunset today runs from 16:35 in Norwich (16:21 in Lerwick) to 17:05 in Truro (17:08 in Penzance). Reading's is at 16:46."
 - "Sunset today runs from 16:21 in Lerwick to 17:07 in Penzance. Reading's is at 16:46."
 - "Reading gets 51m more daylight than Lerwick today, and 6m less than Penzance."
 
 ### Where the sun rises and sets
+(Heading on the page: "Direction of sunrise and sunset", John, October 27th 2026.)
 - "The sun rises in the east-south-east, roughly over Bracknell, and sets in the west-south-west, roughly over Theale."
   - Directions use the 16-point compass, from the sun's direction (azimuth) at sunrise and sunset.
   - The town is a recognisable place lying in that direction, within about 5°, at a sensible distance. In the example, Bracknell and Theale were picked by hand.

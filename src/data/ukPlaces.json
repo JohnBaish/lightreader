@@ -1,5 +1,5 @@
 {
- "note": "The big places \"Across the UK\" picks its ends from: every city in OS Open Names (Great Britain) and five towns at the edges. Built by scripts/build-uk-places.ts.",
+ "note": "The big places \"Across the UK\" picks its ends from: every city in OS Open Names (Great Britain) and five towns at the edges (edge: true). Built by scripts/build-uk-places.ts.",
  "places": [
   {
    "name": "Aberdeen",
@@ -94,7 +94,8 @@
   {
    "name": "Dover",
    "latitude": 51.1281,
-   "longitude": 1.3084
+   "longitude": 1.3084,
+   "edge": true
   },
   {
    "name": "Dundee",
@@ -169,7 +170,8 @@
   {
    "name": "Lerwick",
    "latitude": 60.1546,
-   "longitude": -1.1468
+   "longitude": -1.1468,
+   "edge": true
   },
   {
    "name": "Lichfield",
@@ -194,7 +196,8 @@
   {
    "name": "Lowestoft",
    "latitude": 52.4773,
-   "longitude": 1.7504
+   "longitude": 1.7504,
+   "edge": true
   },
   {
    "name": "Manchester",
@@ -234,7 +237,8 @@
   {
    "name": "Penzance",
    "latitude": 50.1174,
-   "longitude": -5.5424
+   "longitude": -5.5424,
+   "edge": true
   },
   {
    "name": "Perth",
@@ -319,7 +323,8 @@
   {
    "name": "Stornoway",
    "latitude": 58.2077,
-   "longitude": -6.3861
+   "longitude": -6.3861,
+   "edge": true
   },
   {
    "name": "Sunderland",

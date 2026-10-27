@@ -9,10 +9,17 @@ import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
 import { along, FOLD_LONGER_THAN, placeLabels, spreadLabels, type Ribbon } from '../lib/ribbon.ts'
 import { ukParts } from '../lib/ukTime.ts'
 
+/** The key, in two groups that each stay together, so when it wraps on a phone "Very dark"
+ *  and "True night" share the second line (John, 27 October). */
 export function Legend() {
+  const groups = [BANDS.slice(0, 3), BANDS.slice(3)]
   return (
     <div className="legend">
-      {BANDS.map((b) => <span key={b}><i className={`band-${b}`} />{BAND_LABEL[b]}</span>)}
+      {groups.map((g, i) => (
+        <span key={i} className="legend-group">
+          {g.map((b) => <span key={b}><i className={`band-${b}`} />{BAND_LABEL[b]}</span>)}
+        </span>
+      ))}
     </div>
   )
 }
@@ -70,7 +77,8 @@ export function SkyRibbonWide({ r }: { r: Ribbon }) {
   )
 }
 
-const FOLD_PX = 40
+/** Folded true night's height on a phone: 80px (John, 27 October: at least twice the first 40). */
+const FOLD_PX = 80
 const LINE_PX = 21
 
 /** Upright, for a phone. The strip's height is shared out by time, except a long true

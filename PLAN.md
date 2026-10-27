@@ -192,11 +192,12 @@ very dark" (both drafts). There's a "Print this month" button.
 
 Branch: `claude/nice-goodall-j1r6wu` (this session's branch)
 
-**Status (28 October):** John chose the rule: towns and cities plus the places postcode
-districts are named after; within 8°; 3 to 25 miles; nearest first; the compass point alone
-when none; Welsh names in English. Built (`src/data/towns.json`, `src/lib/towns.ts`), with
-the sheet `design/directions-sheet-2026-10-27.md` for John. Not on the page until he has
-checked it (`directionSentences(ctx, withTowns)`).
+**Status (28 October):** John chose a first rule (one place within 8°, 3 to 25 miles,
+towns and cities plus the places postcode districts are named after), then found its places
+too obscure and asked for "between Town and Town (near smaller place)". Built as the
+second version (`describeToward()` in `src/lib/towns.ts`), with the sheet
+`design/directions-sheet-2026-10-27.md` for John. Not on the page until he has checked it
+(`directionSentences(ctx, withTowns)`).
 
 - Directions on the 16-point compass from the sun's direction at sunrise and
   sunset.

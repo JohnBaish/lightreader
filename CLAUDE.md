@@ -619,3 +619,24 @@ places yet).
 **Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 10); in Chromium at 1200px, and
 at 390px and 375px with touch: the months' positions line up; the year card and tables as
 before; no errors, no sideways scroll.
+
+### 2026-10-28 — stage 6, second version: "between … and … (near …)" (branch `claude/nice-goodall-j1r6wu`)
+
+**John** found the first sheet's places too obscure, and asked for "rises between Town/City
+and Town/City (near smaller place name)".
+
+**What (`src/lib/towns.ts`, `describeToward()`):**
+- **Between:** the nearest town or city on each side of the sun's direction, within 20°
+  and 3 to 25 miles, named left then right as you face the sun.
+- **In brackets:** the nearest smaller place (one a postcode district is named after) within
+  8° of the line, if there is one.
+- **With no town on one side:** "roughly over" a town or city within 8°.
+- **With neither:** the compass point alone.
+- `src/data/towns.json` now marks the towns and cities (`npm run towns` rebuilt from the
+  same download).
+- The 20° was chosen after trying 30°, which reached for small towns further round (Reading:
+  "Tadley and Thatcham").
+- The sheet is regenerated with the new wording and how often each kind is used: "between"
+  72 to 77%, "roughly over" 11 to 13%, the compass alone 12 to 16%.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (unchanged; not on the page yet).

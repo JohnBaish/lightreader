@@ -10,7 +10,7 @@ import { district } from '../src/lib/postcode.ts'
 import { directionSentences } from '../src/lib/sentences/directions.ts'
 import type { SkyContext } from '../src/lib/sentences/context.ts'
 import { dayFigures } from '../src/lib/sun.ts'
-import { TOWN_MILES, TOWN_WITHIN_DEGREES, townToward, type Toward } from '../src/lib/towns.ts'
+import { BETWEEN_DEGREES, describeToward, TOWN_MILES, TOWN_WITHIN_DEGREES, townsBetween } from '../src/lib/towns.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
 
 const now = new Date()
@@ -21,17 +21,20 @@ const longest = `${year + 1}-06-21`
 const DATES = [today, shortest, longest]
 
 const codes = Object.keys((outcodes as { outcodes: Record<string, unknown> }).outcodes)
-const show = (t: Toward | null) => (t ? `${t.name} (${Math.round(t.miles)} mi, ${Math.round(t.off)}° off)` : '—')
+const show = (d: { latitude: number; longitude: number }, az: number, own: string) => describeToward(d, az, own).replace(/^, /, '') || '—'
 
-// How often a place is found, for every district.
-const found: Record<string, [number, number]> = {}
-for (const date of DATES) found[date] = [0, 0]
+// How often each kind of wording is used, for every district: [between, roughly over, none]
+// for sunrise and then sunset.
+const found: Record<string, number[]> = {}
+for (const date of DATES) found[date] = [0, 0, 0, 0, 0, 0]
 for (const code of codes) {
   const d = district(code)!
   for (const date of DATES) {
     const f = dayFigures(d, date)
-    if (townToward(d, f.sunriseAzimuth!, d.name)) found[date][0]++
-    if (townToward(d, f.sunsetAzimuth!, d.name)) found[date][1]++
+    ;[f.sunriseAzimuth!, f.sunsetAzimuth!].forEach((az, i) => {
+      const kind = townsBetween(d, az, d.name) ? 0 : describeToward(d, az, d.name) ? 1 : 2
+      found[date][i * 3 + kind]++
+    })
   }
 }
 const pct = (n: number) => `${Math.round((n / codes.length) * 100)}%`
@@ -44,17 +47,17 @@ for (const code of codes.sort((a, b) => a.localeCompare(b, 'en', { numeric: true
 }
 
 const lines: string[] = [
-  `# "Roughly over …": the places, for John to check (${longDate(today, true)})`,
+  `# Where the sun rises and sets: the places, second version, for John to check (${longDate(today, true)})`,
   '',
-  `The rule (John, 28 October): a town or city, or a place a postcode district is named after, lying within ${TOWN_WITHIN_DEGREES}° of the direction the sun rises or sets, between ${TOWN_MILES[0]} and ${TOWN_MILES[1]} miles away; the nearest first. Distances and directions are from the middle of the visitor's postcode district. Where none lies that way (often the sea), the sentence gives the compass point alone.`,
+  `The rule (John, 28 October, second version): "between" the nearest town or city on each side of the direction the sun rises or sets, each within ${BETWEEN_DEGREES}° of it and ${TOWN_MILES[0]} to ${TOWN_MILES[1]} miles away, named left then right as you face the sun; in brackets, the nearest smaller place (one a postcode district is named after) lying within ${TOWN_WITHIN_DEGREES}° of the line, if there is one. With no town on one side, "roughly over" the nearest town or city within ${TOWN_WITHIN_DEGREES}° of the line. With neither (often the sea), the compass point alone. Distances and directions are from the middle of the visitor's postcode district.`,
   '',
-  `Made with \`npm run directions-sheet\`. Places from OS Open Names (${(await import('../src/data/towns.json', { with: { type: 'json' } })).default.places.length} near England). "° off" is how far the place's direction is from the sun's.`,
+  `Made with \`npm run directions-sheet\`. Places from OS Open Names (${(await import('../src/data/towns.json', { with: { type: 'json' } })).default.places.length} near England).`,
   '',
-  '## How often a place is found, across all ' + codes.length + ' English postcode districts',
+  '## Which wording is used, across all ' + codes.length + ' English postcode districts',
   '',
-  '| Day | Sunrise | Sunset |',
-  '|---|---|---|',
-  ...DATES.map((date) => `| ${longDate(date, true)} | ${pct(found[date][0])} | ${pct(found[date][1])} |`),
+  '| Day | Sunrise: between | roughly over | compass only | Sunset: between | roughly over | compass only |',
+  '|---|---|---|---|---|---|---|',
+  ...DATES.map((date) => `| ${longDate(date, true)} | ${found[date].map(pct).join(' | ')} |`),
   '',
   `## Today's sentence, one district from each postcode area`,
   '',
@@ -70,7 +73,7 @@ for (const code of areas.values()) {
   const d = district(code)!
   const cellsFor = (date: string) => {
     const f = dayFigures(d, date)
-    return [`${compassPoint(f.sunriseAzimuth!)}: ${show(townToward(d, f.sunriseAzimuth!, d.name))}`, `${compassPoint(f.sunsetAzimuth!)}: ${show(townToward(d, f.sunsetAzimuth!, d.name))}`]
+    return [`${compassPoint(f.sunriseAzimuth!)}: ${show(d, f.sunriseAzimuth!, d.name)}`, `${compassPoint(f.sunsetAzimuth!)}: ${show(d, f.sunsetAzimuth!, d.name)}`]
   }
   lines.push(`| ${code} ${d.name} | ${[...cellsFor(shortest), ...cellsFor(longest)].join(' | ')} |`)
 }

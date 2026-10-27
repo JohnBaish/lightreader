@@ -81,11 +81,11 @@ for (const r of near.sort((a, b) => a.name.localeCompare(b.name))) {
 const SAID_AS: Record<string, string> = { 'City of Westminster': 'Westminster', 'City of London': 'the City of London' }
 
 const out = {
-  note: 'Towns, cities and the places postcode districts in England are named after, near England: [name, latitude, longitude] (WGS84, from OS Open Names). For "roughly over …" (SPEC §6). Built by scripts/build-towns.ts.',
+  note: 'Towns, cities and the places postcode districts in England are named after, near England: [name, latitude, longitude, 1 for a town or city] (WGS84, from OS Open Names). For "roughly over …" (SPEC §6). Built by scripts/build-towns.ts.',
   credits: outcodes.credits,
   places: places.map((r) => {
     const { latitude, longitude } = fromBritishGrid(r.e, r.n)
-    return [SAID_AS[r.name] ?? r.name, Number(latitude.toFixed(4)), Number(longitude.toFixed(4))]
+    return [SAID_AS[r.name] ?? r.name, Number(latitude.toFixed(4)), Number(longitude.toFixed(4)), r.type === 'Town' || r.type === 'City' ? 1 : 0]
   }),
 }
 writeFileSync('src/data/towns.json', JSON.stringify(out) + '\n')

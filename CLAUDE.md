@@ -748,3 +748,16 @@ address on `https://lightreader.baish.net/`, so previews work once the domain is
 Sizes as Hindcaster's: title Caprasimo 72px, tagline Figtree 600 at 27px (Hindcaster's file
 says these came unchanged from clockwheel's Clockmaker template; clockwheel's own file
 wasn't checked from here). **Verified:** build (the picture and six `og:` tags in `dist`).
+
+### 2026-10-28 — licence notices kept in the built scripts (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** go ahead with the Astronomy Engine notice. **Found:** the build kept the libraries'
+licence comments in the worker's script but dropped every one from the main script
+(Astronomy Engine's MIT notice and React's `@license` lines alike). **What:**
+`vite.config.ts` sets `build.rolldownOptions.output.comments.legal: true`, so both scripts
+keep them (the main script about 2 KB larger, 154 KB compressed). **Verified:** the built
+main script now holds "Copyright (c) 2019-2023 Don Cross" and React's five `@license` lines;
+`npx tsc -b`, lint, `npm run check` (14 + 12 + 11); the stage 5 browser run at 1200px and
+390px with touch, no errors, no sideways scroll.
+
+John will run `/fresh-look` in a new thread (with a prompt drafted here), on this branch.

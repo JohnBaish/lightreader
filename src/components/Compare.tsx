@@ -11,7 +11,7 @@ import { longDate } from '../lib/format.ts'
 import type { District } from '../lib/postcode.ts'
 import { dayRibbon } from '../lib/ribbon.ts'
 import { dayFigures, type Place } from '../lib/sun.ts'
-import { bearingAndMiles } from '../lib/towns.ts'
+import { bearingAndMiles } from '../lib/geo.ts'
 import { Legend } from './SkyRibbon.tsx'
 
 export function DayStrip({ place, date, label }: { place: Place; date: string; label: string }) {

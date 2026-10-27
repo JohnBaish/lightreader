@@ -14,6 +14,7 @@ import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
 import { dayFigures, daysFigures } from '../src/lib/sun.ts'
 import { dayDetail, yearView } from '../src/lib/yearView.ts'
 import { describeToward, townsBetween } from '../src/lib/towns.ts'
+import { arrange, bestSplit } from '../src/lib/layout.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -231,6 +232,16 @@ check('fresh look: names for every district; "last Friday"; towns by postcode (2
   assert.deepEqual(t('14-7-2027'), { kind: 'date', date: '2027-07-14' })
   const reading = t('Reading')
   assert.ok(reading.kind === 'error' && reading.message.includes('type its postcode'))
+})
+
+check('the sentence cards split into two even columns, in order (John, 28 October)', () => {
+  // Today, This fortnight and Records on the left; the tall Looking ahead on the right.
+  assert.deepEqual(arrange([176, 176, 122, 420], 16), { split: 3, lastWide: false })
+  assert.deepEqual(arrange([100, 100], 16), { split: 1, lastWide: false })
+  // Darkness and Across the UK side by side, Direction across the foot: 70 empty beside
+  // Darkness, against 185 beside Direction in columns.
+  assert.deepEqual(arrange([122, 192, 145], 16), { split: 1, lastWide: true })
+  assert.deepEqual(bestSplit([122, 192, 145], 16), { split: 2, empty: 185 })
 })
 
 console.log(`\n${passed} checks passed`)

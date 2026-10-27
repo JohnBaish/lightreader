@@ -2,8 +2,9 @@
 // the page shows today and the ribbon straight away. A light label that could be read as
 // an ordinary word is a small tag in its band colour (John, 27 October, option B).
 
-import { Fragment, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { BAND_LABEL } from '../lib/bands.ts'
+import { arrange, type Arrangement } from '../lib/layout.ts'
 import type { Group } from '../lib/sentences/index.ts'
 import { sentenceParts } from '../lib/sentences/words.ts'
 
@@ -15,34 +16,73 @@ export function Sentence({ text }: { text: string }) {
   )
 }
 
+function GroupCard({ g, cardRef }: { g: Group; cardRef?: (e: HTMLElement | null) => void }) {
+  return (
+    <section className="card group" ref={cardRef}>
+      <h3>{g.heading}</h3>
+      <ul>{g.sentences.map((s, i) => <li key={i}><Sentence text={s} /></li>)}</ul>
+    </section>
+  )
+}
+
+/** A run of cards between full-width ones, in two columns on a computer, arranged by
+ *  `arrange()` (src/lib/layout.ts) from each card's height in a column, measured as drawn and
+ *  again whenever a card changes size. One card alone spans the width. On a phone the
+ *  columns stack, so the order is kept. */
+function CardRun({ run }: { run: Group[] }) {
+  const cards = useRef(new Map<string, HTMLElement>())
+  const heights = useRef(new Map<string, number>())
+  const box = useRef<HTMLDivElement>(null)
+  const [layout, setLayout] = useState<Arrangement>(() => ({ split: Math.ceil(run.length / 2), lastWide: false }))
+  const order = run.map((g) => g.heading).join('|')
+  useLayoutEffect(() => {
+    if (run.length < 2) return
+    const measure = () => {
+      // Only a card in a column is measured, so a card spanning the width keeps its column
+      // height and the arrangement can't flip back and forth.
+      for (const [heading, e] of cards.current) if (e.closest('.group-col')) heights.current.set(heading, e.getBoundingClientRect().height)
+      const hs = run.map((g) => heights.current.get(g.heading) ?? 0)
+      const gap = parseFloat(getComputedStyle(box.current!).rowGap) || 0
+      const next = arrange(hs, gap)
+      setLayout((was) => (was.split === next.split && was.lastWide === next.lastWide ? was : next))
+    }
+    measure()
+    const watch = new ResizeObserver(measure)
+    cards.current.forEach((e) => watch.observe(e))
+    return () => watch.disconnect()
+  }, [order, run])
+  if (run.length === 1) return <div className="group-wide"><GroupCard g={run[0]} /></div>
+  const card = (g: Group) => (
+    <GroupCard key={g.heading} g={g} cardRef={(e) => { if (e) cards.current.set(g.heading, e); else cards.current.delete(g.heading) }} />
+  )
+  const inColumns = layout.lastWide ? run.slice(0, -1) : run
+  return (
+    <div className="group-run" ref={box}>
+      {/* Two single cards side by side sit centred on each other (John, 28 October). */}
+      <div className={`group-cols${layout.split === 1 && inColumns.length === 2 ? ' group-pair' : ''}`}>
+        <div className="group-col">{inColumns.slice(0, layout.split).map(card)}</div>
+        <div className="group-col">{inColumns.slice(layout.split).map(card)}</div>
+      </div>
+      {layout.lastWide && <div className="group-wide">{card(run[run.length - 1])}</div>}
+    </div>
+  )
+}
+
 /** The groups as cards, in the spec's order; `after` puts a card of its own (such as "Is
  *  it light at…?") straight after the group named, across the full width. */
 export function SentenceGroups({ groups, after = {} }: { groups: Group[] | null; after?: Record<string, ReactNode> }) {
   if (!groups) return <p className="muted working" role="status">Working out the rest of the year…</p>
   const shown = groups.filter((g) => g.sentences.length)
-  // Cards sit two to a row on a computer. A card left on its own before a full-width card
-  // (or at the end) stretches across both columns, rather than leaving a gap beside it (the
-  // fresh look, 2.1; John, 28 October).
-  const alone = new Set<string>()
-  let run: string[] = []
+  // Runs of cards between the full-width ones.
+  const parts: ReactNode[] = []
+  let run: Group[] = []
   for (const g of shown) {
-    run.push(g.heading)
+    run.push(g)
     if (after[g.heading] || g === shown[shown.length - 1]) {
-      if (run.length % 2 === 1) alone.add(run[run.length - 1])
+      parts.push(<CardRun key={run[0].heading} run={run} />)
+      if (after[g.heading]) parts.push(<div key={`after-${g.heading}`} className="group-wide">{after[g.heading]}</div>)
       run = []
     }
   }
-  return (
-    <div className="groups">
-      {shown.map((g) => (
-        <Fragment key={g.heading}>
-          <section className={`card group${alone.has(g.heading) ? ' group-wide' : ''}`}>
-            <h3>{g.heading}</h3>
-            <ul>{g.sentences.map((s, i) => <li key={i}><Sentence text={s} /></li>)}</ul>
-          </section>
-          {after[g.heading] && <div className="group-wide">{after[g.heading]}</div>}
-        </Fragment>
-      ))}
-    </div>
-  )
+  return <div className="groups">{parts}</div>
 }

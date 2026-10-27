@@ -100,7 +100,12 @@ body { margin: 0; background: var(--color-bg); }
 .ribbon-vstrip button { position: absolute; left: 0; right: 0; border: 0; padding: 0; cursor: pointer; }
 
 /* The sentence groups, two to a row on a computer (as the mock-up). */
-.groups { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: center; /* side-by-side cards centred on each other (John, 28 October) */ }
+.groups { display: flex; flex-direction: column; gap: var(--space-4); }
+/* Two columns of cards, split where they come out most even (Sentences.tsx, CardRun). */
+.group-run { display: flex; flex-direction: column; gap: var(--space-4); }
+.group-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }
+.group-pair { align-items: center; }
+.group-col { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
 .group { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-2); }
 .group ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .group li::marker { color: var(--color-accent); }
@@ -110,7 +115,7 @@ body { margin: 0; background: var(--color-bg); }
 .band-tag.band-daylight, .band-tag.band-half-light { color: var(--color-text); }
 
 /* A card across the full width of the groups (Is it light at…?). */
-.group-wide { grid-column: 1 / -1; }
+.group-wide { display: flex; flex-direction: column; }
 
 /* Is it light at…? (mock-up option B of "your times") */
 .chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
@@ -218,7 +223,7 @@ body { margin: 0; background: var(--color-bg); }
   .today-big .dot { display: none; }
   .today-big { display: flex; flex-direction: column; }
   .today-blocks { flex-direction: column; gap: var(--space-3); }
-  .groups { grid-template-columns: 1fr; }
+  .group-cols { grid-template-columns: 1fr; }
   .compare { padding: var(--space-4); }
   .pair-row { grid-template-columns: 1fr; gap: 2px; }
   .pair-axis .pair-label { display: none; }

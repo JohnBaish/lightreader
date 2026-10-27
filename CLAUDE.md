@@ -946,3 +946,36 @@ does that, but also floats "Records and runs" halfway down beside the much talle
 ahead"; picture `design/previews/fl-after-sentences-wide.png` sent to John to decide
 whether to keep it for every pair. **Verified:** `npx tsc -b`, lint, `npm run check`
 (14 + 14 + 12); 1200px and 390px with touch, no errors, no sideways scroll. Not merged.
+
+### 2026-10-28 — the sentence cards arranged automatically (branch `claude/nice-goodall-j1r6wu`, not yet on `main`)
+
+**John:** rather than centring every pair, "auto arrange placement and width of boxes": in
+today's case Today, This fortnight and Records and runs one above the other on the left, and
+Looking ahead on the right.
+
+**What:** `src/lib/layout.ts` (`arrange()`, `bestSplit()`) and `CardRun` in `Sentences.tsx`
+replace the two-to-a-row grid, the centring tried before and the lone-card rule. On a
+computer:
+- each run of cards between full-width ones keeps its order, reading down the left column
+  then down the right;
+- the split is where the two columns are most even, the least empty space beside the shorter;
+- with three or more cards, the last may instead span the width under the two columns, when
+  that leaves less empty space;
+- two single cards side by side are centred on each other, which gives John's Darkness
+  against Across the UK;
+- heights are measured as drawn, and again whenever a card changes size (ResizeObserver).
+  Only cards in a column are measured, so the choice can't flip back and forth.
+
+On a phone the columns stack, so the order is unchanged. Today in Reading, Brighton and
+Berwick: Today, This fortnight and Records and runs on the left; Looking ahead on the right;
+Darkness centred beside Across the UK, with Direction across the foot.
+
+**Also found and fixed:** 4.2's distance check in `Compare.tsx` imported `towns.ts`, which put
+the whole town list into the main script (155 KB compressed went to 177 KB, the build's
+500 KB warning). That version is live on `main` now. The bearing and distance sum moved to
+`src/lib/geo.ts`; the main script is back to 155 KB compressed.
+
+**Verified:** `npx tsc -b`, lint, `npm run check` (14 + 14 + 13; new: `arrange()` on today's and
+the bottom run's real heights). In Chromium at 1200px (also 900px) for RG1, TD15 and BN1, and
+at 390px with touch: no errors, no sideways scroll, the phone order unchanged; the stage 5 run
+again. Pictures `design/previews/layout-*.png`.

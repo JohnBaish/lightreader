@@ -708,3 +708,12 @@ C read as a sun on the horizon; B's arc thins to a curl. Nothing wired in yet.
 John: apart from his two changes (the line under the heading and "your recent selections"),
 the rest of the opening page's wording is fine as it stands. `design/landing-wording-2026-10-28.md`
 marked agreed. Docs only.
+
+### 2026-10-28 — icon A chosen; the search description agreed (branch `claude/nice-goodall-j1r6wu`)
+
+**John:** dark mode "looks really really good"; icon A ("really good"); the search
+description to end "and compared with dates or places you choose." (139 characters, so it
+fits: "Free sunrise, sunset and twilight times for any postcode in England: today, through
+the year, and compared with dates or places you choose."). **What:** `public/favicon.svg`
+(option A), linked from `index.html`; the build copies it. The description goes in with the
+title and the rest of the search tags once the title is confirmed (PLAN).

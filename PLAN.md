@@ -215,7 +215,12 @@ Branch: `stage-7-launch`
 - Dark mode with Hindcaster's switch, light by default (question 2 decides
   the colours). Mock-ups in both themes first.
   **Built (28 October), for John to look at on the preview.**
-- Favicon options, then a link-preview image (house style §7).
+- Favicon options, then a link-preview image (house style §7). **John chose A (28
+  October), now `public/favicon.svg`.**
+- Search description agreed (John, 28 October, 139 characters): "Free sunrise, sunset and
+  twilight times for any postcode in England: today, through the year, and compared with
+  dates or places you choose." Title draft: "Lightreader – sunrise, sunset and twilight
+  times in England".
 - Search: title, description, canonical address, `robots.txt`, `sitemap.xml`
   (`SEO-HANDOVER.md` checklist).
 - A `/fresh-look` review before launch.

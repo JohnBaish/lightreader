@@ -212,6 +212,8 @@ Branch: `stage-7-launch`
 - Search: title, description, canonical address, `robots.txt`, `sitemap.xml`
   (`SEO-HANDOVER.md` checklist).
 - A `/fresh-look` review before launch.
+- Astronomy Engine's MIT notice: the worker's script carries it, but the main script
+  (which also includes the library) loses it in the build. Keep it there too (28 October).
 - **John:** the `lightreader.baish.net` domain and Web Analytics in Vercel,
   then Search Console, then the hub card with the hub's title and
   description updated, then the baish.net overview.

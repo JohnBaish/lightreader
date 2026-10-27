@@ -561,3 +561,11 @@ The rest is the figures themselves. How long it takes on John's iPhone isn't kno
 **Verified:** `npx tsc -b`, lint, `npm run check` (14 + 12 + 10; the ribbon still agrees
 with the tables every day); the stage 4 and 5 browser runs at 1200px and 390px with touch:
 no errors, no sideways scroll.
+
+### 2026-10-28 — the opening page's wording, for John (branch `claude/nice-goodall-j1r6wu`)
+
+John asked for the wording a first-time visitor sees, to redraft it. Written out word for
+word in `design/landing-wording-2026-10-28.md` (top bar, the opening card, its messages,
+"About these figures", the footer and credits). Docs only. Noticed while checking: the
+build keeps Astronomy Engine's MIT notice in the worker's script but not in the main
+script, which also includes the library; noted for stage 7 in PLAN.

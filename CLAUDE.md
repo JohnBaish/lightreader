@@ -1245,3 +1245,13 @@ tool came to 191 characters); `SEO-HANDOVER.md` gains Lightreader's column. Merg
 **Still to do:** the overview PDF and the 24-hour exceptions in clockwheel's house style; John's
 Search Console steps (Lightreader's sitemap and indexing; re-request indexing of www.baish.net for
 the new description).
+
+### 2026-10-28 — PARKED
+
+Everything is committed and live (Lightreader `main` and the branch the same; clockwheel `main`
+has the hub card). Nothing is half-done. **Waiting on John:**
+1. Search Console: Lightreader's sitemap and Request indexing; re-request www.baish.net.
+2. Whether to add searchable text to the opening page (a short folded "what it is" section, or a
+   shorter "About these figures"); drafts offered, not written.
+3. Then, in clockwheel: the overview PDF, and Lightreader on the house style's list of 24-hour
+   exceptions (§15).

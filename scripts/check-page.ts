@@ -104,8 +104,8 @@ check('the light now and how long it has left, beside "Now" (John, 28 October)',
   const at = (iso: string) => nowLight(ribbon(district('RG4')!, new Date(iso)))
   // Half-light begins at 06:15:27 (shown 06:15); sunset 16:44:22; very dark ends 04:59:12.
   assert.deepEqual(at('2026-10-28T05:46:00Z'), { band: 'Dark', left: '29m left' })
-  assert.deepEqual(at('2026-10-28T13:00:00Z'), { band: 'Light', left: '3h 44m left' })
-  assert.deepEqual(at('2026-10-28T20:00:00Z'), { band: 'True night', left: '8h 59m left' })
+  assert.deepEqual(at('2026-10-28T13:00:00Z'), { band: 'Light', left: '3h\u00a044m left' })
+  assert.deepEqual(at('2026-10-28T20:00:00Z'), { band: 'True night', left: '8h\u00a059m left' })
 })
 
 check('compare: what someone types, read as a date or a place', () => {
@@ -131,15 +131,15 @@ check('compare: what someone types, read as a date or a place', () => {
 check("compare: the spec's three examples, with today's figures", () => {
   const here = dayFigures(RG1, '2026-10-27')
   assert.deepEqual(compareDate(here, dayFigures(RG1, '2026-12-25'), '2026-10-27'), [
-    'On Friday December 25th the sun rises at 08:08, 1h 20m later than today.',
+    'On Friday December 25th the sun rises at 08:08, 1h\u00a020m later than today.',
     'It sets at 15:59, 47m earlier.',
     'Half-light ends at 16:40, 41m earlier.',
-    "That's 2h 7m less daylight: 7h 51m in all.",
+    "That's 2h\u00a07m less daylight: 7h\u00a051m in all.",
   ])
   assert.deepEqual(compareDate(here, dayFigures(RG1, '2026-07-14'), '2026-10-27'), [
-    'On Tuesday July 14th the sun rose at 05:03, 1h 45m earlier than today, and set at 21:15, 4h 29m later.',
-    'Half-light ended at 22:00, 4h 39m later than today.',
-    'There was 6h 14m more daylight: 16h 12m in all.',
+    'On Tuesday July 14th the sun rose at 05:03, 1h\u00a045m earlier than today, and set at 21:15, 4h\u00a029m later.',
+    'Half-light ended at 22:00, 4h\u00a039m later than today.',
+    'There was 6h\u00a014m more daylight: 16h\u00a012m in all.',
     'There was no true night.',
   ])
   const ab = readTarget('Aberdeen', RG1, '2026-10-27') as { place: { latitude: number; longitude: number } }
@@ -147,7 +147,7 @@ check("compare: the spec's three examples, with today's figures", () => {
     'In Aberdeen today the sun rose at 07:08, 20m later than in Reading.',
     'It sets at 16:36, 11m earlier.',
     'Half-light ends at 17:16, 5m earlier.',
-    "That's 31m less daylight: 9h 27m in all.",
+    "That's 31m less daylight: 9h\u00a027m in all.",
   ])
 })
 
@@ -215,8 +215,8 @@ check('the year: every day from midnight to midnight, agreeing with the tables',
     assert.equal(light.to, minutes(row.sunset!), date)
   })
   const oct = v.months.find((m) => m.month === '2026-10')!
-  assert.deepEqual(oct.rows[26], { date: '2026-10-27', civilDawn: '06:14', sunrise: '06:48', sunset: '16:46', civilDusk: '17:21', nauticalDusk: '18:00', daylight: '9h 58m' })
-  assert.equal(dayDetail(oct.rows[26]), '9h 58m of daylight. Half-light 06:14 to 17:21; very dark from 18:00.')
+  assert.deepEqual(oct.rows[26], { date: '2026-10-27', civilDawn: '06:14', sunrise: '06:48', sunset: '16:46', civilDusk: '17:21', nauticalDusk: '18:00', daylight: '9h\u00a058m' })
+  assert.equal(dayDetail(oct.rows[26]), '9h\u00a058m of daylight. Half-light 06:14 to 17:21; very dark from 18:00.')
   assert.deepEqual(oct.clockMarks, [{ date: '2026-10-25', text: 'Clocks went back on Sunday October 25th. Times from here are GMT.' }])
   assert.deepEqual(v.months.find((m) => m.month === '2027-03')!.clockMarks, [{ date: '2027-03-28', text: 'Clocks go forward on Sunday March 28th. Times from here are BST.' }])
   // May 20th: true night begins after midnight (SPEC §9's "to check").
@@ -227,7 +227,7 @@ check('the year: every day from midnight to midnight, agreeing with the tables',
   const fy = yearChanges(td15, far.today, far)
   const june21 = yearView(far, fy.from, fy.to, fy.changes).months[2].rows[20]
   assert.equal(june21.nauticalDusk, null)
-  assert.equal(dayDetail(june21), '17h 33m of daylight. Half-light 03:22 to 22:58; the sky never gets very dark.')
+  assert.equal(dayDetail(june21), '17h\u00a033m of daylight. Half-light 03:22 to 22:58; the sky never gets very dark.')
 })
 
 check('fresh look: names for every district; "last Friday"; towns by postcode (28 October)', () => {

@@ -1112,3 +1112,20 @@ label column on a computer is 175px in the year card so the full name fits on on
 Pictures `design/previews/year-day-phone.png`, `-computer-a.png` (heading kept),
 `-computer-b.png` (heading removed, shown by adding the phone's rule in the browser only).
 **Verified:** checks 14 + 16 + 14, tsc, lint, build; no errors, no sideways scroll.
+
+### 2026-10-28 — option B for the year card; "1h 12m" kept together; live
+
+**John:** option B (no heading above a chosen day on a computer either; today keeps its
+heading); keep "1h 12m" together everywhere; put it live, with the weekday change from earlier
+this morning. **What:** `.kicker-chosen` hidden at every width; `duration()` in `format.ts` joins
+hours and minutes with a non-breaking space (the checks' expected strings use ` `). `main`
+fast-forwarded. Pictures `design/previews/year-day-phone.png` and `year-day-computer.png`.
+**Verified:** checks 14 + 16 + 14, tsc, lint, build; Chromium at 1200px and 390px with touch
+(year card, sentence cards, the ribbon's Now line): no errors, no sideways scroll.
+
+### 2026-10-28 — PARKED
+
+Everything is committed and live; `main` and the branch are the same. Nothing is half-done.
+**For John:** the `lightreader.baish.net` domain and Web Analytics in Vercel, then Search
+Console. **Needs clockwheel access:** the baish.net hub card, the overview PDF, and Lightreader
+in the house style's list of 24-hour exceptions.

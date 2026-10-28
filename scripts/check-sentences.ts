@@ -32,11 +32,11 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
   assert.deepEqual(groups, [
     { heading: 'Today', sentences: [
       'Sunrise 06:48, sunset 16:46.',
-      '9h 58m of daylight.',
+      '9h\u00a058m of daylight.',
       'Days are shortening by nearly 4m a day, close to the fastest they ever change.',
     ] },
     { heading: 'This fortnight', sentences: [
-      'A week ago, before the clocks went back, the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later). Days were 26m longer.',
+      'A week ago, before the clocks went back, the sun rose at 07:36 (48m later) and set at 18:00 (1h\u00a014m later). Days were 26m longer.',
       'Next Tuesday the sun rises at 07:01 (12m later) and sets at 16:33 (13m earlier).',
     ] },
     { heading: 'Looking back', sentences: [
@@ -47,7 +47,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The sun rises after 07:00 from November 3rd to February 23rd.',
       'The sun sets before 16:00 from November 30th to December 25th.',
       'Earliest sunset: 15:55, every day from December 9th to December 16th. Within that period, the very earliest are on December 12th and December 13th, a fraction of a second apart.',
-      'Shortest day: December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m less than today.',
+      'Shortest day: December 21st, 55 days from now, with 7h\u00a050m of daylight, 2h\u00a08m less than today.',
       'Latest sunrise: 08:09, every day from December 26th to January 4th. Within that period, the very latest are on December 30th and December 31st, a fraction of a second apart.',
       'Spring equinox: March 20th, 144 days from now, with sunset at 18:16.',
     ] },
@@ -60,8 +60,8 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'The sun is up at 17:30 again from February 22nd.',
     ] },
     { heading: 'Darkness', sentences: [
-      'Very dark or true night from 18:00 to 05:36 (11h 36m).',
-      "Tonight's true night lasts 10h 19m.",
+      'Very dark or true night from 18:00 to 05:36 (11h\u00a036m).',
+      "Tonight's true night lasts 10h\u00a019m.",
     ] },
     { heading: 'Across the UK', sentences: [
       "There's an early sunset today in Norwich at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance). Reading's is at 16:46.",
@@ -99,7 +99,7 @@ check('the clock-change line: ten weeks ahead, the day before and the day itself
 
 check('this fortnight names a clock change in between, either way', () => {
   assert.deepEqual(fortnightSentences(ctxFor('RG1', '2027-03-28T10:00:00Z'))[0],
-    'A week ago, before the clocks went forward, the sun rose at 06:05 (44m earlier) and set at 18:18 (1h 12m earlier). Days were 28m shorter.')
+    'A week ago, before the clocks went forward, the sun rose at 06:05 (44m earlier) and set at 18:18 (1h\u00a012m earlier). Days were 28m shorter.')
   assert.match(fortnightSentences(ctxFor('RG1', '2027-03-23T10:00:00Z'))[1], /^Next Tuesday, after the clocks go forward, the sun rises at /)
   assert.match(fortnightSentences(ctxFor('RG1', '2026-12-21T10:00:00Z'))[0], /^A week ago the sun rose at 08:02 \(5m earlier\)/)
 })
@@ -158,7 +158,7 @@ check('rule E: no true night, and not even very dark in the far north at midsumm
 check('across the UK: cities at the ends, edge towns in brackets; a place near the visitor left out', () => {
   assert.deepEqual(acrossUkSentences(ctxFor('RG1', '2027-06-21T10:00:00Z')), [
     "There's an early sunset today in Canterbury at 21:15 (21:14 in Dover), and a late one in Inverness at 22:19 (22:35 in Stornoway). Reading's is at 21:25.",
-    'Reading gets 13m more daylight than Truro today, and 1h 24m less than Inverness.',
+    'Reading gets 13m more daylight than Truro today, and 1h\u00a024m less than Inverness.',
   ])
   // Penzance itself is left out, so Penzance is beyond both ends.
   assert.deepEqual(acrossUkSentences(ctxFor('TR18', '2026-10-27T09:02:00Z')), [
@@ -181,7 +181,7 @@ check('looking ahead: the next equinox, whenever it is, in date order (John, 28 
   assert.deepEqual(eq('2027-03-20T10:00:00Z'), ['Spring equinox: today, with sunset at 18:16.'])
   // After the longest day, a week inside the three months; sunset 18:00:34 GMT, 19:01 BST.
   assert.deepEqual(eq('2027-06-01T10:00:00Z'), [
-    'Longest day: June 21st, 20 days from now, with 16h 38m of daylight, 20m more than today.',
+    'Longest day: June 21st, 20 days from now, with 16h\u00a038m of daylight, 20m more than today.',
     'Autumn equinox: September 23rd, 114 days from now, with sunset at 19:01.',
   ])
   assert.equal(eq('2027-09-22T10:00:00Z')[0], 'Autumn equinox: tomorrow, September 23rd (Thursday), with sunset at 19:01.')
@@ -232,7 +232,7 @@ check('the fresh look and John\'s amendments (28 October)', () => {
     'Next Tuesday the sun rises at 07:25 (12m later) and sets at 16:12 (10m earlier).',
   ])
   assert.equal(fortnightSentences(ctxFor('RG1', '2026-10-20T10:00:00Z'))[1],
-    "Next Tuesday, after the clocks go back, the sun rises at 06:48 (48m earlier) and sets at 16:46 (1h 14m earlier). That's 26m less daylight.")
+    "Next Tuesday, after the clocks go back, the sun rises at 06:48 (48m earlier) and sets at 16:46 (1h\u00a014m earlier). That's 26m less daylight.")
   // 2.2 and J8: around the equinox, one plain sentence.
   assert.equal(acrossUkSentences(ctxFor('RG1', '2027-03-18T10:00:00Z'))[1], 'Today every place in the UK gets about the same amount of daylight.')
   assert.equal(acrossUkSentences(ctxFor('RG1', '2027-03-17T10:00:00Z'))[1], 'Reading gets 2m more daylight than Inverness today, and about the same amount of daylight as Truro.')

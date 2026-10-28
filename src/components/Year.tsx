@@ -248,7 +248,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         <Legend />
         {row && (
           <div className="year-detail" aria-live="polite">
-            {/* On a phone, a day other than today is named by its strip below instead (John, 28 October). */}
+            {/* A day other than today is named by its strip below instead (John, 28 October). */}
             <div className={`kicker${day === v.today ? '' : ' kicker-chosen'}`}>{longDate(day, true)}{day === v.today ? ' · Today' : ''}</div>
             {day !== v.today ? (
               <DayAgainstToday d={d} day={day} today={v.today} />

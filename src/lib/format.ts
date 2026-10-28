@@ -54,7 +54,8 @@ export function duration(ms: number): string {
   const h = Math.floor(minutes / 60)
   const m = minutes % 60
   if (h === 0) return `${m}m`
-  return m === 0 ? `${h}h` : `${h}h ${m}m`
+  // A non-breaking space, so "1h 12m" never splits across two lines (John, 28 October).
+  return m === 0 ? `${h}h` : `${h}h\u00a0${m}m`
 }
 
 /** The 16 points of the compass, as words, for an azimuth in degrees from true north

@@ -207,6 +207,9 @@ body { margin: 0; background: var(--color-bg); }
 .year-detail-big .pair { white-space: nowrap; }
 .year-detail .pairs { width: 100%; }
 .year-detail .pair-row { grid-template-columns: 175px 1fr; }
+/* A chosen day is named by its strip, so no heading above it (John, 28 October, option B);
+   today's own detail keeps its heading. */
+.year-detail .kicker-chosen { display: none; }
 .year-detail .clock-note { background: var(--color-surface); }
 .year-compare { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
 .year-compare li::marker { color: var(--color-accent); }
@@ -230,7 +233,6 @@ body { margin: 0; background: var(--color-bg); }
   .compare { padding: var(--space-4); }
   .pair-row, .year-detail .pair-row { grid-template-columns: 1fr; gap: 2px; }
   .pair-axis .pair-label { display: none; }
-  .year-detail .kicker-chosen { display: none; }
   /* 44px to tap on a phone (house rule; the fresh look, 6.3). The chips' ✕ keeps its look
      and gains a larger tap area around it. */
   .chip button { width: 36px; height: 36px; position: relative; }

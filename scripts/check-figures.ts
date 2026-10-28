@@ -52,9 +52,9 @@ check('dates: "Tuesday October 27th", with the year only when asked', () => {
     ['1st', '2nd', '3rd', '4th', '11th', '12th', '13th', '21st', '22nd', '23rd', '31st'])
 })
 
-check('durations: "1h 20m", "47m", "2h", "less than a minute"', () => {
+check('durations: "1h\u00a020m", "47m", "2h", "less than a minute"', () => {
   const m = 60_000
-  assert.equal(duration(80 * m), '1h 20m')
+  assert.equal(duration(80 * m), '1h\u00a020m')
   assert.equal(duration(47 * m), '47m')
   assert.equal(duration(120 * m), '2h')
   assert.equal(duration(119.6 * m), '2h') // rounds to 120 minutes
@@ -85,7 +85,7 @@ check('Reading (RG1), Tuesday October 27th 2026: every event, to the second', ()
   assert.ok(gap(d.sunrise, at('2026-10-27T06:48:23Z')) < 2)
   assert.equal(clock(d.sunrise!), '06:48')
   assert.equal(clock(d.sunset!), '16:46')
-  assert.equal(duration(daylight(d)), '9h 58m')
+  assert.equal(duration(daylight(d)), '9h\u00a058m')
   assert.equal(compassPoint(d.sunriseAzimuth!), 'east-south-east')
   assert.equal(compassPoint(d.sunsetAzimuth!), 'west-south-west')
 })

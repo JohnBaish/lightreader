@@ -1010,7 +1010,7 @@ John, just before stopping: once it's dark, the top card could switch to tomorro
 and tomorrow's sunset. Noted in PLAN ("For John to come back to") with the two points to
 settle (which moment is "dark"; the headings); nothing built. Docs only.
 
-### 2026-10-29 — the top card after dark; the next equinox; Compare's hint (branch `claude/nice-goodall-j1r6wu`, not yet on `main`)
+### 2026-10-28 — the top card after dark; the next equinox; Compare's hint (branch `claude/nice-goodall-j1r6wu`, not yet on `main`)
 
 **John:** agreed the after-dark top card (dark = half-light over; "Tomorrow · …" with sunrise
 and sunset); Compare's example postcode BS1; the next equinox in "Looking ahead" with its date,

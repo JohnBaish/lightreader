@@ -175,7 +175,7 @@ check('coming up: only the soonest hour for sunrise and for sunset; the spring r
   assert.ok(comingUpSentences(ctxFor('RG1', '2026-12-21T10:00:00Z')).includes('First sunset at 16:00 or later: Saturday December 26th.'))
 })
 
-check('looking ahead: the next equinox, whenever it is, in date order (John, 29 October)', () => {
+check('looking ahead: the next equinox, whenever it is, in date order (John, 28 October)', () => {
   const eq = (iso: string) => comingUpSentences(ctxFor('RG1', iso)).filter((s) => /equinox|Longest day|Shortest day/.test(s))
   assert.deepEqual(eq('2027-03-19T10:00:00Z'), ['Spring equinox: tomorrow, Saturday March 20th, with sunset at 18:16.'])
   assert.deepEqual(eq('2027-03-20T10:00:00Z'), ['Spring equinox: today, with sunset at 18:16.'])

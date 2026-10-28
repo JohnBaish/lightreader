@@ -9,7 +9,7 @@
 // - Turning points: the earliest or latest sunrise or sunset, with the run of days showing
 //   that minute and the very day (rules B and G), and the shortest or longest day.
 // - The clock change, only in the ten weeks before it.
-// - The next equinox, whenever it is (John, 29 October): its date, how far off, and that
+// - The next equinox, whenever it is (John, 28 October): its date, how far off, and that
 //   day's sunset.
 
 import { Seasons } from 'astronomy-engine'

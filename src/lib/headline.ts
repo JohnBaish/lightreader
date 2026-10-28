@@ -1,7 +1,7 @@
 // The top of the page (SPEC §5, "Today"), which changes with the time of day (John, 27
 // October): before the sun is highest, today's sunrise and sunset; from then on, today's
 // sunset and then tomorrow's sunrise, each under its own small heading; and once it's dark
-// (half-light over, at the minute shown, as everywhere else on the page; John, 29 October),
+// (half-light over, at the minute shown, as everywhere else on the page; John, 28 October),
 // tomorrow's sunrise and sunset. Where half-light lasts all night, that never happens.
 
 import { clock, longDate } from './format.ts'

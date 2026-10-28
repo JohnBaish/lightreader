@@ -1179,3 +1179,13 @@ and sunset. SPEC §5 annotated. **Verified:** checks 14 + 16 + 15 (the top card 
 390px with touch at 12:00, 16:50 and 18:30: the three states, no errors, no sideways scroll.
 **Mistake on the way:** rewriting the top card's check removed the "Now … left" check beside it;
 caught by the type check and put back unchanged.
+
+### 2026-10-28 — side-by-side cards line up at the top again; "Reading's is at …" out (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** undo the centring that moved Darkness down beside Across the UK, and remove "Caversham's
+is at 16:44" from Across the UK. **What:** `.group-pair` removed (`Sentences.tsx`, `global.css`), so
+two single cards side by side line up at the top like the rest. `acrossUk.ts`: the visitor's own
+sunset is said only when it's beyond both ends ("; Penzance's is later still, at 17:08."). Checks
+updated (Reading today and at midsummer). **Verified:** checks 14 + 16 + 15, tsc, lint, build;
+Chromium at 1200px (Darkness and Across the UK both start at the same height) and 390px with touch:
+no errors, no sideways scroll. Picture `design/previews/darkness-across-top.png`.

@@ -58,8 +58,8 @@ function CardRun({ run }: { run: Group[] }) {
   const inColumns = layout.lastWide ? run.slice(0, -1) : run
   return (
     <div className="group-run" ref={box}>
-      {/* Two single cards side by side sit centred on each other (John, 28 October). */}
-      <div className={`group-cols${layout.split === 1 && inColumns.length === 2 ? ' group-pair' : ''}`}>
+      {/* Side by side, cards line up at the top (John, 28 October: no longer centred). */}
+      <div className="group-cols">
         <div className="group-col">{inColumns.slice(0, layout.split).map(card)}</div>
         <div className="group-col">{inColumns.slice(layout.split).map(card)}</div>
       </div>

@@ -64,7 +64,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       "Tonight's true night lasts 10h\u00a019m.",
     ] },
     { heading: 'Across the UK', sentences: [
-      "There's an early sunset today in Norwich at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance). Reading's is at 16:46.",
+      "There's an early sunset today in Norwich at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance).",
       'Reading gets 33m more daylight than Inverness today, and 5m less than Truro.',
     ] },
     { heading: 'Direction of sunrise and sunset', sentences: [
@@ -157,7 +157,7 @@ check('rule E: no true night, and not even very dark in the far north at midsumm
 
 check('across the UK: cities at the ends, edge towns in brackets; a place near the visitor left out', () => {
   assert.deepEqual(acrossUkSentences(ctxFor('RG1', '2027-06-21T10:00:00Z')), [
-    "There's an early sunset today in Canterbury at 21:15 (21:14 in Dover), and a late one in Inverness at 22:19 (22:35 in Stornoway). Reading's is at 21:25.",
+    "There's an early sunset today in Canterbury at 21:15 (21:14 in Dover), and a late one in Inverness at 22:19 (22:35 in Stornoway).",
     'Reading gets 13m more daylight than Truro today, and 1h\u00a024m less than Inverness.',
   ])
   // Penzance itself is left out, so Penzance is beyond both ends.

@@ -32,8 +32,9 @@ export function acrossUkSentences(ctx: SkyContext, places: NamedPlace[] = UK_PLA
 
   // The ends among the cities; an edge town in brackets when it goes further (John, 27
   // October), in John's wording of 28 October (J7): "There's an early sunset today in Norwich
-  // at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance).
-  // Reading's is at 16:46."
+  // at 16:35 (16:21 in Lerwick), and a late one in Truro at 17:05 (17:08 in Penzance)."
+  // The visitor's own sunset only when it's beyond both ends ("; Penzance's is later still,
+  // at 17:08."); John, 28 October, took out "Reading's is at 16:46."
   const sunset = (d: DayFigures) => d.sunset!.getTime()
   const [early, late] = ends(cities, sunset)
   const [earliest, latest] = ends(near, sunset)
@@ -42,7 +43,7 @@ export function acrossUkSentences(ctx: SkyContext, places: NamedPlace[] = UK_PLA
   const mine = here.sunset.getTime()
   const yours = mine < sunset(earliest.day) ? `; ${ctx.name}'s is earlier still, at ${clock(here.sunset)}.`
     : mine > sunset(latest.day) ? `; ${ctx.name}'s is later still, at ${clock(here.sunset)}.`
-    : `. ${ctx.name}'s is at ${clock(here.sunset)}.`
+    : '.'
   const out = [`There's an early sunset today in ${early.name} at ${clock(early.day.sunset!)}${also(early, earliest, at)}, and a late one in ${late.name} at ${clock(late.day.sunset!)}${also(late, latest, at)}${yours}`]
 
   // "Reading gets 33m more daylight than Inverness today, and 5m less than Truro." The cities

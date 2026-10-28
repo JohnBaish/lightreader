@@ -106,7 +106,6 @@ body { margin: 0; background: var(--color-bg); }
 /* Two columns of cards, split where they come out most even (Sentences.tsx, CardRun). */
 .group-run { display: flex; flex-direction: column; gap: var(--space-4); }
 .group-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }
-.group-pair { align-items: center; }
 .group-col { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
 .group { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-2); }
 .group ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }

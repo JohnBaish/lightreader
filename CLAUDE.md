@@ -1034,3 +1034,10 @@ four dates, the top card at 17:20 and 17:21). In Chromium at 1200px and 390px wi
 at 17:00 and 18:30 today: no errors, no sideways scroll. Pictures
 `design/previews/after-dark-*.png`, `looking-ahead-equinox-narrow.png`, `compare-bs1-narrow.png`.
 
+
+### 2026-10-28 — Compare's refusal example KT12; live
+
+**John:** Compare's message for something it doesn't know now says "type its postcode (like
+KT12)" (was TR18; `compare.ts`). Then he said put it live: `main` fast-forwarded to the branch,
+with the top card after dark, the next equinox and the BS1 hint. **Verified:** `npx tsc -b`,
+lint, build, `npm run check` (14 + 15 + 13).

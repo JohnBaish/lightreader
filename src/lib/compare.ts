@@ -38,7 +38,7 @@ function solsticeDay(place: Place, today: string, longest: boolean, last: boolea
 }
 
 /** The fresh look, 4.3 (a): only cities are known by name, so say how to find a town. */
-const NOT_KNOWN = "That isn't a date or place Lightreader knows. Try one like Christmas or 14/7. For a town in England, type its postcode (like TR18). Cities can be typed by name."
+const NOT_KNOWN = "That isn't a date or place Lightreader knows. Try one like Christmas or 14/7. For a town in England, type its postcode (like KT12). Cities can be typed by name."
 
 /** What someone typed, as a date or a place to compare with. */
 export function readTarget(typed: string, place: Place, today: string): Target {

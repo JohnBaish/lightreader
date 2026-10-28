@@ -1226,3 +1226,9 @@ Phones unchanged (one column). **Verified:** checks 14 + 16 + 15, tsc, lint, bui
 1200px (light and dark) and 900px (RG4, TD15): both columns end at the same height, the layout
 stays put, no errors, no sideways scroll; 390px with touch unchanged. Pictures
 `design/previews/cards-filled-*.png`. Held with the equinox change until John has seen it.
+
+### 2026-10-28 — live: the equinox line and the filled columns
+
+**John:** "I love this. Make it all live." `main` fast-forwarded to the branch: the equinox line
+without its sunset, and the last card in each column filling it. **Verified:** checks 14 + 16 + 15,
+tsc, lint, build first.

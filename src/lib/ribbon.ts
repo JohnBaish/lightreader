@@ -1,7 +1,8 @@
 // The next 24 hours, for the sky ribbon (SPEC §5, mock-up option B): the stretches of
 // light from now to the same time tomorrow, and the changes between them.
 
-import { BAND_AFTER, bandAt, timeline, type Band, type EventKind } from './bands.ts'
+import { BAND_AFTER, BAND_LABEL, bandAt, timeline, type Band, type EventKind } from './bands.ts'
+import { duration } from './format.ts'
 import { daysFigures, type Place } from './sun.ts'
 import { addDays, ukInstant, ukParts } from './ukTime.ts'
 
@@ -61,6 +62,15 @@ export function ribbon(place: Place, now: Date): Ribbon {
     ? { at: midnightAt, day: SHORT_DAY[new Date(tomorrow + 'T12:00:00Z').getUTCDay()] }
     : null
   return { from: now, to, segments, ticks, midnight }
+}
+
+/** The light now and how long it has left, beside "Now" (John, 28 October): "Dark" and
+ *  "29m left", from the minutes shown. No "left" if it lasts the whole 24 hours. */
+const minuteOf = (d: Date) => Math.round(d.getTime() / 60_000)
+export function nowLight(r: Ribbon): { band: string; left: string | null } {
+  const first = r.segments[0]
+  const left = r.segments.length > 1 ? `${duration((minuteOf(first.to) - minuteOf(r.from)) * 60_000)} left` : null
+  return { band: BAND_LABEL[first.band], left }
 }
 
 /** Where `at` falls along the ribbon, from 0 to 1. */

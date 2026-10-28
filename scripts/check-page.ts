@@ -10,7 +10,7 @@ import { clockNote, compareDate, comparePlace, readTarget } from '../src/lib/com
 import { headline } from '../src/lib/headline.ts'
 import { lightAtYear, yearChanges } from '../src/lib/lightAtYear.ts'
 import { makeContext } from '../src/lib/sentences/index.ts'
-import { placeLabels, ribbon, spreadLabels } from '../src/lib/ribbon.ts'
+import { placeLabels, ribbon, spreadLabels, nowLight } from '../src/lib/ribbon.ts'
 import { dayFigures, daysFigures } from '../src/lib/sun.ts'
 import { dayDetail, yearView } from '../src/lib/yearView.ts'
 import { describeToward, townsBetween } from '../src/lib/towns.ts'
@@ -98,6 +98,14 @@ check('the top of the page: today\'s sunrise and sunset until the sun is highest
   assert.deepEqual(headline(new Date('2026-10-27T17:21:00Z'), today, tomorrow), dark)
   assert.deepEqual(headline(new Date('2026-10-27T22:00:00Z'), today, tomorrow), dark)
   assert.equal(headline(new Date('2026-10-27T11:47:00Z'), today, tomorrow).length, 1)
+})
+
+check('the light now and how long it has left, beside "Now" (John, 28 October)', () => {
+  const at = (iso: string) => nowLight(ribbon(district('RG4')!, new Date(iso)))
+  // Half-light begins at 06:15:27 (shown 06:15); sunset 16:44:22; very dark ends 04:59:12.
+  assert.deepEqual(at('2026-10-28T05:46:00Z'), { band: 'Dark', left: '29m left' })
+  assert.deepEqual(at('2026-10-28T13:00:00Z'), { band: 'Daylight', left: '3h 44m left' })
+  assert.deepEqual(at('2026-10-28T20:00:00Z'), { band: 'True night', left: '8h 59m left' })
 })
 
 check('compare: what someone types, read as a date or a place', () => {

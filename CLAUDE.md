@@ -1054,3 +1054,13 @@ come close (tried first: they overlapped), so there it's a third line under the 
 label rows are taller. Pictures `design/previews/ribbon-now-options-*.png` (Caversham, RG4, dark
 mode, 05:46 and 13:00). No errors, no sideways scroll. Waiting for John's choice; to be tidied
 before going live.
+
+### 2026-10-28 — "Now 05:46 Dark (29m left)" (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** the brackets on every change looked cluttered; keep only the light now and how long
+it has left. **What:** the mock-up switch and options A and B are gone; the other labels are
+as live. `nowLight()` in `ribbon.ts` (from the minutes shown); phone: "Now 05:46 Dark (29m
+left)"; computer: "NOW / 05:46 / Dark / 29m left" beside the strip, which stays the same
+height. **Verified:** `npx tsc -b`, lint, build, `npm run check` (14 + 15 + 14; new: RG4 at
+05:46, 13:00 and 20:00). Chromium at 1200px and 390px with touch, dark mode: no errors, no
+sideways scroll. Pictures `design/previews/ribbon-now-left-*.png`.

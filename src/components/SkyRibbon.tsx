@@ -6,7 +6,7 @@
 import { BANDS, BAND_LABEL } from '../lib/bands.ts'
 import { clock, duration } from '../lib/format.ts'
 import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
-import { along, FOLD_LONGER_THAN, placeLabels, spreadLabels, type Ribbon } from '../lib/ribbon.ts'
+import { along, FOLD_LONGER_THAN, nowLight, placeLabels, spreadLabels, type Ribbon } from '../lib/ribbon.ts'
 import { ukParts } from '../lib/ukTime.ts'
 
 /** The key, in two groups that each stay together, so when it wraps on a phone "Very dark"
@@ -23,23 +23,6 @@ export function Legend() {
     </div>
   )
 }
-
-// MOCK-UP for John (28 October), chosen with ?ribbon=a (time from now) or ?ribbon=b (how long
-// each stretch lasts). To be settled and tidied before it goes live.
-const MOCK = typeof location === 'undefined' ? null : new URLSearchParams(location.search).get('ribbon')
-const minuteOf = (d: Date) => Math.round(d.getTime() / 60_000)
-/** The bracket after a change's time: from now (a), or how long the light it leads into lasts (b). */
-function extra(r: Ribbon, at: Date): string {
-  if (MOCK === 'a') return ` (${duration((minuteOf(at) - minuteOf(r.from)) * 60_000)})`
-  if (MOCK === 'b') {
-    const seg = r.segments.find((s) => s.from.getTime() === at.getTime())
-    if (!seg || seg.to.getTime() === r.to.getTime()) return ''
-    return ` (${duration((minuteOf(seg.to) - minuteOf(seg.from)) * 60_000)})`
-  }
-  return ''
-}
-/** What the light is now, after "Now 05:46". */
-const nowBand = (r: Ribbon) => (MOCK ? BAND_LABEL[r.segments[0].band] : '')
 
 const pct = (x: number) => `${(x * 100).toFixed(3)}%`
 
@@ -59,19 +42,18 @@ export function SkyRibbonWide({ r }: { r: Ribbon }) {
     return () => ro.disconnect()
   }, [])
   // "Now" sits just left of the strip, so no change of light, however soon, can reach it.
-  // On a computer the bracket goes on a line of its own, so the labels stay narrow.
-  const labels = r.ticks.map((t) => ({ at: t.at, time: clock(t.at), label: t.label, extra: t.kind === 'noon' ? '' : extra(r, t.at).trim() }))
+  const labels = r.ticks.map((t) => ({ at: t.at, time: clock(t.at), label: t.label }))
   const spans = labels.map((l): [number, number] => {
     const x = along(r, l.at) * width
-    const w = Math.max(labelWidth(l.time, l.label), l.extra.length * 6.4 + 4)
+    const w = labelWidth(l.time, l.label)
     return [x - w / 2, x + w / 2]
   })
   const place = placeLabels(spans, labels.map((l) => along(r, l.at) * width))
   // Room for the far rows only when they're used.
-  const rowPx = MOCK ? 58 : 44
-  const above = place.some((p) => p.side === 'above' && p.row === 1) ? rowPx * 2 : rowPx
-  const below = place.some((p) => p.side === 'below' && p.row === 1) ? rowPx * 2 : rowPx
-  const vars = { '--above': `${above}px`, '--below': `${below}px`, '--far': `${rowPx + 6}px` } as CSSProperties
+  const above = place.some((p) => p.side === 'above' && p.row === 1) ? 88 : 44
+  const below = place.some((p) => p.side === 'below' && p.row === 1) ? 88 : 44
+  const vars = { '--above': `${above}px`, '--below': `${below}px` } as CSSProperties
+  const light = nowLight(r)
   return (
     <div className="ribbon-wide">
       <div className="ribbon-track" ref={ref} style={vars}>
@@ -83,12 +65,11 @@ export function SkyRibbonWide({ r }: { r: Ribbon }) {
             <div className="ribbon-midnight" style={{ left: pct(along(r, r.midnight.at)) }}><span>{r.midnight.day}</span></div>
           )}
         </div>
-        <div className="ribbon-now"><span>Now</span><b className="mono">{clock(r.from)}</b>{nowBand(r) && <em>{nowBand(r)}</em>}</div>
+        <div className="ribbon-now"><span>Now</span><b className="mono">{clock(r.from)}</b><em>{light.band}</em>{light.left && <em>{light.left}</em>}</div>
         {labels.map((l, i) => (
           <div key={i} className={`ribbon-tick ${place[i].side} row${place[i].row}`} style={{ left: pct(along(r, l.at)) }}>
             <b className="mono">{l.time}</b>
             <span>{l.label}</span>
-            {l.extra && <span className="ribbon-extra">{l.extra}</span>}
           </div>
         ))}
       </div>
@@ -155,12 +136,12 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
           ))}
         </div>
         {labels.map((l, i) => l.now ? (
-          <div key={i} className="ribbon-vlabel ribbon-vnow" style={{ top: l.top }}>Now {clock(r.from)}{nowBand(r) && ` ${nowBand(r)}`}{MOCK === 'b' && r.segments.length > 1 ? ` (${duration((minuteOf(r.segments[0].to) - minuteOf(r.from)) * 60_000)} left)` : ''}</div>
+          <div key={i} className="ribbon-vlabel ribbon-vnow" style={{ top: l.top }}>Now {clock(r.from)} {nowLight(r).band}{nowLight(r).left && ` (${nowLight(r).left})`}</div>
         ) : l.tick ? (
           <div key={i}>
             <div className="ribbon-vmark" style={{ top: l.at }} />
             <div className="ribbon-vlabel" style={{ top: l.top }}>
-              <b className="mono">{day && ukParts(l.tick.at).date !== today ? `${day} ` : ''}{clock(l.tick.at)}{l.tick.kind === 'noon' ? '' : extra(r, l.tick.at)}</b> {l.tick.label}
+              <b className="mono">{day && ukParts(l.tick.at).date !== today ? `${day} ` : ''}{clock(l.tick.at)}</b> {l.tick.label}
             </div>
           </div>
         ) : (

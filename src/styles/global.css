@@ -82,9 +82,8 @@ body { margin: 0; background: var(--color-bg); }
 .ribbon-tick.above::after { content: ''; width: 1px; height: 8px; background: var(--color-text); margin-top: 2px; }
 .ribbon-tick.below { top: calc(var(--above, 44px) + 40px + 4px); }
 .ribbon-tick.below::before { content: ''; width: 1px; height: 8px; background: var(--color-text); margin-bottom: 2px; }
-.ribbon-tick.above.row1::after { height: var(--far, 50px); }
-.ribbon-tick.below.row1::before { height: var(--far, 50px); }
-.ribbon-tick .ribbon-extra { font-size: 11px; color: var(--color-neutral-700); }
+.ribbon-tick.above.row1::after { height: 50px; }
+.ribbon-tick.below.row1::before { height: 50px; }
 
 .ribbon-narrow { display: flex; flex-direction: column; gap: var(--space-4); }
 .ribbon-column { position: relative; margin-left: 4px; }

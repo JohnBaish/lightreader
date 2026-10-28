@@ -1208,3 +1208,9 @@ lint, build; Chromium at 1200px and 390px with touch: no errors, no sideways scr
 figures" off the opening page, the top card's middle state from sunset, side-by-side cards lined up
 at the top, Across the UK without the visitor's own sunset, the Pace of change wording and the
 centred day table. **Verified:** checks 14 + 16 + 15, tsc, lint, build first.
+
+### 2026-10-28 — the equinox line without its sunset (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** drop "with sunset at …" from the equinox line: "Spring equinox: March 20th, 143 days
+from now." (`comingUp.ts`; checks and SPEC §6 updated). **Verified:** checks 14 + 16 + 15, tsc,
+lint, build.

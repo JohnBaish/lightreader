@@ -130,6 +130,7 @@ This shows events in the next three months. The clock-change line appears only i
 - "Shortest day: Monday December 21st, with 7h 49m of daylight."
   - **Changed (John, October 28th 2026, J4):** "Shortest day: Monday December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m less than today." The longest day the same, with "more".
   - **Added (John, October 28th 2026):** the next equinox, wherever it falls, in date order with the rest: "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:16." ("today" or "tomorrow, …" when it's that close; the date is the UK date of the equinox moment).
+  - **Changed (John, October 28th 2026):** without the sunset time: "Spring equinox: March 20th, 143 days from now."
 - "Latest sunrise: 08:10, every day from Monday December 28th to Saturday January 2nd. Within that period, the very latest are on Wednesday December 30th and Thursday December 31st, a fraction of a second apart."
 - "First sunset at 17:00 or later: Friday February 5th."
   - This illustrates the wording; on October 27th it would fall outside the three-month window.

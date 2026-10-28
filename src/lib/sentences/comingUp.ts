@@ -216,8 +216,8 @@ function clockChangeLine(ctx: SkyContext): Item[] {
   return [{ date: change.date, text: `Clocks go ${way} ${when}: ${event} jumps from ${clock(was)} to ${clock(now)}.` }]
 }
 
-/** "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:16." (John,
- *  28 October): the next equinox, by its UK date, wherever it falls; in date order with the
+/** "Spring equinox: March 20th, 143 days from now." (John, 28 October; its sunset time was
+ *  dropped the same day): the next equinox, by its UK date, wherever it falls; in date order with the
  *  rest, so it sits before or after the shortest or longest day. */
 function equinoxLine(ctx: SkyContext): Item[] {
   const year = Number(ctx.today.slice(0, 4))
@@ -231,8 +231,7 @@ function equinoxLine(ctx: SkyContext): Item[] {
     })
     .find((e) => e.date >= ctx.today)
   if (!next) return []
-  const sunset = dayOf(ctx, next.date).sunset
   const n = daysBetween(ctx.today, next.date)
   const when = n === 0 ? 'today' : n === 1 ? `tomorrow, ${dayIn(ctx, next.date)}` : `${dayIn(ctx, next.date)}, ${numberWord(n)} days from now`
-  return [{ date: next.date, text: `${next.name}: ${when}${sunset ? `, with sunset at ${clock(sunset)}` : ''}.` }]
+  return [{ date: next.date, text: `${next.name}: ${when}.` }]
 }

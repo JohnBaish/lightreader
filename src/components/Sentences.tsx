@@ -25,6 +25,12 @@ function GroupCard({ g, cardRef }: { g: Group; cardRef?: (e: HTMLElement | null)
   )
 }
 
+/** A card's height as its contents need it, whether or not it's been stretched. */
+function naturalHeight(card: HTMLElement): number {
+  const last = card.lastElementChild ?? card
+  return last.getBoundingClientRect().bottom - card.getBoundingClientRect().top + parseFloat(getComputedStyle(card).paddingBottom)
+}
+
 /** A run of cards between full-width ones, in two columns on a computer, arranged by
  *  `arrange()` (src/lib/layout.ts) from each card's height in a column, measured as drawn and
  *  again whenever a card changes size. One card alone spans the width. On a phone the
@@ -40,7 +46,9 @@ function CardRun({ run }: { run: Group[] }) {
     const measure = () => {
       // Only a card in a column is measured, so a card spanning the width keeps its column
       // height and the arrangement can't flip back and forth.
-      for (const [heading, e] of cards.current) if (e.closest('.group-col')) heights.current.set(heading, e.getBoundingClientRect().height)
+      // A card's own height, from its top to the end of its sentences plus its padding, as the
+      // last card in a column is stretched to fill it (John, 28 October).
+      for (const [heading, e] of cards.current) if (e.closest('.group-col')) heights.current.set(heading, naturalHeight(e))
       const hs = run.map((g) => heights.current.get(g.heading) ?? 0)
       const gap = parseFloat(getComputedStyle(box.current!).rowGap) || 0
       const next = arrange(hs, gap)
@@ -58,7 +66,8 @@ function CardRun({ run }: { run: Group[] }) {
   const inColumns = layout.lastWide ? run.slice(0, -1) : run
   return (
     <div className="group-run" ref={box}>
-      {/* Side by side, cards line up at the top (John, 28 October: no longer centred). */}
+      {/* Side by side, cards line up at the top, and the last in each column stretches so the
+          two columns end level (John, 28 October). */}
       <div className="group-cols">
         <div className="group-col">{inColumns.slice(0, layout.split).map(card)}</div>
         <div className="group-col">{inColumns.slice(layout.split).map(card)}</div>

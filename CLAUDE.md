@@ -1214,3 +1214,15 @@ centred day table. **Verified:** checks 14 + 16 + 15, tsc, lint, build first.
 **John:** drop "with sunset at …" from the equinox line: "Spring equinox: March 20th, 143 days
 from now." (`comingUp.ts`; checks and SPEC §6 updated). **Verified:** checks 14 + 16 + 15, tsc,
 lint, build.
+
+### 2026-10-28 — side-by-side cards fill their columns: for John to look at (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** could the blank space beside a shorter column be the card's own shading instead (This
+fortnight, Darkness)? **What:** the last card in each column stretches to fill it (`.group-col >
+.group:last-child { flex: 1 0 auto }`, columns stretched), so both columns end level. The
+arrangement measures each card's own height (top to the end of its sentences plus padding,
+`naturalHeight()` in `Sentences.tsx`), so the stretching can't change which column a card goes in.
+Phones unchanged (one column). **Verified:** checks 14 + 16 + 15, tsc, lint, build; Chromium at
+1200px (light and dark) and 900px (RG4, TD15): both columns end at the same height, the layout
+stays put, no errors, no sideways scroll; 390px with touch unchanged. Pictures
+`design/previews/cards-filled-*.png`. Held with the equinox change until John has seen it.

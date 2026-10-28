@@ -1232,3 +1232,16 @@ stays put, no errors, no sideways scroll; 390px with touch unchanged. Pictures
 **John:** "I love this. Make it all live." `main` fast-forwarded to the branch: the equinox line
 without its sunset, and the last card in each column filling it. **Verified:** checks 14 + 16 + 15,
 tsc, lint, build first.
+
+### 2026-10-28 — on the baish.net hub (clockwheel `eeb5c73`)
+
+**John:** the site is live at `lightreader.baish.net`; the hub card to use the link-preview
+wording; search description option A. **What (in `JohnBaish/clockwheel`):** `landing.html` gains
+a Lightreader card after Hindcaster ("Sunrise, sunset and light-based facts for English places
+you choose."); the hub's search description becomes "Free browser tools by John Baish: radio
+clocks, backtiming, flowcharts, yesterday's weather, and sunrise and sunset times." (naming every
+tool came to 191 characters); `SEO-HANDOVER.md` gains Lightreader's column. Merged to clockwheel's
+`main`; both Vercel builds completed. Pictures `design/previews/baish-hub-lightreader-*.png`.
+**Still to do:** the overview PDF and the 24-hour exceptions in clockwheel's house style; John's
+Search Console steps (Lightreader's sitemap and indexing; re-request indexing of www.baish.net for
+the new description).

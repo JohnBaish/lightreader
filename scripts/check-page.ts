@@ -15,6 +15,8 @@ import { dayFigures, daysFigures } from '../src/lib/sun.ts'
 import { dayDetail, yearView } from '../src/lib/yearView.ts'
 import { describeToward, townsBetween } from '../src/lib/towns.ts'
 import { arrange, bestSplit } from '../src/lib/layout.ts'
+import { pace, rate } from '../src/lib/pace.ts'
+import { addMonths } from '../src/lib/year.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) {
@@ -254,6 +256,28 @@ check('the sentence cards split into two even columns, in order (John, 28 Octobe
   // Darkness, against 185 beside Direction in columns.
   assert.deepEqual(arrange([122, 192, 145], 16), { split: 1, lastWide: true })
   assert.deepEqual(bestSplit([122, 192, 145], 16), { split: 2, empty: 185 })
+})
+
+check('pace of change: the day\'s change, the next week, and the fastest, past or to come (John, 28 October)', () => {
+  const at = (iso: string) => {
+    const ctx = makeContext(district('RG4')!, 'Caversham', new Date(iso + 'T12:00:00Z'))
+    return pace(ctx, addMonths(iso, -6), addMonths(iso, 6))
+  }
+  const now = at('2026-10-28')
+  assert.equal(now.rows.length, 366)
+  assert.equal(rate(now.rows.find((r) => r.date === '2026-10-28')!.change), '3m\u00a040s') // 219.8 s
+  // The fastest shrinking (234.5 s, September 24th to 26th) has passed, so it was; then spring's
+  // fastest growing (238.2 s, March 18th and 19th; checked separately with SearchRiseSet).
+  assert.deepEqual(now.sentences, [
+    'Daylight is shrinking by 3m\u00a040s a day, and by 4.2% (25m) over the next week.',
+    'The most it shrank was 3m\u00a054s a day, around September 25th.',
+    'It will grow fastest around March 18th, by 3m\u00a058s a day.',
+  ])
+  assert.deepEqual(at('2026-09-01').sentences.slice(1), ['The most it shrinks in a year is 3m\u00a054s a day, around September 25th.'])
+  assert.deepEqual(at('2026-12-25').sentences, [
+    'Daylight is growing by 20s a day, and by 1.1% (5m) over the next week.',
+    'The most it grows in a year is 3m\u00a058s a day, around March 18th.',
+  ])
 })
 
 console.log(`\n${passed} checks passed`)

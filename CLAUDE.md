@@ -1144,3 +1144,18 @@ to view), pictures `design/previews/pace-of-change-computer.png` (light) and `-p
 the span is 234.5 s a day on September 24th, 25th and 26th (a near-tie, shown 3m 54s); the
 fastest gain 238.2 s on March 18th and 19th 2027 (3m 58s). Wording drafted. No errors, no
 sideways scroll at 1200px or 390px with touch.
+
+### 2026-10-28 — "Pace of change" built, option A (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** option A on phone and computer; "around" for near-tied days; "was" once the
+fastest has passed, then the fastest of the other way to come. **What:** `src/lib/pace.ts`
+(worked out in the worker with the year; `YearView.pace`), `src/components/Pace.tsx` between
+"The year in light" and "Day by day", styles `.pace-*` in `global.css`. The sentences (drafts):
+"Daylight is shrinking by 3m 40s a day, and by 4.2% (25m) over the next week."; while the season's
+fastest is ahead, "The most it shrinks in a year is 3m 54s a day, around September 25th."; once
+past, "The most it shrank was …" and "It will grow fastest around March 18th, by 3m 58s a day."
+Days within half a second of the fastest are a near-tie, and the middle one is named. The y-axis
+reaches 4m 50s either way (Berwick's fastest is 4m 38s). **Verified:** checks 14 + 16 + 15 (new:
+RG4 on October 28th, September 1st and December 25th, with real figures); tsc, lint, build;
+Chromium at 1200px and 900px, and 390px and 375px with touch, light and dark (RG4, TD15, TR18): no
+errors, no sideways scroll. Pictures `design/previews/pace-built-*.png`.

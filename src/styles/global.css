@@ -165,6 +165,22 @@ body { margin: 0; background: var(--color-bg); }
 .year, .days { padding: var(--space-5, 20px) var(--space-6); gap: var(--space-3); }
 .year h3, .days h3 { margin: 0; font-size: 20px; }
 .year-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.pace-chart { width: 100%; }
+.pace-chart svg { display: block; overflow: visible; }
+.pace-axis { font-size: 11px; fill: var(--color-neutral-700); }
+.pace-grid { stroke: var(--color-text); stroke-opacity: 0.12; stroke-dasharray: 3 3; }
+.pace-zero { stroke: var(--color-text); stroke-opacity: 0.45; }
+.pace-line { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
+.pace-gain { fill: var(--band-daylight); opacity: 0.85; }
+.pace-loss { fill: var(--band-very-dark); opacity: 0.85; }
+.pace-in { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
+.pace-in-gain { fill: #201e1d; }
+.pace-in-loss { fill: #f5ead8; }
+.pace-today { stroke: var(--color-accent); stroke-width: 2; }
+.pace-dot { fill: var(--color-accent); stroke: var(--color-surface); stroke-width: 2; }
+.pace-tag { font-size: 12px; font-weight: 600; fill: var(--color-text); }
+.pace-words { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.pace-words li::marker { color: var(--color-accent); }
 .yr { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: 240px 18px; column-gap: 6px; }
 .yr-hours { position: relative; font-size: 11px; color: var(--color-neutral-700); font-variant-numeric: tabular-nums; }
 .yr-hours span { position: absolute; right: 0; transform: translateY(50%); }

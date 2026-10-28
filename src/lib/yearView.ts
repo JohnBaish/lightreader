@@ -9,6 +9,7 @@
 import { BAND_AFTER, bandAt, type Band, type Change } from './bands.ts'
 import { clock, duration, longDate } from './format.ts'
 import { clockChanges, dayOf, type SkyContext } from './sentences/context.ts'
+import { pace, type Pace } from './pace.ts'
 import { daylight } from './sun.ts'
 import { addDays, ukInstant, ukParts } from './ukTime.ts'
 
@@ -39,6 +40,8 @@ export type YearView = {
   ribbon: Stretch[][]
   /** Each month the span touches ("2026-04" … "2027-04"), with every day of it. */
   months: { month: string; rows: DayRow[]; clockMarks: ClockMark[] }[]
+  /** "Pace of change": each day's gain or loss of daylight, and its sentences. */
+  pace: Pace
 }
 
 const show = (at: Date | null) => (at ? clock(at) : null)
@@ -112,7 +115,7 @@ export function yearView(ctx: SkyContext, from: string, to: string, changes: Cha
       .map((c) => ({ date: c.date, text: clockMarkText(c.date, c.forward, ctx.today) }))
     months.push({ month: m, rows, clockMarks })
   }
-  return { from, to, today: ctx.today, ribbon, months }
+  return { from, to, today: ctx.today, ribbon, months, pace: pace(ctx, from, to) }
 }
 
 /** The detail card's line under the times: "9h 58m of daylight. Half-light 06:14 to 17:21;

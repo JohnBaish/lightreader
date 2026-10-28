@@ -11,6 +11,7 @@ import { longDate, ordinal, weekday } from '../lib/format.ts'
 import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
 import { addDays } from '../lib/ukTime.ts'
 import { Legend } from './SkyRibbon.tsx'
+import { PaceCard } from './Pace.tsx'
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const monthName = (m: string) => MONTH_NAMES[Number(m.slice(5, 7)) - 1]
@@ -263,6 +264,8 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         )}
         <p className="note">{narrow ? "Tap or slide along the year to see a day's times." : "Click or drag along the year to see a day's times, or use the arrow keys."}</p>
       </section>
+
+      <PaceCard p={v.pace} narrow={narrow} span={fromLabel} />
 
       <section className="card days" ref={daysCard}>
         <div className="year-head">

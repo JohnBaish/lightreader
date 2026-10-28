@@ -1168,3 +1168,14 @@ entering a postcode. **What:** `App.tsx` shows `<About />` only once a postcode 
 noted. **Verified:** checks 14 + 16 + 15, tsc, lint, build; Chromium at 1200px and 390px with
 touch: the opening page has only the heading, line, box and footer; after typing RG4, "About
 these figures" is at the foot; no errors, no sideways scroll.
+
+### 2026-10-28 — the top card's middle state from sunset (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** "Today's sunset" and "Tomorrow's sunrise" from sunset, not once the sun is highest.
+**What:** `headline.ts`: today's sunrise and sunset until sunset (at the minute shown, like the
+change at dark); then today's sunset and tomorrow's sunrise; then, once dark, tomorrow's sunrise
+and sunset. SPEC §5 annotated. **Verified:** checks 14 + 16 + 15 (the top card at 11:48, 16:45,
+16:46, 17:20, 17:21 and 22:00, Reading, October 27th); tsc, lint, build; Chromium at 1200px and
+390px with touch at 12:00, 16:50 and 18:30: the three states, no errors, no sideways scroll.
+**Mistake on the way:** rewriting the top card's check removed the "Now … left" check beside it;
+caught by the type check and put back unchanged.

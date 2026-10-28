@@ -83,23 +83,25 @@ check('the postcode box: the first half of anything typed, England only', () => 
   assert.equal(district('CF10'), null) // Cardiff: not in England
 })
 
-check('the top of the page: today\'s sunrise and sunset until the sun is highest, then sunset and tomorrow\'s sunrise, then once dark tomorrow\'s sunrise and sunset', () => {
+check('the top of the page: today\'s sunrise and sunset until sunset, then its sunset and tomorrow\'s sunrise, then once dark tomorrow\'s sunrise and sunset', () => {
   const [today, tomorrow] = daysFigures(RG1, '2026-10-27', '2026-10-28')
-  assert.deepEqual(headline(new Date('2026-10-27T09:02:00Z'), today, tomorrow), [
+  const before = [
     { kicker: 'Today · Tuesday October 27th', items: [{ label: 'Sunrise', time: '06:48' }, { label: 'Sunset', time: '16:46' }] },
-  ])
-  // The sun is highest at 11:47:44 UTC (GMT).
+  ]
+  assert.deepEqual(headline(new Date('2026-10-27T09:02:00Z'), today, tomorrow), before)
+  // Sunset is 16:46:21 GMT, shown 16:46 (John, 28 October: from sunset, not once the sun is highest).
+  assert.deepEqual(headline(new Date('2026-10-27T11:48:00Z'), today, tomorrow), before)
+  assert.deepEqual(headline(new Date('2026-10-27T16:45:00Z'), today, tomorrow), before)
   const after = [
     { kicker: "Today's sunset · Tuesday October 27th", items: [{ label: 'Sunset', time: '16:46' }] },
     { kicker: "Tomorrow's sunrise · Wednesday October 28th", items: [{ label: 'Sunrise', time: '06:50' }] },
   ]
-  assert.deepEqual(headline(new Date('2026-10-27T11:48:00Z'), today, tomorrow), after)
+  assert.deepEqual(headline(new Date('2026-10-27T16:46:00Z'), today, tomorrow), after)
   // Half-light ends at 17:20:56, shown as 17:21: from then, tomorrow's sunrise and sunset.
   assert.deepEqual(headline(new Date('2026-10-27T17:20:00Z'), today, tomorrow), after)
   const dark = [{ kicker: 'Tomorrow · Wednesday October 28th', items: [{ label: 'Sunrise', time: '06:50' }, { label: 'Sunset', time: '16:44' }] }]
   assert.deepEqual(headline(new Date('2026-10-27T17:21:00Z'), today, tomorrow), dark)
   assert.deepEqual(headline(new Date('2026-10-27T22:00:00Z'), today, tomorrow), dark)
-  assert.equal(headline(new Date('2026-10-27T11:47:00Z'), today, tomorrow).length, 1)
 })
 
 check('the light now and how long it has left, beside "Now" (John, 28 October)', () => {

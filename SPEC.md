@@ -83,6 +83,7 @@ All of these colours are approved by John.
    - **Changed (John, October 27th 2026):** before the sun is highest, as above, under "Today · Tuesday October 27th"; from then on, today's sunset under "Today · …" and then tomorrow's sunrise under "Tomorrow · Wednesday October 28th". The headings' wording is a draft.
    - **Changed (John, October 28th 2026, option B):** the headings say which event: "Today's sunset · …" and "Tomorrow's sunrise · …".
    - **Changed (John, October 28th 2026):** once it's dark (half-light over, at the minute shown), tomorrow's sunrise and sunset under "Tomorrow · Thursday October 29th". Where half-light lasts all night, it stays as before.
+   - **Changed (John, October 28th 2026):** "Today's sunset" and "Tomorrow's sunrise" from sunset, not once the sun is highest; until then, today's sunrise and sunset.
 3. **Next 24 hours: the sky ribbon** (mockup option B).
    - **Computer:** a horizontal strip, drawn to scale, from now to the same time tomorrow, coloured by band. Each change of light is a tick with its time and label, alternating above and below. The strip starts with a "Now" marker and has a midnight divider marked "Wed" (or whichever day). Show the legend below it.
    - **Phone:** the strip stands upright. True night is folded to a fixed height with a zigzag and its length ("True night, 10h 19m (folded)"). Events are listed beside it. (John, October 27th 2026: the folded part at least twice as tall as first built; the key wraps with "Very dark" beside "True night".)

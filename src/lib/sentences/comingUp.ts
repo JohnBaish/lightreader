@@ -9,11 +9,14 @@
 // - Turning points: the earliest or latest sunrise or sunset, with the run of days showing
 //   that minute and the very day (rules B and G), and the shortest or longest day.
 // - The clock change, only in the ten weeks before it.
+// - The next equinox, whenever it is (John, 29 October): its date, how far off, and that
+//   day's sunset.
 
+import { Seasons } from 'astronomy-engine'
 import { clock, duration } from '../format.ts'
 import { daylight, type DayFigures } from '../sun.ts'
 import { addMonths } from '../year.ts'
-import { addDays } from '../ukTime.ts'
+import { addDays, ukParts } from '../ukTime.ts'
 import { bestWithTies, clockChanges, clockSeconds, dayOf, daysAhead, daysBetween, offsetOn, runAround, shown, type SkyContext } from './context.ts'
 import { numberWord } from '../words.ts'
 import { dateIn, inDays, rangeIn } from './words.ts'
@@ -29,7 +32,7 @@ export function comingUpSentences(ctx: SkyContext): string[] {
   const end = addMonths(ctx.today, 3)
   const ahead = daysAhead(ctx, 400)
   const windowLength = ahead.findIndex((d) => d.date > end)
-  const items: Item[] = [...hourCrossings(ctx, ahead, windowLength), ...turningPoints(ctx, ahead, windowLength), ...clockChangeLine(ctx)]
+  const items: Item[] = [...hourCrossings(ctx, ahead, windowLength), ...turningPoints(ctx, ahead, windowLength), ...clockChangeLine(ctx), ...equinoxLine(ctx)]
   return items.sort((a, b) => a.date.localeCompare(b.date)).map((i) => i.text)
 }
 
@@ -211,4 +214,25 @@ function clockChangeLine(ctx: SkyContext): Item[] {
   }
   const when = n === 1 ? 'tomorrow' : `${inDays(n)}, on ${dateIn(ctx, change.date)}`
   return [{ date: change.date, text: `Clocks go ${way} ${when}: ${event} jumps from ${clock(was)} to ${clock(now)}.` }]
+}
+
+/** "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:17." (John,
+ *  29 October): the next equinox, by its UK date, wherever it falls; in date order with the
+ *  rest, so it sits before or after the shortest or longest day. */
+function equinoxLine(ctx: SkyContext): Item[] {
+  const year = Number(ctx.today.slice(0, 4))
+  const next = [year, year + 1]
+    .flatMap((y) => {
+      const s = Seasons(y)
+      return [
+        { name: 'Spring equinox', date: ukParts(s.mar_equinox.date).date },
+        { name: 'Autumn equinox', date: ukParts(s.sep_equinox.date).date },
+      ]
+    })
+    .find((e) => e.date >= ctx.today)
+  if (!next) return []
+  const sunset = dayOf(ctx, next.date).sunset
+  const n = daysBetween(ctx.today, next.date)
+  const when = n === 0 ? 'today' : n === 1 ? `tomorrow, ${dateIn(ctx, next.date)}` : `${dateIn(ctx, next.date)}, ${numberWord(n)} days from now`
+  return [{ date: next.date, text: `${next.name}: ${when}${sunset ? `, with sunset at ${clock(sunset)}` : ''}.` }]
 }

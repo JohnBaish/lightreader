@@ -120,7 +120,7 @@ export function CompareCard({ d, today, now }: { d: District; today: string; now
         <form className="field" onSubmit={submit} noValidate>
           <label htmlFor="cmp">Type a date, like "Christmas" or "14/7", or a place or postcode.</label>
           <div className="choose-row">
-            <input className="input" id="cmp" value={typed} placeholder="Christmas, 14/7 or TR18" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
+            <input className="input" id="cmp" value={typed} placeholder="Christmas, 14/7 or BS1" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
               autoFocus={adding} onChange={(e) => { setTyped(e.target.value); setError(null) }} />
             <button className="btn btn-primary" type="submit">Compare</button>
             {list.length > 0 && <button className="btn btn-secondary" type="button" onClick={close}>Cancel</button>}

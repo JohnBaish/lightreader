@@ -240,12 +240,6 @@ Branch: `stage-7-launch`
 
 ## For John to come back to
 
-- **The top card after dark** (John, 28 October, last thing): once it's dark, switch from
-  "Today's sunset · Tomorrow's sunrise" to tomorrow's sunrise and tomorrow's sunset. To
-  settle in the morning: which moment counts as "dark" (half-light ending, as the rest of
-  the site uses), and the headings (for example "Tomorrow · Wednesday October 28th" with
-  "Sunrise 06:50 · Sunset 16:44"). Mock-up first.
-
 - **The landing page** (what a first-time visitor sees before entering a postcode): John
   wants to review it at some point (27 October). Today it has a heading, one line, the
   postcode box, "About these figures" and the footer, all draft wording.

@@ -49,6 +49,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'Earliest sunset: 15:55, every day from Wednesday December 9th to Wednesday December 16th. Within that period, the very earliest are on Saturday December 12th and Sunday December 13th, a fraction of a second apart.',
       'Shortest day: Monday December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m less than today.',
       'Latest sunrise: 08:09, every day from Saturday December 26th to Monday January 4th. Within that period, the very latest are on Wednesday December 30th and Thursday December 31st, a fraction of a second apart.',
+      'Spring equinox: Saturday March 20th, 144 days from now, with sunset at 18:16.',
     ] },
     { heading: 'Is it light at 07:30?', sentences: [
       '07:30 is always at least half-light here. Even on the darkest mornings, Thursday December 31st and Friday January 1st, half-light starts at 07:29.',
@@ -172,6 +173,18 @@ check('coming up: only the soonest hour for sunrise and for sunset; the spring r
   assert.equal(march.filter((s) => s.startsWith('First sunrise')).length, 1)
   // December: the same "first" a year on is next year's, not a repeat.
   assert.ok(comingUpSentences(ctxFor('RG1', '2026-12-21T10:00:00Z')).includes('First sunset at 16:00 or later: Saturday December 26th.'))
+})
+
+check('looking ahead: the next equinox, whenever it is, in date order (John, 29 October)', () => {
+  const eq = (iso: string) => comingUpSentences(ctxFor('RG1', iso)).filter((s) => /equinox|Longest day|Shortest day/.test(s))
+  assert.deepEqual(eq('2027-03-19T10:00:00Z'), ['Spring equinox: tomorrow, Saturday March 20th, with sunset at 18:16.'])
+  assert.deepEqual(eq('2027-03-20T10:00:00Z'), ['Spring equinox: today, with sunset at 18:16.'])
+  // After the longest day, a week inside the three months; sunset 18:00:34 GMT, 19:01 BST.
+  assert.deepEqual(eq('2027-06-01T10:00:00Z'), [
+    'Longest day: Monday June 21st, 20 days from now, with 16h 38m of daylight, 20m more than today.',
+    'Autumn equinox: Thursday September 23rd, 114 days from now, with sunset at 19:01.',
+  ])
+  assert.equal(eq('2027-09-22T10:00:00Z')[0], 'Autumn equinox: tomorrow, Thursday September 23rd, with sunset at 19:01.')
 })
 
 check('records: a year or more back says "for a year"', () => {

@@ -1,6 +1,8 @@
 // The top of the page (SPEC §5, "Today"), which changes with the time of day (John, 27
 // October): before the sun is highest, today's sunrise and sunset; from then on, today's
-// sunset and then tomorrow's sunrise, each under its own small heading.
+// sunset and then tomorrow's sunrise, each under its own small heading; and once it's dark
+// (half-light over, at the minute shown, as everywhere else on the page; John, 29 October),
+// tomorrow's sunrise and sunset. Where half-light lasts all night, that never happens.
 
 import { clock, longDate } from './format.ts'
 import type { DayFigures } from './sun.ts'
@@ -12,6 +14,10 @@ export function headline(now: Date, today: DayFigures, tomorrow: DayFigures): He
   const item = (label: string, at: Date | null) => (at ? [{ label, time: clock(at) }] : [])
   if (now < today.noon) {
     return [{ kicker: day(today, 'Today'), items: [...item('Sunrise', today.sunrise), ...item('Sunset', today.sunset)] }]
+  }
+  const dark = today.civilDusk && Math.round(today.civilDusk.getTime() / 60_000) * 60_000
+  if (dark && now.getTime() >= dark) {
+    return [{ kicker: day(tomorrow, 'Tomorrow'), items: [...item('Sunrise', tomorrow.sunrise), ...item('Sunset', tomorrow.sunset)] }]
   }
   // John, 28 October (option B): the headings say which event.
   return [

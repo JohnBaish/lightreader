@@ -1009,3 +1009,28 @@ are). Nothing is half-done.
 John, just before stopping: once it's dark, the top card could switch to tomorrow's sunrise
 and tomorrow's sunset. Noted in PLAN ("For John to come back to") with the two points to
 settle (which moment is "dark"; the headings); nothing built. Docs only.
+
+### 2026-10-29 — the top card after dark; the next equinox; Compare's hint (branch `claude/nice-goodall-j1r6wu`, not yet on `main`)
+
+**John:** agreed the after-dark top card (dark = half-light over; "Tomorrow · …" with sunrise
+and sunset); Compare's example postcode BS1; the next equinox in "Looking ahead" with its date,
+days from now and sunset.
+
+**What:**
+- `headline.ts`: from the minute half-light ends (as shown, rule C), "Tomorrow · Thursday
+  October 29th" with "Sunrise 06:52 · Sunset 16:43" (stacked on a phone). No change where
+  half-light lasts all night.
+- `comingUp.ts`: `equinoxLine()`, from Astronomy Engine's `Seasons()` (UK date of the moment;
+  checked against the published 2026–2028 equinoxes), always shown and sorted by date with the
+  rest: "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:16."; "today"
+  or "tomorrow, …" when close. Draft wording.
+- `Compare.tsx`: the hint reads "Christmas, 14/7 or BS1". The refusal message still says "(like
+  TR18)".
+
+**Figures checked independently** with `SearchRiseSet` for Reading: sunset 18:16:29 on March
+20th 2027, 19:00:34 BST on September 23rd 2027, tomorrow 06:50:07 / 16:44:27 (for the check's
+date). **Verified:** `npx tsc -b`, lint, `npm run check` (14 + 15 + 13; new: the equinox on
+four dates, the top card at 17:20 and 17:21). In Chromium at 1200px and 390px with touch, Reading
+at 17:00 and 18:30 today: no errors, no sideways scroll. Pictures
+`design/previews/after-dark-*.png`, `looking-ahead-equinox-narrow.png`, `compare-bs1-narrow.png`.
+

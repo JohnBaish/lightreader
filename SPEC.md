@@ -81,6 +81,8 @@ All of these colours are approved by John.
 1. **Header:** logo, "Lightreader", and a postcode pill showing, for example, "Reading (RG1)" with a Change button.
 2. **Today:** "Sunrise 06:49 · Sunset 16:46" in large type. Show nothing else here; day length lives in the sentences.
    - **Changed (John, October 27th 2026):** before the sun is highest, as above, under "Today · Tuesday October 27th"; from then on, today's sunset under "Today · …" and then tomorrow's sunrise under "Tomorrow · Wednesday October 28th". The headings' wording is a draft.
+   - **Changed (John, October 28th 2026, option B):** the headings say which event: "Today's sunset · …" and "Tomorrow's sunrise · …".
+   - **Changed (John, October 29th 2026):** once it's dark (half-light over, at the minute shown), tomorrow's sunrise and sunset under "Tomorrow · Thursday October 29th". Where half-light lasts all night, it stays as before.
 3. **Next 24 hours: the sky ribbon** (mockup option B).
    - **Computer:** a horizontal strip, drawn to scale, from now to the same time tomorrow, coloured by band. Each change of light is a tick with its time and label, alternating above and below. The strip starts with a "Now" marker and has a midnight divider marked "Wed" (or whichever day). Show the legend below it.
    - **Phone:** the strip stands upright. True night is folded to a fixed height with a zigzag and its length ("True night, 10h 19m (folded)"). Events are listed beside it. (John, October 27th 2026: the folded part at least twice as tall as first built; the key wraps with "Very dark" beside "True night".)
@@ -123,6 +125,7 @@ This shows events in the next three months. The clock-change line appears only i
 - "Earliest sunset: 15:55, every day from Monday December 7th to Friday December 18th. Within that period, the very earliest is on Saturday December 12th."
 - "Shortest day: Monday December 21st, with 7h 49m of daylight."
   - **Changed (John, October 28th 2026, J4):** "Shortest day: Monday December 21st, 55 days from now, with 7h 50m of daylight, 2h 8m less than today." The longest day the same, with "more".
+  - **Added (John, October 29th 2026):** the next equinox, wherever it falls, in date order with the rest: "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:16." ("today" or "tomorrow, …" when it's that close; the date is the UK date of the equinox moment).
 - "Latest sunrise: 08:10, every day from Monday December 28th to Saturday January 2nd. Within that period, the very latest are on Wednesday December 30th and Thursday December 31st, a fraction of a second apart."
 - "First sunset at 17:00 or later: Friday February 5th."
   - This illustrates the wording; on October 27th it would fall outside the three-month window.

@@ -1087,3 +1087,16 @@ usually has two or three lines: at most three, none on about a week round the lo
 `sentences/index.ts`, the check, SPEC §6 annotated. Then live: `main` fast-forwarded.
 **Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and 390px with touch
 (RG1, TD15, BN1): the card arranged as before, no errors, no sideways scroll.
+
+### 2026-10-28 — no weekdays in Looking back, Looking ahead and "Is it light at…?" (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** remove the days of the week in those three, unless the date is one to six days
+ahead, when the day goes in brackets. **What:** `dayIn()` and `daysIn()` in
+`sentences/words.ts` (the year as before, over 300 days away), used by `records.ts`,
+`comingUp.ts` and `lightAt.ts`: "The sun rises after 07:00 from November 3rd (Tuesday) to
+February 23rd.", "Earliest sunset: … from December 8th to December 17th", "Half-light lasts
+past 17:30 from February 2nd." Today itself has no bracket ("December 11th and December 12th
+(Saturday)" on the 11th). Other groups, Compare and the year card keep their weekdays.
+**Verified:** checks 14 + 16 + 14 (every expectation updated to the real output; new: the rule
+at 0, 1, 6 and 7 days, past dates, the year); tsc, lint, build; Chromium at 1200px and 390px
+with touch: no errors, no sideways scroll.

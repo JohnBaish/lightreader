@@ -12,7 +12,7 @@ import { duration } from '../format.ts'
 import { daylight, type DayFigures } from '../sun.ts'
 import { addDays } from '../ukTime.ts'
 import { clockSeconds, dayOf, daysBack, daysBetween, offsetOn, runAround, type SkyContext } from './context.ts'
-import { dateIn } from './words.ts'
+import { dayIn } from './words.ts'
 
 export const RECORD_MIN_DAYS = 30
 
@@ -54,7 +54,7 @@ export function recordSentences(ctx: SkyContext): string[] {
         // A year or more back: "The shortest day for a year." (John, 27 October)
         out.push(`The ${label} for ${daysBetween(d.date, ctx.today) > 366 ? 'more than a year' : 'a year'}.`)
       } else {
-        out.push(`The ${label} since ${dateIn(ctx, d.date)}.`)
+        out.push(`The ${label} since ${dayIn(ctx, d.date)}.`)
       }
     }
   }
@@ -71,7 +71,7 @@ export function recordSentences(ctx: SkyContext): string[] {
     const closest = run.sort((x, y) => Math.abs(daylight(x) - daylight(today)) - Math.abs(daylight(y) - daylight(today)))[0]
     // It says what "the shortest day since …" says, better (John, 27 October), so that
     // one goes.
-    return [...out.filter((s) => !/^The (shortest|longest) day since /.test(s)), `Today's daylight matches ${dateIn(ctx, closest.date)}'s.`]
+    return [...out.filter((s) => !/^The (shortest|longest) day since /.test(s)), `Today's daylight matches ${dayIn(ctx, closest.date)}'s.`]
   }
   return out
 }

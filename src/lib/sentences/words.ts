@@ -15,6 +15,23 @@ export function rangeIn(ctx: SkyContext, a: string, b: string): [string, string]
   return [longDate(a, year), longDate(b, year)]
 }
 
+/** A date in "Looking back", "Looking ahead" and "Is it light at…?" (John, 28 October): no
+ *  weekday ("February 2nd"), except a date one to six days ahead, which gives it in brackets
+ *  ("November 3rd (Tuesday)"); the year as for `dateIn`. */
+function shortDate(ctx: SkyContext, date: string, withYear: boolean): string {
+  const full = longDate(date, withYear)
+  const space = full.indexOf(' ')
+  const ahead = daysBetween(ctx.today, date)
+  return ahead >= 1 && ahead <= 6 ? `${full.slice(space + 1)} (${full.slice(0, space)})` : full.slice(space + 1)
+}
+export const dayIn = (ctx: SkyContext, date: string) => shortDate(ctx, date, Math.abs(daysBetween(ctx.today, date)) > 300)
+
+/** Two dates for "from … to …" in those groups: the year on both if either needs it. */
+export function daysIn(ctx: SkyContext, a: string, b: string): [string, string] {
+  const year = Math.abs(daysBetween(ctx.today, a)) > 300 || Math.abs(daysBetween(ctx.today, b)) > 300
+  return [shortDate(ctx, a, year), shortDate(ctx, b, year)]
+}
+
 /** A light label inside a sentence, where it could be read as an ordinary word ("at its
  *  darkest the sky only reaches dark"). John, 27 October (option B): the page shows it as
  *  a small coloured tag matching the ribbon's key; anywhere else (`plainText`) it's in

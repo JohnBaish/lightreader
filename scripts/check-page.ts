@@ -179,7 +179,7 @@ check('is it light at…?: the strip agrees with the sentences, day by day', () 
   const year = yearChanges(RG1, ctx.today)
   const at = lightAtYear(ctx, year, '17:30')
   assert.equal(at.today, 'dark')
-  assert.deepEqual(at.sentences, ['Half-light lasts past 17:30 from Tuesday February 2nd.', 'The sun is up at 17:30 again from Monday February 22nd.'])
+  assert.deepEqual(at.sentences, ['Half-light lasts past 17:30 from February 2nd.', 'The sun is up at 17:30 again from February 22nd.'])
   const day = (date: string) => at.strip[Math.round((Date.parse(date) - Date.parse(at.from)) / 86_400_000)]
   const light = (b: string) => b === 'daylight' || b === 'half-light'
   assert.ok(!light(day('2027-02-01')))

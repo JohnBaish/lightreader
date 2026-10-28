@@ -19,7 +19,7 @@ import { addMonths } from '../year.ts'
 import { addDays, ukParts } from '../ukTime.ts'
 import { bestWithTies, clockChanges, clockSeconds, dayOf, daysAhead, daysBetween, offsetOn, runAround, shown, type SkyContext } from './context.ts'
 import { numberWord } from '../words.ts'
-import { dateIn, inDays, rangeIn } from './words.ts'
+import { dayIn, inDays, daysIn } from './words.ts'
 
 export const CLOCK_CHANGE_NOTICE_DAYS = 70
 /** A threshold lasting longer than this (about eight months) is hardly news: "after 05:00
@@ -108,10 +108,10 @@ function crossingLine(ctx: SkyContext, list: DayFigures[], c: Crossing): Item | 
   if (again && changeBetween) {
     const change = list.slice(c.i + 1, again.i + 1).find(changesClock)!
     const way = offsetOn(change.date) > offsetOn(addDays(change.date, -1)) ? 'forward' : 'back'
-    const [a, b] = rangeIn(ctx, cur.date, list[again.i].date)
+    const [a, b] = daysIn(ctx, cur.date, list[again.i].date)
     return { date: cur.date, text: `${what}: ${a}, and again after the clocks go ${way}, on ${b}.` }
   }
-  return { date: cur.date, text: `${what}: ${dateIn(ctx, cur.date)}.` }
+  return { date: cur.date, text: `${what}: ${dayIn(ctx, cur.date)}.` }
 }
 
 /** The last day of the run starting at `list[i]`, and whether a clock change ended it;
@@ -129,11 +129,11 @@ function runEnd(list: DayFigures[], i: number, test: (d: DayFigures) => boolean)
  *  sentences stop at a clock change and say so). */
 function fromUntil(ctx: SkyContext, start: DayFigures, end: { day: DayFigures; byClocks: boolean }): string {
   if (!end.byClocks) {
-    const [a, b] = rangeIn(ctx, start.date, end.day.date)
+    const [a, b] = daysIn(ctx, start.date, end.day.date)
     return `from ${a} to ${b}`
   }
   const change = addDays(end.day.date, 1)
-  const [a, b] = rangeIn(ctx, start.date, change)
+  const [a, b] = daysIn(ctx, start.date, change)
   return `from ${a} until the clocks go ${offsetOn(change) > offsetOn(end.day.date) ? 'forward' : 'back'} on ${b}`
 }
 
@@ -175,7 +175,7 @@ function turnText(ctx: SkyContext, t: Turn, low: boolean, list: DayFigures[], i:
     const than = Math.abs(diff) < 60_000 ? 'much the same as today' : `${duration(diff)} ${diff > 0 ? 'more' : 'less'} than today`
     return n === 0
       ? `${label}: today, with ${duration(daylight(day))} of daylight.`
-      : `${label}: ${dateIn(ctx, day.date)}, ${when}, with ${duration(daylight(day))} of daylight, ${than}.`
+      : `${label}: ${dayIn(ctx, day.date)}, ${when}, with ${duration(daylight(day))} of daylight, ${than}.`
   }
   const at = (d: DayFigures) => d[t.event!]!
   const minute = shown(at(day))
@@ -185,14 +185,14 @@ function turnText(ctx: SkyContext, t: Turn, low: boolean, list: DayFigures[], i:
   const ties = bestWithTies(near, (d) => (low ? 1 : -1) * t.key(d))
   const very = low ? 'very earliest' : 'very latest'
   const head = `${label}: ${clock(at(day))}`
-  if (first.date === last.date) return `${head}, on ${dateIn(ctx, day.date)}.`
-  const [a, b] = rangeIn(ctx, first.date, last.date)
+  if (first.date === last.date) return `${head}, on ${dayIn(ctx, day.date)}.`
+  const [a, b] = daysIn(ctx, first.date, last.date)
   const run = `${head}, every day from ${a} to ${b}.`
   if (ties.length > 1) {
-    const names = ties.map((d) => dateIn(ctx, d.date))
+    const names = ties.map((d) => dayIn(ctx, d.date))
     return `${run} Within that period, the ${very} are on ${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}, a fraction of a second apart.`
   }
-  return `${run} Within that period, the ${very} is on ${dateIn(ctx, ties[0].date)}.`
+  return `${run} Within that period, the ${very} is on ${dayIn(ctx, ties[0].date)}.`
 }
 
 /** "Clocks go forward in nine days, on Sunday March 28th: sunset jumps from 18:28 to 19:30."
@@ -212,7 +212,7 @@ function clockChangeLine(ctx: SkyContext): Item[] {
     const tense = ctx.now.getTime() >= now.getTime() ? 'was' : 'is'
     return [{ date: change.date, text: `Clocks went ${way} today: ${event} ${tense} at ${clock(now)}, not ${clock(was)}.` }]
   }
-  const when = n === 1 ? 'tomorrow' : `${inDays(n)}, on ${dateIn(ctx, change.date)}`
+  const when = n === 1 ? 'tomorrow' : `${inDays(n)}, on ${dayIn(ctx, change.date)}`
   return [{ date: change.date, text: `Clocks go ${way} ${when}: ${event} jumps from ${clock(was)} to ${clock(now)}.` }]
 }
 
@@ -233,6 +233,6 @@ function equinoxLine(ctx: SkyContext): Item[] {
   if (!next) return []
   const sunset = dayOf(ctx, next.date).sunset
   const n = daysBetween(ctx.today, next.date)
-  const when = n === 0 ? 'today' : n === 1 ? `tomorrow, ${dateIn(ctx, next.date)}` : `${dateIn(ctx, next.date)}, ${numberWord(n)} days from now`
+  const when = n === 0 ? 'today' : n === 1 ? `tomorrow, ${dayIn(ctx, next.date)}` : `${dayIn(ctx, next.date)}, ${numberWord(n)} days from now`
   return [{ date: next.date, text: `${next.name}: ${when}${sunset ? `, with sunset at ${clock(sunset)}` : ''}.` }]
 }

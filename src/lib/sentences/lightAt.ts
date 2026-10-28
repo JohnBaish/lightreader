@@ -12,7 +12,7 @@ import { clock } from '../format.ts'
 import type { DayFigures } from '../sun.ts'
 import { addDays } from '../ukTime.ts'
 import { bestWithTies, clockSeconds, dayOf, daysAhead, offsetOn, shown, type SkyContext } from './context.ts'
-import { dateIn } from './words.ts'
+import { dayIn } from './words.ts'
 
 /** A time of day as "HH:MM", e.g. "07:30". */
 export type TimeOfDay = string
@@ -45,7 +45,7 @@ function change(days: DayFigures[], test: (d: DayFigures) => boolean): { last: D
 }
 
 const clockWords = (ctx: SkyContext, firstOfNew: string) =>
-  `the clocks go ${offsetOn(firstOfNew) > offsetOn(addDays(firstOfNew, -1)) ? 'forward' : 'back'} on ${dateIn(ctx, firstOfNew)}`
+  `the clocks go ${offsetOn(firstOfNew) > offsetOn(addDays(firstOfNew, -1)) ? 'forward' : 'back'} on ${dayIn(ctx, firstOfNew)}`
 
 export function lightAtSentences(ctx: SkyContext, time: TimeOfDay): string[] {
   const t = minutesOf(time)
@@ -62,7 +62,7 @@ function lightSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: 
   const c = change(days, (d) => lightAt(d, t))
   if (c && c.last.date === ctx.today) return `From tomorrow it's ${light ? 'dark' : 'light'} at ${time}.`
   if (c && light) {
-    const end = c.byClocks ? `until ${clockWords(ctx, addDays(c.last.date, 1))}` : `until ${dateIn(ctx, c.last.date)}`
+    const end = c.byClocks ? `until ${clockWords(ctx, addDays(c.last.date, 1))}` : `until ${dayIn(ctx, c.last.date)}`
     return `It's light at ${time} ${end}.`
   }
   if (c) {
@@ -72,8 +72,8 @@ function lightSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: 
     const next = addDays(c.last.date, 1)
     const clocks = c.byClocks ? `, when the clocks go ${offsetOn(next) > offsetOn(c.last.date) ? 'forward' : 'back'}` : ''
     return morning
-      ? `Half-light starts by ${time} from ${dateIn(ctx, next)}${clocks}.`
-      : `Half-light lasts past ${time} from ${dateIn(ctx, next)}${clocks}.`
+      ? `Half-light starts by ${time} from ${dayIn(ctx, next)}${clocks}.`
+      : `Half-light lasts past ${time} from ${dayIn(ctx, next)}${clocks}.`
   }
   if (!light) return `It's always dark at ${time} here.`
   // Daylight all year: said plainly (the fresh look, 3.2).
@@ -87,7 +87,7 @@ function lightSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: 
   const tied = bestWithTies(withEvent, (d) => (morning ? -1 : 1) * clockSeconds(d[event]!))
   const worst = [tied[0]]
   for (const d of tied.slice(1)) if (d.date === addDays(worst[worst.length - 1].date, 1)) worst.push(d)
-  const names = worst.map((d) => dateIn(ctx, d.date)).join(' and ')
+  const names = worst.map((d) => dayIn(ctx, d.date)).join(' and ')
   const verb = morning ? 'starts' : 'ends'
   const which = morning ? 'morning' : 'evening'
   const nameWords = worst.length > 1 ? `the darkest ${which}s, ${names}` : `the darkest ${which}, ${names}`
@@ -109,9 +109,9 @@ function sunSentence(ctx: SkyContext, days: DayFigures[], time: TimeOfDay, t: nu
     return `The sun is ${by} ${time} again from tomorrow.`
   }
   if (up) {
-    const end = c.byClocks ? `until ${clockWords(ctx, next)}` : `until ${dateIn(ctx, c.last.date)}`
+    const end = c.byClocks ? `until ${clockWords(ctx, next)}` : `until ${dayIn(ctx, c.last.date)}`
     return morning ? `The sun is up by ${time} ${end}.` : `The sun is still up at ${time} ${end}.`
   }
-  const from = c.byClocks ? `from ${dateIn(ctx, next)}, when the clocks go ${offsetOn(next) > offsetOn(c.last.date) ? 'forward' : 'back'}` : `from ${dateIn(ctx, next)}`
+  const from = c.byClocks ? `from ${dayIn(ctx, next)}, when the clocks go ${offsetOn(next) > offsetOn(c.last.date) ? 'forward' : 'back'}` : `from ${dayIn(ctx, next)}`
   return `The sun is ${by} ${time} again ${from}.`
 }

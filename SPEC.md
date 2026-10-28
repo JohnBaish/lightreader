@@ -114,6 +114,7 @@ Compares with the same weekday a week back and a week ahead.
 ### Records and runs
 
 - **Changed (John, October 28th 2026):** headed "Looking back" on the page.
+- **Changed (John, October 28th 2026):** in Looking back, Looking ahead and "Is it light at…?", dates have no weekday ("January 26th"), except a date one to six days ahead, which has it in brackets ("November 3rd (Tuesday)").
 - "The earliest sunset since Wednesday January 28th."
 - "The shortest day since Saturday February 14th."
 - "The latest sunrise since the clocks went back."

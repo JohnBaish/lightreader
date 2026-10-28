@@ -30,7 +30,7 @@ Lightreader
 
 ## About these figures
 
-(Also shown at the foot of the page once a postcode is chosen.)
+(Shown at the foot of the page only once a postcode is chosen: John, 28 October, took it off the opening page.)
 
 **Daylight:** The sun is up: from sunrise to sunset, when the top of the sun meets a flat horizon.
 

@@ -1159,3 +1159,12 @@ reaches 4m 50s either way (Berwick's fastest is 4m 38s). **Verified:** checks 14
 RG4 on October 28th, September 1st and December 25th, with real figures); tsc, lint, build;
 Chromium at 1200px and 900px, and 390px and 375px with touch, light and dark (RG4, TD15, TR18): no
 errors, no sideways scroll. Pictures `design/previews/pace-built-*.png`.
+
+### 2026-10-28 — "About these figures" off the opening page (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** remove "About these figures" from the page a first-time visitor sees before
+entering a postcode. **What:** `App.tsx` shows `<About />` only once a postcode is chosen
+(also while changing postcode, as the figures are still below); `design/landing-wording-2026-10-28.md`
+noted. **Verified:** checks 14 + 16 + 15, tsc, lint, build; Chromium at 1200px and 390px with
+touch: the opening page has only the heading, line, box and footer; after typing RG4, "About
+these figures" is at the foot; no errors, no sideways scroll.

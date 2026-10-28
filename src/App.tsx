@@ -134,7 +134,8 @@ export default function App() {
           </section>
         )}
         {d && <SafetyNet key={d.code}><Place d={d} now={now} /></SafetyNet>}
-        <About />
+        {/* Not on the opening page before a postcode is chosen (John, 28 October). */}
+        {d && <About />}
         <footer className="footer-notice" data-noprint>
           Lightreader is a free-to-use personal project by John Baish. More free tools at{' '}
           <a href="https://www.baish.net/" target="_blank" rel="noopener noreferrer" className="footer-link">www.baish.net</a>.

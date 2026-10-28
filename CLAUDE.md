@@ -1041,3 +1041,16 @@ at 17:00 and 18:30 today: no errors, no sideways scroll. Pictures
 KT12)" (was TR18; `compare.ts`). Then he said put it live: `main` fast-forwarded to the branch,
 with the top card after dark, the next equinox and the BS1 hint. **Verified:** `npx tsc -b`,
 lint, build, `npm run check` (14 + 15 + 13).
+
+### 2026-10-28 — the ribbon's "Now" and brackets: mock-ups for John (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John** (from his phone at 05:45) asked for "Now 05:46 Dark" (the light now) and brackets
+like "06:15 (1h 29m)". Built as a switch for the mock-ups only (`MOCK` in `SkyRibbon.tsx`,
+`?ribbon=a` or `?ribbon=b`; without it the ribbon is as live): both add the light now after
+"Now" ("Daylight" in the day, the key's word); **A** gives each change's time from now ("06:15
+(29m)"), **B** how long the light it leads into lasts ("06:15 (35m) Half-light", and "Now 05:46
+Dark (29m left)" on a phone). On a computer the bracket would crowd the labels where changes
+come close (tried first: they overlapped), so there it's a third line under the word, and the
+label rows are taller. Pictures `design/previews/ribbon-now-options-*.png` (Caversham, RG4, dark
+mode, 05:46 and 13:00). No errors, no sideways scroll. Waiting for John's choice; to be tidied
+before going live.

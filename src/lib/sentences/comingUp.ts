@@ -217,7 +217,7 @@ function clockChangeLine(ctx: SkyContext): Item[] {
 }
 
 /** "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:17." (John,
- *  29 October): the next equinox, by its UK date, wherever it falls; in date order with the
+ *  28 October): the next equinox, by its UK date, wherever it falls; in date order with the
  *  rest, so it sits before or after the shortest or longest day. */
 function equinoxLine(ctx: SkyContext): Item[] {
   const year = Number(ctx.today.slice(0, 4))

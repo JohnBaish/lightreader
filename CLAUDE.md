@@ -1100,3 +1100,15 @@ past 17:30 from February 2nd." Today itself has no bracket ("December 11th and D
 **Verified:** checks 14 + 16 + 14 (every expectation updated to the real output; new: the rule
 at 0, 1, 6 and 7 days, past dates, the year); tsc, lint, build; Chromium at 1200px and 390px
 with touch: no errors, no sideways scroll.
+
+### 2026-10-28 — the year card's chosen day: mock-ups (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** remove the red date heading when a day is chosen, at least on a phone; the strip's
+label in full ("Saturday January 16th", was "Sat January 16th"); no weekday in the sentences
+("On January 16th the sun rises …"). Compare unchanged. **What:** `kicker-chosen` hidden on a
+phone (`global.css`), kept on a computer for now; today's own detail keeps its heading (there's
+no strip to name it). `compareDate(…, weekday = true)`: the year card passes `false`. The
+label column on a computer is 175px in the year card so the full name fits on one line.
+Pictures `design/previews/year-day-phone.png`, `-computer-a.png` (heading kept),
+`-computer-b.png` (heading removed, shown by adding the phone's rule in the browser only).
+**Verified:** checks 14 + 16 + 14, tsc, lint, build; no errors, no sideways scroll.

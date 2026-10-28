@@ -123,9 +123,11 @@ export function clockNote(today: string, other: string): string | null {
 }
 
 /** Comparing today with another date, here (SPEC §8). */
-export function compareDate(here: DayFigures, there: DayFigures, today: string): string[] {
+export function compareDate(here: DayFigures, there: DayFigures, today: string, weekday = true): string[] {
   if (!here.sunrise || !here.sunset || !there.sunrise || !there.sunset) return []
-  const name = longDate(there.date)
+  // The year card names the day on its strip, so its sentences leave out the weekday ("On
+  // January 16th the sun rises …"; John, 28 October). Compare keeps it.
+  const name = weekday ? longDate(there.date) : longDate(there.date).replace(/^\S+ /, '')
   const diff = daylight(there) - daylight(here)
   const more = Math.abs(diff) < 60_000 ? null : `${duration(diff)} ${diff > 0 ? 'more' : 'less'}`
   if (there.date > today) {

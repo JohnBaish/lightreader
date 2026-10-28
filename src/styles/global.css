@@ -206,6 +206,7 @@ body { margin: 0; background: var(--color-bg); }
 .day-cards li.is-today { background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg)); }
 .year-detail-big .pair { white-space: nowrap; }
 .year-detail .pairs { width: 100%; }
+.year-detail .pair-row { grid-template-columns: 175px 1fr; }
 .year-detail .clock-note { background: var(--color-surface); }
 .year-compare { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
 .year-compare li::marker { color: var(--color-accent); }
@@ -227,8 +228,9 @@ body { margin: 0; background: var(--color-bg); }
   .today-blocks { flex-direction: column; gap: var(--space-3); }
   .group-cols { grid-template-columns: 1fr; }
   .compare { padding: var(--space-4); }
-  .pair-row { grid-template-columns: 1fr; gap: 2px; }
+  .pair-row, .year-detail .pair-row { grid-template-columns: 1fr; gap: 2px; }
   .pair-axis .pair-label { display: none; }
+  .year-detail .kicker-chosen { display: none; }
   /* 44px to tap on a phone (house rule; the fresh look, 6.3). The chips' ✕ keeps its look
      and gains a larger tap area around it. */
   .chip button { width: 36px; height: 36px; position: relative; }

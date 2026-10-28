@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerE
 import { clockNote, compareDate } from '../lib/compare.ts'
 import type { District } from '../lib/postcode.ts'
 import { dayFigures } from '../lib/sun.ts'
-import { DayStrip, SHORT } from './Compare.tsx'
+import { DayStrip } from './Compare.tsx'
 import { BANDS } from '../lib/bands.ts'
 import { longDate, ordinal, weekday } from '../lib/format.ts'
 import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
@@ -177,12 +177,12 @@ function DayAgainstToday({ d, day, today }: { d: District; day: string; today: s
   return (
     <>
       <div className="pairs">
-        <DayStrip place={d} date={day} label={SHORT(day)} />
+        <DayStrip place={d} date={day} label={longDate(day)} />
         <DayStrip place={d} date={today} label="Today" />
         <div className="pair-row pair-axis"><span className="pair-label" /><div className="pair-hours"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
       </div>
       {note && <p className="clock-note">{note}</p>}
-      <ul className="year-compare">{compareDate(here, there, today).map((s, i) => <li key={i}>{s}</li>)}</ul>
+      <ul className="year-compare">{compareDate(here, there, today, false).map((s, i) => <li key={i}>{s}</li>)}</ul>
     </>
   )
 }
@@ -248,7 +248,8 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         <Legend />
         {row && (
           <div className="year-detail" aria-live="polite">
-            <div className="kicker">{longDate(day, true)}{day === v.today ? ' · Today' : ''}</div>
+            {/* On a phone, a day other than today is named by its strip below instead (John, 28 October). */}
+            <div className={`kicker${day === v.today ? '' : ' kicker-chosen'}`}>{longDate(day, true)}{day === v.today ? ' · Today' : ''}</div>
             {day !== v.today ? (
               <DayAgainstToday d={d} day={day} today={v.today} />
             ) : (

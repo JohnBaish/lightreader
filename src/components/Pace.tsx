@@ -97,7 +97,6 @@ export function PaceCard({ p, narrow, span }: { p: Pace; narrow: boolean; span: 
         </svg>
       </div>
       <ul className="pace-words">{p.sentences.map((s, i) => <li key={i}>{s}</li>)}</ul>
-      <p className="note">The line shows how much daylight each day gains or loses against the day before.</p>
     </section>
   )
 }

@@ -36,7 +36,7 @@ function paceSentences(ctx: SkyContext, change: (date: string) => number): strin
   const today = ctx.today
   const now = change(today)
   const growing = now > 0
-  const word = growing ? 'growing' : 'shrinking'
+  const word = growing ? 'increasing' : 'reducing'
   const week = daylight(dayOf(ctx, addDays(today, 7))) - daylight(dayOf(ctx, today))
   const pct = Math.abs((week / daylight(dayOf(ctx, today))) * 100).toFixed(1)
   const out = [`Daylight is ${word} by ${rate(now)} a day, and by ${pct}% (${duration(week)}) over the next week.`]
@@ -49,16 +49,17 @@ function paceSentences(ctx: SkyContext, change: (date: string) => number): strin
   while (sameWay(addDays(end, 1))) end = addDays(end, 1)
   const fastest = fastestIn(start, end, change)
   if (fastest.date > today) {
-    out.push(`The most it ${growing ? 'grows' : 'shrinks'} in a year is ${rate(fastest.change)} a day, around ${dayIn(ctx, fastest.date)}.`)
+    out.push(`The most it ${growing ? 'increases' : 'reduces'} in a year is ${rate(fastest.change)} a day, around ${dayIn(ctx, fastest.date)}.`)
   } else {
-    // Once the fastest has passed, it was; and the other way's fastest is the one to come
-    // (John, 28 October).
-    out.push(`The most it ${growing ? 'grew' : 'shrank'} was ${rate(fastest.change)} a day, around ${dayIn(ctx, fastest.date)}.`)
+    // Once the fastest has passed, when it happened; and the other way's fastest is the one to
+    // come (John, 28 October). A season's fastest always falls in the same calendar year as the
+    // rest of that season to date (March for increasing, September for reducing), so "this year".
+    out.push(`The most it ${growing ? 'increases' : 'reduces'} is ${rate(fastest.change)} a day, which happened this year around ${dayIn(ctx, fastest.date)}.`)
     const nextStart = addDays(end, 1)
     let nextEnd = nextStart
     while (!sameWay(addDays(nextEnd, 1))) nextEnd = addDays(nextEnd, 1)
     const next = fastestIn(nextStart, nextEnd, change)
-    out.push(`It will ${growing ? 'shrink' : 'grow'} fastest around ${dayIn(ctx, next.date)}, by ${rate(next.change)} a day.`)
+    out.push(`It will ${growing ? 'reduce' : 'increase'} fastest around ${dayIn(ctx, next.date)}, by ${rate(next.change)} a day.`)
   }
   return out
 }

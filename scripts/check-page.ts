@@ -271,14 +271,14 @@ check('pace of change: the day\'s change, the next week, and the fastest, past o
   // The fastest shrinking (234.5 s, September 24th to 26th) has passed, so it was; then spring's
   // fastest growing (238.2 s, March 18th and 19th; checked separately with SearchRiseSet).
   assert.deepEqual(now.sentences, [
-    'Daylight is shrinking by 3m\u00a040s a day, and by 4.2% (25m) over the next week.',
-    'The most it shrank was 3m\u00a054s a day, around September 25th.',
-    'It will grow fastest around March 18th, by 3m\u00a058s a day.',
+    'Daylight is reducing by 3m\u00a040s a day, and by 4.2% (25m) over the next week.',
+    'The most it reduces is 3m\u00a054s a day, which happened this year around September 25th.',
+    'It will increase fastest around March 18th, by 3m\u00a058s a day.',
   ])
-  assert.deepEqual(at('2026-09-01').sentences.slice(1), ['The most it shrinks in a year is 3m\u00a054s a day, around September 25th.'])
+  assert.deepEqual(at('2026-09-01').sentences.slice(1), ['The most it reduces in a year is 3m\u00a054s a day, around September 25th.'])
   assert.deepEqual(at('2026-12-25').sentences, [
-    'Daylight is growing by 20s a day, and by 1.1% (5m) over the next week.',
-    'The most it grows in a year is 3m\u00a058s a day, around March 18th.',
+    'Daylight is increasing by 20s a day, and by 1.1% (5m) over the next week.',
+    'The most it increases in a year is 3m\u00a058s a day, around March 18th.',
   ])
 })
 

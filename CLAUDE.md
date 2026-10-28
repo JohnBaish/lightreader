@@ -1189,3 +1189,15 @@ sunset is said only when it's beyond both ends ("; Penzance's is later still, at
 updated (Reading today and at midsummer). **Verified:** checks 14 + 16 + 15, tsc, lint, build;
 Chromium at 1200px (Darkness and Across the UK both start at the same height) and 390px with touch:
 no errors, no sideways scroll. Picture `design/previews/darkness-across-top.png`.
+
+### 2026-10-28 — Pace of change wording; the day table centred (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** "reducing"/"reduces" and "increasing"/"increases" (not shrinking or growing); once the
+fastest has passed, "The most it reduces is 3m 54s a day, which happened this year around September
+25th."; then "It will increase fastest around March 18th, by 3m 58s a day."; the note under the chart
+removed; in "Day by day" the times centred under their headings. **What:** `pace.ts`, `Pace.tsx`,
+`global.css` (every column but the date centred; the clock-change rows unchanged). A season's
+fastest always falls in the same calendar year as the rest of that season to date, so "this year"
+is always true. **Verified:** checks 14 + 16 + 15 (expectations updated to the new wording); tsc,
+lint, build; Chromium at 1200px and 390px with touch: no errors, no sideways scroll. Picture
+`design/previews/day-table-centred.png`.

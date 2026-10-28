@@ -210,6 +210,8 @@ body { margin: 0; background: var(--color-bg); }
 .day-table th { text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-700); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--color-divider); }
 .day-table td { padding: 7px 8px; border-bottom: 1px solid var(--color-divider); }
 .day-table td:first-child { white-space: nowrap; }
+/* Each time centred under its heading (John, 28 October); the date stays at the left. */
+.day-table th:not(:first-child), .day-table td:not(:first-child) { text-align: center; }
 .is-today { background: color-mix(in srgb, var(--color-accent) 18%, transparent); box-shadow: inset 3px 0 0 var(--color-accent-700); }
 .is-chosen:not(.is-today) { box-shadow: inset 3px 0 0 var(--color-text); }
 .today-tag { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; background: var(--color-surface); border-radius: 999px; padding: 1px 6px; margin-left: 6px; vertical-align: 1px; }

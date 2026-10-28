@@ -216,7 +216,7 @@ function clockChangeLine(ctx: SkyContext): Item[] {
   return [{ date: change.date, text: `Clocks go ${way} ${when}: ${event} jumps from ${clock(was)} to ${clock(now)}.` }]
 }
 
-/** "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:17." (John,
+/** "Spring equinox: Saturday March 20th, 143 days from now, with sunset at 18:16." (John,
  *  28 October): the next equinox, by its UK date, wherever it falls; in date order with the
  *  rest, so it sits before or after the shortest or longest day. */
 function equinoxLine(ctx: SkyContext): Item[] {

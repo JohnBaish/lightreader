@@ -1201,3 +1201,10 @@ fastest always falls in the same calendar year as the rest of that season to dat
 is always true. **Verified:** checks 14 + 16 + 15 (expectations updated to the new wording); tsc,
 lint, build; Chromium at 1200px and 390px with touch: no errors, no sideways scroll. Picture
 `design/previews/day-table-centred.png`.
+
+### 2026-10-28 — live: Pace of change and the rest
+
+**John:** make it all live. `main` fast-forwarded to the branch: "Pace of change", "About these
+figures" off the opening page, the top card's middle state from sunset, side-by-side cards lined up
+at the top, Across the UK without the visitor's own sunset, the Pace of change wording and the
+centred day table. **Verified:** checks 14 + 16 + 15, tsc, lint, build first.

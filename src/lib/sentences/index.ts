@@ -18,7 +18,7 @@ export function allGroups(ctx: SkyContext, times: TimeOfDay[]): Group[] {
   return [
     { heading: 'Today', sentences: todaySentences(ctx) },
     { heading: 'This fortnight', sentences: fortnightSentences(ctx) },
-    { heading: 'Records and runs', sentences: recordSentences(ctx) },
+    { heading: 'Looking back', sentences: recordSentences(ctx) }, // was "Records and runs" (John, 28 October)
     { heading: 'Looking ahead', sentences: comingUpSentences(ctx) }, // was "Coming up" (John, 28 October)
     ...times.map((t) => ({ heading: `Is it light at ${t}?`, sentences: lightAtSentences(ctx, t) })),
     { heading: 'Darkness', sentences: darknessSentences(ctx) },

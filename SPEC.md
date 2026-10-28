@@ -112,6 +112,8 @@ Compares with the same weekday a week back and a week ahead.
 - **Changed (John, October 28th 2026, J1):** the daylight line ("Days were 26m longer.", "That's 25m less daylight.") only when a clock change lies between, where the brackets need explaining.
 
 ### Records and runs
+
+- **Changed (John, October 28th 2026):** headed "Looking back" on the page.
 - "The earliest sunset since Wednesday January 28th."
 - "The shortest day since Saturday February 14th."
 - "The latest sunrise since the clocks went back."

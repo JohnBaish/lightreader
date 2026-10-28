@@ -39,7 +39,7 @@ check('Reading, Tuesday October 27th 2026 at 09:02: every group', () => {
       'A week ago, before the clocks went back, the sun rose at 07:36 (48m later) and set at 18:00 (1h 14m later). Days were 26m longer.',
       'Next Tuesday the sun rises at 07:01 (12m later) and sets at 16:33 (13m earlier).',
     ] },
-    { heading: 'Records and runs', sentences: [
+    { heading: 'Looking back', sentences: [
       'The earliest sunset since Wednesday January 28th.',
       "Today's daylight matches Saturday February 14th's.",
     ] },

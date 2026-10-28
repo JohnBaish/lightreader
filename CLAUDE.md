@@ -1079,3 +1079,11 @@ note drops the length the "Now" line already gives ("True night (folded: tap to 
 `main` fast-forwarded to the branch, with "Now 05:46 Dark (29m left)", "Light", and no repeated
 true-night length. **Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and
 390px with touch: no errors, no sideways scroll.
+
+### 2026-10-28 — "Looking back"; live
+
+**John:** "Records and runs" renamed "Looking back" (pairs with "Looking ahead"; the card
+usually has two or three lines: at most three, none on about a week round the longest day).
+`sentences/index.ts`, the check, SPEC §6 annotated. Then live: `main` fast-forwarded.
+**Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and 390px with touch
+(RG1, TD15, BN1): the card arranged as before, no errors, no sideways scroll.

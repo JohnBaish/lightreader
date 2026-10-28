@@ -1,4 +1,4 @@
-// "Records and runs" (SPEC §6, rule A): "The earliest sunset since Wednesday January 28th."
+// "Records and runs", headed "Looking back" on the page (John, 28 October; SPEC §6, rule A): "The earliest sunset since Wednesday January 28th."
 //
 // Rule A: compared to the second, by the clock; shown only when the day it goes back to is
 // at least 30 days ago. When that day is the one just before a clock change (so the record

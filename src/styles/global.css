@@ -95,6 +95,7 @@ body { margin: 0; background: var(--color-bg); }
   linear-gradient(45deg, transparent 45%, #f5ead8 45%, #f5ead8 55%, transparent 55%) 5.5px center / 11px 12px repeat-x,
   var(--band-true-night); }
 .ribbon-vnow { font-weight: 600; color: var(--color-accent-800); }
+.ribbon-vnow span { font-weight: 400; color: var(--color-text); }
 .ribbon-vmark { position: absolute; left: 22px; width: 8px; height: 1px; background: var(--color-text); }
 .ribbon-vlabel { position: absolute; left: 36px; right: 0; font-size: 13.5px; line-height: 21px; white-space: nowrap; }
 .ribbon-fold-note { font-size: 12px; color: var(--color-accent-700); background: none; border: 0; padding: 0; text-align: left; font-family: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }

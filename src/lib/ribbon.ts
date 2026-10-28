@@ -65,12 +65,13 @@ export function ribbon(place: Place, now: Date): Ribbon {
 }
 
 /** The light now and how long it has left, beside "Now" (John, 28 October): "Dark" and
- *  "29m left", from the minutes shown. No "left" if it lasts the whole 24 hours. */
+ *  "29m left", from the minutes shown. No "left" if it lasts the whole 24 hours. Daylight is
+ *  "Light" here, to match "Dark" and echo the site's name (John); the key keeps "Daylight". */
 const minuteOf = (d: Date) => Math.round(d.getTime() / 60_000)
 export function nowLight(r: Ribbon): { band: string; left: string | null } {
   const first = r.segments[0]
   const left = r.segments.length > 1 ? `${duration((minuteOf(first.to) - minuteOf(r.from)) * 60_000)} left` : null
-  return { band: BAND_LABEL[first.band], left }
+  return { band: first.band === 'daylight' ? 'Light' : BAND_LABEL[first.band], left }
 }
 
 /** Where `at` falls along the ribbon, from 0 to 1. */

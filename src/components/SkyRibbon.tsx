@@ -118,7 +118,9 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
     { at: LINE_PX / 2, now: true },
     ...[
       ...r.ticks.map((tick) => ({ at: yOf(tick.at), tick })),
-      ...placed.filter((p) => long(p.s)).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}, ${duration(ms(p.s))} ${open ? '(tap to fold)' : '(folded: tap to open)'}` })),
+      // The fold's note gives true night's length, unless it's true night now, when the
+      // "Now" line has already said how long is left (John, 28 October).
+      ...placed.filter((p) => long(p.s)).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}${p.s.from.getTime() === r.from.getTime() ? '' : `, ${duration(ms(p.s))}`} ${open ? '(tap to fold)' : '(folded: tap to open)'}` })),
     ].sort((a, b) => a.at - b.at),
   ]
   const tops = spreadLabels(entries.map((e) => e.at), LINE_PX)
@@ -136,7 +138,7 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
           ))}
         </div>
         {labels.map((l, i) => l.now ? (
-          <div key={i} className="ribbon-vlabel ribbon-vnow" style={{ top: l.top }}>Now {clock(r.from)} {nowLight(r).band}{nowLight(r).left && ` (${nowLight(r).left})`}</div>
+          <div key={i} className="ribbon-vlabel ribbon-vnow" style={{ top: l.top }}>Now {clock(r.from)} <span>{nowLight(r).band}{nowLight(r).left && ` (${nowLight(r).left})`}</span></div>
         ) : l.tick ? (
           <div key={i}>
             <div className="ribbon-vmark" style={{ top: l.at }} />

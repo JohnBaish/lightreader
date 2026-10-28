@@ -1064,3 +1064,11 @@ left)"; computer: "NOW / 05:46 / Dark / 29m left" beside the strip, which stays 
 height. **Verified:** `npx tsc -b`, lint, build, `npm run check` (14 + 15 + 14; new: RG4 at
 05:46, 13:00 and 20:00). Chromium at 1200px and 390px with touch, dark mode: no errors, no
 sideways scroll. Pictures `design/previews/ribbon-now-left-*.png`.
+
+### 2026-10-28 — "Light", plain words on a phone, no repeated length (branch `claude/nice-goodall-j1r6wu`, not on `main`)
+
+**John:** "Light" rather than "Daylight" after "Now" (matches "Dark", echoes the name; the key
+keeps "Daylight"); on a phone "Dark (29m left)" not bold; when it's true night now, the fold's
+note drops the length the "Now" line already gives ("True night (folded: tap to open)").
+**Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and 390px with touch at
+05:46, 13:00 and 20:00: no errors, no sideways scroll. Pictures refreshed.

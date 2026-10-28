@@ -104,7 +104,7 @@ check('the light now and how long it has left, beside "Now" (John, 28 October)',
   const at = (iso: string) => nowLight(ribbon(district('RG4')!, new Date(iso)))
   // Half-light begins at 06:15:27 (shown 06:15); sunset 16:44:22; very dark ends 04:59:12.
   assert.deepEqual(at('2026-10-28T05:46:00Z'), { band: 'Dark', left: '29m left' })
-  assert.deepEqual(at('2026-10-28T13:00:00Z'), { band: 'Daylight', left: '3h 44m left' })
+  assert.deepEqual(at('2026-10-28T13:00:00Z'), { band: 'Light', left: '3h 44m left' })
   assert.deepEqual(at('2026-10-28T20:00:00Z'), { band: 'True night', left: '8h 59m left' })
 })
 

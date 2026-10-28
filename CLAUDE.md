@@ -1129,3 +1129,18 @@ Everything is committed and live; `main` and the branch are the same. Nothing is
 **For John:** the `lightreader.baish.net` domain and Web Analytics in Vercel, then Search
 Console. **Needs clockwheel access:** the baish.net hub card, the overview PDF, and Lightreader
 in the house style's list of 24-hour exceptions.
+
+### 2026-10-28 — "Pace of change": mock-ups for John (branch `claude/nice-goodall-j1r6wu`; nothing on the page)
+
+**John** asked for design options for a new card before "Day by day": a line of daylight
+gained or lost each day over the year, today marked, and two sentences under it. Three options
+for Caversham (RG4): **A** the line with the area above zero in the daylight colour and below
+in the very-dark colour, labelled "Days getting longer/shorter"; **B** the line alone; **C**
+today's figure large, a short chart under it. `design/pace-of-change-mockup.html` (a standalone
+page; it loads the built stylesheet from `dist/`, so copy it into `dist/` after `npm run build`
+to view), pictures `design/previews/pace-of-change-computer.png` (light) and `-phone.png`
+(dark). **Real figures** (sun.ts, checked separately with `SearchRiseSet`): today −3m 40s a day
+(219.8 s); over the next week daylight falls by 25m, 4.2% (9h 54m to 9h 29m); the fastest loss in
+the span is 234.5 s a day on September 24th, 25th and 26th (a near-tie, shown 3m 54s); the
+fastest gain 238.2 s on March 18th and 19th 2027 (3m 58s). Wording drafted. No errors, no
+sideways scroll at 1200px or 390px with touch.

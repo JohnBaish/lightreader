@@ -120,7 +120,7 @@ export function SkyRibbonNarrow({ r }: { r: Ribbon }) {
       ...r.ticks.map((tick) => ({ at: yOf(tick.at), tick })),
       // The fold's note gives true night's length, unless it's true night now, when the
       // "Now" line has already said how long is left (John, 28 October).
-      ...placed.filter((p) => long(p.s)).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}${p.s.from.getTime() === r.from.getTime() ? '' : `, ${duration(ms(p.s))}`} ${open ? '(tap to fold)' : '(folded: tap to open)'}` })),
+      ...placed.filter((p) => long(p.s)).map((p) => ({ at: p.top + p.h / 2, fold: `${BAND_LABEL['true-night']}${p.s.from.getTime() === r.from.getTime() ? '' : `, ${duration(ms(p.s))}`} ${open ? '(tap to fold)' : '(folded: tap to extend)'}` })),
     ].sort((a, b) => a.at - b.at),
   ]
   const tops = spreadLabels(entries.map((e) => e.at), LINE_PX)

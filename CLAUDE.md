@@ -1072,3 +1072,10 @@ keeps "Daylight"); on a phone "Dark (29m left)" not bold; when it's true night n
 note drops the length the "Now" line already gives ("True night (folded: tap to open)").
 **Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and 390px with touch at
 05:46, 13:00 and 20:00: no errors, no sideways scroll. Pictures refreshed.
+
+### 2026-10-28 — "tap to extend"; the Now line live
+
+**John:** the fold's note says "(folded: tap to extend)" (was "tap to open"); then put it live.
+`main` fast-forwarded to the branch, with "Now 05:46 Dark (29m left)", "Light", and no repeated
+true-night length. **Verified:** checks 14 + 15 + 14, tsc, lint, build; Chromium at 1200px and
+390px with touch: no errors, no sideways scroll.

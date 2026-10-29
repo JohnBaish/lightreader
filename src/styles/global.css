@@ -273,7 +273,7 @@ body { margin: 0; background: var(--color-bg); }
   .year-detail-big .dot { display: none; }
 }
 
-/* Dark mode, as Hindcaster's (HOUSE-STYLE §2): light unless the visitor switches
+/* Dark mode, as Hindcaster's (HOUSE-STYLE §2): follows the device unless the visitor switches (John, 29 October)
    (src/lib/theme.ts); the same tokens as organic.css given dark values, and the band colours'
    dark set from SPEC §4. Screen only, so a printed page is always light. */
 @media screen {

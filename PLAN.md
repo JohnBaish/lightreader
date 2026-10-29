@@ -214,6 +214,7 @@ Branch: `stage-7-launch`
 
 - Dark mode with Hindcaster's switch, light by default (question 2 decides
   the colours). Mock-ups in both themes first.
+  **29 October (John):** now follows the device's own setting unless the visitor switches.
   **Built (28 October), for John to look at on the preview.**
 - Favicon options, then a link-preview image (house style §7). **John chose A (28
   October), now `public/favicon.svg`.** Link-preview picture approved with "Sunrise, sunset

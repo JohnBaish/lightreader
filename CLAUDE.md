@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   Hindcaster's copy on 2026-10-27, which matches clockwheel `36378ed`.
+   clockwheel on 2026-10-29 (commit `cba1629`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1255,3 +1255,19 @@ has the hub card). Nothing is half-done. **Waiting on John:**
    shorter "About these figures"); drafts offered, not written.
 3. Then, in clockwheel: the overview PDF, and Lightreader on the house style's list of 24-hour
    exceptions (§15).
+
+### 2026-10-29 — dark mode follows the device (branch `claude/sharp-ritchie-uzbr9y`, merged)
+
+Dark mode now follows the device's own light or dark setting until the visitor uses the switch (John,
+replacing "light by default"). Only a choice that differs from the device is kept (`'light'` or
+`'dark'`); setting the switch back to match the device removes it, and the page then changes live
+when the device does. `src/lib/theme.ts` and the script in `index.html` (same rule, before the page
+draws). `HOUSE-STYLE.md` re-copied from clockwheel `cba1629` (§2: every tool has dark mode, following
+the device; §16: built in from the start).
+
+**Verified:** `npx tsc -b`, lint, `npm run check`, build. In Chromium at 1200px, and 390px with touch:
+a light device opens light and a dark one dark; the switch keeps the other choice across a reload;
+switching back to match the device clears it; with nothing kept, the page follows the device changing
+live, and a kept choice isn't overridden; printing stays light; blocked storage follows the device and
+the switch still works; no errors, no sideways scroll (34 checks per site). **Couldn't be checked:** a
+real phone changing at dusk. Merged to `main` at John's word.

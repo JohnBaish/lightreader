@@ -20,10 +20,17 @@
     <meta name="twitter:title" content="Lightreader" />
     <meta name="twitter:description" content="Sunrise, sunset and light-based facts for English places you choose." />
     <meta name="twitter:image" content="https://lightreader.baish.net/og-lightreader.png" />
-    <!-- Dark mode: set before the page draws, so a visitor who chose it never sees a flash of
-         the light page. The same key as src/lib/theme.ts. -->
+    <!-- Dark mode: set before the page draws, so there's no flash of the wrong colours. A
+         choice kept by the switch wins; otherwise the device's own setting (John, 29 October).
+         The same key and rule as src/lib/theme.ts. -->
     <script>
-      try { if (localStorage.getItem('lightreader.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch (e) {}
+      (function () {
+        var t = null
+        try { t = localStorage.getItem('lightreader.theme') } catch (e) {}
+        var device = false
+        try { device = window.matchMedia('(prefers-color-scheme: dark)').matches } catch (e) {}
+        if (t === 'dark' || (t !== 'light' && device)) document.documentElement.dataset.theme = 'dark'
+      })()
     </script>
   </head>
   <body>

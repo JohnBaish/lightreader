@@ -37,6 +37,7 @@ Key points:
 - The repo is **public** (John, 27 October: to avoid the limits that come
   with a private repo). It holds no one else's raw data, unlike Hindcaster.
 - Add a dated entry below for every change.
+- **Project tracker:** when something significant changes (a stage finished, a decision made, something goes live or is parked), update this project's file and its line in `INDEX.md` in `JohnBaish/baish.net-directory`, following that repo's README.
 
 ## Layout
 
@@ -1271,3 +1272,9 @@ switching back to match the device clears it; with nothing kept, the page follow
 live, and a kept choice isn't overridden; printing stays light; blocked storage follows the device and
 the switch still works; no errors, no sideways scroll (34 checks per site). **Couldn't be checked:** a
 real phone changing at dusk. Merged to `main` at John's word.
+
+### 2026-10-29 — project tracker line (notes only, straight to `main`)
+
+At John's request: a line in the key points asking future sessions to update
+this project's file in the project tracker (`JohnBaish/baish.net-directory`)
+when something significant changes.

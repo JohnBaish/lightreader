@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-10-29 (commit `cba1629`).
+   clockwheel on 2026-10-29 (commit `aa12cd6`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1278,3 +1278,9 @@ real phone changing at dusk. Merged to `main` at John's word.
 At John's request: a line in the key points asking future sessions to update
 this project's file in the project tracker (`JohnBaish/baish.net-directory`)
 when something significant changes.
+
+### 2026-10-29 — house style re-copied (notes only, straight to `main`)
+
+From clockwheel `aa12cd6`: §10 describes the project tracker
+(`JohnBaish/baish.net-directory`) and when to update it; §16 adds the tracker to
+starting a new tool. No app code changed.

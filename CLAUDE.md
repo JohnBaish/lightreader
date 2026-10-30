@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-10-29 (commit `aa12cd6`).
+   clockwheel on 2026-10-30 (commit `674122d`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1284,3 +1284,19 @@ when something significant changes.
 From clockwheel `aa12cd6`: §10 describes the project tracker
 (`JohnBaish/baish.net-directory`) and when to update it; §16 adds the tracker to
 starting a new tool. No app code changed.
+
+### 2026-10-30 — sharper dark-mode text (branch `dark-text-smoothing`, merged the same day)
+
+Macs draw light text on a dark page with heavy, soft edges, most of all the Caprasimo headings (found in
+Riverwatcher's mock-up; "way better" with finer smoothing, John, on a MacBook). `global.css`, in the
+screen-only dark block straight after the dark colours: `:root[data-theme="dark"] body {
+-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }`. Only macOS browsers use it;
+light mode unchanged. Dark mode always sets `data-theme="dark"`, including when following the device
+(checked in `theme.ts` and `index.html`). `HOUSE-STYLE.md` re-copied from clockwheel `674122d` (§2 the
+smoothing rule; §3 never bold Caprasimo).
+
+**Verified:** build, lint (known warnings only), `npm run check`. In Chromium at 1200px and 390px with
+touch, light and dark devices, every main screen: smoothing `antialiased` in dark only, `auto` in light; no
+errors; no sideways scroll. No element drawn in Caprasimo above weight 400 (no faked bold) on any screen.
+**Couldn't be checked:** how a Mac actually draws the text (this container runs Linux); John to look on
+his MacBook.

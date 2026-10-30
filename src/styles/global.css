@@ -304,6 +304,10 @@ body { margin: 0; background: var(--color-bg); }
     --band-very-dark: #3d344f;
     --band-true-night: #0f0e16;
   }
+  /* Finer text smoothing in dark mode: Macs draw light text on a dark page with heavy, soft edges,
+     most of all the Caprasimo headings (John, October 30th 2026; HOUSE-STYLE §2). Only macOS
+     browsers use it; light mode is left as it is. */
+  :root[data-theme="dark"] body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   /* Ink on the two light bands, whatever the theme; and on the open month's button. */
   :root[data-theme="dark"] .band-tag.band-daylight, :root[data-theme="dark"] .band-tag.band-half-light { color: #201e1d; }
   :root[data-theme="dark"] .chip-button.is-open { color: var(--color-bg); }

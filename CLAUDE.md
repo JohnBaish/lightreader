@@ -1255,3 +1255,11 @@ has the hub card). Nothing is half-done. **Waiting on John:**
    shorter "About these figures"); drafts offered, not written.
 3. Then, in clockwheel: the overview PDF, and Lightreader on the house style's list of 24-hour
    exceptions (§15).
+
+### 2026-10-31 — Search Console done (John)
+
+**John:** point 1 of the parked list is done: Lightreader's sitemap submitted and indexing
+requested in Search Console, and indexing requested again for www.baish.net (SEO-HANDOVER
+checklist items 16–17). **Still waiting on John:** whether to add searchable text to the opening
+page; then, in clockwheel, the overview PDF and Lightreader on the house style's list of 24-hour
+exceptions (§15). Docs only.

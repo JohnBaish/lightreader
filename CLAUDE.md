@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-11-01 (commit `b31863e`).
+   clockwheel on 2026-11-01 (commit `a6cb099`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1327,4 +1327,11 @@ From clockwheel `b31863e` (from the Refueller session): §15 now lists Lightread
 exception beside Clockmaker's (John, 27 October), and §1 and §16 describe the baish.net overview in two parts. Lightreader
 has its own section in clockwheel's `design/overview/baish-net-overview.md` and four pages in
 `baish-net-pictures-2026-11-01.pdf`, from the live site. That clears the second next step left by the October 28th park.
+No app code changed.
+
+### 2026-11-01 — house style re-copied: tidy branches as you go (notes only, straight to `main`)
+
+From clockwheel `a6cb099`: §10 now asks sessions to delete a branch as soon as it's merged, keep unmerged ones only for
+work worth returning to (noted in the project's notes), tag dead unmerged work before deleting, check merged status with
+full history (cloud copies are often shallow), and list branches for John to delete, as cloud sessions can't (John).
 No app code changed.

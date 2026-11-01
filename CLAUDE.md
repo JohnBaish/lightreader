@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-11-01 (commit `a6cb099`).
+   clockwheel on 2026-11-01 (commit `5086657`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1339,3 +1339,9 @@ No app code changed.
 ### 2026-11-01 — "Delete merged branches" workflow (straight to `main`)
 
 A "Delete merged branches" workflow (`.github/workflows/tidy-branches.yml`, Run workflow only, nothing scheduled): deletes only branches fully merged into `main`, never `main`, and only if a branch hasn't moved since it was checked; "Only list" (ticked by default) changes nothing; named unmerged branches can be added, each kept as an `archive/<name>` tag first. Added because cloud sessions can't delete branches (John: automate it, with no danger to the websites; the sites build from `main`, and deletions made by the job start no other workflows). Tested against a pretend GitHub here: the trial changed nothing; the real run deleted the merged branch and the named one (kept as a tag), and refused `main`. House style re-copied from clockwheel (§10 mentions it).
+
+### 2026-11-01 — house style re-copied: sessions delete merged branches themselves (notes only, straight to `main`)
+
+From clockwheel `5086657`: §10 now asks a session to run the "Delete merged branches" workflow itself after a merge (trial run
+first, then the real run, then check the branches are gone and log it), rather than listing branches for John (John). No app code
+changed.

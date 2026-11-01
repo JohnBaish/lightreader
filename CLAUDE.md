@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-10-31 (commit `9edeea5`).
+   clockwheel on 2026-11-01 (commit `b31863e`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1320,3 +1320,11 @@ requested in Search Console, and indexing requested again for www.baish.net (SEO
 checklist items 16–17). **Still waiting on John:** whether to add searchable text to the opening
 page; then, in clockwheel, the overview PDF and Lightreader on the house style's list of 24-hour
 exceptions (§15). Docs only.
+
+### 2026-11-01 — house style re-copied: Lightreader's 24-hour times; in the overview (notes only, straight to `main`)
+
+From clockwheel `b31863e` (from the Refueller session): §15 now lists Lightreader's 24-hour times ("06:48") as an agreed
+exception beside Clockmaker's (John, 27 October), and §1 and §16 describe the baish.net overview in two parts. Lightreader
+has its own section in clockwheel's `design/overview/baish-net-overview.md` and four pages in
+`baish-net-pictures-2026-11-01.pdf`, from the live site. That clears the second next step left by the October 28th park.
+No app code changed.

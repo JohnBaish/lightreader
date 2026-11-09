@@ -12,7 +12,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build and the open questions. Work one stage at a
    time, on its branch.
 3. `HOUSE-STYLE.md`: the shared look and ways of working. Copied from
-   clockwheel on 2026-11-01 (commit `5086657`).
+   clockwheel on 2026-11-09 (commit `49cbf9e`).
    Clockwheel holds the master copy; if it has changed, re-copy it and note
    that here. The same goes for `SEO-HANDOVER.md` and
    `.claude/skills/fresh-look/`.
@@ -1345,3 +1345,7 @@ A "Delete merged branches" workflow (`.github/workflows/tidy-branches.yml`, Run 
 From clockwheel `5086657`: §10 now asks a session to run the "Delete merged branches" workflow itself after a merge (trial run
 first, then the real run, then check the branches are gone and log it), rather than listing branches for John (John). No app code
 changed.
+
+### 2026-11-09 — house style and fresh look re-copied (notes only, straight to `main`)
+
+From clockwheel `49cbf9e`: §6 adds "A phone held sideways" (a short screen is `max-height: 500px`; keep the top small; no chart, map or pop-up taller than the screen; draggable things shorter than it; 16px boxes), §10 and §11 check at 844×390 with touch too, and the fresh-look review now does every pass sideways as well (its `SKILL.md` and report template, re-copied); also the November 5th §2 section on reviewing dark mode colours. No app code changed.

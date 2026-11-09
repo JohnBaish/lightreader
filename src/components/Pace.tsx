@@ -98,11 +98,11 @@ export function PaceCard({ p, narrow, span, place }: { p: Pace; narrow: boolean;
           </text>
         </svg>
       </div>
-      <ul className="pace-words">{p.sentences.map((s, i) => <li key={i}>{s}</li>)}</ul>
-      {/* "Copy chart" / "Share chart" (John, November 9th 2026): the chart and its sentences. */}
+      {/* "Copy chart" / "Share chart" (John, November 9th 2026): just under the chart (John), for the chart and its sentences. */}
       <div className="share-row" data-noprint>
         <ShareButton what="chart" make={() => deliver(paceImage(p, place, span), imageName('pace-of-change', Date.parse(`${p.today}T12:00:00Z`)), 'Pace of change')} />
       </div>
+      <ul className="pace-words">{p.sentences.map((s, i) => <li key={i}>{s}</li>)}</ul>
     </section>
   )
 }

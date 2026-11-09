@@ -62,6 +62,13 @@ Key points:
 
 ## Log
 
+### 2026-11-09 — the share buttons just under the charts (same branch, not merged)
+
+**John:** in "The year in light" and "Pace of change" the button belongs immediately under the chart. It now follows the year
+ribbon's key (before the chosen day's detail) and the pace chart (before its sentences). **Verified:** `tsc -b`, lint, checks,
+build; Chromium at 1200px, 390px and 844×390 with touch, light and dark: buttons in place, copying and saving as before, a
+chosen day kept after a tap inside the card and gone after one outside; no errors, no sideways scroll.
+
 ### 2026-11-09 — "Copy chart" / "Share chart" on three charts; tapping away from the year (branch `claude/amazing-albattani-t8s1nk`, not merged)
 
 **John:** Refueller's and Riverwatcher's chart sharing for "Next 24 hours", "The year in light" (the ribbon only, not the

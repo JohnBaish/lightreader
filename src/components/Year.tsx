@@ -255,6 +255,11 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         </div>
         <YearRibbon v={v} chosen={day} onChoose={setChosen} narrow={narrow} />
         <Legend />
+        {/* "Copy chart" / "Share chart" (John, November 9th 2026): just under the chart (John), the year ribbon only, with today's line and the chosen
+            day's, not the comparison beneath it. */}
+        <div className="share-row" data-noprint>
+          <ShareButton what="chart" make={() => deliver(yearImage(v, place, fromLabel, day === v.today ? null : day, longDate(day, true)), imageName('year', Date.parse(`${v.today}T12:00:00Z`)), 'The year in light')} />
+        </div>
         {row && (
           <div className="year-detail" aria-live="polite">
             {/* A day other than today is named by its strip below instead (John, 28 October). */}
@@ -271,11 +276,6 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
           </div>
         )}
         <p className="note">{narrow ? "Tap or slide along the year to see a day's times." : "Click or drag along the year to see a day's times, or use the arrow keys."}</p>
-        {/* "Copy chart" / "Share chart" (John, November 9th 2026): the year ribbon only, with today's line and the chosen
-            day's, not the comparison beneath it. */}
-        <div className="share-row" data-noprint>
-          <ShareButton what="chart" make={() => deliver(yearImage(v, place, fromLabel, day === v.today ? null : day, longDate(day, true)), imageName('year', Date.parse(`${v.today}T12:00:00Z`)), 'The year in light')} />
-        </div>
       </section>
 
       <PaceCard p={v.pace} narrow={narrow} span={fromLabel} place={place} />

@@ -62,6 +62,19 @@ Key points:
 
 ## Log
 
+### 2026-11-09 — "Copy chart" / "Share chart" on three charts; tapping away from the year (branch `claude/amazing-albattani-t8s1nk`, not merged)
+
+**John:** Refueller's and Riverwatcher's chart sharing for "Next 24 hours", "The year in light" (the ribbon only, not the
+comparison under a chosen day) and "Pace of change"; and a click or tap away from the year card removes a chosen day's line.
+**What:** `src/components/ShareButton.tsx` (from Riverwatcher), `src/lib/shareImage.ts` (`ribbonImage`, `yearImage`,
+`paceImage`: each picture in the light colours, headed "LIGHTREADER" and the card's own heading, with the place, the dates
+and the credit line; drafts for John: "From 14:15 on Monday November 9th: Light now, 2h 9m left."), `src/lib/tapAway.ts`
+(listens for a real click, so a scroll or the hidden link that saves a picture doesn't count). Buttons under each chart
+(`.share-row`), hidden in print. The year picture shows today's line and, if one is chosen, the chosen day's. **Verified:**
+`tsc -b`, lint, checks, build; Chromium at 1200px, 390px and 844×390 with touch, light and dark (RG1): all three copied (pictures
+read back) or saved; a chosen day stays after a tap inside the card or on its share button, and goes after a tap outside; no
+errors, no sideways scroll. **Couldn't check:** a real phone's share sheet, Safari's clipboard.
+
 ### 2026-10-27 — spec read; mock-ups moved; plan drafted (branch `claude/nice-goodall-j1r6wu`)
 
 **What:** moved John's four mock-ups from the top of the repo to

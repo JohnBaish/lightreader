@@ -6,13 +6,15 @@
 
 import { useLayoutEffect, useRef, useState } from 'react'
 import { rate, type Pace } from '../lib/pace.ts'
+import { deliver, imageName, paceImage } from '../lib/shareImage.ts'
+import { ShareButton } from './ShareButton.tsx'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 /** The y-axis reaches 4m 50s either way, so Berwick's fastest (4m 38s) still fits with a
  *  little room; no English district is further north. */
 const MAX_SECONDS = 290
 
-export function PaceCard({ p, narrow, span }: { p: Pace; narrow: boolean; span: string }) {
+export function PaceCard({ p, narrow, span, place }: { p: Pace; narrow: boolean; span: string; place: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(narrow ? 330 : 1000)
   useLayoutEffect(() => {
@@ -97,6 +99,10 @@ export function PaceCard({ p, narrow, span }: { p: Pace; narrow: boolean; span: 
         </svg>
       </div>
       <ul className="pace-words">{p.sentences.map((s, i) => <li key={i}>{s}</li>)}</ul>
+      {/* "Copy chart" / "Share chart" (John, November 9th 2026): the chart and its sentences. */}
+      <div className="share-row" data-noprint>
+        <ShareButton what="chart" make={() => deliver(paceImage(p, place, span), imageName('pace-of-change', Date.parse(`${p.today}T12:00:00Z`)), 'Pace of change')} />
+      </div>
     </section>
   )
 }

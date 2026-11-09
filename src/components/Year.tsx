@@ -1,7 +1,7 @@
 // The year (SPEC §9): the year ribbon (mock-up option C), and below it the day-by-day
 // tables (option B), folded to a row of month buttons until one is chosen.
 
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { clockNote, compareDate } from '../lib/compare.ts'
 import type { District } from '../lib/postcode.ts'
 import { dayFigures } from '../lib/sun.ts'
@@ -12,6 +12,9 @@ import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
 import { addDays } from '../lib/ukTime.ts'
 import { Legend } from './SkyRibbon.tsx'
 import { PaceCard } from './Pace.tsx'
+import { ShareButton } from './ShareButton.tsx'
+import { deliver, imageName, yearImage } from '../lib/shareImage.ts'
+import { useTapAway } from '../lib/tapAway.ts'
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const monthName = (m: string) => MONTH_NAMES[Number(m.slice(5, 7)) - 1]
@@ -197,6 +200,11 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
   // Bumped by "See all of …", so it scrolls to the day even when that month is already open
   // (the fresh look, 5.2).
   const [seeAllCount, setSeeAllCount] = useState(0)
+  // A day chosen on the year ribbon goes again (back to today) with a click or tap anywhere outside its card (John,
+  // November 9th 2026). Before the early return, as it's a hook.
+  const yearCard = useRef<HTMLElement>(null)
+  const backToToday = useCallback(() => setChosen(null), [])
+  useTapAway(chosen !== null && chosen !== v?.today, yearCard, backToToday)
 
   // After "See all of …", bring the month, at the chosen day, into view.
   useEffect(() => {
@@ -240,7 +248,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
 
   return (
     <>
-      <section className="card year">
+      <section className="card year" ref={yearCard}>
         <div className="year-head">
           <h3>The year in light</h3>
           <span className="muted">{fromLabel}</span>
@@ -263,9 +271,14 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
           </div>
         )}
         <p className="note">{narrow ? "Tap or slide along the year to see a day's times." : "Click or drag along the year to see a day's times, or use the arrow keys."}</p>
+        {/* "Copy chart" / "Share chart" (John, November 9th 2026): the year ribbon only, with today's line and the chosen
+            day's, not the comparison beneath it. */}
+        <div className="share-row" data-noprint>
+          <ShareButton what="chart" make={() => deliver(yearImage(v, place, fromLabel, day === v.today ? null : day, longDate(day, true)), imageName('year', Date.parse(`${v.today}T12:00:00Z`)), 'The year in light')} />
+        </div>
       </section>
 
-      <PaceCard p={v.pace} narrow={narrow} span={fromLabel} />
+      <PaceCard p={v.pace} narrow={narrow} span={fromLabel} place={place} />
 
       <section className="card days" ref={daysCard}>
         <div className="year-head">

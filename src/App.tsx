@@ -15,7 +15,10 @@ import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
 import { YearCards } from './components/Year.tsx'
 import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { useIsNarrow } from './lib/responsive.ts'
-import { ribbon } from './lib/ribbon.ts'
+import { nowLight, ribbon } from './lib/ribbon.ts'
+import { clock, longDate } from './lib/format.ts'
+import { deliver, imageName, ribbonImage } from './lib/shareImage.ts'
+import { ShareButton } from './components/ShareButton.tsx'
 import { savedTimes, saveTimes, tidyTimes } from './lib/times.ts'
 import { useSky } from './lib/useSky.ts'
 import { headline } from './lib/headline.ts'
@@ -93,6 +96,14 @@ function Place({ d, now }: { d: District; now: Date }) {
       <section className="card next24">
         <h3>Next 24 hours</h3>
         {narrow ? <SkyRibbonNarrow r={r} /> : <SkyRibbonWide r={r} />}
+        {/* "Copy chart" / "Share chart" (John, November 9th 2026, as in Refueller and Riverwatcher). */}
+        <div className="share-row" data-noprint>
+          <ShareButton what="chart" make={() => {
+            const light = nowLight(r)
+            const words = `From ${clock(r.from)} on ${longDate(today)}: ${light.band} now${light.left ? `, ${light.left}` : ''}.`
+            return deliver(ribbonImage(r, `${d.name} (${d.code})`, words), imageName('next-24-hours', r.from.getTime()), 'Next 24 hours')
+          }} />
+        </div>
       </section>
       <SentenceGroups groups={groups} after={{ 'Looking ahead': <LightAtCard key="light-at" times={times} lightAt={lightAt} narrow={narrow} onChange={changeTimes} /> }} />
       <CompareCard d={d} today={today} now={now} />

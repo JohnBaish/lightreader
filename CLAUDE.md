@@ -62,6 +62,14 @@ Key points:
 
 ## Log
 
+### 2026-11-09 — Nightreader's design work parked here (branch `claude/adoring-davinci-drczxf`, not merged)
+
+**John:** park the Nightreader mock-ups in this repo for the time being (there's no Nightreader repo yet). `design/nightreader/`:
+the mock-up page's source, the scripts that work out its figures, the star files and their licence, and `README.md` (what's agreed,
+what's open). Nothing in Lightreader's app or build changed; the folder is to move to `JohnBaish/nightreader` when John creates it.
+Mock-ups: https://claude.ai/artifact/UDWU52EtUoMi9d7JYEMB57. **Verified:** the figures and the page rebuild from this folder
+(`node design/nightreader/data.mjs`, then `build.mjs`); the page was checked in Chromium at 1200px, 390px and 844×390 with touch.
+
 ### 2026-11-09 — the share buttons just under the charts (same branch, not merged)
 
 **John:** in "The year in light" and "Pace of change" the button belongs immediately under the chart. It now follows the year

@@ -125,8 +125,8 @@ check('meteor showers fall on their usual dates, each with its night', () => {
 })
 
 check('directions name real places across Great Britain, never your own place', () => {
-  // Saturn at its highest tonight, due south
-  assert.equal(describeToward(RG1, 181.7, 'Reading'), ', between Bordon and Alton (near Hook)')
+  assert.equal(describeToward(RG1, 180, 'Reading'), ', between Bordon and Alton (near Hook)')
+  assert.equal(describeToward(RG1, 181.7, 'Reading'), ', roughly over Alton') // Saturn at its highest tonight
   assert.ok(!describeToward(RG1, 0, 'Reading').includes('Reading'))
   assert.match(describeToward(EH1, 250, 'Edinburgh'), /between|roughly over/)
   assert.equal(describeToward(ZE1, 90, 'Lerwick'), '') // east of Lerwick is the sea

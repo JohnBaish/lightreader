@@ -62,7 +62,11 @@ every direction tried, and from Inverness four of five, give the compass point a
 and Cardiff read well ("between Loanhead and Penicuik (near Roslin)", "roughly over Barry").
 Put to John (SPEC §12.2).
 
-**Mistake on the way:** an apostrophe in a check's name broke the file; caught at once by running it.
+**Mistakes, logged openly:** an apostrophe in a check's name broke the file. Then I committed
+and pushed while one check was failing, and wrote "14 checks" here: the run's result was hidden
+by the command I used. The failing check was my own wrong expectation (1.7° west of south the
+towns rule gives "roughly over Alton", not "between Bordon and Alton"); the code was right. The
+check now holds both real results, and the next commit corrects it. All 14 pass.
 
 **Verified:** `npm run check` (14), `npm run typecheck`. **Couldn't be checked:** the meteor
 shower list (`www.imo.net` isn't allowed in this session).

@@ -99,10 +99,10 @@ Times are UK clock time. Nothing here is on a page yet: it is for checking the r
 - Thursday August 21st 2036: partial, 18:16 to 19:56, 60% of the Sun covered at 19:07, Sun 9° up.
 
 **Eclipses of the Moon with the Moon up:**
-- Saturday February 20th 2027: penumbral, peak 23:13, 0% covered, Moon 46° up.
 - Wednesday January 12th 2028: partial, peak 04:13, 3% covered, Moon 35° up.
 - Sunday December 31st 2028: total, peak 16:52, 100% covered, Moon 6° up.
 - Tuesday June 26th 2029: total, peak 04:22, 100% covered, Moon 3° up.
+- Thursday December 20th 2029: total, peak 22:42, 100% covered, Moon 57° up.
 
 **Planets at their best:**
 - Jupiter opposite the Sun on Thursday February 11th 2027 (brightness -2.6).

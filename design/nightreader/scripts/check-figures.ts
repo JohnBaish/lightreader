@@ -9,6 +9,7 @@ import { lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses } 
 import { clock, duration } from '../src/lib/format.ts'
 import { LOW, WELL, fists, moonLook, moonUp, night, nights, sky, sunDepthNeeded } from '../src/lib/night.ts'
 import type { Place } from '../src/lib/sun.ts'
+import { describeToward } from '../src/lib/towns.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
 
 let passed = 0
@@ -109,7 +110,7 @@ check('looking ahead from Reading: phases, eclipses and oppositions', () => {
   const sun = solarEclipses(RG1, from, 1)[0]
   assert.equal(`${ukParts(sun.peak).date} ${clock(sun.begin)} ${clock(sun.peak)} ${clock(sun.end)} ${Math.round(sun.covered * 100)}`, '2027-08-02 09:03 09:59 10:58 42')
   const moon = lunarEclipses(RG1, from, 3)
-  assert.deepEqual(moon.map((e) => `${e.kind} ${ukParts(e.peak).date}`), ['penumbral 2027-02-20', 'partial 2028-01-12', 'total 2028-12-31'])
+  assert.deepEqual(moon.map((e) => `${e.kind} ${ukParts(e.peak).date}`), ['partial 2028-01-12', 'total 2028-12-31', 'total 2029-06-26'])
   assert.deepEqual(oppositions(from).map((o) => `${o.name} ${ukParts(o.at).date}`), ['Jupiter 2027-02-11', 'Mars 2027-02-19', 'Saturn 2027-10-18'])
 })
 
@@ -121,6 +122,14 @@ check('meteor showers fall on their usual dates, each with its night', () => {
   assert.equal(ukParts(m.Perseids.peak).date, '2027-08-12')
   assert.equal(ukParts(m.Quadrantids.peak).date, '2027-01-03')
   assert.equal(m.Ursids.night.moonFreeMs, 0)
+})
+
+check('directions name real places across Great Britain, never your own place', () => {
+  // Saturn at its highest tonight, due south
+  assert.equal(describeToward(RG1, 181.7, 'Reading'), ', between Bordon and Alton (near Hook)')
+  assert.ok(!describeToward(RG1, 0, 'Reading').includes('Reading'))
+  assert.match(describeToward(EH1, 250, 'Edinburgh'), /between|roughly over/)
+  assert.equal(describeToward(ZE1, 90, 'Lerwick'), '') // east of Lerwick is the sea
 })
 
 console.log(`\n${passed} checks passed`)

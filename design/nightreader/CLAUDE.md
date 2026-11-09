@@ -38,12 +38,34 @@ Key points:
   (commit `8ea2e16`), unchanged.
 - `src/data/outcodes.json`: Great Britain's postcode districts, copied from Refueller
   (`data/outcodes.json`, made October 30th 2026).
+- `src/lib/towns.ts` (Lightreader's, unchanged) and `src/data/towns.json` (`npm run towns`).
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - While parked, the scripts use Lightreader's installed packages (`npm ci` in its top folder).
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-09 — John's answers; faint eclipses out; the town list for Great Britain
+
+**John:** yes to the far-north fallback and to the four Sun-depth numbers; faint eclipses of the
+Moon left out ("I think so"); phase names fine as they are; the repo tomorrow.
+
+**What:** `lunarEclipses()` leaves out penumbral eclipses, so Reading's next is the partial one
+on January 12th 2028. `scripts/build-towns.ts` (`npm run towns <Refueller's data/places.json>`)
+writes `src/data/towns.json`: 2,092 places (1,426 towns and cities, 666 smaller places districts
+are named after; 2,800 of 2,863 districts matched). `src/lib/towns.ts` copied from Lightreader
+unchanged. SPEC §3, §5, §7, §8 and §12 and PLAN updated; the figures sheet remade.
+
+**Found:** in the Highlands and islands the rule's 25 miles rarely reaches a town: from Lerwick
+every direction tried, and from Inverness four of five, give the compass point alone. Edinburgh
+and Cardiff read well ("between Loanhead and Penicuik (near Roslin)", "roughly over Barry").
+Put to John (SPEC §12.2).
+
+**Mistake on the way:** an apostrophe in a check's name broke the file; caught at once by running it.
+
+**Verified:** `npm run check` (14), `npm run typecheck`. **Couldn't be checked:** the meteor
+shower list (`www.imo.net` isn't allowed in this session).
 
 ### 2026-11-09 — spec and plan; stage 1 started: the figures
 

@@ -36,7 +36,7 @@ night: no made-up figures, no decoration standing in for data.
    more below the horizon and the Moon is down (its top edge below the horizon).
 2. **Agreed.** When there's no true night, it falls back to "very dark" (the Sun 12° or more
    below) and says so.
-3. **Proposed.** Further north the fallback needs one more step. From Edinburgh and Lerwick
+3. **Agreed (John, November 9th 2026).** Further north the fallback needs one more step. From Edinburgh and Lerwick
    on June 21st the sky only reaches "dark" (6° or more below); from the far north of
    Shetland it's half-light all night. So: true night, else very dark, else dark, else
    "Half-light all night: the sky never gets dark."
@@ -59,7 +59,7 @@ full it is; it isn't a measurement of brightness, and the page says so.
    **low** from 10° to 20° ("needs a clear horizon"). Below 10° isn't in view. A single
    higher bar would hide planets that can plainly be seen: from Britain a planet in the
    southern part of its path never climbs above about 15°, and less from Scotland.
-3. **Agreed in principle; the numbers Proposed.** How dark the sky must be depends on how
+3. **Agreed (John, November 9th 2026), to look at again once on a page.** How dark the sky must be depends on how
    bright the planet is. The Sun must be at least this far below the horizon:
    3° for the very brightest (Venus), 4.5° for bright ones (Jupiter, Mars at its best),
    6° for ordinary ones (Saturn, Mars), 9° for faint ones (Mercury at its dimmest).
@@ -84,7 +84,7 @@ full it is; it isn't a measurement of brightness, and the page says so.
 
 The opening is the Moon beside one figure (Moon-free true night), smaller than first drawn.
 
-## 7. Looking ahead (Proposed)
+## 7. Looking ahead (the list Proposed; leaving out faint eclipses Agreed)
 
 A short list in date order, each line worked out for the place:
 
@@ -100,8 +100,10 @@ A short list in date order, each line worked out for the place:
 
 1. **Agreed.** Postcode districts: Refueller's list for Great Britain (2,863 districts, from
    OS Open Names), with its three credit lines.
-2. **To build.** A town list covering Scotland and Wales for "Where to look" (Lightreader's
-   covers places near England only), by Lightreader's `build-towns.ts`.
+2. **Built.** The town list for Great Britain (`src/data/towns.json`: 1,426 towns and cities and
+   666 smaller places districts are named after), from Refueller's place list. **To settle:** in
+   the Highlands and islands few towns lie within the rule's 25 miles, so most directions there
+   fall back to the compass point alone (Lerwick and Inverness in the checks).
 3. **Agreed for the mock-up; to confirm for launch.** Stars: d3-celestial's files (BSD
    licence), from a compilation of ESA's Hipparcos catalogue. The underlying catalogue's
    terms are still to read. HYG (CC BY-SA 4.0) is the alternative.
@@ -126,9 +128,10 @@ place, as Lightreader does; a full-circle view; star names on tapping.
 
 ## 12. Open questions for John
 
-1. §3.3: the extra fallback step for the far north ("dark", then "half-light all night").
-2. §5.3: the four Sun-depth numbers. The figures sheet shows what they give.
-3. §7: is "Looking ahead" the right list, and is leaving out faint eclipses right?
-4. The Moon's phase names: eight names cover the month, so "First quarter" runs from about
-   35% to 65% lit. Fine, or only "First quarter" on the day itself?
-5. The repo: `JohnBaish/nightreader`, public, when you're ready to create it.
+Answered on November 9th 2026: the far-north fallback (yes); the four Sun-depth numbers (yes);
+faint eclipses of the Moon left out ("I think so"); phase names fine as they are.
+
+1. §7: is "Looking ahead" otherwise the right list?
+2. §8.2: should directions reach further than 25 miles where towns are sparse (the Highlands
+   and islands), or is the compass point alone right there?
+3. The repo: `JohnBaish/nightreader`, public (John: to come on November 10th).

@@ -6,7 +6,8 @@
   "scripts": {
     "check": "node scripts/check-figures.ts",
     "typecheck": "tsc -p tsconfig.json",
-    "figures-sheet": "node scripts/figures-sheet.ts"
+    "figures-sheet": "node scripts/figures-sheet.ts",
+    "towns": "node scripts/build-towns.ts"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",

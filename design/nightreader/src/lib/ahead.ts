@@ -18,14 +18,14 @@ export function moonPhases(from: Date, count: number): { phase: string; at: Date
   return out
 }
 
-/** Eclipses of the Moon with the Moon above the horizon at the peak. "Penumbral" ones only dim
- *  the Moon slightly and are hard to notice. */
+/** Eclipses of the Moon with the Moon above the horizon at the peak. Faint ("penumbral") ones,
+ *  which only dim the Moon slightly and are hard to notice, are left out (John, November 9th 2026). */
 export function lunarEclipses(place: Place, from: Date, count: number): { kind: string; peak: Date; covered: number; altitude: number }[] {
   const out = []
   let e = SearchLunarEclipse(from)
   for (let tries = 0; out.length < count && tries < 40; tries++) {
     const altitude = position(place, Body.Moon, e.peak.date).altitude
-    if (altitude > 0) out.push({ kind: e.kind, peak: e.peak.date, covered: e.obscuration, altitude })
+    if (altitude > 0 && e.kind !== 'penumbral') out.push({ kind: e.kind, peak: e.peak.date, covered: e.obscuration, altitude })
     e = NextLunarEclipse(e.peak)
   }
   return out

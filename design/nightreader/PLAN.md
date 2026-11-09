@@ -17,10 +17,12 @@ Mock-ups agreed (`design/mockups/`, https://claude.ai/artifact/UDWU52EtUoMi9d7JY
 2. **Done:** Great Britain's postcode districts (`src/data/outcodes.json`, from Refueller).
 3. **Done:** `npm run check` (13 checks) and `npm run figures-sheet`
    (`design/figures-sheet-2026-11-09.md`: five places from Penzance to Lerwick).
-4. **To do:** John reads the figures sheet and answers SPEC §12.
-5. **To do:** the meteor shower list checked against the International Meteor Organization;
+4. **Done:** John answered SPEC §12's first four questions (November 9th 2026).
+5. **To do:** the meteor shower list checked against the International Meteor Organization
+   (`www.imo.net` isn't an allowed site in the session; John to allow it);
    eclipse and planet dates compared with a published source; the stars' terms read.
-6. **To do:** the town list for Great Britain; the stars and lines prepared as a small file.
+6. **Done:** the town list for Great Britain (`npm run towns`). **To do:** the stars and lines
+   prepared as a small file (stage 4 needs it).
 7. **To do:** how long a year of nights takes on a phone (about 365 Moon searches).
 
 ## Stage 2: the sentences

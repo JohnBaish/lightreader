@@ -108,7 +108,7 @@ const stars = JSON.parse(fs.readFileSync(ST + 'd3c-stars.6.json', 'utf8')).featu
 const lines = []
 for (const f of JSON.parse(fs.readFileSync(ST + 'd3c-constellations.lines.json', 'utf8')).features) for (const seg of f.geometry.coordinates) { if (seg.every(c => c[1] < -38)) continue; lines.push(seg.map(c => ofDate(c[0], c[1]))) }
 // towns round Reading, from Lightreader's list (OS Open Names)
-const TW = JSON.parse(fs.readFileSync(new URL('../../src/data/towns.json', import.meta.url), 'utf8'))
+const TW = JSON.parse(fs.readFileSync(new URL('../../../../src/data/towns.json', import.meta.url), 'utf8'))
 const towns = TW.places.map(([name, la, lo, big]) => { const p1 = lat * R, p2 = la * R, dl = (lo - lon) * R
   const d = 2 * Math.asin(Math.sqrt(Math.sin((p2 - p1) / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2)) * 3958.8
   const b = (Math.atan2(Math.sin(dl) * Math.cos(p2), Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl)) / R + 360) % 360
@@ -117,4 +117,4 @@ console.log('stars', stars.length, 'named', stars.filter(s => s[4]).map(s => s[4
 fs.writeFileSync(new URL('./data.json', import.meta.url), JSON.stringify({ place: 'Reading (RG1)', lat, rule: RULE, year, nights, stars, lines, towns }))
 for (const n of nights) { console.log(n.title, n.date, '| dark', n.dusk, n.dawn, n.dark, 'free', n.free, '| look', JSON.stringify(n.look)); console.log(' moon', JSON.stringify(n.moonB)); for (const b of n.bodies) console.log(' ', JSON.stringify(b)) }
 const y = year.nights; console.log(JSON.stringify(y[0]), JSON.stringify(y[200]), JSON.stringify(y[226]))
-console.log('phases', year.phases.length, 'size', fs.statSync('data.json').size)
+console.log('phases', year.phases.length, 'size', fs.statSync(new URL('./data.json', import.meta.url)).size)

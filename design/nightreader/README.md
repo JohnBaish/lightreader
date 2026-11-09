@@ -56,6 +56,8 @@ The mock-ups (a private page): https://claude.ai/artifact/UDWU52EtUoMi9d7JYEMB57
 
 ## Files
 
+All of these are now in `design/mockups/`.
+
 - `template.html`: the mock-up page. `build.mjs` puts `data.json` into it and writes
   `nightreader-mockups.html` (the published page) and `test.html` (for the browser check).
 - `data.mjs`: works out every figure for the middle of RG1 (the year grid, three sample nights,
@@ -65,8 +67,11 @@ The mock-ups (a private page): https://claude.ai/artifact/UDWU52EtUoMi9d7JYEMB57
 - `screenshots.cjs`: renders `test.html` at 1200px, 390px with touch and 844 by 390 with touch.
 - `stars/`: d3-celestial's star, star-name and constellation-line files, and its licence.
 
-To rebuild: `npm ci` in the repo, then `node design/nightreader/data.mjs` and
-`node design/nightreader/build.mjs`.
+To rebuild: `npm ci` in Lightreader's top folder, then `node design/nightreader/design/mockups/data.mjs`
+and `node design/nightreader/design/mockups/build.mjs`.
+
+**Since then:** `SPEC.md`, `PLAN.md` and `CLAUDE.md` in this folder are the current notes; stage 1
+(the figures) has started. The lists above are the state at the end of the mock-up rounds.
 
 ## Checked
 

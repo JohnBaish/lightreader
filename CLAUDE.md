@@ -62,6 +62,13 @@ Key points:
 
 ## Log
 
+### 2026-11-09 — Nightreader: spec, plan and stage 1's figures, still parked (same branch, not merged)
+
+**John:** write Nightreader's spec and plan and start its first stage. All inside `design/nightreader/`, which is laid out
+as the future repo (`SPEC.md`, `PLAN.md`, its own `CLAUDE.md` with its log, `src/lib/`, `scripts/`, `design/mockups/`).
+Nothing in Lightreader's app or build changed. **Verified:** Nightreader's own checks (13) and type check; Lightreader's
+lint still clean.
+
 ### 2026-11-09 — Nightreader's design work parked here (branch `claude/adoring-davinci-drczxf`, not merged)
 
 **John:** park the Nightreader mock-ups in this repo for the time being (there's no Nightreader repo yet). `design/nightreader/`:

@@ -62,6 +62,12 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — Nightreader moved out to its own repo (same branch, not merged)
+
+**John** created `JohnBaish/nightreader`, and everything in `design/nightreader/` moved there (its `main`, commit `e61219c`).
+The folder is removed from this branch, which now differs from `main` only by these log entries. Nothing in Lightreader's
+app or build changed at any point. **Verified:** lint still clean.
+
 ### 2026-11-09 — Nightreader: spec, plan and stage 1's figures, still parked (same branch, not merged)
 
 **John:** write Nightreader's spec and plan and start its first stage. All inside `design/nightreader/`, which is laid out

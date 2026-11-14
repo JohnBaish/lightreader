@@ -62,6 +62,17 @@ Key points:
 
 ## Log
 
+### 2026-11-14 — dark mode colours: options 5 and 7 built and live (branch `dark-colours`, merged)
+
+**John:** build 5 and 7 and make them live, with Claude's defaults (the chosen-day panel lighter than its card, as on
+Riverwatcher). **What (`global.css`, one block at the end, dark mode on screen only):** the page `#24211e` (was `#2a2723`);
+cards lifted with a shadow; the year card's chosen-day panel `#403b35` with a soft shadow, its links `#ea9862`; each "Is it light
+at…?" time edged in today's light at that time (daylight `#d8b46e`, half-light `#c27a48`, dark `#a58ba0`, and very dark
+`#9a86c4` and true night `#7d78c0` 7px wide), all at least 3:1 against the card. Small sunken pieces (the postcode pill, the time
+chips, the day cards) keep the page colour, so they're a step darker too. Light mode and printing unchanged. **Verified:**
+`tsc -b`, lint, checks, build; Chromium, a first visit and RG4, at 1200px, 390px and 844×390 with touch, light and dark: no
+errors, no sideways scroll; the edges and panel looked at on a phone. **Couldn't check:** a real phone or Mac.
+
 ### 2026-11-14 — dark mode colour review: options 5 and 7 together, mocked up (design only, straight to `main`)
 
 After Riverwatcher's review (its `design/previews/dark-review-2026-11-13/`), John asked to see the same pairing here: option 5, colour

@@ -363,3 +363,24 @@ body { margin: 0; background: var(--color-bg); }
 @media (max-width: 720px) { .share-row { justify-content: flex-start; } }
 @media (pointer: coarse) { .share-btn { min-height: 44px; } }
 @media print { .share-row { display: none !important; } }
+
+/* Dark mode colour review (John, November 14th 2026: options 5 and 7, house style §2).
+   7, clearer layers: the page a step darker than before, cards lifted with a shadow, and the
+   year card's chosen-day panel a step lighter than the card (it used to be darker). 5, colour by
+   state: each "Is it light at…?" time edged in today's light at that time, in the band colours
+   (the darker three lightened so they show on a card, thicker for very dark and true night).
+   Edge colours at least 3:1 against the card. Dark mode on screen only. */
+@media screen {
+  :root[data-theme="dark"] {
+    --color-bg: #24211e;
+    --e-daylight: #d8b46e; --e-half: #c27a48; --e-dark: #a58ba0; --e-vdark: #9a86c4; --e-night: #7d78c0;
+  }
+  :root[data-theme="dark"] .card { box-shadow: 0 0 0 1px color-mix(in srgb, #e8dfcf 8%, transparent), 0 4px 14px #0009; }
+  :root[data-theme="dark"] .year-detail { background: #403b35; box-shadow: 0 3px 10px #0008; --color-accent: #ea9862; }
+  :root[data-theme="dark"] .light-at-time { padding-left: 14px; }
+  :root[data-theme="dark"] .light-at-time:has(.band-tag.band-daylight) { box-shadow: inset 4px 0 0 var(--e-daylight); }
+  :root[data-theme="dark"] .light-at-time:has(.band-tag.band-half-light) { box-shadow: inset 4px 0 0 var(--e-half); }
+  :root[data-theme="dark"] .light-at-time:has(.band-tag.band-dark) { box-shadow: inset 4px 0 0 var(--e-dark); }
+  :root[data-theme="dark"] .light-at-time:has(.band-tag.band-very-dark) { box-shadow: inset 7px 0 0 var(--e-vdark); }
+  :root[data-theme="dark"] .light-at-time:has(.band-tag.band-true-night) { box-shadow: inset 7px 0 0 var(--e-night); }
+}

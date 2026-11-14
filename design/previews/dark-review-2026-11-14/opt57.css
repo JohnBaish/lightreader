@@ -1,0 +1,13 @@
+/* Lightreader: options 5 and 7 together (mock-up, dark mode only) */
+/* 7: clearer layers - page a step darker, panels inside cards a step lighter than the card */
+:root[data-theme="dark"] { --color-bg: #24211e; }
+:root[data-theme="dark"] .card { box-shadow: 0 0 0 1px color-mix(in srgb, #e8dfcf 8%, transparent), 0 4px 14px #0009; }
+:root[data-theme="dark"] .year-detail { background: #403b35; box-shadow: 0 3px 10px #0008; }
+/* 5: colour by state - each "Is it light at" time edged in today's light (thicker for the darker two) */
+:root[data-theme="dark"] { --e-daylight: #d8b46e; --e-half: #c27a48; --e-dark: #a58ba0; --e-vdark: #9a86c4; --e-night: #7d78c0; }
+:root[data-theme="dark"] .light-at-time { padding-left: 12px; }
+:root[data-theme="dark"] .light-at-time:has(.band-tag.band-daylight) { box-shadow: inset 4px 0 0 var(--e-daylight); }
+:root[data-theme="dark"] .light-at-time:has(.band-tag.band-half-light) { box-shadow: inset 4px 0 0 var(--e-half); }
+:root[data-theme="dark"] .light-at-time:has(.band-tag.band-dark) { box-shadow: inset 4px 0 0 var(--e-dark); }
+:root[data-theme="dark"] .light-at-time:has(.band-tag.band-very-dark) { box-shadow: inset 7px 0 0 var(--e-vdark); }
+:root[data-theme="dark"] .light-at-time:has(.band-tag.band-true-night) { box-shadow: inset 7px 0 0 var(--e-night); }

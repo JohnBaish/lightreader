@@ -62,6 +62,14 @@ Key points:
 
 ## Log
 
+### 2026-11-14 — dark mode colour review: options 5 and 7 together, mocked up (design only, straight to `main`)
+
+After Riverwatcher's review (its `design/previews/dark-review-2026-11-13/`), John asked to see the same pairing here: option 5, colour
+tied to each item's state, and option 7, clearer layers (page `#24211e`, raised panels `#403b35`). Mock-ups by adding CSS in the browser
+only to the built site (nothing in the app changed), dark mode, at 1200px and 390px with touch. Here: each "Is it light at…?" time edged in its light today (daylight gold, half-light orange, the darker three in lightened violets and thicker); option 7 as Riverwatcher's, with the year card's chosen-day panel a step lighter rather than darker. Heading bands across every sentence card were tried and dropped: they carried no meaning. New edge colours checked
+at least 3:1 against the cards; text unchanged. Pictures (`now.png`, `opt57.png`), CSS and `shot.cjs` in
+`design/previews/dark-review-2026-11-14/`. No errors, no sideways scroll. Waiting for John's choice.
+
 ### 2026-11-09 — the share buttons just under the charts (same branch, not merged)
 
 **John:** in "The year in light" and "Pace of change" the button belongs immediately under the chart. It now follows the year

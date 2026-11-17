@@ -74,7 +74,8 @@ themselves weren't tried).
 **John's iPhone results** (WhatsApp, Gmail, Messages): the text is used everywhere and the title nowhere; the
 picture is always kept; a link sent separately gives Gmail the subject "Lightreader", Messages a preview card, and moves
 "Save Image" under View More. **Made live** at John's word so a friend can test Android without a Vercel login
-(tests 8 and 7); to remove afterwards.
+(tests 8 and 7). **Android results** (WhatsApp, Gmail): WhatsApp the same as iPhone for both; Gmail left the
+subject empty for both. Recommendations unchanged. **Page removed** the same day.
 
 ### 2026-11-14 — dark mode colours: options 5 and 7 built and live (branch `dark-colours`, merged)
 

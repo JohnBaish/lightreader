@@ -286,15 +286,24 @@ function save(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 2000)
 }
 
+/** What goes with a shared picture (John, November 17th 2026, after testing on iPhone and Android): a sentence (the caption
+ *  in WhatsApp and Messages, the body of an email), the link to the same place sent separately (it follows the sentence, and
+ *  gives Gmail its subject), and a title, which hardly any app uses. */
+export type ShareWords = { title: string; text: string; url: string }
+
+/** "Lightreader: Pace of change", the sentence, and a link opening on the district shown (`#RG4`). */
+export const shareWords = (heading: string, text: string, code: string): ShareWords =>
+  ({ title: `Lightreader: ${heading}`, text, url: `${location.origin}/#${code}` })
+
 /** Hands the picture over: the share sheet on a touch screen, else the clipboard, else a saved file. Call straight from the tap. */
-export async function deliver(canvas: HTMLCanvasElement, filename: string, title: string): Promise<Delivered> {
+export async function deliver(canvas: HTMLCanvasElement, filename: string, words: ShareWords): Promise<Delivered> {
   const blob = new Promise<Blob>((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error('No picture'))), 'image/png'))
   if (touch()) {
     const b = await blob
     const file = new File([b], filename, { type: 'image/png' })
     if (navigator.canShare?.({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title })
+        await navigator.share({ files: [file], ...words })
         return 'shared'
       } catch (e) {
         if ((e as Error).name === 'AbortError') return 'cancelled'

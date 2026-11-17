@@ -45,6 +45,9 @@ export function longDate(date: string, withYear = false): string {
   return `${weekday(date)} ${month} ${day}${withYear ? ` ${date.slice(0, 4)}` : ''}`
 }
 
+/** "November 17th", for a UK date "YYYY-MM-DD" (the words sent with a shared picture). */
+export const monthDay = (date: string) => `${MONTHS[Number(date.slice(5, 7)) - 1]} ${ordinal(Number(date.slice(8, 10)))}`
+
 /** "1h 20m", "47m", "2h" (never "2h 0m"), and "less than a minute" for anything shorter
  *  than a minute. Rounded to the nearest minute, from the exact length (rule H). */
 export function duration(ms: number): string {

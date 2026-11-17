@@ -7,13 +7,13 @@ import type { District } from '../lib/postcode.ts'
 import { dayFigures } from '../lib/sun.ts'
 import { DayStrip } from './Compare.tsx'
 import { BANDS } from '../lib/bands.ts'
-import { longDate, ordinal, weekday } from '../lib/format.ts'
+import { longDate, monthDay, ordinal, weekday } from '../lib/format.ts'
 import { dayDetail, type DayRow, type YearView } from '../lib/yearView.ts'
 import { addDays } from '../lib/ukTime.ts'
 import { Legend } from './SkyRibbon.tsx'
 import { PaceCard } from './Pace.tsx'
 import { ShareButton } from './ShareButton.tsx'
-import { deliver, imageName, yearImage } from '../lib/shareImage.ts'
+import { deliver, imageName, shareWords, yearImage } from '../lib/shareImage.ts'
 import { useTapAway } from '../lib/tapAway.ts'
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -258,7 +258,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         {/* "Copy chart" / "Share chart" (John, November 9th 2026): just under the chart (John), the year ribbon only, with today's line and the chosen
             day's, not the comparison beneath it. */}
         <div className="share-row" data-noprint>
-          <ShareButton what="chart" make={() => deliver(yearImage(v, place, fromLabel, day === v.today ? null : day, longDate(day, true)), imageName('year', Date.parse(`${v.today}T12:00:00Z`)), 'The year in light')} />
+          <ShareButton what="chart" make={() => deliver(yearImage(v, place, fromLabel, day === v.today ? null : day, longDate(day, true)), imageName('year', Date.parse(`${v.today}T12:00:00Z`)), shareWords('The year in light', `The year in light for ${place}${day === v.today ? '' : `, with ${monthDay(day)} marked`}, from Lightreader.`, d.code))} />
         </div>
         {row && (
           <div className="year-detail" aria-live="polite">
@@ -278,7 +278,7 @@ export function YearCards({ v, narrow, place, d }: { v: YearView | null; narrow:
         <p className="note">{narrow ? "Tap or slide along the year to see a day's times." : "Click or drag along the year to see a day's times, or use the arrow keys."}</p>
       </section>
 
-      <PaceCard p={v.pace} narrow={narrow} span={fromLabel} place={place} />
+      <PaceCard p={v.pace} narrow={narrow} span={fromLabel} place={place} code={d.code} />
 
       <section className="card days" ref={daysCard}>
         <div className="year-head">

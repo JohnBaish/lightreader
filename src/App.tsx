@@ -13,11 +13,11 @@ import { SentenceGroups } from './components/Sentences.tsx'
 import { ThemeSwitch } from './components/ThemeSwitch.tsx'
 import { SkyRibbonNarrow, SkyRibbonWide } from './components/SkyRibbon.tsx'
 import { YearCards } from './components/Year.tsx'
-import { POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
+import { POSTCODE_CREDITS, district, outwardCode, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { useIsNarrow } from './lib/responsive.ts'
 import { nowLight, ribbon } from './lib/ribbon.ts'
-import { clock, longDate } from './lib/format.ts'
-import { deliver, imageName, ribbonImage } from './lib/shareImage.ts'
+import { clock, longDate, monthDay } from './lib/format.ts'
+import { deliver, imageName, ribbonImage, shareWords } from './lib/shareImage.ts'
 import { ShareButton } from './components/ShareButton.tsx'
 import { savedTimes, saveTimes, tidyTimes } from './lib/times.ts'
 import { useSky } from './lib/useSky.ts'
@@ -101,7 +101,7 @@ function Place({ d, now }: { d: District; now: Date }) {
           <ShareButton what="chart" make={() => {
             const light = nowLight(r)
             const words = `From ${clock(r.from)} on ${longDate(today)}: ${light.band} now${light.left ? `, ${light.left}` : ''}.`
-            return deliver(ribbonImage(r, `${d.name} (${d.code})`, words), imageName('next-24-hours', r.from.getTime()), 'Next 24 hours')
+            return deliver(ribbonImage(r, `${d.name} (${d.code})`, words), imageName('next-24-hours', r.from.getTime()), shareWords('Next 24 hours', `The light in ${d.name} (${d.code}) over 24 hours from ${clock(r.from)} on ${monthDay(today)}, from Lightreader.`, d.code))
           }} />
         </div>
       </section>
@@ -112,15 +112,35 @@ function Place({ d, now }: { d: District; now: Date }) {
   )
 }
 
+/** The district named in the address after "#" (`#RG4`), so a shared link opens on the same place (John, November 17th
+ *  2026). It never reaches the server. Anything else after "#" is ignored. */
+function hashDistrict(): District | null {
+  const code = outwardCode(decodeURIComponent(location.hash.slice(1)))
+  return code ? district(code) : null
+}
+
+/** Puts the district shown into the address, without adding a step to Back. */
+function showInAddress(code: string) {
+  if (decodeURIComponent(location.hash.slice(1)) !== code) history.replaceState(null, '', `#${code}`)
+}
+
 export default function App() {
   const now = useNow()
-  const [d, setD] = useState<District | null>(savedDistrict)
+  // A link with a place after "#" opens on it, without changing the place this device remembers (as Nightreader).
+  const [d, setD] = useState<District | null>(() => hashDistrict() ?? savedDistrict())
   const [changing, setChanging] = useState(false)
   const choose = (next: District) => {
     saveDistrict(next.code)
     setD(next)
     setChanging(false)
   }
+  // The place shown is kept in the address (#RG4), so a shared link opens on it (John, November 17th 2026).
+  useEffect(() => { if (d) showInAddress(d.code) }, [d])
+  useEffect(() => {
+    const onHash = () => { const next = hashDistrict(); if (next) setD(next) }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
 
   return (
     <>

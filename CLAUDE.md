@@ -62,6 +62,16 @@ Key points:
 
 ## Log
 
+### 2026-11-17 — a share test page (branch `claude/happy-turing-3so1yn`, not merged)
+
+**John:** find out what each app puts in the text box beside a shared picture. Every site's Share button sends only a
+title (the card's heading), with no text or link. `public/share-test.html` is a stand-alone page (not linked from the
+site, `noindex`): nine buttons sharing the same test picture (no real figures), each with a different mix of title, text
+and link (`https://lightreader.baish.net/#RG4`, to see whether the part after "#" survives), numbered in the words so
+the results can be read back. For John's iPhone, and an Android phone if a friend helps. **Checked:** the page in
+Chromium at 1200px and 390px with touch: no errors, no sideways scroll (headless Chromium can't share, so the buttons
+themselves weren't tried).
+
 ### 2026-11-14 — dark mode colours: options 5 and 7 built and live (branch `dark-colours`, merged)
 
 **John:** build 5 and 7 and make them live, with Claude's defaults (the chosen-day panel lighter than its card, as on

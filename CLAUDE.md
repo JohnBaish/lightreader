@@ -66,13 +66,13 @@ Key points:
 
 **John** (after the share tests): every Share button sends a sentence, a link to the same place, and a title. His
 wording: "The light in Caversham (RG4) over 24 hours from 09:46 on November 17th, from Lightreader.", "The year in light
-for Caversham (RG4), from Lightreader." (", with May 20th marked" for a chosen day), "The rate of change for the day’s
-length in Caversham (RG4), from Lightreader." Titles "Lightreader: Next 24 hours" and so on. `ShareWords`, `shareWords()`
+for Caversham (RG4), from Lightreader." (", with May 20th marked" for a chosen day), "Pace of change in the day’s length
+in Caversham (RG4), from Lightreader." (John, reworded the same day) Titles "Lightreader: Next 24 hours" and so on. `ShareWords`, `shareWords()`
 and `deliver(…, words)` in `src/lib/shareImage.ts`; `monthDay()` in `format.ts`. **The place now goes in the address**
 (`#RG4`, as Nightreader): a link opens on that place without changing the one the device remembers; anything else after
 "#" is ignored (`hashDistrict`, `showInAddress` in `App.tsx`). **Checked:** tsc, lint, `npm run check` (15), build; in
 Chromium as an iPhone 13, the share sheet replaced by a recorder: the words and links above for `#RG4`, a remembered RG1,
-`#RG4` over a remembered RG1 (RG1 still remembered), and `#nonsense`; no errors.
+`#RG4` over a remembered RG1 (RG1 still remembered), and `#nonsense`; no errors. **Live** at John's word.
 
 ### 2026-11-17 — a share test page (branch `claude/happy-turing-3so1yn`, then live for an Android test)
 

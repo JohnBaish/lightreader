@@ -100,7 +100,7 @@ export function PaceCard({ p, narrow, span, place, code }: { p: Pace; narrow: bo
       </div>
       {/* "Copy chart" / "Share chart" (John, November 9th 2026): just under the chart (John), for the chart and its sentences. */}
       <div className="share-row" data-noprint>
-        <ShareButton what="chart" make={() => deliver(paceImage(p, place, span), imageName('pace-of-change', Date.parse(`${p.today}T12:00:00Z`)), shareWords('Pace of change', `The rate of change for the day’s length in ${place}, from Lightreader.`, code))} />
+        <ShareButton what="chart" make={() => deliver(paceImage(p, place, span), imageName('pace-of-change', Date.parse(`${p.today}T12:00:00Z`)), shareWords('Pace of change', `Pace of change in the day’s length in ${place}, from Lightreader.`, code))} />
       </div>
       <ul className="pace-words">{p.sentences.map((s, i) => <li key={i}>{s}</li>)}</ul>
     </section>

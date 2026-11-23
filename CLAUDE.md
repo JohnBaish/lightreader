@@ -1432,3 +1432,6 @@ the horizon at midnight whenever its declination is above about 22.0°, which ha
 **Verified:** tsc, lint, build, `npm run check` (14 + 16 + 15); Chromium at 1200px and 390px with touch, light and dark: no
 errors, no sideways scroll, the fold lines 39px (computer) and 46px (phone), and the section gone once a postcode is chosen.
 Pictures `design/previews/opening-text-2026-11-23/`.
+
+**Live (2026-11-23):** John: "No changes. Let's publish it." `main` fast-forwarded to the branch, wording exactly as drafted.
+For John: in Search Console, URL Inspection of `https://lightreader.baish.net/`, then Request indexing.

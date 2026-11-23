@@ -1420,3 +1420,15 @@ From clockwheel `49cbf9e`: §6 adds "A phone held sideways" (a short screen is `
 
 From clockwheel: §2 now records the darker dark page (`#24211e`), the card shadow, raised panels
 `#403b35` with `#ea9862` accents, and coloured state edges. No app code changed.
+
+### 2026-11-23 — searchable text on the opening page: a draft for John (branch `claude/busy-meitner-3z7m8h`, not merged)
+
+**John** asked for the opening-page text (SEO-HANDOVER step 9) to be drafted and mocked up. `src/components/OpeningAbout.tsx`,
+modelled on standalone Backtimer's folded sections (styles `.opening-about` in `global.css`, copied from Backtimer's): under the
+postcode card, only before a postcode is chosen, a heading "Free sunrise, sunset and twilight times for England" and three closed
+parts: "What does Lightreader show?", "Civil, nautical and astronomical twilight" (the four bands with their swatches) and "How
+do I use Lightreader?". Draft wording. Fact checked: England's southern tip is about 49.96° N, so the sun stays above 18° below
+the horizon at midnight whenever its declination is above about 22.0°, which happens for some weeks round every midsummer.
+**Verified:** tsc, lint, build, `npm run check` (14 + 16 + 15); Chromium at 1200px and 390px with touch, light and dark: no
+errors, no sideways scroll, the fold lines 39px (computer) and 46px (phone), and the section gone once a postcode is chosen.
+Pictures `design/previews/opening-text-2026-11-23/`.

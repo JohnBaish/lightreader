@@ -4,6 +4,7 @@
 // these figures" and the footer (SPEC §5). A first-time visitor sees the postcode box; the
 // last postcode chosen is kept on this device only.
 
+import { OpeningAbout } from './components/OpeningAbout.tsx'
 import { Component, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { About } from './components/About.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
@@ -164,6 +165,8 @@ export default function App() {
             <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
           </section>
         )}
+        {/* For people searching: only before a postcode is chosen (draft, November 23rd 2026). */}
+        {!d && <OpeningAbout />}
         {d && <SafetyNet key={d.code}><Place d={d} now={now} /></SafetyNet>}
         {/* Not on the opening page before a postcode is chosen (John, 28 October). */}
         {d && <About />}
